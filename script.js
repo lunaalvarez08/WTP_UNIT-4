@@ -1,11 +1,14 @@
-console.log("Website loaded!");
-// ADD ROW FUNCTIONALITY
+// ======= VARIABLES =======
 const addRowBtn = document.getElementById('add-row');
 const tableBody = document.querySelector('.evidence-table tbody');
+const questionButtons = document.querySelectorAll('.question-selector button');
+const teamSelect = document.getElementById('team-member');
 
+// ======= ADD ROW FUNCTION =======
 addRowBtn.addEventListener('click', () => {
   const newRow = document.createElement('tr');
-
+  // Default question is Q1
+  newRow.dataset.question = 'Q1';
   newRow.innerHTML = `
     <td contenteditable="true">New evidence</td>
     <td>
@@ -19,36 +22,32 @@ addRowBtn.addEventListener('click', () => {
         <option value="other">Other</option>
       </select>
     </td>
-    <td contenteditable="true">Reasoning</td>
+    <td contenteditable="true">Explanation</td>
     <td><button class="delete-row">Delete</button></td>
   `;
   tableBody.appendChild(newRow);
-  attachDeleteEvent(newRow);
 });
 
-// DELETE ROW FUNCTIONALITY
-function attachDeleteEvent(row) {
-  const deleteBtn = row.querySelector('.delete-row');
-  deleteBtn.addEventListener('click', () => {
-    row.remove();
-  });
-}
-
-// INITIAL DELETE BUTTONS
-document.querySelectorAll('.delete-row').forEach(button => {
-  button.addEventListener('click', (e) => {
+// ======= DELETE ROW FUNCTION =======
+tableBody.addEventListener('click', (e) => {
+  if (e.target.classList.contains('delete-row')) {
     e.target.closest('tr').remove();
-  });
+  }
 });
-// Filter rows by question
-const questionButtons = document.querySelectorAll('.question-selector button');
-const tableRows = document.querySelectorAll('.evidence-table tbody tr');
 
+// ======= FILTER BY QUESTION =======
 questionButtons.forEach(button => {
   button.addEventListener('click', () => {
-    const question = button.getAttribute('data-question');
-    tableRows.forEach(row => {
-      row.style.display = row.getAttribute('data-question') === question ? '' : 'none';
+    const selectedQuestion = button.dataset.question;
+    const allRows = tableBody.querySelectorAll('tr');
+    allRows.forEach(row => {
+      row.style.display = row.dataset.question === selectedQuestion ? '' : 'none';
     });
   });
+});
+
+// ======= OPTIONAL: FILTER BY TEAM MEMBER (future enhancement) =======
+teamSelect.addEventListener('change', () => {
+  const member = teamSelect.value;
+  // You can add logic here to filter rows per member
 });
