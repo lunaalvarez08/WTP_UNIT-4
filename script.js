@@ -38,6 +38,9 @@ addRowBtn.addEventListener('click', () => {
 
   tableBody.appendChild(newRow);
   attachDeleteEvent(newRow);
+
+  // Focus the first cell automatically
+  newRow.querySelector('td').focus();
 });
 
 // DELETE ROW FUNCTIONALITY
