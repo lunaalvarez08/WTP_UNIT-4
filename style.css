@@ -305,3 +305,99 @@ section button:hover {
 .team-card:hover {
   transform: scale(1.05);
 }
+/* QUESTION SELECTOR */
+.question-selector {
+  margin: 20px 0;
+}
+
+.question-selector button {
+  margin: 5px;
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: none;
+  background-color: #B22234; /* American red */
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.question-selector button:hover {
+  background-color: #a31d2b;
+  transform: scale(1.05);
+}
+
+/* TEAM MEMBER SELECTOR */
+.team-selector {
+  margin: 15px 0;
+  font-size: 16px;
+}
+
+.team-selector select {
+  padding: 6px 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 2px solid #0A285F;
+}
+
+/* EVIDENCE TABLE */
+.evidence-table {
+  margin: 20px auto;
+  width: 90%;
+  max-width: 900px;
+}
+
+.evidence-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.evidence-table th, .evidence-table td {
+  border: 1px solid #0A285F; /* navy border */
+  padding: 10px;
+  text-align: left;
+}
+
+.evidence-table th {
+  background-color: #0A285F; 
+  color: white;
+}
+
+.evidence-table td select {
+  width: 100%;
+  padding: 4px;
+}
+
+.evidence-table td button {
+  background-color: #B22234;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.evidence-table td button:hover {
+  background-color: #a31d2b;
+  transform: scale(1.05);
+}
+
+#add-row {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background-color: #B22234;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+#add-row:hover {
+  background-color: #a31d2b;
+  transform: scale(1.05);
+}
