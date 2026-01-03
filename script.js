@@ -40,3 +40,15 @@ document.querySelectorAll('.delete-row').forEach(button => {
     e.target.closest('tr').remove();
   });
 });
+// Filter rows by question
+const questionButtons = document.querySelectorAll('.question-selector button');
+const tableRows = document.querySelectorAll('.evidence-table tbody tr');
+
+questionButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    const question = button.getAttribute('data-question');
+    tableRows.forEach(row => {
+      row.style.display = row.getAttribute('data-question') === question ? '' : 'none';
+    });
+  });
+});
