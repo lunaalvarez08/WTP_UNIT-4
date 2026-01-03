@@ -1,10 +1,23 @@
 // ADD ROW FUNCTIONALITY
 const addRowBtn = document.getElementById('add-row');
 const tableBody = document.querySelector('.evidence-table tbody');
+let currentQuestion = 'Q1'; // default question
+
+// Update currentQuestion when a question button is clicked
+const questionButtons = document.querySelectorAll('.question-selector button');
+questionButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    currentQuestion = button.getAttribute('data-question');
+    // Show only rows for the selected question
+    tableBody.querySelectorAll('tr').forEach(row => {
+      row.style.display = row.getAttribute('data-question') === currentQuestion ? '' : 'none';
+    });
+  });
+});
 
 addRowBtn.addEventListener('click', () => {
   const newRow = document.createElement('tr');
-  newRow.setAttribute('data-question', 'Q1'); // default question, can adjust later
+  newRow.setAttribute('data-question', currentQuestion); // match current question
 
   newRow.innerHTML = `
     <td contenteditable="true">New evidence</td>
@@ -39,17 +52,5 @@ function attachDeleteEvent(row) {
 document.querySelectorAll('.delete-row').forEach(button => {
   button.addEventListener('click', (e) => {
     e.target.closest('tr').remove();
-  });
-});
-
-// FILTER ROWS BY QUESTION
-const questionButtons = document.querySelectorAll('.question-selector button');
-
-questionButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    const question = button.getAttribute('data-question');
-    tableBody.querySelectorAll('tr').forEach(row => {
-      row.style.display = row.getAttribute('data-question') === question ? '' : 'none';
-    });
   });
 });
