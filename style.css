@@ -1,37 +1,95 @@
+/* GENERAL BODY STYLING */
 body {
   font-family: Arial, sans-serif;
   background-color: #fff;
   color: #333;
   text-align: center;
-  padding: 20px;
-}
-h1 {
-  color: #0b2a4a; /* navy blue */
-  margin-top: 30px;
-}
-section:first-of-type {
-  background-color: rgba(178, 34, 34, 0.85); /* American red */
-  color: white;
-  margin: 40px auto;
-  padding: 30px;
-  width: 80%;
-  border-radius: 12px;
-}
-button {
-  display: block;
-  margin: 12px auto;
-  padding: 14px 20px;
-  width: 260px;
-  font-size: 16px;
-  border-radius: 10px;
-  border: 2px solid #0b2a4a;
-  background-color: white;
-  cursor: pointer;
-  transition: all 0.2s ease;
+  margin: 0;
+  padding: 0;
 }
 
-button:hover {
-  background-color: #0b2a4a;
+/* NAV BAR */
+header {
+  background-color: #0A285F; /* navy */
   color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+}
+
+header .logo {
+  font-weight: bold;
+  font-size: 22px;
+}
+
+header nav a {
+  color: white;
+  text-decoration: none;
+  margin-left: 20px;
+  font-weight: 500;
+}
+
+header nav a:hover {
+  text-decoration: underline;
+}
+
+/* MIDDLE CIRCLE */
+.middle-circle {
+  margin: 20px 0;
+}
+
+.middle-circle .circle {
+  width: 100px;
+  height: 100px;
+  background-color: #B22234; /* red */
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  font-size: 24px;
+  margin: 0 auto;
+}
+
+.middle-circle strong {
+  display: block;
+  margin-top: 10px;
+  font-size: 20px;
+}
+
+.middle-circle p {
+  margin: 5px 0 20px 0;
+  font-size: 16px;
+}
+
+/* PAGE TITLE */
+h1 {
+  color: #0A285F; /* navy */
+  margin-bottom: 20px;
+}
+
+/* SECTIONS */
+section {
+  margin: 20px 0;
+}
+
+/* PRACTICE RESOURCES BUTTONS */
+section button {
+  margin: 5px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  border: none;
+  background-color: #B22234; /* red */
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 16px;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+section button:hover {
+  background-color: #a31d2b;
   transform: scale(1.05);
 }
