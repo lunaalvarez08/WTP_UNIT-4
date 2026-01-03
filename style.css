@@ -5,3 +5,33 @@ body {
   text-align: center;
   padding: 20px;
 }
+h1 {
+  color: #0b2a4a; /* navy blue */
+  margin-top: 30px;
+}
+section:first-of-type {
+  background-color: rgba(178, 34, 34, 0.85); /* American red */
+  color: white;
+  margin: 40px auto;
+  padding: 30px;
+  width: 80%;
+  border-radius: 12px;
+}
+button {
+  display: block;
+  margin: 12px auto;
+  padding: 14px 20px;
+  width: 260px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 2px solid #0b2a4a;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  background-color: #0b2a4a;
+  color: white;
+  transform: scale(1.05);
+}
