@@ -28,9 +28,9 @@
 
   <!-- QUESTION SELECTOR -->
   <section class="question-selector">
-    <button>Q1</button>
-    <button>Q2</button>
-    <button>Q3</button>
+   <button data-question="Q1">Q1</button>
+<button data-question="Q2">Q2</button>
+<button data-question="Q3">Q3</button>
   </section>
 
   <!-- TEAM MEMBER SELECTOR -->
@@ -57,22 +57,17 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td contenteditable="true">Sample evidence</td>
-          <td>
-            <select>
-              <option value="primary">Primary Source</option>
-              <option value="secondary">Secondary Source</option>
-              <option value="court">Court Case</option>
-              <option value="stat">Statistics/Data</option>
-              <option value="expert">Expert Opinion</option>
-              <option value="current">Current Event</option>
-              <option value="other">Other</option>
-            </select>
-          </td>
-          <td contenteditable="true">Explanation</td>
-          <td><button class="delete-row">Delete</button></td>
-        </tr>
+        <tr data-question="Q1">
+  <td contenteditable="true">Sample evidence</td>
+  <td>
+    <select>
+      <option value="primary">Primary Source</option>
+      <option value="secondary">Secondary Source</option>
+    </select>
+  </td>
+  <td contenteditable="true">Explanation</td>
+  <td><button class="delete-row">Delete</button></td>
+</tr>
       </tbody>
     </table>
     <button id="add-row">+ Add Row</button>
