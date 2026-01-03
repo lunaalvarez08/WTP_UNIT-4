@@ -205,3 +205,24 @@ section button:hover {
   font-weight: bold;
   background-color: white;
 }
+/* PRACTICE SETS */
+.practice-list {
+  max-width: 800px;
+  margin: 40px auto;
+}
+
+.practice-card {
+  padding: 20px;
+  margin-bottom: 15px;
+  border: 2px solid #0A285F;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.2s;
+}
+
+.practice-card:hover {
+  background-color: #0A285F;
+  color: white;
+  transform: scale(1.03);
+}
