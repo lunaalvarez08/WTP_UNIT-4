@@ -8,6 +8,7 @@
 </head>
 <body>
 
+  <!-- NAV BAR -->
   <header>
     <div class="logo">We The People</div>
     <nav>
@@ -21,28 +22,62 @@
     </nav>
   </header>
 
+  <!-- PAGE TITLE -->
   <h1>Evidence Charts</h1>
+  <p>Create, view, and edit evidence charts for Q1, Q2, and Q3</p>
 
-  <section class="evidence-selector">
-    <button>Question 1</button>
-    <button>Question 2</button>
-    <button>Question 3</button>
+  <!-- QUESTION SELECTOR -->
+  <section class="question-selector">
+    <button>Q1</button>
+    <button>Q2</button>
+    <button>Q3</button>
   </section>
 
+  <!-- TEAM MEMBER SELECTOR -->
+  <section class="team-selector">
+    <label for="team-member">Team Member:</label>
+    <select id="team-member">
+      <option value="all">All Members</option>
+      <option value="luna">Luna</option>
+      <option value="sarah">Sarah</option>
+      <option value="bekim">Bekim</option>
+      <option value="evan">Evan</option>
+    </select>
+  </section>
+
+  <!-- EVIDENCE TABLE -->
   <section class="evidence-table">
     <table>
-      <tr>
-        <th>Claim</th>
-        <th>Evidence</th>
-        <th>Reasoning</th>
-      </tr>
-      <tr>
-        <td>Sample claim</td>
-        <td>Federalist 10</td>
-        <td>Controls factions</td>
-      </tr>
+      <thead>
+        <tr>
+          <th>Evidence</th>
+          <th>Type of Evidence</th>
+          <th>Why it relates</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td contenteditable="true">Sample evidence</td>
+          <td>
+            <select>
+              <option value="primary">Primary Source</option>
+              <option value="secondary">Secondary Source</option>
+              <option value="court">Court Case</option>
+              <option value="stat">Statistics/Data</option>
+              <option value="expert">Expert Opinion</option>
+              <option value="current">Current Event</option>
+              <option value="other">Other</option>
+            </select>
+          </td>
+          <td contenteditable="true">Explanation</td>
+          <td><button class="delete-row">Delete</button></td>
+        </tr>
+      </tbody>
     </table>
+    <button id="add-row">+ Add Row</button>
   </section>
 
+  <script src="script.js"></script>
 </body>
 </html>
