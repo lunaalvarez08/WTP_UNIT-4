@@ -188,3 +188,20 @@ section button:hover {
   background-color: #a31d2b;
   transform: scale(1.05);
 }
+/* TEAM MEMBERS PAGE */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  max-width: 800px;
+  margin: 40px auto;
+}
+
+.team-card {
+  padding: 30px;
+  border: 2px solid #D4AF37; /* gold */
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: white;
+}
