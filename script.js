@@ -1,23 +1,31 @@
 // ADD ROW FUNCTIONALITY
 const addRowBtn = document.getElementById('add-row');
 const tableBody = document.querySelector('.evidence-table tbody');
-let currentQuestion = 'Q1'; // default question
+const teamSelector = document.getElementById('team-member');
+
+let currentQuestion = 'Q1'; // default
+let currentTeam = 'all';     // default
 
 // Update currentQuestion when a question button is clicked
 const questionButtons = document.querySelectorAll('.question-selector button');
 questionButtons.forEach(button => {
   button.addEventListener('click', () => {
     currentQuestion = button.getAttribute('data-question');
-    // Show only rows for the selected question
-    tableBody.querySelectorAll('tr').forEach(row => {
-      row.style.display = row.getAttribute('data-question') === currentQuestion ? '' : 'none';
-    });
+    filterRows();
   });
 });
 
+// Update currentTeam when dropdown changes
+teamSelector.addEventListener('change', () => {
+  currentTeam = teamSelector.value;
+  filterRows();
+});
+
+// Add new row
 addRowBtn.addEventListener('click', () => {
   const newRow = document.createElement('tr');
-  newRow.setAttribute('data-question', currentQuestion); // match current question
+  newRow.setAttribute('data-question', currentQuestion);
+  newRow.setAttribute('data-team', currentTeam);
 
   newRow.innerHTML = `
     <td contenteditable="true">New evidence</td>
@@ -38,12 +46,13 @@ addRowBtn.addEventListener('click', () => {
 
   tableBody.appendChild(newRow);
   attachDeleteEvent(newRow);
+  filterRows();
 
-  // Focus the first cell automatically
+  // Focus first cell
   newRow.querySelector('td').focus();
 });
 
-// DELETE ROW FUNCTIONALITY
+// Delete row functionality
 function attachDeleteEvent(row) {
   const deleteBtn = row.querySelector('.delete-row');
   deleteBtn.addEventListener('click', () => {
@@ -51,9 +60,23 @@ function attachDeleteEvent(row) {
   });
 }
 
-// INITIAL DELETE BUTTONS
+// Initial delete buttons
 document.querySelectorAll('.delete-row').forEach(button => {
-  button.addEventListener('click', (e) => {
+  button.addEventListener('click', e => {
     e.target.closest('tr').remove();
   });
 });
+
+// Filter rows by current question and team
+function filterRows() {
+  tableBody.querySelectorAll('tr').forEach(row => {
+    const rowQuestion = row.getAttribute('data-question');
+    const rowTeam = row.getAttribute('data-team') || 'all';
+    const showByQuestion = rowQuestion === currentQuestion;
+    const showByTeam = currentTeam === 'all' || rowTeam === currentTeam;
+    row.style.display = showByQuestion && showByTeam ? '' : 'none';
+  });
+}
+
+// Set default question filter on page load
+filterRows();
