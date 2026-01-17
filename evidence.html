@@ -45,33 +45,32 @@
     </select>
   </section>
 
-  <!-- EVIDENCE TABLE -->
   <section class="evidence-table">
-    <table>
-      <thead>
-        <tr>
-          <th>Evidence</th>
-          <th>Type of Evidence</th>
-          <th>Why it relates</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr data-question="Q1">
-  <td contenteditable="true">Sample evidence</td>
-  <td>
-    <select>
-      <option value="primary">Primary Source</option>
-      <option value="secondary">Secondary Source</option>
-    </select>
-  </td>
-  <td contenteditable="true">Explanation</td>
-  <td><button class="delete-row">Delete</button></td>
-</tr>
-      </tbody>
-    </table>
-    <button id="add-row">+ Add Row</button>
-  </section>
+  <table>
+    <thead>
+      <tr>
+        <th>Evidence</th>
+        <th>Type of Evidence</th>
+        <th>Why it relates</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr data-question="Q1">
+        <td><textarea class="auto-textarea" placeholder="Type evidence here...">Sample evidence</textarea></td>
+        <td>
+          <select>
+            <option value="primary">Primary Source</option>
+            <option value="secondary">Secondary Source</option>
+          </select>
+        </td>
+        <td><textarea class="auto-textarea" placeholder="Explain why it relates...">Explanation</textarea></td>
+        <td><button class="delete-row">Delete</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <button id="add-row">+ Add Row</button>
+</section>
 
   <script src="script.js"></script>
 </body>
