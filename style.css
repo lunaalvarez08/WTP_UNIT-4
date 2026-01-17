@@ -401,3 +401,15 @@ section button:hover {
   background-color: #a31d2b;
   transform: scale(1.05);
 }
+.auto-textarea {
+  width: 100%;
+  min-height: 50px;
+  max-height: 300px;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  resize: none;
+  overflow-y: hidden;
+  font-family: inherit;
+  font-size: 14px;
+}
