@@ -55,59 +55,92 @@
         <th>Actions</th>
       </tr>
     </thead>
-    <tbody>
-      <!-- Luna -->
-      <tr data-question="Q1" data-member="luna">
-        <td><textarea class="auto-textarea" placeholder="Type evidence here...">Evidence from Luna</textarea></td>
-        <td>
-          <select>
-            <option value="primary">Primary Source</option>
-            <option value="secondary">Secondary Source</option>
-          </select>
-        </td>
-        <td><textarea class="auto-textarea" placeholder="Explain why it relates...">Explanation</textarea></td>
-        <td><button class="delete-row">Delete</button></td>
-      </tr>
+   <tbody>
+  <!-- Luna -->
+  <tr data-question="Q1" data-member="luna">
+    <td><textarea class="auto-textarea" placeholder="Type evidence here...">Evidence from Luna</textarea></td>
+    <td>
+      <select class="type-select">
+        <option value="primary">Primary Source</option>
+        <option value="secondary">Secondary Source</option>
+      </select>
+    </td>
+    <td>
+      <select class="member-select">
+        <option value="luna" selected>Luna</option>
+        <option value="sarah">Sarah</option>
+        <option value="bekim">Bekim</option>
+        <option value="evan">Evan</option>
+      </select>
+    </td>
+    <td><textarea class="auto-textarea" placeholder="Explain why it relates...">Explanation</textarea></td>
+    <td><button class="delete-row">Delete</button></td>
+  </tr>
 
-      <!-- Sarah -->
-      <tr data-question="Q1" data-member="sarah">
-        <td><textarea class="auto-textarea" placeholder="Type evidence here...">Evidence from Sarah</textarea></td>
-        <td>
-          <select>
-            <option value="primary">Primary Source</option>
-            <option value="secondary">Secondary Source</option>
-          </select>
-        </td>
-        <td><textarea class="auto-textarea" placeholder="Explain why it relates...">Explanation</textarea></td>
-        <td><button class="delete-row">Delete</button></td>
-      </tr>
+  <!-- Sarah -->
+  <tr data-question="Q1" data-member="sarah">
+    <td><textarea class="auto-textarea" placeholder="Type evidence here...">Evidence from Sarah</textarea></td>
+    <td>
+      <select class="type-select">
+        <option value="primary">Primary Source</option>
+        <option value="secondary">Secondary Source</option>
+      </select>
+    </td>
+    <td>
+      <select class="member-select">
+        <option value="luna">Luna</option>
+        <option value="sarah" selected>Sarah</option>
+        <option value="bekim">Bekim</option>
+        <option value="evan">Evan</option>
+      </select>
+    </td>
+    <td><textarea class="auto-textarea" placeholder="Explain why it relates...">Explanation</textarea></td>
+    <td><button class="delete-row">Delete</button></td>
+  </tr>
 
-      <!-- Bekim -->
-      <tr data-question="Q1" data-member="bekim">
-        <td><textarea class="auto-textarea" placeholder="Type evidence here...">Evidence from Bekim</textarea></td>
-        <td>
-          <select>
-            <option value="primary">Primary Source</option>
-            <option value="secondary">Secondary Source</option>
-          </select>
-        </td>
-        <td><textarea class="auto-textarea" placeholder="Explain why it relates...">Explanation</textarea></td>
-        <td><button class="delete-row">Delete</button></td>
-      </tr>
+  <!-- Bekim -->
+  <tr data-question="Q1" data-member="bekim">
+    <td><textarea class="auto-textarea" placeholder="Type evidence here...">Evidence from Bekim</textarea></td>
+    <td>
+      <select class="type-select">
+        <option value="primary">Primary Source</option>
+        <option value="secondary">Secondary Source</option>
+      </select>
+    </td>
+    <td>
+      <select class="member-select">
+        <option value="luna">Luna</option>
+        <option value="sarah">Sarah</option>
+        <option value="bekim" selected>Bekim</option>
+        <option value="evan">Evan</option>
+      </select>
+    </td>
+    <td><textarea class="auto-textarea" placeholder="Explain why it relates...">Explanation</textarea></td>
+    <td><button class="delete-row">Delete</button></td>
+  </tr>
 
-      <!-- Evan -->
-      <tr data-question="Q1" data-member="evan">
-        <td><textarea class="auto-textarea" placeholder="Type evidence here...">Evidence from Evan</textarea></td>
-        <td>
-          <select>
-            <option value="primary">Primary Source</option>
-            <option value="secondary">Secondary Source</option>
-          </select>
-        </td>
-        <td><textarea class="auto-textarea" placeholder="Explain why it relates...">Explanation</textarea></td>
-        <td><button class="delete-row">Delete</button></td>
-      </tr>
-    </tbody>
+  <!-- Evan -->
+  <tr data-question="Q1" data-member="evan">
+    <td><textarea class="auto-textarea" placeholder="Type evidence here...">Evidence from Evan</textarea></td>
+    <td>
+      <select class="type-select">
+        <option value="primary">Primary Source</option>
+        <option value="secondary">Secondary Source</option>
+      </select>
+    </td>
+    <td>
+      <select class="member-select">
+        <option value="luna">Luna</option>
+        <option value="sarah">Sarah</option>
+        <option value="bekim">Bekim</option>
+        <option value="evan" selected>Evan</option>
+      </select>
+    </td>
+    <td><textarea class="auto-textarea" placeholder="Explain why it relates...">Explanation</textarea></td>
+    <td><button class="delete-row">Delete</button></td>
+  </tr>
+</tbody>
+
   </table>
   <button id="add-row">+ Add Row</button>
 </section>
