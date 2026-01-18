@@ -1,89 +1,7 @@
-// ADD ROW FUNCTIONALITY
-const addRowBtn = document.getElementById('add-row');
-const tableBody = document.querySelector('.evidence-table tbody');
-const teamSelector = document.getElementById('team-member');
-
-let currentQuestion = 'Q1'; // default
-let currentTeam = 'all';     // default
-
-// Update currentQuestion when a question button is clicked
-const questionButtons = document.querySelectorAll('.question-selector button');
-questionButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    currentQuestion = button.getAttribute('data-question');
-    filterRows();
-  });
-});
-
-// Update currentTeam when dropdown changes
-teamSelector.addEventListener('change', () => {
-  currentTeam = teamSelector.value;
-  filterRows();
-});
-
-// Add new row
-addRowBtn.addEventListener('click', () => {
-  const newRow = document.createElement('tr');
-  newRow.setAttribute('data-question', currentQuestion);
-  newRow.setAttribute('data-team', currentTeam);
-
-  newRow.innerHTML = `
-    <td contenteditable="true">New evidence</td>
-    <td>
-      <select>
-        <option value="primary">Primary Source</option>
-        <option value="secondary">Secondary Source</option>
-        <option value="court">Court Case</option>
-        <option value="stat">Statistics/Data</option>
-        <option value="expert">Expert Opinion</option>
-        <option value="current">Current Event</option>
-        <option value="other">Other</option>
-      </select>
-    </td>
-    <td contenteditable="true">Reasoning</td>
-    <td><button class="delete-row">Delete</button></td>
-  `;
-
-  tableBody.appendChild(newRow);
-  attachDeleteEvent(newRow);
-  filterRows();
-
-  // Focus first cell
-  newRow.querySelector('td').focus();
-});
-
-// Delete row functionality
-function attachDeleteEvent(row) {
-  const deleteBtn = row.querySelector('.delete-row');
-  deleteBtn.addEventListener('click', () => {
-    row.remove();
-  });
-}
-
-// Initial delete buttons
-document.querySelectorAll('.delete-row').forEach(button => {
-  button.addEventListener('click', e => {
-    e.target.closest('tr').remove();
-  });
-});
-
-// Filter rows by current question and team
-function filterRows() {
-  tableBody.querySelectorAll('tr').forEach(row => {
-    const rowQuestion = row.getAttribute('data-question');
-    const rowTeam = row.getAttribute('data-team') || 'all';
-    const showByQuestion = rowQuestion === currentQuestion;
-    const showByTeam = currentTeam === 'all' || rowTeam === currentTeam;
-    row.style.display = showByQuestion && showByTeam ? '' : 'none';
-  });
-}
-
-// Set default question filter on page load
-filterRows();
 // ========== AUTO-GROW FUNCTION ==========
 function autoGrow(textarea) {
-  textarea.style.height = 'auto'; // reset height
-  textarea.style.height = textarea.scrollHeight + 'px'; // grow to fit content
+  textarea.style.height = 'auto';
+  textarea.style.height = textarea.scrollHeight + 'px';
 }
 
 // Apply auto-grow to existing textareas
@@ -99,35 +17,43 @@ function addDeleteListener(btn) {
   });
 }
 
-// Apply delete to existing rows
+// Apply delete to all existing rows
 document.querySelectorAll('.delete-row').forEach(btn => addDeleteListener(btn));
+
+// ========== FILTER FUNCTION ==========
+function filterTable(question = 'all', member = 'all', type = 'all') {
+  document.querySelectorAll('.evidence-table tbody tr').forEach(row => {
+    const rowQuestion = row.getAttribute('data-question');
+    const rowMember = row.getAttribute('data-member');
+    const rowType = row.querySelector('.type-select')?.value || 'primary';
+
+    const showQuestion = question === 'all' || rowQuestion === question;
+    const showMember = member === 'all' || rowMember === member;
+    const showType = type === 'all' || rowType === type;
+
+    row.style.display = (showQuestion && showMember && showType) ? '' : 'none';
+  });
+}
 
 // ========== ADD ROW FUNCTION ==========
 document.getElementById('add-row').addEventListener('click', () => {
   const tbody = document.querySelector('.evidence-table tbody');
-
-  // 1️⃣ Get currently selected question
   const activeButton = document.querySelector('.question-selector button.active');
   const selectedQuestion = activeButton ? activeButton.getAttribute('data-question') : 'Q1';
-
-  // 2️⃣ Get currently selected team member
   const selectedMember = document.getElementById('team-member').value || 'luna';
 
-  // 3️⃣ Create new row
   const row = document.createElement('tr');
   row.setAttribute('data-question', selectedQuestion);
   row.setAttribute('data-member', selectedMember);
 
   row.innerHTML = `
     <td><textarea class="auto-textarea" placeholder="Type evidence here..."></textarea></td>
-
     <td>
       <select class="type-select">
         <option value="primary">Primary Source</option>
         <option value="secondary">Secondary Source</option>
       </select>
     </td>
-
     <td>
       <select class="member-select">
         <option value="luna">Luna</option>
@@ -136,28 +62,32 @@ document.getElementById('add-row').addEventListener('click', () => {
         <option value="evan">Evan</option>
       </select>
     </td>
-
     <td><textarea class="auto-textarea" placeholder="Explain why it relates..."></textarea></td>
     <td><button class="delete-row">Delete</button></td>
   `;
 
   tbody.appendChild(row);
 
-  // 4️⃣ Set the inline member select to the currently selected member
+  // Set member select to current member
   row.querySelector('.member-select').value = selectedMember;
 
-  // 5️⃣ Apply auto-grow to the new textareas
+  // Auto-grow new textareas
   row.querySelectorAll('.auto-textarea').forEach(textarea => {
     textarea.addEventListener('input', () => autoGrow(textarea));
     autoGrow(textarea);
   });
 
-  // 6️⃣ Apply delete button
+  // Add delete functionality
   addDeleteListener(row.querySelector('.delete-row'));
 
-  // 7️⃣ Re-apply filtering so the new row shows/hides correctly
-  const currentMemberFilter = document.getElementById('team-member').value;
-  filterTable(selectedQuestion, currentMemberFilter);
+  // Reapply filters
+  const currentQuestion = activeButton ? activeButton.getAttribute('data-question') : 'all';
+  const currentMember = document.getElementById('team-member').value;
+  const currentType = document.getElementById('type-filter')?.value || 'all';
+  filterTable(currentQuestion, currentMember, currentType);
+
+  // Focus first cell
+  row.querySelector('td').focus();
 });
 
 // ========== QUESTION FILTER ==========
@@ -165,7 +95,9 @@ document.querySelectorAll('.question-selector button').forEach(button => {
   button.addEventListener('click', () => {
     const selectedQuestion = button.getAttribute('data-question');
     const selectedMember = document.getElementById('team-member').value;
-    filterTable(selectedQuestion, selectedMember);
+    const selectedType = document.getElementById('type-filter')?.value || 'all';
+
+    filterTable(selectedQuestion, selectedMember, selectedType);
 
     // Highlight active button
     document.querySelectorAll('.question-selector button').forEach(btn => {
@@ -177,13 +109,23 @@ document.querySelectorAll('.question-selector button').forEach(button => {
 // ========== TEAM MEMBER FILTER ==========
 document.getElementById('team-member').addEventListener('change', () => {
   const selectedMember = document.getElementById('team-member').value;
-
-  // Find currently active question
   const activeButton = document.querySelector('.question-selector button.active');
   const selectedQuestion = activeButton ? activeButton.getAttribute('data-question') : 'all';
-
-  filterTable(selectedQuestion, selectedMember);
+  const selectedType = document.getElementById('type-filter')?.value || 'all';
+  filterTable(selectedQuestion, selectedMember, selectedType);
 });
+
+// ========== TYPE FILTER ==========
+const typeFilter = document.getElementById('type-filter');
+if (typeFilter) {
+  typeFilter.addEventListener('change', () => {
+    const selectedType = typeFilter.value;
+    const selectedMember = document.getElementById('team-member').value;
+    const activeButton = document.querySelector('.question-selector button.active');
+    const selectedQuestion = activeButton ? activeButton.getAttribute('data-question') : 'all';
+    filterTable(selectedQuestion, selectedMember, selectedType);
+  });
+}
 
 // ========== INLINE MEMBER SELECT CHANGE ==========
 document.addEventListener('change', e => {
@@ -191,23 +133,14 @@ document.addEventListener('change', e => {
     const row = e.target.closest('tr');
     row.setAttribute('data-member', e.target.value);
 
-    // Re-apply filtering after changing member
     const activeButton = document.querySelector('.question-selector button.active');
     const selectedQuestion = activeButton ? activeButton.getAttribute('data-question') : 'all';
     const selectedMember = document.getElementById('team-member').value;
-    filterTable(selectedQuestion, selectedMember);
+    const selectedType = document.getElementById('type-filter')?.value || 'all';
+
+    filterTable(selectedQuestion, selectedMember, selectedType);
   }
 });
 
-// ========== FILTER FUNCTION ==========
-function filterTable(question, member) {
-  document.querySelectorAll('.evidence-table tbody tr').forEach(row => {
-    const rowQuestion = row.getAttribute('data-question');
-    const rowMember = row.getAttribute('data-member');
-
-    const showQuestion = question === 'all' || rowQuestion === question;
-    const showMember = member === 'all' || rowMember === member;
-
-    row.style.display = (showQuestion && showMember) ? '' : 'none';
-  });
-}
+// ========== INITIAL FILTER ==========
+filterTable();
