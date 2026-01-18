@@ -141,3 +141,37 @@ document.getElementById('add-row').addEventListener('click', () => {
   // Apply delete button
   addDeleteListener(row.querySelector('.delete-row'));
 });
+// QUESTION FILTER
+document.querySelectorAll('.question-selector button').forEach(button => {
+  button.addEventListener('click', () => {
+    const selectedQuestion = button.getAttribute('data-question');
+    const selectedMember = document.getElementById('team-member').value;
+    filterTable(selectedQuestion, selectedMember);
+
+    // Highlight active button
+    document.querySelectorAll('.question-selector button').forEach(btn => {
+      btn.classList.toggle('active', btn === button);
+    });
+  });
+});
+// TEAM MEMBER FILTER
+document.getElementById('team-member').addEventListener('change', () => {
+  const selectedMember = document.getElementById('team-member').value;
+
+  // Find currently active question
+  const activeButton = document.querySelector('.question-selector button.active');
+  const selectedQuestion = activeButton ? activeButton.getAttribute('data-question') : 'all';
+
+  filterTable(selectedQuestion, selectedMember);
+});
+function filterTable(question, member) {
+  document.querySelectorAll('.evidence-table tbody tr').forEach(row => {
+    const rowQuestion = row.getAttribute('data-question');
+    const rowMember = row.getAttribute('data-member');
+
+    const showQuestion = question === 'all' || rowQuestion === question;
+    const showMember = member === 'all' || rowMember === member;
+
+    row.style.display = (showQuestion && showMember) ? '' : 'none';
+  });
+}
