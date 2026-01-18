@@ -413,3 +413,7 @@ section button:hover {
   font-family: inherit;
   font-size: 14px;
 }
+.question-selector button.active {
+  background-color: #4caf50;
+  color: white;
+}
