@@ -41,6 +41,7 @@ document.getElementById('add-row').addEventListener('click', () => {
   const activeButton = document.querySelector('.question-selector button.active');
   const selectedQuestion = activeButton ? activeButton.getAttribute('data-question') : 'Q1';
   const selectedMember = document.getElementById('team-member').value || 'luna';
+  const selectedType = document.getElementById('type-filter')?.value || 'primary'; // <-- use current type filter
 
   const row = document.createElement('tr');
   row.setAttribute('data-question', selectedQuestion);
@@ -50,8 +51,8 @@ document.getElementById('add-row').addEventListener('click', () => {
     <td><textarea class="auto-textarea" placeholder="Type evidence here..."></textarea></td>
     <td>
       <select class="type-select">
-        <option value="primary">Primary Source</option>
-        <option value="secondary">Secondary Source</option>
+        <option value="primary" ${selectedType === 'primary' ? 'selected' : ''}>Primary Source</option>
+        <option value="secondary" ${selectedType === 'secondary' ? 'selected' : ''}>Secondary Source</option>
       </select>
     </td>
     <td>
