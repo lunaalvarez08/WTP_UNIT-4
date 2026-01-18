@@ -79,12 +79,47 @@
       </tr>
     </thead>
     <tbody>
-      <!-- Q1, Q2, Q3 rows go here exactly as you already have them -->
-      <!-- All rows include: auto-textarea, type-select, member-select, explanation textarea, delete button -->
+      <!-- Example Row (copy for Q1-Q3 and all team members or generate via JS) -->
+      <tr data-question="Q1" data-member="luna">
+        <td><textarea class="auto-textarea">Evidence from Luna</textarea></td>
+        <td>
+          <select class="type-select">
+            <option value="constitution">Constitution / Amendments</option>
+            <option value="bill_of_rights">Bill of Rights</option>
+            <option value="other_amendments">Other Amendments</option>
+            <option value="constitutional_principles">Constitutional Principles/Values</option>
+            <option value="federalist_paper">Federalist Paper Quote</option>
+            <option value="anti_federalist">Anti-Federalist Quote</option>
+            <option value="founding_father">Founding Father Quote</option>
+            <option value="historian">Historian / Political Scientist Analysis</option>
+            <option value="comparative_doc">Other Historical Documents</option>
+            <option value="supreme_court">Supreme Court Case</option>
+            <option value="state_court">State Court Case</option>
+            <option value="international_court">International Court Case</option>
+            <option value="us_current_event">U.S. Current Event</option>
+            <option value="state_current_event">State / Local Current Event</option>
+            <option value="world_current_event">World Current Event</option>
+            <option value="international_doc">International Document / Treaty</option>
+            <option value="other">Other</option>
+          </select>
+        </td>
+        <td>
+          <select class="member-select">
+            <option value="luna" selected>Luna</option>
+            <option value="sarah">Sarah</option>
+            <option value="bekim">Bekim</option>
+            <option value="evan">Evan</option>
+          </select>
+        </td>
+        <td><textarea class="auto-textarea">Explanation</textarea></td>
+        <td><button class="delete-row">Delete</button></td>
+      </tr>
+      <!-- Repeat for all other team members and questions, or add via JS -->
     </tbody>
   </table>
   <button id="add-row">+ Add Row</button>
 </section>
+
 
 <script src="script.js"></script>
 </body>
