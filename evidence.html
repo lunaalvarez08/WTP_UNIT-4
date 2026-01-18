@@ -34,16 +34,24 @@
   </section>
 
   <!-- TEAM MEMBER SELECTOR -->
-  <section class="team-selector">
-    <label for="team-member">Team Member:</label>
-    <select id="team-member">
-      <option value="all">All Members</option>
-      <option value="luna">Luna</option>
-      <option value="sarah">Sarah</option>
-      <option value="bekim">Bekim</option>
-      <option value="evan">Evan</option>
-    </select>
-  </section>
+<section class="team-selector">
+  <label for="team-member">Team Member:</label>
+  <select id="team-member">
+    <option value="all">All Members</option>
+    <option value="luna">Luna</option>
+    <option value="sarah">Sarah</option>
+    <option value="bekim">Bekim</option>
+    <option value="evan">Evan</option>
+  </select>
+
+  <!-- TYPE OF EVIDENCE FILTER -->
+  <label for="type-filter">Type of Evidence:</label>
+  <select id="type-filter">
+    <option value="all">All Types</option>
+    <option value="primary">Primary Source</option>
+    <option value="secondary">Secondary Source</option>
+  </select>
+</section>
 
 <section class="evidence-table">
   <table>
@@ -51,11 +59,23 @@
       <tr>
         <th>Evidence</th>
         <th>Type of Evidence</th>
+        <th>Team Member</th>
         <th>Why it relates</th>
         <th>Actions</th>
       </tr>
     </thead>
-   <tbody>
+    <tbody>
+      <!-- Q1, Q2, Q3 rows go here exactly as you already have them -->
+      <!-- All rows include: auto-textarea, type-select, member-select, explanation textarea, delete button -->
+    </tbody>
+  </table>
+  <button id="add-row">+ Add Row</button>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>
+
   <!-- Q1 Rows -->
   <tr data-question="Q1" data-member="luna">
     <td><textarea class="auto-textarea">Evidence from Luna</textarea></td>
