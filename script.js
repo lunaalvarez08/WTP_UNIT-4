@@ -41,7 +41,7 @@ document.getElementById('add-row').addEventListener('click', () => {
   const activeButton = document.querySelector('.question-selector button.active');
   const selectedQuestion = activeButton ? activeButton.getAttribute('data-question') : 'Q1';
   const selectedMember = document.getElementById('team-member').value || 'luna';
-  const selectedType = document.getElementById('type-filter')?.value || 'primary'; // <-- use current type filter
+  const selectedType = document.getElementById('type-filter')?.value || 'primary';
 
   const row = document.createElement('tr');
   row.setAttribute('data-question', selectedQuestion);
@@ -51,8 +51,23 @@ document.getElementById('add-row').addEventListener('click', () => {
     <td><textarea class="auto-textarea" placeholder="Type evidence here..."></textarea></td>
     <td>
       <select class="type-select">
-        <option value="primary" ${selectedType === 'primary' ? 'selected' : ''}>Primary Source</option>
-        <option value="secondary" ${selectedType === 'secondary' ? 'selected' : ''}>Secondary Source</option>
+        <option value="constitution" ${selectedType === 'constitution' ? 'selected' : ''}>Constitution / Amendments</option>
+        <option value="bill_of_rights" ${selectedType === 'bill_of_rights' ? 'selected' : ''}>Bill of Rights</option>
+        <option value="other_amendments" ${selectedType === 'other_amendments' ? 'selected' : ''}>Other Amendments</option>
+        <option value="constitutional_principles" ${selectedType === 'constitutional_principles' ? 'selected' : ''}>Constitutional Principles/Values</option>
+        <option value="federalist_paper" ${selectedType === 'federalist_paper' ? 'selected' : ''}>Federalist Paper Quote</option>
+        <option value="anti_federalist" ${selectedType === 'anti_federalist' ? 'selected' : ''}>Anti-Federalist Quote</option>
+        <option value="founding_father" ${selectedType === 'founding_father' ? 'selected' : ''}>Founding Father Quote / Letter / Speech</option>
+        <option value="historian" ${selectedType === 'historian' ? 'selected' : ''}>Historian / Political Scientist Analysis</option>
+        <option value="comparative_doc" ${selectedType === 'comparative_doc' ? 'selected' : ''}>Other Historical Documents</option>
+        <option value="supreme_court" ${selectedType === 'supreme_court' ? 'selected' : ''}>Supreme Court Case</option>
+        <option value="state_court" ${selectedType === 'state_court' ? 'selected' : ''}>State Court Case</option>
+        <option value="international_court" ${selectedType === 'international_court' ? 'selected' : ''}>International Court Case</option>
+        <option value="us_current_event" ${selectedType === 'us_current_event' ? 'selected' : ''}>U.S. Current Event</option>
+        <option value="state_current_event" ${selectedType === 'state_current_event' ? 'selected' : ''}>State / Local Current Event</option>
+        <option value="world_current_event" ${selectedType === 'world_current_event' ? 'selected' : ''}>World Current Event</option>
+        <option value="international_doc" ${selectedType === 'international_doc' ? 'selected' : ''}>International Document / Treaty</option>
+        <option value="other" ${selectedType === 'other' ? 'selected' : ''}>Other</option>
       </select>
     </td>
     <td>
@@ -97,7 +112,6 @@ document.querySelectorAll('.question-selector button').forEach(button => {
     const selectedQuestion = button.getAttribute('data-question');
     const selectedMember = document.getElementById('team-member').value;
     const selectedType = document.getElementById('type-filter')?.value || 'all';
-
     filterTable(selectedQuestion, selectedMember, selectedType);
 
     // Highlight active button
@@ -138,7 +152,6 @@ document.addEventListener('change', e => {
     const selectedQuestion = activeButton ? activeButton.getAttribute('data-question') : 'all';
     const selectedMember = document.getElementById('team-member').value;
     const selectedType = document.getElementById('type-filter')?.value || 'all';
-
     filterTable(selectedQuestion, selectedMember, selectedType);
   }
 });
