@@ -80,3 +80,64 @@ function filterRows() {
 
 // Set default question filter on page load
 filterRows();
+// ========== AUTO-GROW FUNCTION ==========
+function autoGrow(textarea) {
+  textarea.style.height = 'auto';                  // reset height
+  textarea.style.height = textarea.scrollHeight + 'px'; // grow to fit content
+}
+
+// Apply auto-grow to existing textareas
+document.querySelectorAll('.auto-textarea').forEach(textarea => {
+  autoGrow(textarea);
+  textarea.addEventListener('input', () => autoGrow(textarea));
+});
+
+// ========== DELETE ROW FUNCTION ==========
+function addDeleteListener(btn) {
+  btn.addEventListener('click', () => {
+    btn.closest('tr').remove();
+  });
+}
+
+// Apply delete to existing rows
+document.querySelectorAll('.delete-row').forEach(btn => addDeleteListener(btn));
+
+// ========== ADD ROW FUNCTION ==========
+document.getElementById('add-row').addEventListener('click', () => {
+  const tbody = document.querySelector('.evidence-table tbody');
+
+  // Get currently selected question
+  const activeButton = document.querySelector('.question-selector button.active');
+  const selectedQuestion = activeButton ? activeButton.getAttribute('data-question') : 'Q1';
+
+  // Get currently selected team member
+  const selectedMember = document.getElementById('team-member').value || 'all';
+
+  // Create new row
+  const row = document.createElement('tr');
+  row.setAttribute('data-question', selectedQuestion);
+  row.setAttribute('data-member', selectedMember);
+
+  row.innerHTML = `
+    <td><textarea class="auto-textarea" placeholder="Type evidence here..."></textarea></td>
+    <td>
+      <select>
+        <option value="primary">Primary Source</option>
+        <option value="secondary">Secondary Source</option>
+      </select>
+    </td>
+    <td><textarea class="auto-textarea" placeholder="Explain why it relates..."></textarea></td>
+    <td><button class="delete-row">Delete</button></td>
+  `;
+
+  tbody.appendChild(row);
+
+  // Apply auto-grow to new textareas
+  row.querySelectorAll('.auto-textarea').forEach(textarea => {
+    textarea.addEventListener('input', () => autoGrow(textarea));
+    autoGrow(textarea);
+  });
+
+  // Apply delete button
+  addDeleteListener(row.querySelector('.delete-row'));
+});
