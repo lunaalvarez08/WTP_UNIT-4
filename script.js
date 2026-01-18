@@ -51,24 +51,39 @@ document.getElementById('add-row').addEventListener('click', () => {
   row.setAttribute('data-member', selectedMember);
 
   row.innerHTML = `
-    <td><textarea class="auto-textarea" placeholder="Type evidence here..."></textarea></td>
-    <td>
-      <select class="type-select">
-        <option value="primary" ${selectedType === 'primary' ? 'selected' : ''}>Primary Source</option>
-        <option value="secondary" ${selectedType === 'secondary' ? 'selected' : ''}>Secondary Source</option>
-      </select>
-    </td>
-    <td>
-      <select class="member-select">
-        <option value="luna">Luna</option>
-        <option value="sarah">Sarah</option>
-        <option value="bekim">Bekim</option>
-        <option value="evan">Evan</option>
-      </select>
-    </td>
-    <td><textarea class="auto-textarea" placeholder="Explain why it relates..."></textarea></td>
-    <td><button class="delete-row">Delete</button></td>
-  `;
+  <td><textarea class="auto-textarea" placeholder="Type evidence here..."></textarea></td>
+  <td>
+    <select class="type-select">
+      <option value="constitution">Constitution / Amendments</option>
+      <option value="bill_of_rights">Bill of Rights</option>
+      <option value="other_amendments">Other Amendments</option>
+      <option value="constitutional_principles">Constitutional Principles/Values</option>
+      <option value="federalist_paper">Federalist Paper Quote</option>
+      <option value="anti_federalist">Anti-Federalist Quote</option>
+      <option value="founding_father">Founding Father Quote / Letter / Speech</option>
+      <option value="historian">Historian / Political Scientist Analysis</option>
+      <option value="comparative_doc">Other Historical Documents (Magna Carta, Articles, etc.)</option>
+      <option value="supreme_court">Supreme Court Case</option>
+      <option value="state_court">State Court Case</option>
+      <option value="international_court">International Court Case</option>
+      <option value="us_current_event">U.S. Current Event</option>
+      <option value="state_current_event">State / Local Current Event</option>
+      <option value="world_current_event">World Current Event</option>
+      <option value="international_doc">International Document / Treaty</option>
+      <option value="other">Other</option>
+    </select>
+  </td>
+  <td>
+    <select class="member-select">
+      <option value="luna">Luna</option>
+      <option value="sarah">Sarah</option>
+      <option value="bekim">Bekim</option>
+      <option value="evan">Evan</option>
+    </select>
+  </td>
+  <td><textarea class="auto-textarea" placeholder="Explain why it relates..."></textarea></td>
+  <td><button class="delete-row">Delete</button></td>
+`;
 
   tbody.appendChild(row);
 
