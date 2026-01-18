@@ -82,7 +82,7 @@ function filterRows() {
 filterRows();
 // ========== AUTO-GROW FUNCTION ==========
 function autoGrow(textarea) {
-  textarea.style.height = 'auto';                  // reset height
+  textarea.style.height = 'auto'; // reset height
   textarea.style.height = textarea.scrollHeight + 'px'; // grow to fit content
 }
 
@@ -106,42 +106,61 @@ document.querySelectorAll('.delete-row').forEach(btn => addDeleteListener(btn));
 document.getElementById('add-row').addEventListener('click', () => {
   const tbody = document.querySelector('.evidence-table tbody');
 
-  // Get currently selected question
+  // 1️⃣ Get currently selected question
   const activeButton = document.querySelector('.question-selector button.active');
   const selectedQuestion = activeButton ? activeButton.getAttribute('data-question') : 'Q1';
 
-  // Get currently selected team member
-  const selectedMember = document.getElementById('team-member').value || 'all';
+  // 2️⃣ Get currently selected team member
+  const selectedMember = document.getElementById('team-member').value || 'luna';
 
-  // Create new row
+  // 3️⃣ Create new row
   const row = document.createElement('tr');
   row.setAttribute('data-question', selectedQuestion);
   row.setAttribute('data-member', selectedMember);
 
   row.innerHTML = `
     <td><textarea class="auto-textarea" placeholder="Type evidence here..."></textarea></td>
+
     <td>
-      <select>
+      <select class="type-select">
         <option value="primary">Primary Source</option>
         <option value="secondary">Secondary Source</option>
       </select>
     </td>
+
+    <td>
+      <select class="member-select">
+        <option value="luna">Luna</option>
+        <option value="sarah">Sarah</option>
+        <option value="bekim">Bekim</option>
+        <option value="evan">Evan</option>
+      </select>
+    </td>
+
     <td><textarea class="auto-textarea" placeholder="Explain why it relates..."></textarea></td>
     <td><button class="delete-row">Delete</button></td>
   `;
 
   tbody.appendChild(row);
 
-  // Apply auto-grow to new textareas
+  // 4️⃣ Set the inline member select to the currently selected member
+  row.querySelector('.member-select').value = selectedMember;
+
+  // 5️⃣ Apply auto-grow to the new textareas
   row.querySelectorAll('.auto-textarea').forEach(textarea => {
     textarea.addEventListener('input', () => autoGrow(textarea));
     autoGrow(textarea);
   });
 
-  // Apply delete button
+  // 6️⃣ Apply delete button
   addDeleteListener(row.querySelector('.delete-row'));
+
+  // 7️⃣ Re-apply filtering so the new row shows/hides correctly
+  const currentMemberFilter = document.getElementById('team-member').value;
+  filterTable(selectedQuestion, currentMemberFilter);
 });
-// QUESTION FILTER
+
+// ========== QUESTION FILTER ==========
 document.querySelectorAll('.question-selector button').forEach(button => {
   button.addEventListener('click', () => {
     const selectedQuestion = button.getAttribute('data-question');
@@ -154,7 +173,8 @@ document.querySelectorAll('.question-selector button').forEach(button => {
     });
   });
 });
-// TEAM MEMBER FILTER
+
+// ========== TEAM MEMBER FILTER ==========
 document.getElementById('team-member').addEventListener('change', () => {
   const selectedMember = document.getElementById('team-member').value;
 
@@ -164,6 +184,22 @@ document.getElementById('team-member').addEventListener('change', () => {
 
   filterTable(selectedQuestion, selectedMember);
 });
+
+// ========== INLINE MEMBER SELECT CHANGE ==========
+document.addEventListener('change', e => {
+  if (e.target.classList.contains('member-select')) {
+    const row = e.target.closest('tr');
+    row.setAttribute('data-member', e.target.value);
+
+    // Re-apply filtering after changing member
+    const activeButton = document.querySelector('.question-selector button.active');
+    const selectedQuestion = activeButton ? activeButton.getAttribute('data-question') : 'all';
+    const selectedMember = document.getElementById('team-member').value;
+    filterTable(selectedQuestion, selectedMember);
+  }
+});
+
+// ========== FILTER FUNCTION ==========
 function filterTable(question, member) {
   document.querySelectorAll('.evidence-table tbody tr').forEach(row => {
     const rowQuestion = row.getAttribute('data-question');
