@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quizzes | WTP U4</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <div class="logo">We The People</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="team.html">Team Members</a>
+      <a href="practice.html">Practice Sets</a>
+      <a href="evidence.html">Evidence Charts</a>
+      <a href="flashcards.html">Flashcards</a>
+      <a href="quizzes.html" class="active">Quizzes</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Quizzes</h1>
+    <p>Select a quiz below to test your knowledge!</p>
+
+    <section class="quiz-sets">
+      <div class="card">
+        <h3>Quiz 1 – Q1</h3>
+        <p>10 questions covering Q1 topics.</p>
+        <button class="btn-navy show-answer">Start Quiz</button>
+        <p class="answer" style="display:none;">Answer: …</p>
+      </div>
+      <div class="card">
+        <h3>Quiz 2 – Q3</h3>
+        <p>10 questions covering Q3 topics.</p>
+        <button class="btn-navy show-answer">Start Quiz</button>
+        <p class="answer" style="display:none;">Answer: …</p>
+      </div>
+      <!-- Add more quiz cards as needed -->
+    </section>
+
+  </main>
+
+  <script>
+    // Simple JS to toggle showing answer
+    document.querySelectorAll(".show-answer").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const answer = btn.nextElementSibling;
+        if(answer.style.display === "none") {
+          answer.style.display = "block";
+          btn.textContent = "Hide Answer";
+        } else {
+          answer.style.display = "none";
+          btn.textContent = "Start Quiz";
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
