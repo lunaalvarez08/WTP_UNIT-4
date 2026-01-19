@@ -87,16 +87,48 @@
       });
     }
 
-    function selectAnswer(option) {
-      const correct = quizData[currentQuestion].answer;
-      if(option === correct) score++;
-      currentQuestion++;
-      if(currentQuestion < quizData.length) {
-        loadQuestion();
-      } else {
-        showScore();
-      }
+function selectAnswer(option, btn) {
+  const correct = quizData[currentQuestion].answer;
+
+  // Highlight the clicked button
+  if(option === correct) {
+    btn.classList.add("correct");
+  } else {
+    btn.classList.add("incorrect");
+    // Also highlight the correct option
+    Array.from(optionsEl.children).forEach(b => {
+      if(b.textContent === correct) b.classList.add("correct");
+    });
+  }
+
+  // Disable all buttons after selection
+  Array.from(optionsEl.children).forEach(b => b.disabled = true);
+
+  // Small delay before moving to next question
+  setTimeout(() => {
+    currentQuestion++;
+    if(currentQuestion < quizData.length) {
+      loadQuestion();
+    } else {
+      showScore();
     }
+  }, 800);
+}
+
+function loadQuestion() {
+  const q = quizData[currentQuestion];
+  questionEl.textContent = q.question;
+  optionsEl.innerHTML = "";
+
+  q.options.forEach(option => {
+    const btn = document.createElement("button");
+    btn.classList.add("btn-navy");
+    btn.textContent = option;
+    btn.addEventListener("click", () => selectAnswer(option, btn));
+    optionsEl.appendChild(btn);
+  });
+}
+
 
     function showScore() {
       quizCard.style.display = "none";
