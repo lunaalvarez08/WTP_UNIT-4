@@ -18,15 +18,23 @@ const inner = document.getElementById("card-inner");
 const hardBtn = document.getElementById("hard-btn");
 const progress = document.getElementById("progress");
 
+// ===== Shuffle function =====
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
 // ===== Build Deck =====
 function buildDeck() {
   deck = [];
   baseFlashcards.forEach(card => {
-    // Apply saved Hard state
     card.hard = savedHard[card.question] || false;
     deck.push(card);
     if (card.hard) deck.push(card, card); // Hard cards appear more often
   });
+  shuffle(deck); // Shuffle after building
 }
 
 // ===== Load Current Card =====
