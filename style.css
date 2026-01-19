@@ -178,3 +178,42 @@ button:hover {
   background-color: #a31d2b;
   transform: scale(1.05);
 }
+
+.practice-sets {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.practice-sets .card {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.practice-sets .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.practice-sets .card h3 {
+  margin-bottom: 10px;
+}
+
+.practice-sets .card p {
+  font-size: 0.95rem;
+  margin-bottom: 15px;
+}
+
+.practice-sets .card button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
