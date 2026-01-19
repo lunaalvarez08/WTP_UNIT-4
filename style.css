@@ -250,3 +250,49 @@ button:hover {
 .practice-sets .card:hover {
   box-shadow: 0 8px 20px rgba(0,0,0,0.15), 0 0 10px rgba(10,40,95,0.3);
 }
+.quiz-sets {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.quiz-sets .card {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  cursor: pointer;
+}
+
+.quiz-sets .card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  background: #eef2ff;
+}
+
+.quiz-sets .card h3 {
+  margin-bottom: 10px;
+}
+
+.quiz-sets .card p {
+  font-size: 0.95rem;
+  margin-bottom: 15px;
+}
+
+.quiz-sets .card button {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.quiz-sets .card button:hover {
+  transform: scale(1.05);
+  background-color: #0c3478;
+}
