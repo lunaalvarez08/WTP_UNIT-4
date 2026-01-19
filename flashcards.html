@@ -40,22 +40,45 @@
 </main>
 
 <script>
-  const flashcards = [
-    { question: "What year was the U.S. Constitution ratified?", answer: "1787" },
-    { question: "Which branch can declare war?", answer: "Legislative" },
-    { question: "Who wrote the Federalist Papers?", answer: "Madison, Hamilton, Jay" }
+  const baseFlashcards = [
+    { question: "What year was the U.S. Constitution ratified?", answer: "1787", hard: false },
+    { question: "Which branch can declare war?", answer: "Legislative", hard: false },
+    { question: "Who wrote the Federalist Papers?", answer: "Madison, Hamilton, Jay", hard: false }
   ];
 
+  let deck = [];
   let index = 0;
 
   const front = document.getElementById("card-front");
   const back = document.getElementById("card-back");
   const inner = document.getElementById("card-inner");
 
+  const progress = document.createElement("p");
+  progress.id = "progress";
+  document.querySelector("main").appendChild(progress);
+
+  const hardBtn = document.createElement("button");
+  hardBtn.textContent = "★ Mark as Hard";
+  hardBtn.className = "btn-red";
+  document.querySelector(".flashcard-wrapper").appendChild(hardBtn);
+
+  function buildDeck() {
+    deck = [];
+    baseFlashcards.forEach(card => {
+      deck.push(card);
+      if (card.hard) {
+        deck.push(card, card); // appear more often
+      }
+    });
+  }
+
   function loadCard() {
     inner.classList.remove("flipped");
-    front.textContent = flashcards[index].question;
-    back.textContent = flashcards[index].answer;
+    const card = deck[index];
+    front.textContent = card.question;
+    back.textContent = card.answer;
+    progress.textContent = `Card ${index + 1} / ${deck.length}`;
+    hardBtn.textContent = card.hard ? "★ Hard (click to unmark)" : "☆ Mark as Hard";
   }
 
   document.querySelector(".flashcard").addEventListener("click", () => {
@@ -63,15 +86,33 @@
   });
 
   document.getElementById("next").addEventListener("click", () => {
-    index = (index + 1) % flashcards.length;
+    index = (index + 1) % deck.length;
     loadCard();
   });
 
   document.getElementById("prev").addEventListener("click", () => {
-    index = (index - 1 + flashcards.length) % flashcards.length;
+    index = (index - 1 + deck.length) % deck.length;
     loadCard();
   });
 
+  hardBtn.addEventListener("click", () => {
+    deck[index].hard = !deck[index].hard;
+    buildDeck();
+    index = 0;
+    loadCard();
+  });
+
+  // Keyboard controls
+  document.addEventListener("keydown", e => {
+    if (e.key === "ArrowRight") document.getElementById("next").click();
+    if (e.key === "ArrowLeft") document.getElementById("prev").click();
+    if (e.key === " ") {
+      e.preventDefault();
+      inner.classList.toggle("flipped");
+    }
+  });
+
+  buildDeck();
   loadCard();
 </script>
 
