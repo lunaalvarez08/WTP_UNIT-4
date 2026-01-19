@@ -164,3 +164,4 @@ document.addEventListener('change', e => {
 
 // ========== INITIAL FILTER ==========
 filterTable();
+<script src="script-evidence.js"></script>
