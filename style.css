@@ -247,3 +247,6 @@ button:hover {
   transform: scale(1.05);
   background-color: #0c3478; /* slightly darker navy */
 }
+.practice-sets .card:hover {
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15), 0 0 10px rgba(10,40,95,0.3);
+}
