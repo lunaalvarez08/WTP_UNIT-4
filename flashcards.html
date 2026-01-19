@@ -23,10 +23,19 @@
 
 <main>
   <h1>Flashcards</h1>
-  <p>Click a card to flip it and see the answer!</p>
+  <p>Click the card to flip it. Use arrows to move.</p>
 
-  <section class="flashcard-container">
-    <!-- Cards will be generated via JS -->
+  <section class="flashcard-wrapper">
+    <button id="prev" class="btn-navy">←</button>
+
+    <div class="flashcard">
+      <div class="card-inner" id="card-inner">
+        <div class="card-front" id="card-front"></div>
+        <div class="card-back" id="card-back"></div>
+      </div>
+    </div>
+
+    <button id="next" class="btn-navy">→</button>
   </section>
 </main>
 
@@ -34,29 +43,36 @@
   const flashcards = [
     { question: "What year was the U.S. Constitution ratified?", answer: "1787" },
     { question: "Which branch can declare war?", answer: "Legislative" },
-    { question: "Who wrote the Federalist Papers?", answer: "Madison, Hamilton, Jay" },
-    // Add more flashcards here
+    { question: "Who wrote the Federalist Papers?", answer: "Madison, Hamilton, Jay" }
   ];
 
-  const container = document.querySelector(".flashcard-container");
+  let index = 0;
 
-  flashcards.forEach(card => {
-    const cardEl = document.createElement("div");
-    cardEl.classList.add("flashcard");
+  const front = document.getElementById("card-front");
+  const back = document.getElementById("card-back");
+  const inner = document.getElementById("card-inner");
 
-    cardEl.innerHTML = `
-      <div class="card-inner">
-        <div class="card-front">${card.question}</div>
-        <div class="card-back">${card.answer}</div>
-      </div>
-    `;
+  function loadCard() {
+    inner.classList.remove("flipped");
+    front.textContent = flashcards[index].question;
+    back.textContent = flashcards[index].answer;
+  }
 
-    cardEl.addEventListener("click", () => {
-      cardEl.querySelector(".card-inner").classList.toggle("flipped");
-    });
-
-    container.appendChild(cardEl);
+  document.querySelector(".flashcard").addEventListener("click", () => {
+    inner.classList.toggle("flipped");
   });
+
+  document.getElementById("next").addEventListener("click", () => {
+    index = (index + 1) % flashcards.length;
+    loadCard();
+  });
+
+  document.getElementById("prev").addEventListener("click", () => {
+    index = (index - 1 + flashcards.length) % flashcards.length;
+    loadCard();
+  });
+
+  loadCard();
 </script>
 
 </body>
