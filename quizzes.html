@@ -131,10 +131,19 @@ function loadQuestion() {
 
 
     function showScore() {
-      quizCard.style.display = "none";
-      scoreCard.style.display = "block";
-      scoreText.textContent = `You scored ${score} out of ${quizData.length}!`;
-    }
+  quizCard.style.display = "none";
+  scoreCard.style.display = "block";
+
+  let displayedScore = 0;
+  const totalScore = score;
+  scoreText.textContent = `You scored 0 out of ${quizData.length}!`;
+
+  const interval = setInterval(() => {
+    displayedScore++;
+    scoreText.textContent = `You scored ${displayedScore} out of ${quizData.length}!`;
+    if(displayedScore >= totalScore) clearInterval(interval);
+  }, 200); // counts up every 200ms
+}
 
     restartBtn.addEventListener("click", () => {
       currentQuestion = 0;
