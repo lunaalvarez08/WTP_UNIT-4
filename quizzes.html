@@ -22,41 +22,98 @@
   </header>
 
   <main>
-    <h1>Quizzes</h1>
-    <p>Select a quiz below to test your knowledge!</p>
+    <h1>Interactive Quiz</h1>
+    <p>Answer the questions below and get your score!</p>
 
-    <section class="quiz-sets">
-      <div class="card">
-        <h3>Quiz 1 – Q1</h3>
-        <p>10 questions covering Q1 topics.</p>
-        <button class="btn-navy show-answer">Start Quiz</button>
-        <p class="answer" style="display:none;">Answer: …</p>
+    <section class="quiz-container">
+      <div id="quiz-card" class="card">
+        <h3 id="question">Question text here</h3>
+        <div id="options">
+          <!-- Buttons for multiple choice options -->
+        </div>
+        <button id="next-btn" class="btn-navy">Next Question</button>
       </div>
-      <div class="card">
-        <h3>Quiz 2 – Q3</h3>
-        <p>10 questions covering Q3 topics.</p>
-        <button class="btn-navy show-answer">Start Quiz</button>
-        <p class="answer" style="display:none;">Answer: …</p>
+
+      <div id="score-card" class="card" style="display:none;">
+        <h3>Your Score</h3>
+        <p id="score-text"></p>
+        <button id="restart-btn" class="btn-navy">Restart Quiz</button>
       </div>
-      <!-- Add more quiz cards as needed -->
     </section>
-
   </main>
 
   <script>
-    // Simple JS to toggle showing answer
-    document.querySelectorAll(".show-answer").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const answer = btn.nextElementSibling;
-        if(answer.style.display === "none") {
-          answer.style.display = "block";
-          btn.textContent = "Hide Answer";
-        } else {
-          answer.style.display = "none";
-          btn.textContent = "Start Quiz";
-        }
+    const quizData = [
+      {
+        question: "What year was the U.S. Constitution ratified?",
+        options: ["1787", "1776", "1791", "1800"],
+        answer: "1787"
+      },
+      {
+        question: "Which branch of government can declare war?",
+        options: ["Legislative", "Executive", "Judicial", "All of the above"],
+        answer: "Legislative"
+      },
+      {
+        question: "Who wrote the Federalist Papers?",
+        options: ["Madison, Hamilton, Jay", "Washington, Adams, Jefferson", "Franklin, Monroe, Hamilton", "Jefferson, Adams, Madison"],
+        answer: "Madison, Hamilton, Jay"
+      }
+      // Add more questions here
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    const questionEl = document.getElementById("question");
+    const optionsEl = document.getElementById("options");
+    const nextBtn = document.getElementById("next-btn");
+    const quizCard = document.getElementById("quiz-card");
+    const scoreCard = document.getElementById("score-card");
+    const scoreText = document.getElementById("score-text");
+    const restartBtn = document.getElementById("restart-btn");
+
+    function loadQuestion() {
+      const q = quizData[currentQuestion];
+      questionEl.textContent = q.question;
+      optionsEl.innerHTML = "";
+
+      q.options.forEach(option => {
+        const btn = document.createElement("button");
+        btn.classList.add("btn-navy");
+        btn.textContent = option;
+        btn.addEventListener("click", () => selectAnswer(option));
+        optionsEl.appendChild(btn);
       });
+    }
+
+    function selectAnswer(option) {
+      const correct = quizData[currentQuestion].answer;
+      if(option === correct) score++;
+      currentQuestion++;
+      if(currentQuestion < quizData.length) {
+        loadQuestion();
+      } else {
+        showScore();
+      }
+    }
+
+    function showScore() {
+      quizCard.style.display = "none";
+      scoreCard.style.display = "block";
+      scoreText.textContent = `You scored ${score} out of ${quizData.length}!`;
+    }
+
+    restartBtn.addEventListener("click", () => {
+      currentQuestion = 0;
+      score = 0;
+      scoreCard.style.display = "none";
+      quizCard.style.display = "block";
+      loadQuestion();
     });
+
+    // Load the first question
+    loadQuestion();
   </script>
 
 </body>
