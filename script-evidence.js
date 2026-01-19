@@ -1,3 +1,4 @@
+const savedHard = JSON.parse(localStorage.getItem("hardCards")) || {};
 // ========== AUTO-GROW FUNCTION ==========
 function autoGrow(textarea) {
   textarea.style.height = 'auto';
