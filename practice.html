@@ -50,3 +50,15 @@
 
 </body>
 </html>
+<script>
+document.querySelectorAll(".practice-sets .card button").forEach(button => {
+  button.addEventListener("click", () => {
+    const card = button.closest(".card");
+    card.style.transition = "transform 0.2s";
+    card.style.transform = "scale(1.08)";
+    setTimeout(() => {
+      card.style.transform = "scale(1)";
+    }, 150);
+  });
+});
+</script>
