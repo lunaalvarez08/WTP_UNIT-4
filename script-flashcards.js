@@ -78,6 +78,13 @@ hardBtn.addEventListener("click", () => {
   loadCard();
 });
 
+// ===== Optional Shuffle Button =====
+document.getElementById("shuffle-btn").addEventListener("click", () => {
+  shuffle(deck);
+  index = 0;
+  loadCard();
+});
+
 // ===== Keyboard Controls =====
 document.addEventListener("keydown", e => {
   if (e.key === "ArrowRight") document.getElementById("next").click();
