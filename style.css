@@ -333,3 +333,51 @@ button:hover {
   50% { transform: scale(1.1); opacity: 1; }
   100% { transform: scale(1); opacity: 1; }
 }
+.flashcard-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.flashcard {
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  border-radius: 12px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.card-inner.flipped {
+  transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  padding: 20px;
+  top: 0;
+  left: 0;
+}
+
+.card-front {
+  background-color: #eef2ff;
+  color: #0A285F;
+}
+
+.card-back {
+  background-color: #0A285F;
+  color: white;
+  transform: rotateY(180deg);
+}
