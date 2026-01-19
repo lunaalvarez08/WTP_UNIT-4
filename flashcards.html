@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flashcards | WTP U4</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="logo">We The People</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="team.html">Team Members</a>
+    <a href="practice.html">Practice Sets</a>
+    <a href="evidence.html">Evidence Charts</a>
+    <a href="flashcards.html" class="active">Flashcards</a>
+    <a href="quizzes.html">Quizzes</a>
+    <a href="about.html">About</a>
+  </nav>
+</header>
+
+<main>
+  <h1>Flashcards</h1>
+  <p>Click a card to flip it and see the answer!</p>
+
+  <section class="flashcard-container">
+    <!-- Cards will be generated via JS -->
+  </section>
+</main>
+
+<script>
+  const flashcards = [
+    { question: "What year was the U.S. Constitution ratified?", answer: "1787" },
+    { question: "Which branch can declare war?", answer: "Legislative" },
+    { question: "Who wrote the Federalist Papers?", answer: "Madison, Hamilton, Jay" },
+    // Add more flashcards here
+  ];
+
+  const container = document.querySelector(".flashcard-container");
+
+  flashcards.forEach(card => {
+    const cardEl = document.createElement("div");
+    cardEl.classList.add("flashcard");
+
+    cardEl.innerHTML = `
+      <div class="card-inner">
+        <div class="card-front">${card.question}</div>
+        <div class="card-back">${card.answer}</div>
+      </div>
+    `;
+
+    cardEl.addEventListener("click", () => {
+      cardEl.querySelector(".card-inner").classList.toggle("flipped");
+    });
+
+    container.appendChild(cardEl);
+  });
+</script>
+
+</body>
+</html>
