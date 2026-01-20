@@ -1,109 +1,154 @@
-alert("Evidence script loaded");
+// ===== Evidence Script =====
+alert("Evidence Script Loaded");
 
-const activeMember = JSON.parse(localStorage.getItem("activeMember"));
-const isPersonal = !!activeMember;
-
-const members = [
-  { name: "Luna", id: "luna" },
-  { name: "Sarah", id: "sarah" },
-  { name: "Bekim", id: "bekim" },
-  { name: "Evan", id: "evan" }
+// ===== Team Data =====
+const teamMembers = [
+  {
+    name: "Luna",
+    emoji: "🦭",
+    evidence: [
+      { question: "Q1", text: "Luna's Q1 evidence", type: "primary", why: "Explanation" },
+      { question: "Q2", text: "Luna's Q2 evidence", type: "secondary", why: "Explanation" },
+      { question: "Q3", text: "Luna's Q3 evidence", type: "primary", why: "Explanation" }
+    ]
+  },
+  {
+    name: "Sarah",
+    emoji: "🦋",
+    evidence: [
+      { question: "Q1", text: "Sarah's Q1 evidence", type: "secondary", why: "Explanation" },
+      { question: "Q2", text: "Sarah's Q2 evidence", type: "primary", why: "Explanation" },
+      { question: "Q3", text: "Sarah's Q3 evidence", type: "secondary", why: "Explanation" }
+    ]
+  },
+  {
+    name: "Bekim",
+    emoji: "⭐",
+    evidence: [
+      { question: "Q1", text: "Bekim's Q1 evidence", type: "primary", why: "Explanation" },
+      { question: "Q2", text: "Bekim's Q2 evidence", type: "secondary", why: "Explanation" },
+      { question: "Q3", text: "Bekim's Q3 evidence", type: "primary", why: "Explanation" }
+    ]
+  },
+  {
+    name: "Evan",
+    emoji: "🏈",
+    evidence: [
+      { question: "Q1", text: "Evan's Q1 evidence", type: "secondary", why: "Explanation" },
+      { question: "Q2", text: "Evan's Q2 evidence", type: "primary", why: "Explanation" },
+      { question: "Q3", text: "Evan's Q3 evidence", type: "secondary", why: "Explanation" }
+    ]
+  }
 ];
 
-const evidenceData = [
-  { member: "luna", question: "Q1", evidence: "Luna Q1 evidence", type: "primary", why: "Explanation" },
-  { member: "luna", question: "Q2", evidence: "Luna Q2 evidence", type: "secondary", why: "Explanation" },
-  { member: "sarah", question: "Q1", evidence: "Sarah Q1 evidence", type: "primary", why: "Explanation" },
-  { member: "bekim", question: "Q3", evidence: "Bekim Q3 evidence", type: "secondary", why: "Explanation" },
-  // add all your real entries here
-];
+// ===== References =====
+const tbody = document.getElementById("evidence-body");
+const teamSelect = document.getElementById("team-member");
+const questionSelect = document.getElementById("question-filter");
+const addRowBtn = document.getElementById("add-row");
+const saveBtn = document.getElementById("save-chart");
 
-const tableBody = document.querySelector(".evidence-table tbody");
-const memberSelect = document.getElementById("team-member");
-const typeSelect = document.getElementById("type-filter");
-const questionButtons = document.querySelectorAll(".question-selector button");
+// ===== Populate Team Member Dropdown =====
+teamMembers.forEach(member => {
+  const option = document.createElement("option");
+  option.value = member.name.toLowerCase();
+  option.textContent = member.name;
+  teamSelect.appendChild(option);
+});
 
-// Hide member drop-down if personal
-if (isPersonal && memberSelect) memberSelect.parentElement.style.display = "none";
-
-// Current filter state
-let currentQuestion = "Q1";
-let currentMember = isPersonal ? activeMember.name.toLowerCase() : "all";
-let currentType = "all";
-
-// Function to render rows
+// ===== Render Evidence Table =====
 function renderTable() {
-  tableBody.innerHTML = "";
+  tbody.innerHTML = "";
+  const selectedMember = teamSelect.value;
+  const selectedQuestion = questionSelect.value;
 
-  const filtered = evidenceData.filter(e => 
-    (currentQuestion === e.question) &&
-    (currentMember === "all" || e.member === currentMember) &&
-    (currentType === "all" || e.type === currentType)
-  );
+  teamMembers.forEach(member => {
+    if (selectedMember !== "all" && selectedMember !== member.name.toLowerCase()) return;
 
-  filtered.forEach(e => {
-    const row = document.createElement("tr");
-    row.dataset.member = e.member;
-    row.dataset.question = e.question;
-    row.innerHTML = `
-      <td><textarea class="auto-textarea">${e.evidence}</textarea></td>
-      <td>
-        <select class="type-select">
-          <option value="primary" ${e.type==="primary"?"selected":""}>Primary Source</option>
-          <option value="secondary" ${e.type==="secondary"?"selected":""}>Secondary Source</option>
-        </select>
-      </td>
-      <td>
-        <select class="member-select" ${isPersonal ? "disabled" : ""}>
-          ${members.map(m => `<option value="${m.id}" ${m.id===e.member?"selected":""}>${m.name}</option>`).join("")}
-        </select>
-      </td>
-      <td><textarea class="auto-textarea">${e.why}</textarea></td>
-      <td><button class="delete-row">Delete</button></td>
-    `;
-    tableBody.appendChild(row);
+    member.evidence.forEach(ev => {
+      if (selectedQuestion !== "all" && selectedQuestion !== ev.question) return;
 
-    // Delete row
-    row.querySelector(".delete-row").addEventListener("click", () => {
-      const index = evidenceData.indexOf(e);
-      if (index > -1) evidenceData.splice(index, 1);
-      renderTable();
+      const tr = document.createElement("tr");
+      tr.dataset.member = member.name.toLowerCase();
+      tr.dataset.question = ev.question;
+
+      tr.innerHTML = `
+        <td><textarea class="auto-textarea">${ev.text}</textarea></td>
+        <td>
+          <select class="type-select">
+            <option value="primary" ${ev.type === "primary" ? "selected" : ""}>Primary Source</option>
+            <option value="secondary" ${ev.type === "secondary" ? "selected" : ""}>Secondary Source</option>
+            <option value="tertiary" ${ev.type === "tertiary" ? "selected" : ""}>Tertiary Source</option>
+            <option value="other" ${ev.type === "other" ? "selected" : ""}>Other</option>
+          </select>
+        </td>
+        <td>
+          <select class="member-select">
+            ${teamMembers.map(tm => `<option value="${tm.name.toLowerCase()}" ${tm.name === member.name ? "selected" : ""}>${tm.name}</option>`).join("")}
+          </select>
+        </td>
+        <td><textarea class="auto-textarea">${ev.why}</textarea></td>
+        <td><button class="delete-row">Delete</button></td>
+      `;
+      tbody.appendChild(tr);
+
+      // Delete row
+      tr.querySelector(".delete-row").addEventListener("click", () => {
+        tr.remove();
+      });
     });
   });
 }
 
-// Question button click
-questionButtons.forEach(btn => {
-  btn.addEventListener("click", () => {
-    currentQuestion = btn.dataset.question;
-    questionButtons.forEach(b => b.classList.toggle("active", b===btn));
-    renderTable();
+// ===== Add Row =====
+addRowBtn.addEventListener("click", () => {
+  const tr = document.createElement("tr");
+  tr.innerHTML = `
+    <td><textarea class="auto-textarea"></textarea></td>
+    <td>
+      <select class="type-select">
+        <option value="primary">Primary Source</option>
+        <option value="secondary">Secondary Source</option>
+        <option value="tertiary">Tertiary Source</option>
+        <option value="other">Other</option>
+      </select>
+    </td>
+    <td>
+      <select class="member-select">
+        ${teamMembers.map(tm => `<option value="${tm.name.toLowerCase()}">${tm.name}</option>`).join("")}
+      </select>
+    </td>
+    <td><textarea class="auto-textarea"></textarea></td>
+    <td><button class="delete-row">Delete</button></td>
+  `;
+  tbody.appendChild(tr);
+
+  tr.querySelector(".delete-row").addEventListener("click", () => {
+    tr.remove();
   });
 });
 
-// Member filter change
-if (memberSelect) memberSelect.addEventListener("change", e => {
-  currentMember = e.target.value;
-  renderTable();
-});
+// ===== Save Chart =====
+saveBtn.addEventListener("click", () => {
+  const allRows = tbody.querySelectorAll("tr");
+  allRows.forEach(row => {
+    const memberName = row.querySelector(".member-select").value;
+    const question = row.dataset.question || "Q1";
+    const text = row.querySelector("td:nth-child(1) textarea").value;
+    const type = row.querySelector(".type-select").value;
+    const why = row.querySelector("td:nth-child(4) textarea").value;
 
-// Type filter change
-if (typeSelect) typeSelect.addEventListener("change", e => {
-  currentType = e.target.value;
-  renderTable();
-});
-
-// Add row
-document.getElementById("add-row").addEventListener("click", () => {
-  evidenceData.push({
-    member: isPersonal ? activeMember.name.toLowerCase() : "luna",
-    question: currentQuestion,
-    evidence: "",
-    type: "primary",
-    why: ""
+    const memberObj = teamMembers.find(m => m.name.toLowerCase() === memberName);
+    if (!memberObj.evidence) memberObj.evidence = [];
+    memberObj.evidence.push({ question, text, type, why });
   });
-  renderTable();
+
+  alert("Evidence chart saved!");
 });
 
-// Initial render
+// ===== Filters =====
+teamSelect.addEventListener("change", renderTable);
+questionSelect.addEventListener("change", renderTable);
+
+// ===== Initial Render =====
 renderTable();
