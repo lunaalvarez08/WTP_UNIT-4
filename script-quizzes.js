@@ -78,8 +78,12 @@ function loadQuestion() {
     optionsEl.appendChild(btn);
   });
 
-  updateProgress();
-  updateStats();
+  const progressBar = document.getElementById("progress-bar");
+
+function updateProgress() {
+  progressEl.textContent = `Question ${index + 1} / ${questions.length}`;
+  const percent = ((index + 1) / questions.length) * 100;
+  progressBar.style.width = percent + "%";
 }
 
 // ===== Handle Answer =====
