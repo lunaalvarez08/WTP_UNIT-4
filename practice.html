@@ -8,48 +8,72 @@
 </head>
 <body>
 
-<header>
-  <div class="logo">We The People</div>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="team.html">Team Members</a>
-    <a href="practice.html">Practice Sets</a>
-    <a href="evidence.html">Evidence Charts</a>
-    <a href="flashcards.html">Flashcards</a>
-    <a href="quizzes.html">Quizzes</a>
-    <a href="about.html">About</a>
-  </nav>
-</header>
+  <!-- NAV BAR -->
+  <header>
+    <div class="logo">We The People</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="team.html">Team Members</a>
+      <a href="practice.html">Practice Sets</a>
+      <a href="evidence.html">Evidence Charts</a>
+      <a href="flashcards.html">Flashcards</a>
+      <a href="quizzes.html">Quizzes</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
 
-<main style="padding: 30px; text-align: center;">
-  <h1 id="practice-title"></h1>
-  <ul id="practice-list"></ul>
-</main>
+  <!-- PAGE TITLE -->
+  <main style="padding: 40px; text-align: center;">
+    <div id="member-emoji" style="font-size: 80px;"></div>
+    <h1 id="member-name"></h1>
+    <p>Select a practice set to view or complete</p>
 
-<script>
-  // Sample practice data
-  const practiceData = {
-    "Luna": ["Q1", "Q2", "Q3"],
-    "Sarah": ["Q1", "Q2"],
-    "Bekim": ["Q2", "Q3"],
-    "Evan": ["Q1", "Q3"]
-  };
+    <section id="practice-sets" class="practice-sets">
+      <!-- Practice cards will appear here -->
+    </section>
+  </main>
 
-  const member = JSON.parse(localStorage.getItem("activeMember"));
-
-  if (!member) {
-    window.location.href = "team.html";
-  } else {
-    document.getElementById("practice-title").textContent = member.name + "'s Practice Sets";
-    const list = document.getElementById("practice-list");
-    const sets = practiceData[member.name] || [];
-    if (sets.length === 0) {
-      list.innerHTML = "<li>No practice sets yet.</li>";
+  <script>
+    // ===== Get member from previous page =====
+    const member = JSON.parse(localStorage.getItem("activeMember"));
+    if (!member) {
+      window.location.href = "team.html";
     } else {
-      list.innerHTML = sets.map(p => `<li>${p}</li>`).join("");
+      document.getElementById("member-name").textContent = member.name;
+      document.getElementById("member-emoji").textContent = member.emoji;
     }
-  }
-</script>
+
+    const practiceContainer = document.getElementById("practice-sets");
+
+    // ===== Member practice sets =====
+    const sets = member.practice || []; // from team data
+
+    function renderPracticeSets() {
+      practiceContainer.innerHTML = "";
+      if (sets.length === 0) {
+        practiceContainer.innerHTML = "<p>No practice sets yet.</p>";
+        return;
+      }
+
+      sets.forEach((set, index) => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+          <h3>${set}</h3>
+          <p>Click to start this practice set</p>
+          <button onclick="startPractice(${index})">Start</button>
+        `;
+        practiceContainer.appendChild(card);
+      });
+    }
+
+    function startPractice(index) {
+      alert(`Starting practice set: ${sets[index]}`);
+      // Later: you can link this to actual practice set content
+    }
+
+    renderPracticeSets();
+  </script>
 
 </body>
 </html>
