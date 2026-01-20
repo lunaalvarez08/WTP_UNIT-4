@@ -21,44 +21,44 @@
     </nav>
   </header>
 
-  <main>
-    <h1>Practice Sets</h1>
+ <main>
+  <h1 id="practice-title">Practice Sets</h1>
+  <div id="practice-list" class="practice-sets"></div>
+</main>
 
-    <section class="practice-sets">
-      <div class="card">
-        <h3>Q1 – Full Set</h3>
-        <p>Contains all Q1 questions for practice and review.</p>
-        <button class="btn-navy">Start</button>
-      </div>
-      <div class="card">
-        <h3>Q3 – Full Set</h3>
-        <p>Contains all Q3 questions for practice and review.</p>
-        <button class="btn-navy">Start</button>
-      </div>
-      <div class="card">
-        <h3>Everything – Q1</h3>
-        <p>All Q1 questions combined for comprehensive practice.</p>
-        <button class="btn-navy">Start</button>
-      </div>
-      <div class="card">
-        <h3>Everything – Q3</h3>
-        <p>All Q3 questions combined for comprehensive practice.</p>
-        <button class="btn-navy">Start</button>
-      </div>
-    </section>
-  </main>
-
-</body>
-</html>
 <script>
-document.querySelectorAll(".practice-sets .card button").forEach(button => {
-  button.addEventListener("click", () => {
-    const card = button.closest(".card");
-    card.style.transition = "transform 0.2s";
-    card.style.transform = "scale(1.08)";
-    setTimeout(() => {
-      card.style.transform = "scale(1)";
-    }, 150);
-  });
-});
+  // 1️⃣ Get active member from localStorage
+  const member = JSON.parse(localStorage.getItem("activeMember"));
+
+  if (!member) {
+    // Redirect to team page if no member selected
+    window.location.href = "team.html";
+  }
+
+  // 2️⃣ Display their practice sets
+  const practiceList = document.getElementById("practice-list");
+  if (member.practice && member.practice.length) {
+    member.practice.forEach(set => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.innerHTML = `
+        <h3>${set}</h3>
+        <p>Click to start this practice set.</p>
+        <button onclick="startPractice('${set}')">Start</button>
+      `;
+      practiceList.appendChild(card);
+    });
+  } else {
+    practiceList.innerHTML = "<p>No practice sets available for this member.</p>";
+  }
+
+  // 3️⃣ Example start function
+  function startPractice(setName) {
+    alert(`Starting ${member.name}'s ${setName}!`);
+    // Here you can link to the actual practice set content
+  }
+
+  // 4️⃣ Update page title
+  document.getElementById("practice-title").textContent = `${member.name}'s Practice Sets`;
 </script>
+
