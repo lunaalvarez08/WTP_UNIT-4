@@ -6,47 +6,49 @@
   <title>Team Members | WTP U4</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    /* === Team Grid === */
-    #team-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 20px;
-      margin: 40px;
-      justify-items: center;
-    }
+    <style>
+  /* === Team Grid === */
+  #team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* smaller cards */
+    gap: 25px; /* more space between cards */
+    margin: 40px;
+    justify-items: center;
+  }
 
-    .team-card {
-      width: 180px;
-      height: 180px;
-      background: #fff;
-      border: 3px solid gold;
-      border-radius: 15px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: transform 0.2s, box-shadow 0.2s;
-      text-align: center;
-      font-family: Arial, sans-serif;
-    }
+  .team-card {
+    width: 150px;  /* slightly smaller */
+    height: 150px; /* slightly smaller */
+    background: #fff;
+    border: 3px solid gold;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-align: center;
+    font-family: Arial, sans-serif;
+  }
 
-    .team-card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-    }
+  .team-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+  }
 
-    .member-emoji {
-      font-size: 50px;
-      margin-bottom: 10px;
-    }
+  .member-emoji {
+    font-size: 45px; /* slightly smaller */
+    margin-bottom: 8px;
+  }
 
-    .member-name {
-      font-weight: bold;
-      font-size: 18px;
-      color: #0A285F; /* navy */
-    }
-  </style>
+  .member-name {
+    font-weight: bold;
+    font-size: 16px; /* slightly smaller */
+    color: #0A285F;
+  }
+</style>
+
 </head>
 <body>
 
