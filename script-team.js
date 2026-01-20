@@ -1,3 +1,4 @@
+alert("TEAM SCRIPT LOADED");
 // ===== Team Data =====
 const teamMembers = [
   { name: "Luna", emoji: "🦭" },
