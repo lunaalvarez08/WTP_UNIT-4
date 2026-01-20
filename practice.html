@@ -8,57 +8,48 @@
 </head>
 <body>
 
-  <header>
-    <div class="logo">We The People</div>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="team.html">Team Members</a>
-      <a href="practice.html" class="active">Practice Sets</a>
-      <a href="evidence.html">Evidence Charts</a>
-      <a href="flashcards.html">Flashcards</a>
-      <a href="quizzes.html">Quizzes</a>
-      <a href="about.html">About</a>
-    </nav>
-  </header>
+<header>
+  <div class="logo">We The People</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="team.html">Team Members</a>
+    <a href="practice.html">Practice Sets</a>
+    <a href="evidence.html">Evidence Charts</a>
+    <a href="flashcards.html">Flashcards</a>
+    <a href="quizzes.html">Quizzes</a>
+    <a href="about.html">About</a>
+  </nav>
+</header>
 
- <main>
-  <h1 id="practice-title">Practice Sets</h1>
-  <div id="practice-list" class="practice-sets"></div>
+<main style="padding: 30px; text-align: center;">
+  <h1 id="practice-title"></h1>
+  <ul id="practice-list"></ul>
 </main>
 
 <script>
-  // 1️⃣ Get active member from localStorage
+  // Sample practice data
+  const practiceData = {
+    "Luna": ["Q1", "Q2", "Q3"],
+    "Sarah": ["Q1", "Q2"],
+    "Bekim": ["Q2", "Q3"],
+    "Evan": ["Q1", "Q3"]
+  };
+
   const member = JSON.parse(localStorage.getItem("activeMember"));
 
   if (!member) {
-    // Redirect to team page if no member selected
     window.location.href = "team.html";
-  }
-
-  // 2️⃣ Display their practice sets
-  const practiceList = document.getElementById("practice-list");
-  if (member.practice && member.practice.length) {
-    member.practice.forEach(set => {
-      const card = document.createElement("div");
-      card.className = "card";
-      card.innerHTML = `
-        <h3>${set}</h3>
-        <p>Click to start this practice set.</p>
-        <button onclick="startPractice('${set}')">Start</button>
-      `;
-      practiceList.appendChild(card);
-    });
   } else {
-    practiceList.innerHTML = "<p>No practice sets available for this member.</p>";
+    document.getElementById("practice-title").textContent = member.name + "'s Practice Sets";
+    const list = document.getElementById("practice-list");
+    const sets = practiceData[member.name] || [];
+    if (sets.length === 0) {
+      list.innerHTML = "<li>No practice sets yet.</li>";
+    } else {
+      list.innerHTML = sets.map(p => `<li>${p}</li>`).join("");
+    }
   }
-
-  // 3️⃣ Example start function
-  function startPractice(setName) {
-    alert(`Starting ${member.name}'s ${setName}!`);
-    // Here you can link to the actual practice set content
-  }
-
-  // 4️⃣ Update page title
-  document.getElementById("practice-title").textContent = `${member.name}'s Practice Sets`;
 </script>
 
+</body>
+</html>
