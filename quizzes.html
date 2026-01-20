@@ -8,70 +8,51 @@
 </head>
 <body>
 
-  <!-- NAV BAR -->
-  <header>
-    <div class="logo">We The People</div>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="team.html">Team Members</a>
-      <a href="practice.html">Practice Sets</a>
-      <a href="evidence.html">Evidence Charts</a>
-      <a href="flashcards.html">Flashcards</a>
-      <a href="quizzes.html">Quizzes</a>
-      <a href="about.html">About</a>
-    </nav>
-  </header>
+<header>
+  <div class="logo">We The People</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="team.html">Team Members</a>
+    <a href="practice.html">Practice Sets</a>
+    <a href="evidence.html">Evidence Charts</a>
+    <a href="flashcards.html">Flashcards</a>
+    <a href="quizzes.html">Quizzes</a>
+    <a href="about.html">About</a>
+  </nav>
+</header>
 
-  <!-- PAGE TITLE -->
-  <main style="padding: 40px; text-align: center;">
-    <div id="member-emoji" style="font-size: 80px;"></div>
-    <h1 id="member-name"></h1>
-    <p>Click a quiz to view/edit questions</p>
+<main style="padding: 40px; text-align: center;">
+  <h1>Quizzes</h1>
 
-    <section id="quiz-container" class="practice-sets">
-      <!-- Quizzes will appear here -->
-    </section>
-  </main>
+  <section>
+    <label for="team-member">Team Member:</label>
+    <select id="team-member">
+      <option value="all">All Members</option>
+    </select>
 
-  <script>
-    // ===== Get member from previous page =====
-    const member = JSON.parse(localStorage.getItem("activeMember"));
-    if (!member) {
-      window.location.href = "team.html";
-    } else {
-      document.getElementById("member-name").textContent = member.name;
-      document.getElementById("member-emoji").textContent = member.emoji;
-    }
+    <label for="quiz-select">Quiz:</label>
+    <select id="quiz-select">
+      <option value="all">All Quizzes</option>
+    </select>
 
-    const container = document.getElementById("quiz-container");
-    const quizzes = member.quizzes || [];
+    <label>
+      <input type="checkbox" id="shuffle"> Shuffle Questions
+    </label>
+  </section>
 
-    function renderQuizzes() {
-      container.innerHTML = "";
-      if (quizzes.length === 0) {
-        container.innerHTML = "<p>No quizzes yet.</p>";
-        return;
-      }
+  <section style="margin-top: 20px;">
+    <button id="start-quiz">Start Quiz</button>
+  </section>
 
-      quizzes.forEach((quiz, index) => {
-        const card = document.createElement("div");
-        card.className = "card";
-        card.innerHTML = `
-          <h3>${quiz}</h3>
-          <p>Click to view or edit questions</p>
-        `;
+  <section id="quiz-container" style="margin-top: 30px; display: none;">
+    <h2 id="question-number"></h2>
+    <p id="question-text"></p>
+    <div id="options"></div>
+    <button id="next-question">Next</button>
+    <p id="feedback" style="font-weight: bold;"></p>
+  </section>
+</main>
 
-        // You can add a click event later to open actual questions
-        card.addEventListener("click", () => {
-          alert(`You clicked on ${quiz} (edit questions here)`);
-        });
-
-        container.appendChild(card);
-      });
-    }
-
-    renderQuizzes();
-  </script>
-
+<script src="script-quizzes.js"></script>
 </body>
 </html>
