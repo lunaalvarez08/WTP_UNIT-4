@@ -26,7 +26,7 @@ baseQuestions.forEach(q => {
 });
 
 // ===== Variables =====
-let questions = [...baseQuestions]; // current quiz order
+let questions = []; // will build deck with hard weighting
 let index = 0;
 
 const questionEl = document.getElementById("quiz-question");
@@ -40,6 +40,24 @@ function shuffle(array) {
     const j = Math.floor(Math.random() * (i+1));
     [array[i], array[j]] = [array[j], array[i]];
   }
+}
+
+// ===== Build Deck with Hard Questions Weighted =====
+function buildDeck() {
+  questions = [];
+  baseQuestions.forEach(q => {
+    // Always include at least 1 copy
+    questions.push(q);
+
+    // Add extra copies based on incorrect count to weight harder questions
+    const weight = Math.min(quizStats[q.question].incorrect, 5); // cap at 5 extra copies
+    for (let i = 0; i < weight; i++) {
+      questions.push(q);
+    }
+  });
+
+  shuffle(questions);
+  index = 0;
 }
 
 // ===== Load Question =====
@@ -118,8 +136,7 @@ document.getElementById("prev").addEventListener("click", () => {
 
 // ===== Shuffle Questions =====
 document.getElementById("shuffle-btn").addEventListener("click", () => {
-  shuffle(questions);
-  index = 0;
+  buildDeck(); // rebuild with current hard weighting
   loadQuestion();
 });
 
@@ -128,8 +145,7 @@ document.getElementById("reset-btn").addEventListener("click", () => {
   quizStats = {};
   baseQuestions.forEach(q => quizStats[q.question] = { correct: 0, incorrect: 0 });
   localStorage.setItem("quizStats", JSON.stringify(quizStats));
-  index = 0;
-  questions = [...baseQuestions];
+  buildDeck();
   loadQuestion();
 });
 
@@ -140,5 +156,5 @@ document.addEventListener("keydown", e => {
 });
 
 // ===== Initialize =====
-shuffle(questions);
+buildDeck();
 loadQuestion();
