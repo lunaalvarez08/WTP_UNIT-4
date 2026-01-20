@@ -8,42 +8,73 @@
 </head>
 <body>
 
-<header>
-  <div class="logo">We The People</div>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="team.html">Team Members</a>
-    <a href="practice.html">Practice Sets</a>
-    <a href="evidence.html">Evidence Charts</a>
-    <a href="flashcards.html" class="active">Flashcards</a>
-    <a href="quizzes.html">Quizzes</a>
-    <a href="about.html">About</a>
-  </nav>
-</header>
+  <!-- NAV BAR -->
+  <header>
+    <div class="logo">We The People</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="team.html">Team Members</a>
+      <a href="practice.html">Practice Sets</a>
+      <a href="evidence.html">Evidence Charts</a>
+      <a href="flashcards.html">Flashcards</a>
+      <a href="quizzes.html">Quizzes</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
 
-<main>
-  <h1>Flashcards</h1>
-  <p>Click the card to flip it. Use arrows to move.</p>
+  <!-- PAGE TITLE -->
+  <main style="padding: 40px; text-align: center;">
+    <div id="member-emoji" style="font-size: 80px;"></div>
+    <h1 id="member-name"></h1>
+    <p>Click a flashcard to flip it</p>
 
-  <section class="flashcard-wrapper">
-    <button id="prev" class="btn-navy">←</button>
+    <section id="flashcard-container" class="flashcard-container">
+      <!-- Flashcards will appear here -->
+    </section>
+  </main>
 
-    <div class="flashcard">
-      <div class="card-inner" id="card-inner">
-        <div class="card-front" id="card-front"></div>
-        <div class="card-back" id="card-back"></div>
-      </div>
-    </div>
+  <script>
+    // ===== Get member from previous page =====
+    const member = JSON.parse(localStorage.getItem("activeMember"));
+    if (!member) {
+      window.location.href = "team.html";
+    } else {
+      document.getElementById("member-name").textContent = member.name;
+      document.getElementById("member-emoji").textContent = member.emoji;
+    }
 
-    <button id="next" class="btn-navy">→</button>
-    <button id="hard-btn" class="btn-red">☆ Mark as Hard</button>
-    <button id="shuffle-btn" class="btn-navy">🔀 Shuffle Deck</button>
-  </section>
+    const container = document.getElementById("flashcard-container");
+    const flashcards = member.flashcards || []; // get flashcards for this member
 
-  <p id="progress"></p>
-</main>
+    function renderFlashcards() {
+      container.innerHTML = "";
+      if (flashcards.length === 0) {
+        container.innerHTML = "<p>No flashcards yet.</p>";
+        return;
+      }
 
-<script src="script-flashcards.js"></script>
+      flashcards.forEach((text, index) => {
+        const wrapper = document.createElement("div");
+        wrapper.className = "flashcard";
+
+        wrapper.innerHTML = `
+          <div class="card-inner">
+            <div class="card-front">${text}</div>
+            <div class="card-back">Answer/Details</div>
+          </div>
+        `;
+
+        wrapper.addEventListener("click", () => {
+          const inner = wrapper.querySelector(".card-inner");
+          inner.classList.toggle("flipped");
+        });
+
+        container.appendChild(wrapper);
+      });
+    }
+
+    renderFlashcards();
+  </script>
 
 </body>
 </html>
