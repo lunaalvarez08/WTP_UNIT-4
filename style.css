@@ -469,3 +469,47 @@ button:hover {
   border-radius: 10px;
   transition: width 0.5s ease, background-color 0.5s ease;
 }
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin: 20px;
+}
+
+.team-card {
+  background-color: #fff;
+  border: 2px solid #0a285f;
+  border-radius: 15px;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  transition: transform 0.2s ease;
+}
+
+.team-card:hover {
+  transform: translateY(-5px);
+}
+
+.member-emoji {
+  font-size: 50px;
+}
+
+.member-name {
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.member-stats {
+  margin: 10px 0;
+  font-size: 0.9rem;
+}
+
+.member-buttons button {
+  margin: 5px;
+}
+
+.member-content {
+  margin-top: 10px;
+  text-align: left;
+}
