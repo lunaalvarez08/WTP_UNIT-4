@@ -8,46 +8,64 @@
 </head>
 <body>
 
-<header>
-  <div class="logo">We The People</div>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="team.html">Team Members</a>
-    <a href="practice.html">Practice Sets</a>
-    <a href="evidence.html">Evidence Charts</a>
-    <a href="flashcards.html">Flashcards</a>
-    <a href="quizzes.html" class="active">Quizzes</a>
-    <a href="about.html">About</a>
-  </nav>
-</header>
+  <!-- NAV BAR -->
+  <header>
+    <div class="logo">We The People</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="team.html">Team Members</a>
+      <a href="practice.html">Practice Sets</a>
+      <a href="evidence.html">Evidence Charts</a>
+      <a href="flashcards.html">Flashcards</a>
+      <a href="quizzes.html">Quizzes</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
 
-<main>
-  <h1>Quizzes</h1>
-  <p>Click the correct answer. Track your progress and stats!</p>
+  <!-- PAGE TITLE -->
+  <main style="padding: 40px; text-align: center;">
+    <div id="member-emoji" style="font-size: 80px;"></div>
+    <h1 id="member-name"></h1>
+    <p>Select a quiz below</p>
 
-  <section class="quiz-wrapper">
-    <div class="quiz-card">
-      <p id="quiz-question"></p>
-      <div id="quiz-options"></div>
-    </div>
+    <section id="quiz-container" class="quiz-sets">
+      <!-- Quiz buttons will appear here -->
+    </section>
+  </main>
 
-    <div class="quiz-buttons">
-      <button id="prev" class="btn-navy">← Previous</button>
-      <button id="next" class="btn-navy">Next →</button>
-      <button id="shuffle-btn" class="btn-navy">🔀 Shuffle Questions</button>
-      <button id="reset-btn" class="btn-red">🔄 Reset Quiz</button>
-    </div>
+  <script>
+    // ===== Get member from previous page =====
+    const member = JSON.parse(localStorage.getItem("activeMember"));
+    if (!member) {
+      window.location.href = "team.html";
+    } else {
+      document.getElementById("member-name").textContent = member.name;
+      document.getElementById("member-emoji").textContent = member.emoji;
+    }
 
-    <!-- Progress Bar -->
-    <div id="progress-bar-container">
-      <div id="progress-bar"></div>
-    </div>
+    const container = document.getElementById("quiz-container");
+    const quizzes = member.quizzes || []; // get quizzes for this member
 
-    <p id="progress"></p>
-    <p id="stats">Correct: 0 | Incorrect: 0</p>
-  </section>
-</main>
+    function renderQuizzes() {
+      container.innerHTML = "";
+      if (quizzes.length === 0) {
+        container.innerHTML = "<p>No quizzes yet.</p>";
+        return;
+      }
 
-<script src="script-quizzes.js"></script>
+      quizzes.forEach((quiz, index) => {
+        const button = document.createElement("button");
+        button.className = "card";
+        button.textContent = quiz;
+        button.addEventListener("click", () => {
+          alert(`You selected ${quiz}. Quiz content would go here.`);
+        });
+        container.appendChild(button);
+      });
+    }
+
+    renderQuizzes();
+  </script>
+
 </body>
 </html>
