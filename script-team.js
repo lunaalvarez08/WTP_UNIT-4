@@ -2,28 +2,28 @@
 const teamMembers = [
   {
     name: "Luna",
-    emoji: "🌙",
+    emoji: "🦭",
     evidence: ["Evidence 1", "Evidence 2", "Evidence 3"],
     flashcards: ["Flashcard A", "Flashcard B"],
     quizzes: ["Quiz 1", "Quiz 2"]
   },
   {
     name: "Sarah",
-    emoji: "☀️",
+    emoji: "🦋",
     evidence: ["Evidence 4", "Evidence 5"],
     flashcards: ["Flashcard C"],
     quizzes: ["Quiz 1"]
   },
   {
     name: "Bekim",
-    emoji: "🔥",
+    emoji: "⭐",
     evidence: ["Evidence 6"],
     flashcards: ["Flashcard D", "Flashcard E"],
     quizzes: ["Quiz 2", "Quiz 3"]
   },
   {
     name: "Evan",
-    emoji: "💧",
+    emoji: "🏈",
     evidence: ["Evidence 7", "Evidence 8", "Evidence 9", "Evidence 10"],
     flashcards: [],
     quizzes: ["Quiz 3"]
