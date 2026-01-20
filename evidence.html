@@ -23,327 +23,98 @@
   </header>
 
   <!-- PAGE TITLE -->
-  <h1>Evidence Charts</h1>
-  <p>Create, view, and edit evidence charts for Q1, Q2, and Q3</p>
+  <main style="padding: 40px; text-align: center;">
+    <h1>Evidence Charts</h1>
+    <p>Create, view, and edit evidence charts</p>
 
-  <!-- QUESTION SELECTOR -->
-  <div class="question-selector">
-    <button data-question="Q1" class="active">Q1</button>
-    <button data-question="Q2">Q2</button>
-    <button data-question="Q3">Q3</button>
-  </div>
+    <!-- QUESTION SELECTOR -->
+    <div class="question-selector">
+      <button data-question="Q1" class="active">Q1</button>
+      <button data-question="Q2">Q2</button>
+      <button data-question="Q3">Q3</button>
+    </div>
 
-  <!-- TEAM MEMBER & TYPE SELECTOR -->
-  <section class="team-selector">
-    <label for="team-member">Team Member:</label>
-    <select id="team-member">
-      <option value="all">All Members</option>
-      <option value="luna">Luna</option>
-      <option value="sarah">Sarah</option>
-      <option value="bekim">Bekim</option>
-      <option value="evan">Evan</option>
-    </select>
-
-    <label for="type-filter">Type of Evidence:</label>
-    <select id="type-filter">
-      <option value="all">All Types</option>
-      <option value="primary">Primary Source</option>
-      <option value="secondary">Secondary Source</option>
-    </select>
-  </section>
-
-  <!-- EVIDENCE TABLE -->
-  <section class="evidence-table">
-    <table>
-      <thead>
-        <tr>
-          <th>Evidence</th>
-          <th>Type of Evidence</th>
-          <th>Team Member</th>
-          <th>Why it relates</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Example rows for all questions and team members -->
-        <!-- Luna Q1 -->
-        <tr data-question="Q1" data-member="luna">
-          <td><textarea class="auto-textarea">Evidence from Luna</textarea></td>
-          <td>
-            <select class="type-select">
-              <option value="primary">Primary Source</option>
-              <option value="secondary">Secondary Source</option>
-            </select>
-          </td>
-          <td>
-            <select class="member-select">
-              <option value="luna" selected>Luna</option>
-              <option value="sarah">Sarah</option>
-              <option value="bekim">Bekim</option>
-              <option value="evan">Evan</option>
-            </select>
-          </td>
-          <td><textarea class="auto-textarea">Explanation</textarea></td>
-          <td><button class="delete-row">Delete</button></td>
-        </tr>
-        <!-- Sarah Q1 -->
-        <tr data-question="Q1" data-member="sarah">
-          <td><textarea class="auto-textarea">Evidence from Sarah</textarea></td>
-          <td>
-            <select class="type-select">
-              <option value="primary">Primary Source</option>
-              <option value="secondary">Secondary Source</option>
-            </select>
-          </td>
-          <td>
-            <select class="member-select">
-              <option value="luna">Luna</option>
-              <option value="sarah" selected>Sarah</option>
-              <option value="bekim">Bekim</option>
-              <option value="evan">Evan</option>
-            </select>
-          </td>
-          <td><textarea class="auto-textarea">Explanation</textarea></td>
-          <td><button class="delete-row">Delete</button></td>
-        </tr>
-        <!-- Bekim Q1 -->
-        <tr data-question="Q1" data-member="bekim">
-          <td><textarea class="auto-textarea">Evidence from Bekim</textarea></td>
-          <td>
-            <select class="type-select">
-              <option value="primary">Primary Source</option>
-              <option value="secondary">Secondary Source</option>
-            </select>
-          </td>
-          <td>
-            <select class="member-select">
-              <option value="luna">Luna</option>
-              <option value="sarah">Sarah</option>
-              <option value="bekim" selected>Bekim</option>
-              <option value="evan">Evan</option>
-            </select>
-          </td>
-          <td><textarea class="auto-textarea">Explanation</textarea></td>
-          <td><button class="delete-row">Delete</button></td>
-        </tr>
-        <!-- Evan Q1 -->
-        <tr data-question="Q1" data-member="evan">
-          <td><textarea class="auto-textarea">Evidence from Evan</textarea></td>
-          <td>
-            <select class="type-select">
-              <option value="primary">Primary Source</option>
-              <option value="secondary">Secondary Source</option>
-            </select>
-          </td>
-          <td>
-            <select class="member-select">
-              <option value="luna">Luna</option>
-              <option value="sarah">Sarah</option>
-              <option value="bekim">Bekim</option>
-              <option value="evan" selected>Evan</option>
-            </select>
-          </td>
-          <td><textarea class="auto-textarea">Explanation</textarea></td>
-          <td><button class="delete-row">Delete</button></td>
-        </tr>
-
-        <!-- Repeat for Q2 and Q3, each team member -->
-        <!-- Luna Q2 -->
-        <tr data-question="Q2" data-member="luna">
-          <td><textarea class="auto-textarea">Evidence from Luna</textarea></td>
-          <td>
-            <select class="type-select">
-              <option value="primary">Primary Source</option>
-              <option value="secondary">Secondary Source</option>
-            </select>
-          </td>
-          <td>
-            <select class="member-select">
-              <option value="luna" selected>Luna</option>
-              <option value="sarah">Sarah</option>
-              <option value="bekim">Bekim</option>
-              <option value="evan">Evan</option>
-            </select>
-          </td>
-          <td><textarea class="auto-textarea">Explanation</textarea></td>
-          <td><button class="delete-row">Delete</button></td>
-        </tr>
-
-        <!-- Sarah Q2 -->
-        <tr data-question="Q2" data-member="sarah">
-          <td><textarea class="auto-textarea">Evidence from Sarah</textarea></td>
-          <td>
-            <select class="type-select">
-              <option value="primary">Primary Source</option>
-              <option value="secondary">Secondary Source</option>
-            </select>
-          </td>
-          <td>
-            <select class="member-select">
-              <option value="luna">Luna</option>
-              <option value="sarah" selected>Sarah</option>
-              <option value="bekim">Bekim</option>
-              <option value="evan">Evan</option>
-            </select>
-          </td>
-          <td><textarea class="auto-textarea">Explanation</textarea></td>
-          <td><button class="delete-row">Delete</button></td>
-        </tr>
-
-        <!-- Bekim Q2 -->
-        <tr data-question="Q2" data-member="bekim">
-          <td><textarea class="auto-textarea">Evidence from Bekim</textarea></td>
-          <td>
-            <select class="type-select">
-              <option value="primary">Primary Source</option>
-              <option value="secondary">Secondary Source</option>
-            </select>
-          </td>
-          <td>
-            <select class="member-select">
-              <option value="luna">Luna</option>
-              <option value="sarah">Sarah</option>
-              <option value="bekim" selected>Bekim</option>
-              <option value="evan">Evan</option>
-            </select>
-          </td>
-          <td><textarea class="auto-textarea">Explanation</textarea></td>
-          <td><button class="delete-row">Delete</button></td>
-        </tr>
-
-        <!-- Evan Q2 -->
-        <tr data-question="Q2" data-member="evan">
-          <td><textarea class="auto-textarea">Evidence from Evan</textarea></td>
-          <td>
-            <select class="type-select">
-              <option value="primary">Primary Source</option>
-              <option value="secondary">Secondary Source</option>
-            </select>
-          </td>
-          <td>
-            <select class="member-select">
-              <option value="luna">Luna</option>
-              <option value="sarah">Sarah</option>
-              <option value="bekim">Bekim</option>
-              <option value="evan" selected>Evan</option>
-            </select>
-          </td>
-          <td><textarea class="auto-textarea">Explanation</textarea></td>
-          <td><button class="delete-row">Delete</button></td>
-        </tr>
-
-        <!-- Luna Q3 -->
-        <tr data-question="Q3" data-member="luna">
-          <td><textarea class="auto-textarea">Evidence from Luna</textarea></td>
-          <td>
-            <select class="type-select">
-              <option value="primary">Primary Source</option>
-              <option value="secondary">Secondary Source</option>
-            </select>
-          </td>
-          <td>
-            <select class="member-select">
-              <option value="luna" selected>Luna</option>
-              <option value="sarah">Sarah</option>
-              <option value="bekim">Bekim</option>
-              <option value="evan">Evan</option>
-            </select>
-          </td>
-          <td><textarea class="auto-textarea">Explanation</textarea></td>
-          <td><button class="delete-row">Delete</button></td>
-        </tr>
-
-        <!-- Sarah Q3 -->
-        <tr data-question="Q3" data-member="sarah">
-          <td><textarea class="auto-textarea">Evidence from Sarah</textarea></td>
-          <td>
-            <select class="type-select">
-              <option value="primary">Primary Source</option>
-              <option value="secondary">Secondary Source</option>
-            </select>
-          </td>
-          <td>
-            <select class="member-select">
-              <option value="luna">Luna</option>
-              <option value="sarah" selected>Sarah</option>
-              <option value="bekim">Bekim</option>
-              <option value="evan">Evan</option>
-            </select>
-          </td>
-          <td><textarea class="auto-textarea">Explanation</textarea></td>
-          <td><button class="delete-row">Delete</button></td>
-        </tr>
-
-        <!-- Bekim Q3 -->
-        <tr data-question="Q3" data-member="bekim">
-          <td><textarea class="auto-textarea">Evidence from Bekim</textarea></td>
-          <td>
-            <select class="type-select">
-              <option value="primary">Primary Source</option>
-              <option value="secondary">Secondary Source</option>
-            </select>
-          </td>
-          <td>
-            <select class="member-select">
-              <option value="luna">Luna</option>
-              <option value="sarah">Sarah</option>
-              <option value="bekim" selected>Bekim</option>
-              <option value="evan">Evan</option>
-            </select>
-          </td>
-          <td><textarea class="auto-textarea">Explanation</textarea></td>
-          <td><button class="delete-row">Delete</button></td>
-        </tr>
-
-        <!-- Evan Q3 -->
-        <tr data-question="Q3" data-member="evan">
-          <td><textarea class="auto-textarea">Evidence from Evan</textarea></td>
-          <td>
-            <select class="type-select">
-              <option value="primary">Primary Source</option>
-              <option value="secondary">Secondary Source</option>
-            </select>
-          </td>
-          <td>
-            <select class="member-select">
-              <option value="luna">Luna</option>
-              <option value="sarah">Sarah</option>
-              <option value="bekim">Bekim</option>
-              <option value="evan" selected>Evan</option>
-            </select>
-          </td>
-          <td><textarea class="auto-textarea">Explanation</textarea></td>
-          <td><button class="delete-row">Delete</button></td>
-        </tr>
-
-      </tbody>
-    </table>
-
-    <button id="add-row">+ Add Row</button>
-  </section>
+    <!-- EVIDENCE TABLE -->
+    <section class="evidence-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Evidence</th>
+            <th>Type of Evidence</th>
+            <th>Why it relates</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="evidence-body">
+          <!-- Rows will be added dynamically -->
+        </tbody>
+      </table>
+      <button id="add-row">+ Add Row</button>
+    </section>
+  </main>
 
   <script>
-  const member = JSON.parse(localStorage.getItem("activeMember"));
+    // ===== Example initial data =====
+    const evidenceData = {
+      Q1: [
+        { evidence: "Example evidence 1", type: "Primary Source", why: "Explanation" },
+        { evidence: "Example evidence 2", type: "Secondary Source", why: "Explanation" }
+      ],
+      Q2: [],
+      Q3: []
+    };
 
-  if (member) {
-    const key = member.name.toLowerCase();
+    const body = document.getElementById("evidence-body");
+    let currentQuestion = "Q1";
 
-    document.querySelector("h1").textContent =
-      member.name + "’s Evidence Charts";
+    const typeOptions = ["Primary Source", "Secondary Source", "Historical Context", "Other"];
 
-    document.querySelectorAll("tbody tr").forEach(row => {
-      if (row.dataset.member !== key) {
-        row.style.display = "none";
-      }
+    // ===== Render rows for a question =====
+    function renderRows() {
+      body.innerHTML = ""; // Clear current rows
+      evidenceData[currentQuestion].forEach((item, index) => {
+        const row = document.createElement("tr");
+
+        row.innerHTML = `
+          <td><textarea class="auto-textarea">${item.evidence}</textarea></td>
+          <td>
+            <select class="type-select">
+              ${typeOptions.map(opt => `<option value="${opt}" ${opt === item.type ? "selected" : ""}>${opt}</option>`).join("")}
+            </select>
+          </td>
+          <td><textarea class="auto-textarea">${item.why}</textarea></td>
+          <td><button class="delete-row">Delete</button></td>
+        `;
+
+        // Delete row functionality
+        row.querySelector(".delete-row").addEventListener("click", () => {
+          evidenceData[currentQuestion].splice(index, 1);
+          renderRows();
+        });
+
+        body.appendChild(row);
+      });
+    }
+
+    // ===== Add new row =====
+    document.getElementById("add-row").addEventListener("click", () => {
+      evidenceData[currentQuestion].push({ evidence: "", type: typeOptions[0], why: "" });
+      renderRows();
     });
 
-    const select = document.getElementById("team-member");
-    if (select) {
-      select.value = key;
-      select.disabled = true;
-    }
-  }
-</script>
-  <script src="script.js"></script>
+    // ===== Question buttons =====
+    document.querySelectorAll(".question-selector button").forEach(btn => {
+      btn.addEventListener("click", () => {
+        currentQuestion = btn.dataset.question;
+        document.querySelectorAll(".question-selector button").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        renderRows();
+      });
+    });
+
+    // Initial render
+    renderRows();
+  </script>
+
 </body>
 </html>
