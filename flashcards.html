@@ -28,7 +28,7 @@
     <h1 id="member-name"></h1>
     <p>Click a flashcard to flip it</p>
 
-    <section id="flashcard-container" class="flashcard-container">
+    <section id="flashcard-container" class="flashcard-wrapper">
       <!-- Flashcards will appear here -->
     </section>
   </main>
@@ -53,23 +53,23 @@
         return;
       }
 
-      flashcards.forEach((text, index) => {
-        const wrapper = document.createElement("div");
-        wrapper.className = "flashcard";
+      flashcards.forEach((fc, index) => {
+        const card = document.createElement("div");
+        card.className = "flashcard";
 
-        wrapper.innerHTML = `
+        card.innerHTML = `
           <div class="card-inner">
-            <div class="card-front">${text}</div>
-            <div class="card-back">Answer/Details</div>
+            <div class="card-front">${fc}</div>
+            <div class="card-back">Answer/Details here</div>
           </div>
         `;
 
-        wrapper.addEventListener("click", () => {
-          const inner = wrapper.querySelector(".card-inner");
+        card.addEventListener("click", () => {
+          const inner = card.querySelector(".card-inner");
           inner.classList.toggle("flipped");
         });
 
-        container.appendChild(wrapper);
+        container.appendChild(card);
       });
     }
 
