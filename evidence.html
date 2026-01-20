@@ -24,8 +24,9 @@
 
   <!-- PAGE TITLE -->
   <main style="padding: 40px; text-align: center;">
-    <h1>Evidence Charts</h1>
-    <p>Create, view, and edit evidence charts</p>
+    <div id="member-emoji" style="font-size: 80px;"></div>
+    <h1 id="member-name"></h1>
+    <p>Create, view, and edit evidence charts for this member</p>
 
     <!-- QUESTION SELECTOR -->
     <div class="question-selector">
@@ -54,12 +55,18 @@
   </main>
 
   <script>
-    // ===== Example initial data =====
+    // ===== Get member from previous page =====
+    const member = JSON.parse(localStorage.getItem("activeMember"));
+    if (!member) {
+      window.location.href = "team.html";
+    } else {
+      document.getElementById("member-name").textContent = member.name;
+      document.getElementById("member-emoji").textContent = member.emoji;
+    }
+
+    // ===== Initial evidence data per member =====
     const evidenceData = {
-      Q1: [
-        { evidence: "Example evidence 1", type: "Primary Source", why: "Explanation" },
-        { evidence: "Example evidence 2", type: "Secondary Source", why: "Explanation" }
-      ],
+      Q1: member.evidence || [],
       Q2: [],
       Q3: []
     };
@@ -69,24 +76,22 @@
 
     const typeOptions = ["Primary Source", "Secondary Source", "Historical Context", "Other"];
 
-    // ===== Render rows for a question =====
+    // ===== Render rows =====
     function renderRows() {
-      body.innerHTML = ""; // Clear current rows
+      body.innerHTML = "";
       evidenceData[currentQuestion].forEach((item, index) => {
         const row = document.createElement("tr");
-
         row.innerHTML = `
-          <td><textarea class="auto-textarea">${item.evidence}</textarea></td>
+          <td><textarea class="auto-textarea">${item.evidence || ""}</textarea></td>
           <td>
             <select class="type-select">
               ${typeOptions.map(opt => `<option value="${opt}" ${opt === item.type ? "selected" : ""}>${opt}</option>`).join("")}
             </select>
           </td>
-          <td><textarea class="auto-textarea">${item.why}</textarea></td>
+          <td><textarea class="auto-textarea">${item.why || ""}</textarea></td>
           <td><button class="delete-row">Delete</button></td>
         `;
 
-        // Delete row functionality
         row.querySelector(".delete-row").addEventListener("click", () => {
           evidenceData[currentQuestion].splice(index, 1);
           renderRows();
