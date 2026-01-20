@@ -24,15 +24,23 @@
 
   <!-- PAGE TITLE -->
   <main style="padding: 40px; text-align: center;">
-    <div id="member-emoji" style="font-size: 80px;"></div>
-    <h1 id="member-name"></h1>
-    <p>Create, view, and edit evidence charts for this member</p>
+    <h1>Evidence Charts</h1>
+    <p>Create, view, and edit evidence charts for your team.</p>
 
-    <!-- QUESTION SELECTOR -->
-    <div class="question-selector">
-      <button data-question="Q1" class="active">Q1</button>
-      <button data-question="Q2">Q2</button>
-      <button data-question="Q3">Q3</button>
+    <!-- FILTERS -->
+    <div style="margin: 20px 0;">
+      <label for="team-member">Team Member:</label>
+      <select id="team-member">
+        <option value="all">All Members</option>
+      </select>
+
+      <label for="question-filter">Question:</label>
+      <select id="question-filter">
+        <option value="all">All Questions</option>
+        <option value="Q1">Q1</option>
+        <option value="Q2">Q2</option>
+        <option value="Q3">Q3</option>
+      </select>
     </div>
 
     <!-- EVIDENCE TABLE -->
@@ -41,85 +49,22 @@
         <thead>
           <tr>
             <th>Evidence</th>
-            <th>Type of Evidence</th>
+            <th>Type</th>
+            <th>Team Member</th>
             <th>Why it relates</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody id="evidence-body">
-          <!-- Rows will be added dynamically -->
+          <!-- Rows will be dynamically created by JS -->
         </tbody>
       </table>
       <button id="add-row">+ Add Row</button>
+      <button id="save-chart">Save Chart</button>
     </section>
   </main>
 
-  <script>
-    // ===== Get member from previous page =====
-    const member = JSON.parse(localStorage.getItem("activeMember"));
-    if (!member) {
-      window.location.href = "team.html";
-    } else {
-      document.getElementById("member-name").textContent = member.name;
-      document.getElementById("member-emoji").textContent = member.emoji;
-    }
-
-    // ===== Initial evidence data per member =====
-    const evidenceData = {
-      Q1: member.evidence || [],
-      Q2: [],
-      Q3: []
-    };
-
-    const body = document.getElementById("evidence-body");
-    let currentQuestion = "Q1";
-
-    const typeOptions = ["Primary Source", "Secondary Source", "Historical Context", "Other"];
-
-    // ===== Render rows =====
-    function renderRows() {
-      body.innerHTML = "";
-      evidenceData[currentQuestion].forEach((item, index) => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-          <td><textarea class="auto-textarea">${item.evidence || ""}</textarea></td>
-          <td>
-            <select class="type-select">
-              ${typeOptions.map(opt => `<option value="${opt}" ${opt === item.type ? "selected" : ""}>${opt}</option>`).join("")}
-            </select>
-          </td>
-          <td><textarea class="auto-textarea">${item.why || ""}</textarea></td>
-          <td><button class="delete-row">Delete</button></td>
-        `;
-
-        row.querySelector(".delete-row").addEventListener("click", () => {
-          evidenceData[currentQuestion].splice(index, 1);
-          renderRows();
-        });
-
-        body.appendChild(row);
-      });
-    }
-
-    // ===== Add new row =====
-    document.getElementById("add-row").addEventListener("click", () => {
-      evidenceData[currentQuestion].push({ evidence: "", type: typeOptions[0], why: "" });
-      renderRows();
-    });
-
-    // ===== Question buttons =====
-    document.querySelectorAll(".question-selector button").forEach(btn => {
-      btn.addEventListener("click", () => {
-        currentQuestion = btn.dataset.question;
-        document.querySelectorAll(".question-selector button").forEach(b => b.classList.remove("active"));
-        btn.classList.add("active");
-        renderRows();
-      });
-    });
-
-    // Initial render
-    renderRows();
-  </script>
-
+  <!-- SCRIPT -->
+  <script src="script-evidence.js"></script>
 </body>
 </html>
