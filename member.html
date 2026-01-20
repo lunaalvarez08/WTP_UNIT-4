@@ -37,13 +37,15 @@
   const member = JSON.parse(localStorage.getItem("activeMember"));
 
   if (!member) {
-    window.location.href = "team.html";
+    window.location.href = "team.html"; // if no member, go back to team
   } else {
     document.getElementById("member-name").textContent = member.name;
     document.getElementById("member-emoji").textContent = member.emoji;
   }
 
   function goTo(page) {
+    // Pass the active member to the next page
+    localStorage.setItem("activeMember", JSON.stringify(member));
     window.location.href = page;
   }
 </script>
