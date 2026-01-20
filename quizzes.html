@@ -26,10 +26,10 @@
   <main style="padding: 40px; text-align: center;">
     <div id="member-emoji" style="font-size: 80px;"></div>
     <h1 id="member-name"></h1>
-    <p>Select a quiz below</p>
+    <p>Click a quiz to view/edit questions</p>
 
-    <section id="quiz-container" class="quiz-sets">
-      <!-- Quiz buttons will appear here -->
+    <section id="quiz-container" class="practice-sets">
+      <!-- Quizzes will appear here -->
     </section>
   </main>
 
@@ -44,7 +44,7 @@
     }
 
     const container = document.getElementById("quiz-container");
-    const quizzes = member.quizzes || []; // get quizzes for this member
+    const quizzes = member.quizzes || [];
 
     function renderQuizzes() {
       container.innerHTML = "";
@@ -54,13 +54,19 @@
       }
 
       quizzes.forEach((quiz, index) => {
-        const button = document.createElement("button");
-        button.className = "card";
-        button.textContent = quiz;
-        button.addEventListener("click", () => {
-          alert(`You selected ${quiz}. Quiz content would go here.`);
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+          <h3>${quiz}</h3>
+          <p>Click to view or edit questions</p>
+        `;
+
+        // You can add a click event later to open actual questions
+        card.addEventListener("click", () => {
+          alert(`You clicked on ${quiz} (edit questions here)`);
         });
-        container.appendChild(button);
+
+        container.appendChild(card);
       });
     }
 
