@@ -1,5 +1,4 @@
 alert("TEAM SCRIPT LOADED");
-
 // ===== Team Data =====
 const teamMembers = [
   { name: "Luna", emoji: "🦭" },
@@ -8,35 +7,24 @@ const teamMembers = [
   { name: "Evan", emoji: "🏈" }
 ];
 
-// ===== Wait until DOM is loaded =====
-document.addEventListener("DOMContentLoaded", () => {
-  // ===== Reference =====
-  const grid = document.getElementById("team-grid");
+// ===== Reference =====
+const grid = document.getElementById("team-grid");
 
-  if (!grid) {
-    alert("Team grid not found!");
-    return;
-  }
+// ===== Create Team Cards =====
+teamMembers.forEach(member => {
+  const card = document.createElement("div");
+  card.className = "team-card";
 
-  // ===== Create Team Cards =====
-  teamMembers.forEach(member => {
-    const card = document.createElement("div");
-    card.className = "team-card";
+  card.innerHTML = `
+    <div class="member-emoji">${member.emoji}</div>
+    <div class="member-name">${member.name}</div>
+  `;
 
-    card.innerHTML = `
-      <div class="member-emoji">${member.emoji}</div>
-      <div class="member-name">${member.name}</div>
-    `;
-
-    // Click → go to member page
-    card.addEventListener("click", () => {
-      localStorage.setItem(
-        "activeMember",
-        JSON.stringify(member)
-      );
-      window.location.href = "member.html";
-    });
-
-    grid.appendChild(card);
+  // Click → go to member page
+  card.addEventListener("click", () => {
+    localStorage.setItem("activeMember", JSON.stringify(member));
+    window.location.href = "member.html"; // go to member page
   });
+
+  grid.appendChild(card);
 });
