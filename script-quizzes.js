@@ -113,18 +113,34 @@ function handleAnswer(selected) {
   }, 800);
 }
 
-// ===== Update Progress / Stats =====
-function updateProgress() {
-  progressEl.textContent = `Question ${index + 1} / ${questions.length}`;
-}
+const progressBar = document.getElementById("progress-bar");
 
-function updateStats() {
+function updateProgress() {
+  // Update text
+  progressEl.textContent = `Question ${index + 1} / ${questions.length}`;
+
+  // Calculate fill %
+  const percent = ((index + 1) / questions.length) * 100;
+  progressBar.style.width = percent + "%";
+
+  // Calculate accuracy
   let totalCorrect = 0, totalIncorrect = 0;
   Object.values(quizStats).forEach(s => {
     totalCorrect += s.correct;
     totalIncorrect += s.incorrect;
   });
-  statsEl.textContent = `Correct: ${totalCorrect} | Incorrect: ${totalIncorrect}`;
+
+  const totalAttempts = totalCorrect + totalIncorrect;
+  const accuracy = totalAttempts ? totalCorrect / totalAttempts : 1;
+
+  // Change color based on accuracy
+  if (accuracy >= 0.8) {
+    progressBar.style.backgroundColor = "#28a745"; // green
+  } else if (accuracy >= 0.5) {
+    progressBar.style.backgroundColor = "#ffc107"; // yellow
+  } else {
+    progressBar.style.backgroundColor = "#dc3545"; // red
+  }
 }
 
 // ===== Navigation Buttons =====
