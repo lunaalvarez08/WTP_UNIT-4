@@ -322,6 +322,28 @@
     <button id="add-row">+ Add Row</button>
   </section>
 
+  <script>
+  const member = JSON.parse(localStorage.getItem("activeMember"));
+
+  if (member) {
+    const key = member.name.toLowerCase();
+
+    document.querySelector("h1").textContent =
+      member.name + "’s Evidence Charts";
+
+    document.querySelectorAll("tbody tr").forEach(row => {
+      if (row.dataset.member !== key) {
+        row.style.display = "none";
+      }
+    });
+
+    const select = document.getElementById("team-member");
+    if (select) {
+      select.value = key;
+      select.disabled = true;
+    }
+  }
+</script>
   <script src="script.js"></script>
 </body>
 </html>
