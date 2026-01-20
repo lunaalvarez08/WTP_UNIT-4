@@ -601,3 +601,83 @@ button:hover {
   background-color: #0A285F;
   color: white;
 }
+
+/* ===== TEAM GRID & CARDS ===== */
+#team-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.team-card {
+  width: 140px;
+  height: 140px;
+  background-color: #eef2ff; /* light blue so it shows */
+  border: 2px solid #0A285F;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.team-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.member-emoji {
+  font-size: 50px;
+}
+
+.member-name {
+  font-weight: bold;
+  margin-top: 5px;
+  color: #0A285F;
+  font-size: 1.1rem;
+}
+
+/* ===== MEMBER PANEL ===== */
+.member-panel {
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  max-width: 800px;
+  background: #fff;
+  border: 2px solid #0A285F;
+  border-radius: 12px;
+  padding: 20px;
+  z-index: 100;
+  display: none; /* hidden by default */
+}
+
+.member-panel.show {
+  display: block;
+}
+
+.member-tabs {
+  margin-top: 15px;
+  display: flex;
+  gap: 10px;
+}
+
+.member-tabs .tab-btn {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  background-color: #B22234;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.member-tabs .tab-btn.active {
+  background-color: #0A285F;
+}
