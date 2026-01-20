@@ -681,3 +681,46 @@ button:hover {
 .member-tabs .tab-btn.active {
   background-color: #0A285F;
 }
+/* ===== TEAM GRID ===== */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  max-width: 700px;
+  margin: 40px auto;
+}
+
+/* ===== TEAM CARD ===== */
+.team-card {
+  border: 1px solid #ddd;
+  border-radius: 16px;
+  padding: 30px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background-color: white;
+}
+
+.team-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+/* ===== EMOJI CIRCLE ===== */
+.emoji-circle {
+  width: 80px;
+  height: 80px;
+  background-color: #0A285F;
+  color: white;
+  border-radius: 50%;
+  font-size: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 15px;
+}
+
+/* ===== NAME ===== */
+.member-name {
+  font-size: 20px;
+  font-weight: 600;
+}
