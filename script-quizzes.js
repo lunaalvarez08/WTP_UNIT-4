@@ -1,180 +1,123 @@
-// ===== Quiz Data =====
-const baseQuestions = [
-  {
-    question: "What year was the U.S. Constitution ratified?",
-    options: ["1776", "1787", "1791", "1800"],
-    answer: "1787"
-  },
-  {
-    question: "Which branch can declare war?",
-    options: ["Executive", "Legislative", "Judicial", "States"],
-    answer: "Legislative"
-  },
-  {
-    question: "Who wrote the Federalist Papers?",
-    options: ["Madison, Hamilton, Jay", "Washington", "Jefferson", "Adams"],
-    answer: "Madison, Hamilton, Jay"
-  }
+alert("Quizzes Script Loaded");
+
+// ===== Team Data =====
+const teamMembers = [
+  { name: "Luna", quizzes: [
+      { question: "What is cellular respiration?", options: ["Energy creation", "Photosynthesis", "Protein synthesis", "None"], answer: "Energy creation" },
+      { question: "Where does glycolysis occur?", options: ["Mitochondria", "Cytoplasm", "Nucleus", "ER"], answer: "Cytoplasm" }
+    ] },
+  { name: "Sarah", quizzes: [
+      { question: "What is the capital of France?", options: ["Paris", "London", "Berlin", "Madrid"], answer: "Paris" }
+    ] },
+  { name: "Bekim", quizzes: [
+      { question: "What is H2O?", options: ["Oxygen", "Water", "Hydrogen", "Salt"], answer: "Water" }
+    ] },
+  { name: "Evan", quizzes: [] }
 ];
 
-// ===== Load stats from localStorage =====
-let quizStats = JSON.parse(localStorage.getItem("quizStats")) || {};
+// ===== References =====
+const teamSelect = document.getElementById("team-member");
+const quizSelect = document.getElementById("quiz-select");
+const shuffleCheck = document.getElementById("shuffle");
+const startBtn = document.getElementById("start-quiz");
+const quizContainer = document.getElementById("quiz-container");
+const questionNumber = document.getElementById("question-number");
+const questionText = document.getElementById("question-text");
+const optionsDiv = document.getElementById("options");
+const nextBtn = document.getElementById("next-question");
+const feedback = document.getElementById("feedback");
 
-// Initialize stats for each question if missing
-baseQuestions.forEach(q => {
-  if (!quizStats[q.question]) quizStats[q.question] = { correct: 0, incorrect: 0 };
+let currentQuiz = [];
+let currentQuestionIndex = 0;
+
+// ===== Populate Team Dropdown =====
+teamMembers.forEach(member => {
+  const option = document.createElement("option");
+  option.value = member.name.toLowerCase();
+  option.textContent = member.name;
+  teamSelect.appendChild(option);
 });
 
-// ===== Variables =====
-let questions = []; // will build deck with hard weighting
-let index = 0;
-
-const questionEl = document.getElementById("quiz-question");
-const optionsEl = document.getElementById("quiz-options");
-const progressEl = document.getElementById("progress");
-const statsEl = document.getElementById("stats");
-
-// ===== Shuffle function =====
-function shuffle(array) {
-  for (let i = array.length -1; i>0; i--) {
-    const j = Math.floor(Math.random() * (i+1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-}
-
-// ===== Build Deck with Hard Questions Weighted =====
-function buildDeck() {
-  questions = [];
-  baseQuestions.forEach(q => {
-    // Always include at least 1 copy
-    questions.push(q);
-
-    // Add extra copies based on incorrect count to weight harder questions
-    const weight = Math.min(quizStats[q.question].incorrect, 5); // cap at 5 extra copies
-    for (let i = 0; i < weight; i++) {
-      questions.push(q);
+// ===== Populate Quiz Dropdown =====
+function updateQuizSelect() {
+  quizSelect.innerHTML = '<option value="all">All Quizzes</option>';
+  const selectedMember = teamSelect.value;
+  teamMembers.forEach(member => {
+    if(selectedMember === "all" || selectedMember === member.name.toLowerCase()) {
+      member.quizzes.forEach((q, i) => {
+        const opt = document.createElement("option");
+        opt.value = `${member.name}-${i}`;
+        opt.textContent = `${member.name} Quiz ${i+1}`;
+        quizSelect.appendChild(opt);
+      });
     }
   });
-
-  shuffle(questions);
-  index = 0;
 }
+updateQuizSelect();
+teamSelect.addEventListener("change", updateQuizSelect);
 
-// ===== Load Question =====
-function loadQuestion() {
-  const q = questions[index];
-  questionEl.textContent = q.question;
+// ===== Start Quiz =====
+startBtn.addEventListener("click", () => {
+  const selectedMember = teamSelect.value;
+  const selectedQuiz = quizSelect.value;
 
-  // Shuffle options
-  const shuffledOptions = [...q.options];
-  shuffle(shuffledOptions);
+  currentQuiz = [];
 
-  optionsEl.innerHTML = "";
-  shuffledOptions.forEach(option => {
+  teamMembers.forEach(member => {
+    if(selectedMember !== "all" && selectedMember !== member.name.toLowerCase()) return;
+
+    member.quizzes.forEach((q, i) => {
+      if(selectedQuiz === "all" || selectedQuiz === `${member.name}-${i}`) {
+        currentQuiz.push({...q, member: member.name});
+      }
+    });
+  });
+
+  if(shuffleCheck.checked) {
+    currentQuiz.sort(() => Math.random() - 0.5);
+  }
+
+  if(currentQuiz.length === 0) {
+    alert("No questions available for selected filters.");
+    return;
+  }
+
+  currentQuestionIndex = 0;
+  quizContainer.style.display = "block";
+  showQuestion();
+});
+
+// ===== Show Question =====
+function showQuestion() {
+  feedback.textContent = "";
+  const q = currentQuiz[currentQuestionIndex];
+  questionNumber.textContent = `Question ${currentQuestionIndex + 1} of ${currentQuiz.length}`;
+  questionText.textContent = q.question;
+
+  optionsDiv.innerHTML = "";
+  q.options.forEach(opt => {
     const btn = document.createElement("button");
-    btn.textContent = option;
-    btn.className = "btn-navy quiz-option";
-    btn.addEventListener("click", () => handleAnswer(option));
-    optionsEl.appendChild(btn);
+    btn.textContent = opt;
+    btn.addEventListener("click", () => {
+      if(opt === q.answer) {
+        feedback.textContent = "✅ Correct!";
+        feedback.style.color = "green";
+      } else {
+        feedback.textContent = `❌ Incorrect. Correct answer: ${q.answer}`;
+        feedback.style.color = "red";
+      }
+    });
+    optionsDiv.appendChild(btn);
   });
-
-  const progressBar = document.getElementById("progress-bar");
-
-function updateProgress() {
-  progressEl.textContent = `Question ${index + 1} / ${questions.length}`;
-  const percent = ((index + 1) / questions.length) * 100;
-  progressBar.style.width = percent + "%";
 }
 
-// ===== Handle Answer =====
-function handleAnswer(selected) {
-  const q = questions[index];
-  const isCorrect = selected === q.answer;
-
-  if (isCorrect) {
-    quizStats[q.question].correct += 1;
+// ===== Next Question =====
+nextBtn.addEventListener("click", () => {
+  if(currentQuestionIndex < currentQuiz.length - 1) {
+    currentQuestionIndex++;
+    showQuestion();
   } else {
-    quizStats[q.question].incorrect += 1;
+    alert("Quiz finished!");
+    quizContainer.style.display = "none";
   }
-
-  localStorage.setItem("quizStats", JSON.stringify(quizStats));
-
-  // Visual feedback
-  Array.from(optionsEl.children).forEach(btn => {
-    if (btn.textContent === q.answer) btn.classList.add("btn-green");
-    else if (btn.textContent === selected) btn.classList.add("btn-red");
-    btn.disabled = true;
-  });
-
-  // Auto move to next question after short delay
-  setTimeout(() => {
-    index = (index + 1) % questions.length;
-    loadQuestion();
-  }, 800);
-}
-
-const progressBar = document.getElementById("progress-bar");
-
-function updateProgress() {
-  // Update text
-  progressEl.textContent = `Question ${index + 1} / ${questions.length}`;
-
-  // Calculate fill %
-  const percent = ((index + 1) / questions.length) * 100;
-  progressBar.style.width = percent + "%";
-
-  // Calculate accuracy
-  let totalCorrect = 0, totalIncorrect = 0;
-  Object.values(quizStats).forEach(s => {
-    totalCorrect += s.correct;
-    totalIncorrect += s.incorrect;
-  });
-
-  const totalAttempts = totalCorrect + totalIncorrect;
-  const accuracy = totalAttempts ? totalCorrect / totalAttempts : 1;
-
-  // Change color based on accuracy
-  if (accuracy >= 0.8) {
-    progressBar.style.backgroundColor = "#28a745"; // green
-  } else if (accuracy >= 0.5) {
-    progressBar.style.backgroundColor = "#ffc107"; // yellow
-  } else {
-    progressBar.style.backgroundColor = "#dc3545"; // red
-  }
-}
-
-// ===== Navigation Buttons =====
-document.getElementById("next").addEventListener("click", () => {
-  index = (index + 1) % questions.length;
-  loadQuestion();
 });
-
-document.getElementById("prev").addEventListener("click", () => {
-  index = (index - 1 + questions.length) % questions.length;
-  loadQuestion();
-});
-
-// ===== Shuffle Questions =====
-document.getElementById("shuffle-btn").addEventListener("click", () => {
-  buildDeck(); // rebuild with current hard weighting
-  loadQuestion();
-});
-
-// ===== Reset Quiz =====
-document.getElementById("reset-btn").addEventListener("click", () => {
-  quizStats = {};
-  baseQuestions.forEach(q => quizStats[q.question] = { correct: 0, incorrect: 0 });
-  localStorage.setItem("quizStats", JSON.stringify(quizStats));
-  buildDeck();
-  loadQuestion();
-});
-
-// ===== Keyboard Controls =====
-document.addEventListener("keydown", e => {
-  if (e.key === "ArrowRight") document.getElementById("next").click();
-  if (e.key === "ArrowLeft") document.getElementById("prev").click();
-});
-
-// ===== Initialize =====
-buildDeck();
-loadQuestion();
