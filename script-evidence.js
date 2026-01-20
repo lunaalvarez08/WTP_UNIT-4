@@ -1,167 +1,109 @@
-const savedHard = JSON.parse(localStorage.getItem("hardCards")) || {};
-// ========== AUTO-GROW FUNCTION ==========
-function autoGrow(textarea) {
-  textarea.style.height = 'auto';
-  textarea.style.height = textarea.scrollHeight + 'px';
-}
+alert("Evidence script loaded");
 
-// Apply auto-grow to existing textareas
-document.querySelectorAll('.auto-textarea').forEach(textarea => {
-  autoGrow(textarea);
-  textarea.addEventListener('input', () => autoGrow(textarea));
-});
+const activeMember = JSON.parse(localStorage.getItem("activeMember"));
+const isPersonal = !!activeMember;
 
-// ========== DELETE ROW FUNCTION ==========
-function addDeleteListener(btn) {
-  btn.addEventListener('click', () => {
-    btn.closest('tr').remove();
-  });
-}
+const members = [
+  { name: "Luna", id: "luna" },
+  { name: "Sarah", id: "sarah" },
+  { name: "Bekim", id: "bekim" },
+  { name: "Evan", id: "evan" }
+];
 
-// Apply delete to all existing rows
-document.querySelectorAll('.delete-row').forEach(btn => addDeleteListener(btn));
+const evidenceData = [
+  { member: "luna", question: "Q1", evidence: "Luna Q1 evidence", type: "primary", why: "Explanation" },
+  { member: "luna", question: "Q2", evidence: "Luna Q2 evidence", type: "secondary", why: "Explanation" },
+  { member: "sarah", question: "Q1", evidence: "Sarah Q1 evidence", type: "primary", why: "Explanation" },
+  { member: "bekim", question: "Q3", evidence: "Bekim Q3 evidence", type: "secondary", why: "Explanation" },
+  // add all your real entries here
+];
 
-// ========== FILTER FUNCTION ==========
-function filterTable(question = 'all', member = 'all', type = 'all') {
-  document.querySelectorAll('.evidence-table tbody tr').forEach(row => {
-    const rowQuestion = row.getAttribute('data-question');
-    const rowMember = row.getAttribute('data-member');
-    const rowType = row.querySelector('.type-select')?.value || 'primary';
+const tableBody = document.querySelector(".evidence-table tbody");
+const memberSelect = document.getElementById("team-member");
+const typeSelect = document.getElementById("type-filter");
+const questionButtons = document.querySelectorAll(".question-selector button");
 
-    const showQuestion = question === 'all' || rowQuestion === question;
-    const showMember = member === 'all' || rowMember === member;
-    const showType = type === 'all' || rowType === type;
+// Hide member drop-down if personal
+if (isPersonal && memberSelect) memberSelect.parentElement.style.display = "none";
 
-    row.style.display = (showQuestion && showMember && showType) ? '' : 'none';
-  });
-}
+// Current filter state
+let currentQuestion = "Q1";
+let currentMember = isPersonal ? activeMember.name.toLowerCase() : "all";
+let currentType = "all";
 
-// ========== ADD ROW FUNCTION ==========
-document.getElementById('add-row').addEventListener('click', () => {
-  const tbody = document.querySelector('.evidence-table tbody');
+// Function to render rows
+function renderTable() {
+  tableBody.innerHTML = "";
 
-  // Current question & filters
-  const activeButton = document.querySelector('.question-selector button.active');
-  const selectedQuestion = activeButton ? activeButton.getAttribute('data-question') : 'Q1';
-  const selectedMember = document.getElementById('team-member').value || 'luna';
-  const selectedType = document.getElementById('type-filter')?.value || 'primary';
+  const filtered = evidenceData.filter(e => 
+    (currentQuestion === e.question) &&
+    (currentMember === "all" || e.member === currentMember) &&
+    (currentType === "all" || e.type === currentType)
+  );
 
-  // Create new row
-  const row = document.createElement('tr');
-  row.setAttribute('data-question', selectedQuestion);
-  row.setAttribute('data-member', selectedMember);
+  filtered.forEach(e => {
+    const row = document.createElement("tr");
+    row.dataset.member = e.member;
+    row.dataset.question = e.question;
+    row.innerHTML = `
+      <td><textarea class="auto-textarea">${e.evidence}</textarea></td>
+      <td>
+        <select class="type-select">
+          <option value="primary" ${e.type==="primary"?"selected":""}>Primary Source</option>
+          <option value="secondary" ${e.type==="secondary"?"selected":""}>Secondary Source</option>
+        </select>
+      </td>
+      <td>
+        <select class="member-select" ${isPersonal ? "disabled" : ""}>
+          ${members.map(m => `<option value="${m.id}" ${m.id===e.member?"selected":""}>${m.name}</option>`).join("")}
+        </select>
+      </td>
+      <td><textarea class="auto-textarea">${e.why}</textarea></td>
+      <td><button class="delete-row">Delete</button></td>
+    `;
+    tableBody.appendChild(row);
 
-  row.innerHTML = `
-  <td><textarea class="auto-textarea" placeholder="Type evidence here..."></textarea></td>
-  <td>
-    <select class="type-select">
-      <option value="constitution">Constitution / Amendments</option>
-      <option value="bill_of_rights">Bill of Rights</option>
-      <option value="other_amendments">Other Amendments</option>
-      <option value="constitutional_principles">Constitutional Principles/Values</option>
-      <option value="federalist_paper">Federalist Paper Quote</option>
-      <option value="anti_federalist">Anti-Federalist Quote</option>
-      <option value="founding_father">Founding Father Quote / Letter / Speech</option>
-      <option value="historian">Historian / Political Scientist Analysis</option>
-      <option value="comparative_doc">Other Historical Documents (Magna Carta, Articles, etc.)</option>
-      <option value="supreme_court">Supreme Court Case</option>
-      <option value="state_court">State Court Case</option>
-      <option value="international_court">International Court Case</option>
-      <option value="us_current_event">U.S. Current Event</option>
-      <option value="state_current_event">State / Local Current Event</option>
-      <option value="world_current_event">World Current Event</option>
-      <option value="international_doc">International Document / Treaty</option>
-      <option value="other">Other</option>
-    </select>
-  </td>
-  <td>
-    <select class="member-select">
-      <option value="luna">Luna</option>
-      <option value="sarah">Sarah</option>
-      <option value="bekim">Bekim</option>
-      <option value="evan">Evan</option>
-    </select>
-  </td>
-  <td><textarea class="auto-textarea" placeholder="Explain why it relates..."></textarea></td>
-  <td><button class="delete-row">Delete</button></td>
-`;
-
-  tbody.appendChild(row);
-
-  // Set member select to current member
-  row.querySelector('.member-select').value = selectedMember;
-
-  // Auto-grow new textareas
-  row.querySelectorAll('.auto-textarea').forEach(textarea => {
-    textarea.addEventListener('input', () => autoGrow(textarea));
-    autoGrow(textarea);
-  });
-
-  // Add delete functionality
-  addDeleteListener(row.querySelector('.delete-row'));
-
-  // Reapply current filters
-  const currentQuestion = activeButton ? activeButton.getAttribute('data-question') : 'all';
-  const currentMember = document.getElementById('team-member').value;
-  const currentType = document.getElementById('type-filter')?.value || 'all';
-  filterTable(currentQuestion, currentMember, currentType);
-
-  // Focus first cell
-  row.querySelector('td textarea').focus();
-});
-
-// ========== QUESTION FILTER ==========
-document.querySelectorAll('.question-selector button').forEach(button => {
-  button.addEventListener('click', () => {
-    const selectedQuestion = button.getAttribute('data-question');
-    const selectedMember = document.getElementById('team-member').value;
-    const selectedType = document.getElementById('type-filter')?.value || 'all';
-
-    filterTable(selectedQuestion, selectedMember, selectedType);
-
-    // Highlight active button
-    document.querySelectorAll('.question-selector button').forEach(btn => {
-      btn.classList.toggle('active', btn === button);
+    // Delete row
+    row.querySelector(".delete-row").addEventListener("click", () => {
+      const index = evidenceData.indexOf(e);
+      if (index > -1) evidenceData.splice(index, 1);
+      renderTable();
     });
   });
-});
-
-// ========== TEAM MEMBER FILTER ==========
-document.getElementById('team-member').addEventListener('change', () => {
-  const selectedMember = document.getElementById('team-member').value;
-  const activeButton = document.querySelector('.question-selector button.active');
-  const selectedQuestion = activeButton ? activeButton.getAttribute('data-question') : 'all';
-  const selectedType = document.getElementById('type-filter')?.value || 'all';
-  filterTable(selectedQuestion, selectedMember, selectedType);
-});
-
-// ========== TYPE FILTER ==========
-const typeFilter = document.getElementById('type-filter');
-if (typeFilter) {
-  typeFilter.addEventListener('change', () => {
-    const selectedType = typeFilter.value;
-    const selectedMember = document.getElementById('team-member').value;
-    const activeButton = document.querySelector('.question-selector button.active');
-    const selectedQuestion = activeButton ? activeButton.getAttribute('data-question') : 'all';
-    filterTable(selectedQuestion, selectedMember, selectedType);
-  });
 }
 
-// ========== INLINE MEMBER SELECT CHANGE ==========
-document.addEventListener('change', e => {
-  if (e.target.classList.contains('member-select')) {
-    const row = e.target.closest('tr');
-    row.setAttribute('data-member', e.target.value);
-
-    const activeButton = document.querySelector('.question-selector button.active');
-    const selectedQuestion = activeButton ? activeButton.getAttribute('data-question') : 'all';
-    const selectedMember = document.getElementById('team-member').value;
-    const selectedType = document.getElementById('type-filter')?.value || 'all';
-
-    filterTable(selectedQuestion, selectedMember, selectedType);
-  }
+// Question button click
+questionButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    currentQuestion = btn.dataset.question;
+    questionButtons.forEach(b => b.classList.toggle("active", b===btn));
+    renderTable();
+  });
 });
 
-// ========== INITIAL FILTER ==========
-filterTable();
-<script src="script-evidence.js"></script>
+// Member filter change
+if (memberSelect) memberSelect.addEventListener("change", e => {
+  currentMember = e.target.value;
+  renderTable();
+});
+
+// Type filter change
+if (typeSelect) typeSelect.addEventListener("change", e => {
+  currentType = e.target.value;
+  renderTable();
+});
+
+// Add row
+document.getElementById("add-row").addEventListener("click", () => {
+  evidenceData.push({
+    member: isPersonal ? activeMember.name.toLowerCase() : "luna",
+    question: currentQuestion,
+    evidence: "",
+    type: "primary",
+    why: ""
+  });
+  renderTable();
+});
+
+// Initial render
+renderTable();
