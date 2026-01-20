@@ -8,73 +8,66 @@
 </head>
 <body>
 
-  <!-- NAV BAR -->
-  <header>
-    <div class="logo">We The People</div>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="team.html">Team Members</a>
-      <a href="practice.html">Practice Sets</a>
-      <a href="evidence.html">Evidence Charts</a>
-      <a href="flashcards.html">Flashcards</a>
-      <a href="quizzes.html">Quizzes</a>
-      <a href="about.html">About</a>
-    </nav>
-  </header>
+<header>
+  <div class="logo">We The People</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="team.html">Team Members</a>
+    <a href="practice.html">Practice Sets</a>
+    <a href="evidence.html">Evidence Charts</a>
+    <a href="flashcards.html">Flashcards</a>
+    <a href="quizzes.html">Quizzes</a>
+    <a href="about.html">About</a>
+  </nav>
+</header>
 
-  <!-- PAGE TITLE -->
-  <main style="padding: 40px; text-align: center;">
-    <div id="member-emoji" style="font-size: 80px;"></div>
-    <h1 id="member-name"></h1>
-    <p>Click a flashcard to flip it</p>
+<main style="padding: 40px; text-align: center;">
+  <h1>Flashcards</h1>
+  <section>
+    <label for="team-member">Team Member:</label>
+    <select id="team-member">
+      <option value="all">All Members</option>
+    </select>
 
-    <section id="flashcard-container" class="flashcard-wrapper">
-      <!-- Flashcards will appear here -->
-    </section>
-  </main>
+    <label for="category">Category:</label>
+    <select id="category">
+      <option value="all">All</option>
+      <option value="Q1">Q1</option>
+      <option value="Q2">Q2</option>
+      <option value="Q3">Q3</option>
+    </select>
 
-  <script>
-    // ===== Get member from previous page =====
-    const member = JSON.parse(localStorage.getItem("activeMember"));
-    if (!member) {
-      window.location.href = "team.html";
-    } else {
-      document.getElementById("member-name").textContent = member.name;
-      document.getElementById("member-emoji").textContent = member.emoji;
-    }
+    <label for="flashcard-type">Type:</label>
+    <select id="flashcard-type">
+      <option value="standard">Standard</option>
+      <option value="fill">Fill-in-the-Blank</option>
+      <option value="mc">Multiple Choice</option>
+    </select>
+  </section>
 
-    const container = document.getElementById("flashcard-container");
-    const flashcards = member.flashcards || []; // get flashcards for this member
+  <section style="margin-top: 20px;">
+    <button id="add-card">+ Add Card</button>
+  </section>
 
-    function renderFlashcards() {
-      container.innerHTML = "";
-      if (flashcards.length === 0) {
-        container.innerHTML = "<p>No flashcards yet.</p>";
-        return;
-      }
+  <section style="margin-top: 20px;">
+    <table id="flashcards-table">
+      <thead>
+        <tr>
+          <th>Front (Question/Term)</th>
+          <th>Back (Answer/Definition)</th>
+          <th>Multiple Choice Options</th>
+          <th>Team Member</th>
+          <th>Category</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Flashcards will be dynamically added here -->
+      </tbody>
+    </table>
+  </section>
+</main>
 
-      flashcards.forEach((fc, index) => {
-        const card = document.createElement("div");
-        card.className = "flashcard";
-
-        card.innerHTML = `
-          <div class="card-inner">
-            <div class="card-front">${fc}</div>
-            <div class="card-back">Answer/Details here</div>
-          </div>
-        `;
-
-        card.addEventListener("click", () => {
-          const inner = card.querySelector(".card-inner");
-          inner.classList.toggle("flipped");
-        });
-
-        container.appendChild(card);
-      });
-    }
-
-    renderFlashcards();
-  </script>
-
+<script src="script-flashcards.js"></script>
 </body>
 </html>
