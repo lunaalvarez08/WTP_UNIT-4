@@ -1,33 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Team Members | WTP U4</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-<header>
-  <div class="logo">We The People</div>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="team.html" class="active">Team Members</a>
-    <a href="practice.html">Practice Sets</a>
-    <a href="evidence.html">Evidence Charts</a>
-    <a href="flashcards.html">Flashcards</a>
-    <a href="quizzes.html">Quizzes</a>
-    <a href="about.html">About</a>
-  </nav>
-</header>
-
 <main>
   <h1>Team Members</h1>
-  <section class="team-grid" id="team-grid">
-    <!-- Cards will be dynamically added via JS -->
-  </section>
-</main>
+  <div id="team-grid" class="team-grid"></div>
 
-<script src="script-team.js"></script>
-</body>
-</html>
+  <!-- Member-specific panel -->
+  <div id="member-panel" class="member-panel hidden">
+    <button id="close-panel" class="btn-red">← Back to Team</button>
+
+    <div class="member-header">
+      <div id="panel-emoji" class="member-emoji"></div>
+      <div id="panel-name" class="member-name"></div>
+    </div>
+
+    <div class="member-tabs">
+      <button class="btn-navy tab-btn" data-tab="practice">Practice Sets</button>
+      <button class="btn-navy tab-btn" data-tab="evidence">Evidence Charts</button>
+      <button class="btn-navy tab-btn" data-tab="flashcards">Flashcards</button>
+      <button class="btn-navy tab-btn" data-tab="quizzes">Quizzes</button>
+    </div>
+
+    <div id="tab-content" class="tab-content">
+      <!-- Dynamic content for selected tab -->
+    </div>
+  </div>
+</main>
