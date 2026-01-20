@@ -26,10 +26,10 @@
   <main style="padding: 40px; text-align: center;">
     <div id="member-emoji" style="font-size: 80px;"></div>
     <h1 id="member-name"></h1>
-    <p>Select a practice set to view or complete</p>
+    <p>Select a practice set below</p>
 
-    <section id="practice-sets" class="practice-sets">
-      <!-- Practice cards will appear here -->
+    <section id="practice-container" class="practice-sets">
+      <!-- Practice set buttons will appear here -->
     </section>
   </main>
 
@@ -43,33 +43,25 @@
       document.getElementById("member-emoji").textContent = member.emoji;
     }
 
-    const practiceContainer = document.getElementById("practice-sets");
-
-    // ===== Member practice sets =====
-    const sets = member.practice || []; // from team data
+    const container = document.getElementById("practice-container");
+    const practiceSets = member.practice || []; // get practice sets for this member
 
     function renderPracticeSets() {
-      practiceContainer.innerHTML = "";
-      if (sets.length === 0) {
-        practiceContainer.innerHTML = "<p>No practice sets yet.</p>";
+      container.innerHTML = "";
+      if (practiceSets.length === 0) {
+        container.innerHTML = "<p>No practice sets yet.</p>";
         return;
       }
 
-      sets.forEach((set, index) => {
-        const card = document.createElement("div");
-        card.className = "card";
-        card.innerHTML = `
-          <h3>${set}</h3>
-          <p>Click to start this practice set</p>
-          <button onclick="startPractice(${index})">Start</button>
-        `;
-        practiceContainer.appendChild(card);
+      practiceSets.forEach((set, index) => {
+        const button = document.createElement("button");
+        button.className = "card";
+        button.textContent = set;
+        button.addEventListener("click", () => {
+          alert(`You selected ${set}. Practice set content would go here.`);
+        });
+        container.appendChild(button);
       });
-    }
-
-    function startPractice(index) {
-      alert(`Starting practice set: ${sets[index]}`);
-      // Later: you can link this to actual practice set content
     }
 
     renderPracticeSets();
