@@ -1,24 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Team Members | WTP U4</title>
-  <link rel="stylesheet" href="style.css">
-  <style>
-    <style>
-  /* === Team Grid === */
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Team Members | WTP U4</title>
+<style>
+  body { font-family: Arial, sans-serif; text-align: center; background: #fefefe; margin:0; padding:0; color:#333;}
+  header { background: #0A285F; color:white; padding:15px 30px; display:flex; justify-content:space-between; align-items:center;}
+  header .logo { font-weight:bold; font-size:22px;}
+  header nav a { color:white; margin-left:20px; text-decoration:none; font-weight:500;}
+  header nav a:hover { text-decoration:underline;}
+
+  h1 { color:#0A285F; margin-top:30px;}
+
+  /* ===== Team Grid ===== */
   #team-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* smaller cards */
-    gap: 25px; /* more space between cards */
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 25px;
     margin: 40px;
     justify-items: center;
   }
 
   .team-card {
-    width: 150px;  /* slightly smaller */
-    height: 150px; /* slightly smaller */
+    width: 150px;
+    height: 150px;
     background: #fff;
     border: 3px solid gold;
     border-radius: 15px;
@@ -29,26 +35,44 @@
     cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s;
     text-align: center;
-    font-family: Arial, sans-serif;
   }
 
-  .team-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+  .team-card:hover { transform: scale(1.05); box-shadow:0 6px 15px rgba(0,0,0,0.2); }
+
+  .member-emoji { font-size: 45px; margin-bottom: 8px; }
+  .member-name { font-weight:bold; font-size:16px; color:#0A285F; }
+
+  /* ===== Member Panel ===== */
+  .member-panel {
+    position: fixed;
+    top:10%;
+    left:50%;
+    transform:translateX(-50%);
+    width:80%;
+    max-width:800px;
+    background:white;
+    border:3px solid gold;
+    border-radius:15px;
+    padding:20px;
+    z-index:100;
+    display:none;
   }
 
-  .member-emoji {
-    font-size: 45px; /* slightly smaller */
-    margin-bottom: 8px;
-  }
+  .member-header { display:flex; align-items:center; gap:15px; justify-content:center; margin-bottom:15px;}
+  .member-header .member-emoji { font-size:60px; }
+  .member-header .member-name { font-size:24px; font-weight:bold; color:#0A285F; }
 
-  .member-name {
-    font-weight: bold;
-    font-size: 16px; /* slightly smaller */
-    color: #0A285F;
+  .member-tabs { margin-top:10px; }
+  .member-tabs button {
+    margin-right:10px; padding:8px 16px; border:none; border-radius:8px; background:#0A285F; color:white; cursor:pointer;
   }
+  .member-tabs button.active { background:#FFA500; color:white; }
+
+  #tab-content { margin-top:20px; text-align:left; }
+  #tab-content ul { padding-left:20px; }
+  #close-panel { margin-bottom:15px; background:#B22234; color:white; padding:6px 12px; border:none; border-radius:8px; cursor:pointer; }
+
 </style>
-
 </head>
 <body>
 
@@ -65,42 +89,98 @@
   </nav>
 </header>
 
-<main>
-  <h1 style="text-align:center; color:#0A285F;">Team Members</h1>
-  <div id="team-grid"></div>
-</main>
+<h1>Team Members</h1>
+<div id="team-grid"></div>
+
+<!-- Member Panel -->
+<div class="member-panel" id="member-panel">
+  <button id="close-panel">← Back to Team</button>
+  <div class="member-header">
+    <div class="member-emoji" id="panel-emoji"></div>
+    <div class="member-name" id="panel-name"></div>
+  </div>
+  <div class="member-tabs">
+    <button class="tab-btn active" data-tab="practice">Practice Sets</button>
+    <button class="tab-btn" data-tab="evidence">Evidence Charts</button>
+    <button class="tab-btn" data-tab="flashcards">Flashcards</button>
+    <button class="tab-btn" data-tab="quizzes">Quizzes</button>
+  </div>
+  <div id="tab-content"></div>
+</div>
 
 <script>
-  // ===== Team Data =====
-  const teamMembers = [
-    { name: "Luna", emoji: "🦭" },
-    { name: "Sarah", emoji: "🦋" },
-    { name: "Bekim", emoji: "⭐" },
-    { name: "Evan", emoji: "🏈" }
-  ];
+const teamMembers = [
+  { 
+    name: "Luna", emoji:"🦭",
+    practice:["Luna Q1","Luna Q2","Luna Q3"],
+    evidence:["Luna Evidence 1","Luna Evidence 2"],
+    flashcards:["Luna Flash A","Luna Flash B"],
+    quizzes:["Luna Quiz 1","Luna Quiz 2"]
+  },
+  { name:"Sarah", emoji:"🦋", practice:["Sarah Q1","Sarah Q2"], evidence:["Sarah Evidence"], flashcards:["Sarah Flash"], quizzes:["Sarah Quiz"] },
+  { name:"Bekim", emoji:"⭐", practice:["Bekim Q1"], evidence:["Bekim Evidence"], flashcards:["Bekim Flash"], quizzes:["Bekim Quiz"] },
+  { name:"Evan", emoji:"🏈", practice:["Evan Q1"], evidence:["Evan Evidence"], flashcards:[], quizzes:["Evan Quiz"] }
+];
 
-  const grid = document.getElementById("team-grid");
+// ===== Create Team Cards =====
+const grid = document.getElementById("team-grid");
+const panel = document.getElementById("member-panel");
+const panelEmoji = document.getElementById("panel-emoji");
+const panelName = document.getElementById("panel-name");
+const tabContent = document.getElementById("tab-content");
+const tabBtns = document.querySelectorAll(".tab-btn");
 
-  // ===== Create Team Cards =====
-  teamMembers.forEach(member => {
-    const card = document.createElement("div");
-    card.className = "team-card";
-
-    card.innerHTML = `
-      <div class="member-emoji">${member.emoji}</div>
-      <div class="member-name">${member.name}</div>
-    `;
-
-    // Clicking a member → store in localStorage + go to personal page
-    card.addEventListener("click", () => {
-      localStorage.setItem("activeMember", JSON.stringify(member));
-      window.location.href = "member.html"; // member page for next step
-    });
-
-    grid.appendChild(card);
+teamMembers.forEach(member=>{
+  const card = document.createElement("div");
+  card.className="team-card";
+  card.innerHTML=`<div class="member-emoji">${member.emoji}</div><div class="member-name">${member.name}</div>`;
+  card.addEventListener("click", ()=>{
+    panel.style.display="block";
+    panelEmoji.textContent=member.emoji;
+    panelName.textContent=member.name;
+    loadTab("practice", member);
   });
+  grid.appendChild(card);
+});
+
+// ===== Tab Function =====
+function loadTab(tab, member){
+  tabBtns.forEach(btn=>btn.classList.remove("active"));
+  document.querySelector(`.tab-btn[data-tab="${tab}"]`).classList.add("active");
+  
+  let html="";
+  switch(tab){
+    case "practice":
+      html="<ul>"+member.practice.map(p=>`<li>${p}</li>`).join("")+"</ul>";
+      break;
+    case "evidence":
+      html="<ul>"+member.evidence.map(e=>`<li>${e}</li>`).join("")+"</ul>";
+      break;
+    case "flashcards":
+      html="<ul>"+member.flashcards.map(f=>`<li>${f}</li>`).join("")+"</ul>";
+      break;
+    case "quizzes":
+      html="<ul>"+member.quizzes.map(q=>`<li>${q}</li>`).join("")+"</ul>";
+      break;
+  }
+  tabContent.innerHTML=html;
+}
+
+// ===== Tab Button Click =====
+tabBtns.forEach(btn=>{
+  btn.addEventListener("click", e=>{
+    const tab = e.target.dataset.tab;
+    const memberName = panelName.textContent;
+    const member = teamMembers.find(m=>m.name===memberName);
+    loadTab(tab, member);
+  });
+});
+
+// ===== Close Panel =====
+document.getElementById("close-panel").addEventListener("click", ()=>{
+  panel.style.display="none";
+});
 </script>
 
 </body>
 </html>
-
