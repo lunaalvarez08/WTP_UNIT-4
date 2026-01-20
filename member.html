@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Team Member | WTP U4</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <div class="logo">We The People</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="team.html">Team Members</a>
+    <a href="practice.html">Practice Sets</a>
+    <a href="evidence.html">Evidence Charts</a>
+    <a href="flashcards.html">Flashcards</a>
+    <a href="quizzes.html">Quizzes</a>
+    <a href="about.html">About</a>
+  </nav>
+</header>
+
+<main style="padding: 40px; text-align: center;">
+  <div id="member-emoji" style="font-size: 80px;"></div>
+  <h1 id="member-name"></h1>
+
+  <section style="margin-top: 30px;">
+    <button class="btn-navy" onclick="goTo('practice.html')">Practice Sets</button>
+    <button class="btn-navy" onclick="goTo('evidence.html')">Evidence Charts</button>
+    <button class="btn-navy" onclick="goTo('flashcards.html')">Flashcards</button>
+    <button class="btn-navy" onclick="goTo('quizzes.html')">Quizzes</button>
+  </section>
+</main>
+
+<script>
+  const member = JSON.parse(localStorage.getItem("activeMember"));
+
+  if (!member) {
+    window.location.href = "team.html";
+  } else {
+    document.getElementById("member-name").textContent = member.name;
+    document.getElementById("member-emoji").textContent = member.emoji;
+  }
+
+  function goTo(page) {
+    window.location.href = page;
+  }
+</script>
+
+</body>
+</html>
