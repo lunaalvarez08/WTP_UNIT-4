@@ -8,154 +8,41 @@
 </head>
 <body>
 
-  <header>
-    <div class="logo">We The People</div>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="team.html">Team Members</a>
-      <a href="practice.html">Practice Sets</a>
-      <a href="evidence.html">Evidence Charts</a>
-      <a href="flashcards.html">Flashcards</a>
-      <a href="quizzes.html" class="active">Quizzes</a>
-      <a href="about.html">About</a>
-    </nav>
-  </header>
+<header>
+  <div class="logo">We The People</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="team.html">Team Members</a>
+    <a href="practice.html">Practice Sets</a>
+    <a href="evidence.html">Evidence Charts</a>
+    <a href="flashcards.html">Flashcards</a>
+    <a href="quizzes.html" class="active">Quizzes</a>
+    <a href="about.html">About</a>
+  </nav>
+</header>
 
-  <main>
-    <h1>Interactive Quiz</h1>
-    <p>Answer the questions below and get your score!</p>
+<main>
+  <h1>Quizzes</h1>
+  <p>Click the correct answer. Track your progress and stats!</p>
 
-    <section class="quiz-container">
-      <div id="quiz-card" class="card">
-        <h3 id="question">Question text here</h3>
-        <div id="options">
-          <!-- Buttons for multiple choice options -->
-        </div>
-        <button id="next-btn" class="btn-navy">Next Question</button>
-      </div>
+  <section class="quiz-wrapper">
+    <div class="quiz-card">
+      <p id="quiz-question"></p>
+      <div id="quiz-options"></div>
+    </div>
 
-      <div id="score-card" class="card" style="display:none;">
-        <h3>Your Score</h3>
-        <p id="score-text"></p>
-        <button id="restart-btn" class="btn-navy">Restart Quiz</button>
-      </div>
-    </section>
-  </main>
+    <div class="quiz-buttons">
+      <button id="prev" class="btn-navy">← Previous</button>
+      <button id="next" class="btn-navy">Next →</button>
+      <button id="shuffle-btn" class="btn-navy">🔀 Shuffle Questions</button>
+      <button id="reset-btn" class="btn-red">🔄 Reset Quiz</button>
+    </div>
 
-  <script>
-    const quizData = [
-      {
-        question: "What year was the U.S. Constitution ratified?",
-        options: ["1787", "1776", "1791", "1800"],
-        answer: "1787"
-      },
-      {
-        question: "Which branch of government can declare war?",
-        options: ["Legislative", "Executive", "Judicial", "All of the above"],
-        answer: "Legislative"
-      },
-      {
-        question: "Who wrote the Federalist Papers?",
-        options: ["Madison, Hamilton, Jay", "Washington, Adams, Jefferson", "Franklin, Monroe, Hamilton", "Jefferson, Adams, Madison"],
-        answer: "Madison, Hamilton, Jay"
-      }
-      // Add more questions here
-    ];
+    <p id="progress"></p>
+    <p id="stats">Correct: 0 | Incorrect: 0</p>
+  </section>
+</main>
 
-    let currentQuestion = 0;
-    let score = 0;
-
-    const questionEl = document.getElementById("question");
-    const optionsEl = document.getElementById("options");
-    const nextBtn = document.getElementById("next-btn");
-    const quizCard = document.getElementById("quiz-card");
-    const scoreCard = document.getElementById("score-card");
-    const scoreText = document.getElementById("score-text");
-    const restartBtn = document.getElementById("restart-btn");
-
-    function loadQuestion() {
-      const q = quizData[currentQuestion];
-      questionEl.textContent = q.question;
-      optionsEl.innerHTML = "";
-
-      q.options.forEach(option => {
-        const btn = document.createElement("button");
-        btn.classList.add("btn-navy");
-        btn.textContent = option;
-        btn.addEventListener("click", () => selectAnswer(option));
-        optionsEl.appendChild(btn);
-      });
-    }
-
-function selectAnswer(option, btn) {
-  const correct = quizData[currentQuestion].answer;
-
-  // Highlight the clicked button
-  if(option === correct) {
-    btn.classList.add("correct");
-  } else {
-    btn.classList.add("incorrect");
-    // Also highlight the correct option
-    Array.from(optionsEl.children).forEach(b => {
-      if(b.textContent === correct) b.classList.add("correct");
-    });
-  }
-
-  // Disable all buttons after selection
-  Array.from(optionsEl.children).forEach(b => b.disabled = true);
-
-  // Small delay before moving to next question
-  setTimeout(() => {
-    currentQuestion++;
-    if(currentQuestion < quizData.length) {
-      loadQuestion();
-    } else {
-      showScore();
-    }
-  }, 800);
-}
-
-function loadQuestion() {
-  const q = quizData[currentQuestion];
-  questionEl.textContent = q.question;
-  optionsEl.innerHTML = "";
-
-  q.options.forEach(option => {
-    const btn = document.createElement("button");
-    btn.classList.add("btn-navy");
-    btn.textContent = option;
-    btn.addEventListener("click", () => selectAnswer(option, btn));
-    optionsEl.appendChild(btn);
-  });
-}
-
-
-    function showScore() {
-  quizCard.style.display = "none";
-  scoreCard.style.display = "block";
-
-  let displayedScore = 0;
-  const totalScore = score;
-  scoreText.textContent = `You scored 0 out of ${quizData.length}!`;
-
-  const interval = setInterval(() => {
-    displayedScore++;
-    scoreText.textContent = `You scored ${displayedScore} out of ${quizData.length}!`;
-    if(displayedScore >= totalScore) clearInterval(interval);
-  }, 200); // counts up every 200ms
-}
-
-    restartBtn.addEventListener("click", () => {
-      currentQuestion = 0;
-      score = 0;
-      scoreCard.style.display = "none";
-      quizCard.style.display = "block";
-      loadQuestion();
-    });
-
-    // Load the first question
-    loadQuestion();
-  </script>
-
+<script src="script-quizzes.js"></script>
 </body>
 </html>
