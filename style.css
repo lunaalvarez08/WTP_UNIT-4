@@ -793,3 +793,61 @@ button:hover {
     margin: 5px 0;
   }
 }
+#welcome-section {
+  background-color: #ffffff;
+  color: #1E3A8A;
+  text-align: center;
+  padding: 60px 20px;
+  font-family: "Times New Roman", serif;
+}
+
+.circle-logo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+#welcome-section h1 {
+  font-size: 2.5em;
+}
+
+#welcome-section h2 {
+  color: #DC2626;
+  margin-bottom: 25px;
+}
+
+#countdown {
+  font-size: 1.1em;
+  margin-bottom: 20px;
+}
+
+.dynamic-content p {
+  font-style: italic;
+  margin: 8px 0;
+}
+
+.buttons-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  padding: 30px;
+  max-width: 700px;
+  margin: auto;
+}
+
+button {
+  background-color: #1E3A8A;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #DC2626;
+}
