@@ -724,3 +724,72 @@ button:hover {
   font-size: 20px;
   font-weight: 600;
 }
+/* HOME PAGE WELCOME SECTION */
+#welcome-section {
+  background-color: #FFFFFF;
+  color: #1E3A8A;
+  text-align: center;
+  padding: 60px 20px;
+  font-family: 'Times New Roman', serif;
+}
+
+.circle-logo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+#welcome-section h1 {
+  font-size: 2.5em;
+  margin: 10px 0;
+}
+
+#welcome-section h2 {
+  font-size: 1.5em;
+  color: #DC2626;
+  margin: 10px 0 30px 0;
+}
+
+/* Countdown Timer */
+#countdown {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+/* Dynamic Content */
+.dynamic-content p {
+  font-size: 1em;
+  margin: 10px 0;
+  font-style: italic;
+}
+
+/* Practice Buttons */
+#practice-buttons {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.button-container button {
+  background-color: #1E3A8A;
+  color: #FFFFFF;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  margin: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button-container button:hover {
+  background-color: #DC2626;
+}
+
+/* Make buttons responsive */
+@media (max-width: 600px) {
+  .button-container button {
+    width: 100%;
+    margin: 5px 0;
+  }
+}
