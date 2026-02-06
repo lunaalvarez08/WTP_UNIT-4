@@ -851,3 +851,47 @@ button {
 button:hover {
   background-color: #DC2626;
 }
+.hero {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+.hero-content {
+  max-width: 700px;
+}
+
+.hero h1 {
+  font-family: "Times New Roman", serif;
+  font-size: 2.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.subtext {
+  font-style: italic;
+  color: #555;
+  margin-bottom: 2.5rem;
+}
+
+.countdown, .daily-box {
+  background: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+#timer {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-top: 0.5rem;
+  color: #8b0000;
+}
+
+.daily-box p {
+  font-size: 1.1rem;
+  margin-top: 0.6rem;
+}
