@@ -21,6 +21,11 @@
 
         .container { max-width: 700px; margin: 50px auto; width: 90%; }
 
+        /* Mode Toggles */
+        .mode-toggle { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
+        .tgl-btn { background: white; border: 1px solid #ddd; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 0.8rem; font-weight: 600; transition: 0.3s; }
+        .tgl-btn.active { background: var(--navy); color: white; border-color: var(--navy); }
+
         /* Tech Glass Card */
         .quiz-card {
             background: var(--glass); backdrop-filter: blur(15px);
@@ -30,7 +35,6 @@
             text-align: center; position: relative; overflow: hidden;
         }
 
-        /* Modern Progress & Timer Header */
         .quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
         .timer-pill { background: #eee; padding: 5px 15px; border-radius: 20px; font-weight: 700; font-size: 0.9rem; color: var(--navy); }
         
@@ -39,7 +43,6 @@
 
         .question-text { font-size: 1.4rem; color: var(--navy); font-family: 'Times New Roman', serif; font-weight: bold; margin-bottom: 30px; }
 
-        /* Option Buttons with Feedback Colors */
         .options-grid { display: grid; gap: 12px; }
         .option-btn {
             background: white; border: 2px solid #f0f0f0; padding: 18px; border-radius: 16px;
@@ -47,7 +50,6 @@
         }
         .option-btn:hover:not(:disabled) { border-color: var(--gold); background: #fafafa; transform: translateY(-2px); }
         
-        /* Feedback States */
         .option-btn.correct { background: var(--green) !important; color: white !important; border-color: var(--green) !important; }
         .option-btn.wrong { background: var(--red) !important; color: white !important; border-color: var(--red) !important; animation: shake 0.4s; }
 
@@ -56,6 +58,9 @@
         .btn-main { background: var(--navy); color: white; border: none; padding: 14px 28px; border-radius: 12px; cursor: pointer; font-weight: 600; margin-top: 25px; transition: 0.3s; }
         .btn-main:hover { transform: scale(1.05); }
         .hidden { display: none; }
+
+        /* Architect Style */
+        .architect-input { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #ddd; margin-bottom: 10px; box-sizing: border-box; }
     </style>
 </head>
 <body>
@@ -74,17 +79,35 @@
     </header>
 
     <div class="container">
+        <div class="mode-toggle">
+            <button id="playModeBtn" class="tgl-btn active" onclick="toggleView('play')">Take Quiz</button>
+            <button id="archModeBtn" class="tgl-btn" onclick="toggleView('arch')">Question Architect</button>
+        </div>
+
         <div id="setup-view" class="quiz-card">
             <h2 style="color: var(--navy); margin-top:0;">Quiz Engine v2.0</h2>
-            <p style="color: #666; font-size: 0.9rem;">Select a team member's deck to begin.</p>
             
-            <div style="margin: 30px 0; display: flex; flex-direction: column; gap: 15px; align-items: center;">
-                <select id="memberSelect" style="padding: 12px; border-radius: 10px; border: 2px solid var(--gold); font-weight: 700; width: 220px;">
-                    <option value="Luna">Luna</option>
-                    <option value="Sarah">Sarah</option>
-                    <option value="Bekim">Bekim</option>
-                    <option value="Evan">Evan</option>
-                </select>
+            <div style="margin: 20px 0; display: grid; gap: 15px; justify-content: center;">
+                <div style="text-align: left;">
+                    <label style="font-size: 0.7rem; font-weight: 800; color: var(--navy);">STUDY DECK</label>
+                    <select id="memberSelect" style="display: block; padding: 12px; border-radius: 10px; border: 2px solid var(--gold); font-weight: 700; width: 250px;">
+                        <option value="Global">All Members (Global)</option>
+                        <option value="Luna">Luna</option>
+                        <option value="Sarah">Sarah</option>
+                        <option value="Bekim">Bekim</option>
+                        <option value="Evan">Evan</option>
+                    </select>
+                </div>
+
+                <div style="text-align: left;">
+                    <label style="font-size: 0.7rem; font-weight: 800; color: var(--navy);">TOPIC FILTER</label>
+                    <select id="qFilterSelect" style="display: block; padding: 12px; border-radius: 10px; border: 2px solid #eee; font-weight: 700; width: 250px;">
+                        <option value="All">All Questions Mix</option>
+                        <option value="Q1">Question 1 Only</option>
+                        <option value="Q2">Question 2 Only</option>
+                        <option value="Q3">Question 3 Only</option>
+                    </select>
+                </div>
                 
                 <label style="font-size: 0.8rem; font-weight: 600; color: #888;">
                     <input type="checkbox" id="timerToggle"> Enable 15s Blitz Timer
@@ -94,16 +117,23 @@
             <button class="btn-main" onclick="startQuiz()">Launch Engine</button>
         </div>
 
+        <div id="architect-view" class="quiz-card hidden">
+            <h2 style="color: var(--navy); margin-top:0;">Question Architect</h2>
+            <p style="font-size: 0.8rem; color: #666;">Create custom multiple-choice questions.</p>
+            <input type="text" id="archQ" class="architect-input" placeholder="Question Text...">
+            <input type="text" id="archCorrect" class="architect-input" style="border-color: var(--green);" placeholder="Correct Answer">
+            <input type="text" id="archWrong" class="architect-input" style="border-color: var(--red);" placeholder="Wrong Answer (Separator with commas)">
+            <button class="btn-main" style="background: var(--gold);" onclick="saveCustomQ()">Save to Bank</button>
+        </div>
+
         <div id="quiz-view" class="quiz-card hidden">
             <div class="quiz-header">
                 <span id="qCount" style="font-size: 0.8rem; color: #888; font-weight: 700;">QUESTION 1/10</span>
                 <div id="timerDisplay" class="timer-pill hidden">15s</div>
             </div>
             <div class="progress-bar"><div id="progressFill"></div></div>
-            
             <div id="questionText" class="question-text"></div>
             <div id="optionsGrid" class="options-grid"></div>
-            
             <button id="nextBtn" class="btn-main hidden" onclick="nextQuestion()">Next Question &rarr;</button>
         </div>
     </div>
@@ -115,21 +145,59 @@
         let timerInterval;
         let timeLeft = 15;
 
+        function toggleView(view) {
+            document.getElementById('setup-view').classList.toggle('hidden', view === 'arch');
+            document.getElementById('architect-view').classList.toggle('hidden', view === 'play');
+            document.getElementById('quiz-view').classList.add('hidden');
+            document.getElementById('playModeBtn').classList.toggle('active', view === 'play');
+            document.getElementById('archModeBtn').classList.toggle('active', view === 'arch');
+        }
+
+        function saveCustomQ() {
+            const q = document.getElementById('archQ').value;
+            const ca = document.getElementById('archCorrect').value;
+            const wa = document.getElementById('archWrong').value.split(',');
+            if(!q || !ca) return alert("Fill out the question and correct answer!");
+            
+            const customBank = JSON.parse(localStorage.getItem('wtp_custom_bank')) || [];
+            customBank.push({ front: q, back: ca, distractors: wa });
+            localStorage.setItem('wtp_custom_bank', JSON.stringify(customBank));
+            
+            document.getElementById('archQ').value = '';
+            document.getElementById('archCorrect').value = '';
+            document.getElementById('archWrong').value = '';
+            alert("Saved to Global Bank!");
+        }
+
         function startQuiz() {
             const member = document.getElementById('memberSelect').value;
-            const q1 = JSON.parse(localStorage.getItem(`cards_${member}_Q1`)) || [];
-            const q2 = JSON.parse(localStorage.getItem(`cards_${member}_Q2`)) || [];
-            const q3 = JSON.parse(localStorage.getItem(`cards_${member}_Q3`)) || [];
-            
-            // Combine and Shuffle
-            quizPool = [...q1, ...q2, ...q3].sort(() => 0.5 - Math.random());
+            const topic = document.getElementById('qFilterSelect').value;
+            quizPool = [];
 
-            if (quizPool.length < 2) return alert("Add more flashcards first!");
+            const members = member === 'Global' ? ['Luna', 'Sarah', 'Bekim', 'Evan'] : [member];
+            const topics = topic === 'All' ? ['Q1', 'Q2', 'Q3'] : [topic];
 
+            members.forEach(m => {
+                topics.forEach(t => {
+                    const cards = JSON.parse(localStorage.getItem(`cards_${m}_${t}`)) || [];
+                    quizPool = [...quizPool, ...cards];
+                });
+            });
+
+            // Add global custom bank questions if Global or "All" is selected
+            if(member === 'Global') {
+                const custom = JSON.parse(localStorage.getItem('wtp_custom_bank')) || [];
+                quizPool = [...quizPool, ...custom];
+            }
+
+            if (quizPool.length < 1) return alert("No cards found for this selection!");
+
+            quizPool.sort(() => 0.5 - Math.random());
             document.getElementById('setup-view').classList.add('hidden');
             document.getElementById('quiz-view').classList.remove('hidden');
             if(document.getElementById('timerToggle').checked) document.getElementById('timerDisplay').classList.remove('hidden');
             
+            currentIdx = 0; score = 0;
             showQuestion();
         }
 
@@ -141,11 +209,14 @@
             document.getElementById('qCount').innerText = `QUESTION ${currentIdx + 1}/${quizPool.length}`;
             document.getElementById('progressFill').style.width = `${((currentIdx) / quizPool.length) * 100}%`;
 
-            // Options
             const grid = document.getElementById('optionsGrid');
             grid.innerHTML = '';
+            
             let answers = [q.back];
-            const distractors = quizPool.filter(c => c.back !== q.back).map(c => c.back).sort(() => 0.5 - Math.random()).slice(0, 3);
+            // Get distractors: either from the custom Q or from other cards in pool
+            let distractors = q.distractors ? q.distractors : quizPool.filter(c => c.back !== q.back).map(c => c.back);
+            distractors = distractors.filter(d => d.trim() !== "").sort(() => 0.5 - Math.random()).slice(0, 3);
+            
             answers = [...answers, ...distractors].sort(() => 0.5 - Math.random());
 
             answers.forEach(ans => {
@@ -165,32 +236,26 @@
             timerInterval = setInterval(() => {
                 timeLeft--;
                 document.getElementById('timerDisplay').innerText = timeLeft + "s";
-                if(timeLeft <= 0) {
-                    clearInterval(timerInterval);
-                    autoFail();
-                }
+                if(timeLeft <= 0) { clearInterval(timerInterval); autoFail(); }
             }, 1000);
         }
 
         function checkAnswer(btn, selected, correct) {
             clearInterval(timerInterval);
-            const allBtns = document.querySelectorAll('.option-btn');
-            allBtns.forEach(b => b.disabled = true);
-
+            document.querySelectorAll('.option-btn').forEach(b => b.disabled = true);
             if (selected === correct) {
                 btn.classList.add('correct');
                 score++;
             } else {
                 btn.classList.add('wrong');
-                allBtns.forEach(b => { if(b.innerText === correct) b.classList.add('correct'); });
+                document.querySelectorAll('.option-btn').forEach(b => { if(b.innerText === correct) b.classList.add('correct'); });
             }
             document.getElementById('nextBtn').classList.remove('hidden');
             document.getElementById('progressFill').style.width = `${((currentIdx + 1) / quizPool.length) * 100}%`;
         }
 
         function autoFail() {
-            const allBtns = document.querySelectorAll('.option-btn');
-            allBtns.forEach(b => {
+            document.querySelectorAll('.option-btn').forEach(b => {
                 b.disabled = true;
                 if(b.innerText === quizPool[currentIdx].back) b.classList.add('correct');
             });
@@ -209,10 +274,7 @@
             view.innerHTML = `
                 <h2 style="color: var(--navy);">Engine Complete</h2>
                 <div style="font-size: 4rem; margin: 20px 0; color: var(--gold); font-weight: 800;">${percent}%</div>
-                <p style="color: #666;">You analyzed ${score} of ${quizPool.length} correctly.</p>
-                <div style="background: #f8f9fa; padding: 15px; border-radius: 12px; font-size: 0.8rem; text-align: left; margin: 20px 0;">
-                    <strong>Status:</strong> ${percent >= 80 ? 'National Ready' : 'Keep Reviewing'}
-                </div>
+                <p>You analyzed ${score} of ${quizPool.length} correctly.</p>
                 <button class="btn-main" onclick="location.reload()">Reset Engine</button>
             `;
         }
