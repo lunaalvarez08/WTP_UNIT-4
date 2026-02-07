@@ -895,3 +895,11 @@ button:hover {
   font-size: 1.1rem;
   margin-top: 0.6rem;
 }
+.hero-content, .welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* centers horizontally */
+  text-align: center;    /* centers the text inside */
+  justify-content: center; /* optional: centers vertically if needed */
+  margin: 0 auto;        /* ensures container itself is centered */
+}
