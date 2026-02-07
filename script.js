@@ -49,3 +49,27 @@ function updateCountdown() {
 
 setInterval(updateCountdown, 1000);
 updateCountdown();
+// Set the date of the competition
+const competitionDate = new Date("April 16, 2026 09:00:00").getTime();
+
+function updateTimer() {
+  const now = new Date().getTime();
+  const distance = competitionDate - now;
+
+  if (distance < 0) {
+    document.getElementById("competition-timer").textContent = "Competition is live!";
+    clearInterval(timerInterval);
+    return;
+  }
+
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  document.getElementById("competition-timer").textContent =
+    `${days}d ${hours}h ${minutes}m ${seconds}s`;
+}
+
+const timerInterval = setInterval(updateTimer, 1000);
+updateTimer(); // initialize immediately
