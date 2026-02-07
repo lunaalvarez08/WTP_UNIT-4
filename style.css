@@ -1088,3 +1088,92 @@ body {
     flex-direction: column;
   }
 }
+/* NAV BAR */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 2rem;
+  background: white;
+}
+
+header .logo {
+  font-family: "Times New Roman", serif;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+header nav a {
+  margin-left: 1rem;
+  text-decoration: none;
+  font-family: "Times New Roman", serif;
+  color: black;
+}
+
+header nav a:hover {
+  color: #1E90FF;
+}
+
+/* HERO SECTION */
+.hero {
+  text-align: center;
+  padding: 4rem 1rem 2rem 1rem;
+}
+
+.hero-content h1 {
+  font-family: "Times New Roman", serif;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.competition-text {
+  font-weight: bold;
+  color: red;
+  margin-bottom: 0.5rem;
+}
+
+/* COUNTDOWN TIMER */
+.countdown-timer {
+  color: #1E90FF;
+  font-size: 1rem;
+  margin: 0.5rem 0 1.5rem 0;
+  font-weight: normal;
+}
+
+/* QUOTE */
+.daily-quote p {
+  font-style: italic;
+  color: #1E90FF;
+  margin-bottom: 2rem;
+}
+
+/* BUTTONS */
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.buttons button {
+  font-family: "Times New Roman", serif;
+  padding: 0.75rem 1.5rem;
+  border: 2px solid red;
+  background: white;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.buttons button:hover {
+  background-color: red;
+  color: white;
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 600px) {
+  .buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+}
