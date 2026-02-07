@@ -1,71 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Practice Sets | WTP U4</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>Practice Hub - Unit 4 Hub</title>
+    <style>
+        :root {
+            --navy: #0A285F; --red: #B22234; --gold: #D4AF37; --green: #27ae60;
+            --glass: rgba(255, 255, 255, 0.95);
+        }
+
+        body { 
+            margin: 0; font-family: 'Inter', sans-serif; 
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh; overflow-x: hidden;
+        }
+
+        /* Keep your Nav Bar */
+        header { background: var(--navy); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 20px rgba(0,0,0,0.1); position: relative; z-index: 100; }
+        .logo { color: white; font-weight: 800; font-size: 1.2rem; }
+        nav a { color: white; text-decoration: none; margin-left: 20px; font-size: 0.85rem; opacity: 0.8; }
+
+        .container { max-width: 900px; margin: 30px auto; width: 90%; }
+
+        /* Global Settings Bar */
+        .settings-bar {
+            background: var(--navy); color: white; padding: 20px;
+            border-radius: 20px; display: flex; gap: 20px; align-items: flex-end;
+            margin-bottom: 30px; box-shadow: 0 10px 30px rgba(10,40,95,0.2);
+        }
+        .settings-group { flex: 1; }
+        .settings-group label { display: block; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; margin-bottom: 8px; color: var(--gold); }
+        .settings-bar select { 
+            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); 
+            color: white; padding: 10px; border-radius: 8px; width: 100%; font-weight: 600;
+        }
+
+        /* Game Selection Grid */
+        .game-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .game-card {
+            background: var(--glass); border-radius: 24px; padding: 30px;
+            text-align: center; cursor: pointer; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255,255,255,0.5); box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            display: flex; flex-direction: column; align-items: center;
+        }
+        .game-card:hover { transform: translateY(-12px) scale(1.02); box-shadow: 0 30px 60px rgba(0,0,0,0.1); border-color: var(--gold); }
+        
+        .game-icon { font-size: 3rem; margin-bottom: 15px; }
+        .game-card h3 { color: var(--navy); margin: 10px 0; font-size: 1.2rem; }
+        .game-card p { color: #666; font-size: 0.85rem; line-height: 1.4; }
+        
+        /* Game Arena (Hidden by default) */
+        #game-arena { display: none; margin-top: 20px; }
+        .back-btn { background: none; border: none; color: var(--navy); font-weight: 800; cursor: pointer; margin-bottom: 15px; display: flex; align-items: center; gap: 5px; }
+
+        .hidden { display: none; }
+    </style>
 </head>
 <body>
 
-  <!-- NAV BAR -->
-  <header>
-    <div class="logo">We The People</div>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="team.html">Team Members</a>
-      <a href="practice.html">Practice Sets</a>
-      <a href="evidence.html">Evidence Charts</a>
-      <a href="flashcards.html">Flashcards</a>
-      <a href="quizzes.html">Quizzes</a>
-      <a href="about.html">About</a>
-    </nav>
-  </header>
+    <header>
+        <div class="logo">We The People</div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="team.html">Team</a>
+            <a href="practice.html">Practice</a>
+            <a href="evidence.html">Charts</a>
+            <a href="flashcards.html">Flashcards</a>
+            <a href="quizzes.html">Quizzes</a>
+        </nav>
+    </header>
 
-  <!-- PAGE TITLE -->
-  <main style="padding: 40px; text-align: center;">
-    <div id="member-emoji" style="font-size: 80px;"></div>
-    <h1 id="member-name"></h1>
-    <p>Select a practice set below</p>
+    <div class="container">
+        <div class="settings-bar">
+            <div class="settings-group">
+                <label>Active Member</label>
+                <select id="globalMember">
+                    <option value="Global">Full Team (Global)</option>
+                    <option value="Luna">Luna</option>
+                    <option value="Sarah">Sarah</option>
+                    <option value="Bekim">Bekim</option>
+                    <option value="Evan">Evan</option>
+                </select>
+            </div>
+            <div class="settings-group">
+                <label>Unit Question Filter</label>
+                <select id="globalTopic">
+                    <option value="All">All Questions (Q1-Q3)</option>
+                    <option value="Q1">Q1: Foundations</option>
+                    <option value="Q2">Q2: Structures</option>
+                    <option value="Q3">Q3: Application</option>
+                </select>
+            </div>
+        </div>
 
-    <section id="practice-container" class="practice-sets">
-      <!-- Practice set buttons will appear here -->
-    </section>
-  </main>
+        <div id="lobby-view">
+            <h2 style="color: var(--navy); margin-bottom: 25px;">Select a Practice Set</h2>
+            <div class="game-grid">
+                <div class="game-card" onclick="launchGame('tetris')">
+                    <div class="game-icon">🧱</div>
+                    <h3>Constitutional Tetris</h3>
+                    <p>Sort powers, clauses, and thinkers into the correct buckets before they stack up!</p>
+                </div>
 
-  <script>
-    // ===== Get member from previous page =====
-    const member = JSON.parse(localStorage.getItem("activeMember"));
-    if (!member) {
-      window.location.href = "team.html";
-    } else {
-      document.getElementById("member-name").textContent = member.name;
-      document.getElementById("member-emoji").textContent = member.emoji;
-    }
+                <div class="game-card" onclick="launchGame('match')">
+                    <div class="game-icon">🃏</div>
+                    <h3>Flash-Match</h3>
+                    <p>Connect Principles to Evidence. Find the pair between Clauses and Cases.</p>
+                </div>
 
-    const container = document.getElementById("practice-container");
-    const practiceSets = member.practice || []; // get practice sets for this member
+                <div class="game-card" onclick="launchGame('ghost')">
+                    <div class="game-icon">👻</div>
+                    <h3>Ghost Writer</h3>
+                    <p>Master your opening statement by filling in the blanks as the script scrolls.</p>
+                </div>
+            </div>
+        </div>
 
-    function renderPracticeSets() {
-      container.innerHTML = "";
-      if (practiceSets.length === 0) {
-        container.innerHTML = "<p>No practice sets yet.</p>";
-        return;
-      }
+        <div id="game-arena">
+            <button class="back-btn" onclick="exitGame()">&larr; BACK TO LOBBY</button>
+            <div id="active-game-content">
+                </div>
+        </div>
+    </div>
 
-      practiceSets.forEach((set, index) => {
-        const button = document.createElement("button");
-        button.className = "card";
-        button.textContent = set;
-        button.addEventListener("click", () => {
-          alert(`You selected ${set}. Practice set content would go here.`);
-        });
-        container.appendChild(button);
-      });
-    }
+    <script>
+        let currentPool = [];
 
-    renderPracticeSets();
-  </script>
+        function launchGame(gameType) {
+            const member = document.getElementById('globalMember').value;
+            const topic = document.getElementById('globalTopic').value;
+            
+            // 1. Compile the Data Pool based on user settings
+            currentPool = [];
+            const members = member === 'Global' ? ['Luna', 'Sarah', 'Bekim', 'Evan'] : [member];
+            const topics = topic === 'All' ? ['Q1', 'Q2', 'Q3'] : [topic];
 
+            members.forEach(m => {
+                topics.forEach(t => {
+                    const cards = JSON.parse(localStorage.getItem(`cards_${m}_${t}`)) || [];
+                    currentPool = [...currentPool, ...cards];
+                });
+            });
+
+            // Add custom architect questions too
+            const bank = JSON.parse(localStorage.getItem('wtp_bank')) || [];
+            const filteredBank = bank.filter(q => 
+                (member === 'Global' || q.member === member) && 
+                (topic === 'All' || q.topic === topic)
+            );
+            currentPool = [...currentPool, ...filteredBank];
+
+            if (currentPool.length < 1) return alert("No cards found! Add some to Flashcards or Architect first.");
+
+            // 2. Hide Lobby, Show Arena
+            document.getElementById('lobby-view').classList.add('hidden');
+            document.getElementById('game-arena').style.display = 'block';
+
+            // 3. Trigger Game Engine
+            if(gameType === 'tetris') startTetris();
+            if(gameType === 'match') startMatch();
+            if(gameType === 'ghost') startGhost();
+        }
+
+        function exitGame() {
+            document.getElementById('lobby-view').classList.remove('hidden');
+            document.getElementById('game-arena').style.display = 'none';
+            document.getElementById('active-game-content').innerHTML = '';
+        }
+
+        // --- GAME ENGINE STUBS (To be coded next) ---
+        function startTetris() {
+            document.getElementById('active-game-content').innerHTML = "<h2>🧱 Tetris Loading...</h2>";
+        }
+
+        function startMatch() {
+            document.getElementById('active-game-content').innerHTML = "<h2>🃏 Flash-Match Loading...</h2>";
+        }
+
+        function startGhost() {
+            document.getElementById('active-game-content').innerHTML = "<h2>👻 Ghost Writer Loading...</h2>";
+        }
+    </script>
 </body>
 </html>
