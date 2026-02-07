@@ -1225,3 +1225,11 @@ header nav a:hover {
     margin: 0.3rem 0;
   }
 }
+#competition-timer {
+  color: #1E90FF; /* blue */
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
