@@ -1275,3 +1275,104 @@ function updateTimer() {
 .buttons {
   text-align: center; /* centers inline/block children */
 }
+:root {
+    --navy: #0A285F;
+    --red: #B22234;
+    --gold: #D4AF37;
+    --light-gray: #f8f9fa;
+    --white: #ffffff;
+}
+
+body {
+    font-family: 'Inter', -apple-system, sans-serif; /* Modern, crisp font */
+    line-height: 1.6;
+    color: #2d3436;
+    margin: 0;
+    background-color: var(--white);
+}
+
+/* Minimal Nav: No background, just clean text */
+.navbar {
+    padding: 2rem 5%;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #eee;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 3rem;
+    margin: 0;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--navy);
+    font-weight: 500;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--red);
+}
+
+/* Hero Section: Typography focused */
+.hero {
+    padding: 8rem 2rem;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    letter-spacing: -1px;
+    color: var(--navy);
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    color: #636e72;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Refined Cards */
+.member-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    padding: 0 5% 5rem;
+}
+
+.member-card {
+    padding: 3rem 1rem;
+    background: var(--light-gray);
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+.member-card:hover {
+    transform: translateY(-5px);
+    background: #f1f2f6;
+}
+
+.member-card h3 {
+    font-weight: 400;
+    color: var(--navy);
+    margin-bottom: 1.5rem;
+}
+
+/* Subtle Gold Button Style */
+.btn-minimal {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid var(--gold);
+    padding-bottom: 4px;
+}
