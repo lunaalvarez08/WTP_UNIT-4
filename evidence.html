@@ -1,70 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Evidence Charts | WTP U4</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evidence Charts - Unit 4</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Specific Styles for the Table */
+        .chart-container { padding: 40px; max-width: 1200px; margin: auto; }
+        
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-top: 20px; 
+            border: 2px solid #D4AF37; /* Gold Accent [cite: 2] */
+        }
+
+        th { 
+            background-color: #0A285F; /* Navy [cite: 2] */
+            color: white; 
+            padding: 12px; 
+            text-align: left; 
+        }
+
+        td { 
+            border: 1px solid #ddd; 
+            padding: 10px; 
+        }
+
+        textarea { 
+            width: 100%; 
+            border: none; 
+            resize: vertical; 
+            font-family: inherit; 
+            font-size: 1rem;
+        }
+
+        .controls { margin-bottom: 20px; display: flex; gap: 10px; }
+    </style>
 </head>
 <body>
 
-  <!-- NAV BAR -->
-  <header>
-    <div class="logo">We The People</div>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="team.html">Team Members</a>
-      <a href="practice.html">Practice Sets</a>
-      <a href="evidence.html">Evidence Charts</a>
-      <a href="flashcards.html">Flashcards</a>
-      <a href="quizzes.html">Quizzes</a>
-      <a href="about.html">About</a>
+    <nav class="navbar">
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="evidence.html">Evidence Charts</a></li>
+            </ul>
     </nav>
-  </header>
 
-  <!-- PAGE TITLE -->
-  <main style="padding: 40px; text-align: center;">
-    <h1>Evidence Charts</h1>
-    <p>Create, view, and edit evidence charts for your team.</p>
+    <div class="chart-container">
+        <h2>Evidence Chart Template</h2>
+        <p>Enter your evidence below. Changes are saved automatically to your browser.</p>
 
-    <!-- FILTERS -->
-    <div style="margin: 20px 0;">
-      <label for="team-member">Team Member:</label>
-      <select id="team-member">
-        <option value="all">All Members</option>
-      </select>
+        <div class="controls">
+            <button class="btn" onclick="addRow()">+ Add Row</button>
+            <button class="btn" style="background-color: #0A285F;" onclick="saveData()">Manual Save</button>
+        </div>
 
-      <label for="question-filter">Question:</label>
-      <select id="question-filter">
-        <option value="all">All Questions</option>
-        <option value="Q1">Q1</option>
-        <option value="Q2">Q2</option>
-        <option value="Q3">Q3</option>
-      </select>
+        <table id="evidenceTable">
+            <thead>
+                <tr>
+                    <th>Evidence </th>
+                    <th>Constitutional / Historical Connection </th>
+                    <th>Why it relates to Q1/Q3 </th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody">
+                </tbody>
+        </table>
     </div>
 
-    <!-- EVIDENCE TABLE -->
-    <section class="evidence-table">
-      <table>
-        <thead>
-          <tr>
-            <th>Evidence</th>
-            <th>Type</th>
-            <th>Team Member</th>
-            <th>Why it relates</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody id="evidence-body">
-          <!-- Rows will be dynamically created by JS -->
-        </tbody>
-      </table>
-      <button id="add-row">+ Add Row</button>
-      <button id="save-chart">Save Chart</button>
-    </section>
-  </main>
+    <script>
+        const tableBody = document.getElementById('tableBody');
 
-  <!-- SCRIPT -->
-  <script src="script-evidence.js"></script>
+        // Load data on page start
+        window.onload = () => {
+            const savedData = JSON.parse(localStorage.getItem('unit4Evidence')) || [];
+            if (savedData.length === 0) {
+                for(let i=0; i<3; i++) addRow(); // Start with 3 empty rows 
+            } else {
+                savedData.forEach(data => addRow(data.col1, data.col2, data.col3));
+            }
+        };
+
+        function addRow(val1 = '', val2 = '', val3 = '') {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td><textarea oninput="autoSave()">${val1}</textarea></td>
+                <td><textarea oninput="autoSave()">${val2}</textarea></td>
+                <td><textarea oninput="autoSave()">${val3}</textarea></td>
+                <td><button onclick="this.parentElement.parentElement.remove(); autoSave();">×</button></td>
+            `;
+            tableBody.appendChild(row);
+        }
+
+        function autoSave() {
+            const rows = document.querySelectorAll('#tableBody tr');
+            const data = Array.from(rows).map(row => {
+                const texts = row.querySelectorAll('textarea');
+                return { col1: texts[0].value, col2: texts[1].value, col3: texts[2].value };
+            });
+            localStorage.setItem('unit4Evidence', JSON.stringify(data));
+        }
+        
+        function saveData() {
+            autoSave();
+            alert("Data saved to browser storage!");
+        }
+    </script>
 </body>
 </html>
