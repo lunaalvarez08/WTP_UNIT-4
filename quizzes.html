@@ -1,58 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quizzes | WTP U4</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizzes - Unit 4</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .quiz-container { padding: 40px; max-width: 600px; margin: auto; text-align: center; }
+        .quiz-card { 
+            border: 2px solid #0A285F; 
+            padding: 30px; 
+            border-radius: 8px; 
+            background: #fcfcfc;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .options-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 20px; }
+        .option-btn { 
+            padding: 12px; 
+            border: 1px solid #D4AF37; 
+            background: white; 
+            cursor: pointer; 
+            transition: 0.2s;
+        }
+        .option-btn:hover { background: #eee; }
+        .feedback { margin-top: 15px; font-weight: bold; }
+        .correct { color: green; }
+        .wrong { color: #B22234; }
+        .hidden { display: none; }
+    </style>
 </head>
 <body>
 
-<header>
-  <div class="logo">We The People</div>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="team.html">Team Members</a>
-    <a href="practice.html">Practice Sets</a>
-    <a href="evidence.html">Evidence Charts</a>
-    <a href="flashcards.html">Flashcards</a>
-    <a href="quizzes.html">Quizzes</a>
-    <a href="about.html">About</a>
-  </nav>
-</header>
+    <nav class="navbar">
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="evidence.html">Evidence</a></li>
+            <li><a href="flashcards.html">Flashcards</a></li>
+            <li><a href="quizzes.html">Quizzes</a></li>
+        </ul>
+    </nav>
 
-<main style="padding: 40px; text-align: center;">
-  <h1>Quizzes</h1>
+    <div class="quiz-container">
+        <h2>Unit 4 Practice Quiz</h2>
+        <div id="setup-view">
+            <p>Ready to test your knowledge based on your flashcards?</p>
+            <button class="btn" onclick="startQuiz()">Start Quiz</button>
+        </div>
 
-  <section>
-    <label for="team-member">Team Member:</label>
-    <select id="team-member">
-      <option value="all">All Members</option>
-    </select>
+        <div id="quiz-view" class="hidden">
+            <div class="quiz-card">
+                <h3 id="question-text">Question goes here?</h3>
+                <div id="options" class="options-grid"></div>
+                <div id="feedback" class="feedback"></div>
+            </div>
+            <br>
+            <button class="btn" style="background-color: #0A285F;" onclick="nextQuestion()">Next Question</button>
+        </div>
+    </div>
 
-    <label for="quiz-select">Quiz:</label>
-    <select id="quiz-select">
-      <option value="all">All Quizzes</option>
-    </select>
+    <script>
+        let currentCards = [];
+        let currentIndex = 0;
 
-    <label>
-      <input type="checkbox" id="shuffle"> Shuffle Questions
-    </label>
-  </section>
+        function startQuiz() {
+            const cards = JSON.parse(localStorage.getItem('unit4Cards')) || [];
+            if (cards.length < 2) {
+                alert("Add at least 2 flashcards first to generate a quiz!");
+                return;
+            }
+            currentCards = [...cards].sort(() => 0.5 - Math.random()); // Shuffle
+            currentIndex = 0;
+            document.getElementById('setup-view').classList.add('hidden');
+            document.getElementById('quiz-view').classList.remove('hidden');
+            showQuestion();
+        }
 
-  <section style="margin-top: 20px;">
-    <button id="start-quiz">Start Quiz</button>
-  </section>
+        function showQuestion() {
+            const card = currentCards[currentIndex];
+            const feedback = document.getElementById('feedback');
+            feedback.innerText = '';
+            document.getElementById('question-text').innerText = card.front;
+            
+            // Generate multiple choice options
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = '';
+            
+            // Get the correct answer + 2 random wrong ones
+            let answers = [card.back];
+            const otherAnswers = currentCards.filter(c => c.id !== card.id).map(c => c.back);
+            const shuffledOthers = otherAnswers.sort(() => 0.5 - Math.random()).slice(0, 2);
+            answers = [...answers, ...shuffledOthers].sort(() => 0.5 - Math.random());
 
-  <section id="quiz-container" style="margin-top: 30px; display: none;">
-    <h2 id="question-number"></h2>
-    <p id="question-text"></p>
-    <div id="options"></div>
-    <button id="next-question">Next</button>
-    <p id="feedback" style="font-weight: bold;"></p>
-  </section>
-</main>
+            answers.forEach(ans => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerText = ans;
+                btn.onclick = () => checkAnswer(ans, card.back);
+                optionsDiv.appendChild(btn);
+            });
+        }
 
-<script src="script-quizzes.js"></script>
+        function checkAnswer(selected, correct) {
+            const feedback = document.getElementById('feedback');
+            if (selected === correct) {
+                feedback.innerText = "Correct! Well done.";
+                feedback.className = "feedback correct";
+            } else {
+                feedback.innerText = `Wrong. The correct answer was: ${correct}`;
+                feedback.className = "feedback wrong";
+            }
+        }
+
+        function nextQuestion() {
+            currentIndex++;
+            if (currentIndex < currentCards.length) {
+                showQuestion();
+            } else {
+                alert("Quiz finished! Great job.");
+                location.reload();
+            }
+        }
+    </script>
 </body>
 </html>
