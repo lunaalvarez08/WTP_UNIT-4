@@ -1008,3 +1008,83 @@ header nav a {
   color: #1e3a8a;
   font-family: "Times New Roman", serif;
 }
+/* GENERAL STYLING */
+body {
+  font-family: 'Times New Roman', serif;
+  background-color: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+
+/* HERO SECTION */
+.hero {
+  min-height: 80vh;
+  display: flex;
+  justify-content: center; /* centers horizontally */
+  align-items: flex-start; /* aligns towards top */
+  text-align: center;
+  padding: 3rem 1rem;
+}
+
+.hero-content {
+  max-width: 800px;
+  width: 100%;
+}
+
+/* MAIN TITLE */
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+/* NATIONAL COMPETITION */
+.competition-text {
+  color: red;
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* QUOTE OF THE DAY */
+.daily-quote p {
+  font-style: italic;
+  color: #1E90FF; /* chic blue */
+  font-size: 1.1rem;
+  margin-bottom: 2rem; /* space before buttons */
+}
+
+/* BUTTONS */
+.buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.buttons button {
+  font-family: 'Times New Roman', serif;
+  font-size: 1rem;
+  padding: 0.8rem 1.2rem;
+  border: 2px solid #1E90FF;
+  background-color: white;
+  color: #1E90FF;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.buttons button:hover {
+  background-color: #1E90FF;
+  color: white;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .buttons {
+    flex-direction: column;
+  }
+}
