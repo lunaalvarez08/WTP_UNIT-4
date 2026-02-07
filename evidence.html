@@ -1,84 +1,70 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Evidence Charts - Unit 4</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        /* Specific Styles for the Table */
-        .chart-container { padding: 40px; max-width: 1200px; margin: auto; }
-        
-        table { 
-            width: 100%; 
-            border-collapse: collapse; 
-            margin-top: 20px; 
-            border: 2px solid #D4AF37; /* Gold Accent [cite: 2] */
-        }
+<div class="content-container" style="padding: 50px 5%; font-family: 'Times New Roman', serif;">
+    <h2 style="color: #0A285F; text-align: center; font-size: 2.5rem; margin-bottom: 10px;">Evidence Chart</h2>
+    <p style="text-align: center; color: #666; margin-bottom: 40px;">Default 3x10 template. Data saves automatically to this device.</p>
 
-        th { 
-            background-color: #0A285F; /* Navy [cite: 2] */
-            color: white; 
-            padding: 12px; 
-            text-align: left; 
-        }
-
-        td { 
-            border: 1px solid #ddd; 
-            padding: 10px; 
-        }
-
-        textarea { 
-            width: 100%; 
-            border: none; 
-            resize: vertical; 
-            font-family: inherit; 
-            font-size: 1rem;
-        }
-
-        .controls { margin-bottom: 20px; display: flex; gap: 10px; }
-    </style>
-</head>
-<body>
-
-    <nav class="navbar">
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="evidence.html">Evidence Charts</a></li>
-            </ul>
-    </nav>
-
-    <div class="chart-container">
-        <h2>Evidence Chart Template</h2>
-        <p>Enter your evidence below. Changes are saved automatically to your browser.</p>
-
-        <div class="controls">
-            <button class="btn" onclick="addRow()">+ Add Row</button>
-            <button class="btn" style="background-color: #0A285F;" onclick="saveData()">Manual Save</button>
-        </div>
-
-        <table id="evidenceTable">
-            <thead>
-                <tr>
-                    <th>Evidence </th>
-                    <th>Constitutional / Historical Connection </th>
-                    <th>Why it relates to Q1/Q3 </th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody id="tableBody">
-                </tbody>
-        </table>
+    <div style="margin-bottom: 20px; display: flex; gap: 10px; justify-content: center;">
+        <button onclick="addRow()" style="border: 2px solid #D4AF37; background: white; color: #0A285F; padding: 10px 20px; cursor: pointer; border-radius: 8px; font-weight: bold;">+ Add Row</button>
     </div>
 
-    <script>
-        const tableBody = document.getElementById('tableBody');
+    <table id="evidenceTable" style="width: 100%; border-collapse: collapse; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+        <thead>
+            <tr style="background-color: #0A285F; color: white;">
+                <th style="padding: 15px; border: 1px solid #0A285F;">Evidence</th>
+                <th style="padding: 15px; border: 1px solid #0A285F;">Constitutional / Historical Connection</th>
+                <th style="padding: 15px; border: 1px solid #0A285F;">Why it relates to Q1/Q3</th>
+                <th style="width: 40px; background: white; border: none;"></th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+            </tbody>
+         <!-- NAV BAR -->
+  <header>
+    <div class="logo">We The People</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="team.html">Team Members</a>
+      <a href="practice.html">Practice Sets</a>
+      <a href="evidence.html">Evidence Charts</a>
+      <a href="flashcards.html">Flashcards</a>
+      <a href="quizzes.html">Quizzes</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>    </table>
+</div>
 
-        // Load data on page start
-        window.onload = () => {
-            const savedData = JSON.parse(localStorage.getItem('unit4Evidence')) || [];
-            if (savedData.length === 0) {
-                for(let i=0; i<3; i++) addRow(); // Start with 3 empty rows 
+<script>
+    const tableBody = document.getElementById('tableBody');
+
+    // Auto-load or create 10 empty rows
+    window.onload = () => {
+        const saved = JSON.parse(localStorage.getItem('unit4Evidence')) || [];
+        if (saved.length === 0) {
+            for(let i=0; i<10; i++) addRow();
+        } else {
+            saved.forEach(data => addRow(data.c1, data.c2, data.c3));
+        }
+    };
+
+    function addRow(v1='', v2='', v3='') {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td style="border: 1px solid #ddd;"><textarea oninput="save()" style="width:100%; border:none; padding:10px; min-height:60px; display:block; resize:vertical;">${v1}</textarea></td>
+            <td style="border: 1px solid #ddd;"><textarea oninput="save()" style="width:100%; border:none; padding:10px; min-height:60px; display:block; resize:vertical;">${v2}</textarea></td>
+            <td style="border: 1px solid #ddd;"><textarea oninput="save()" style="width:100%; border:none; padding:10px; min-height:60px; display:block; resize:vertical;">${v3}</textarea></td>
+            <td style="text-align:center;"><button onclick="this.parentElement.parentElement.remove(); save();" style="color: #B22234; background:none; border:none; font-size:20px; cursor:pointer;">&times;</button></td>
+        `;
+        tableBody.appendChild(tr);
+    }
+
+    function save() {
+        const rows = document.querySelectorAll('#tableBody tr');
+        const data = Array.from(rows).map(r => {
+            const t = r.querySelectorAll('textarea');
+            return { c1: t[0].value, c2: t[1].value, c3: t[2].value };
+        });
+        localStorage.setItem('unit4Evidence', JSON.stringify(data));
+    }
+</script>0; i<3; i++) addRow(); // Start with 3 empty rows 
             } else {
                 savedData.forEach(data => addRow(data.col1, data.col2, data.col3));
             }
