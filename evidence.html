@@ -1,124 +1,103 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Evidence Charts - Unit 4</title>
-    <style>
-        /* This matches the look from your screenshot */
-        body { margin: 0; font-family: 'Times New Roman', serif; background-color: #FFFFFF; }
+<div class="content-container" style="padding: 30px 5%; font-family: 'Times New Roman', serif;">
+    
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 20px;">
+        <div>
+            <h2 style="color: #0A285F; margin: 0; font-size: 2rem;">Evidence Charts</h2>
+            <p style="color: #666; margin: 5px 0 0 0;">Create, view, and edit evidence charts for Unit 4.</p>
+        </div>
         
-        header { 
-            background-color: #0A285F; 
-            padding: 15px 5%; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-        }
-
-        .logo { color: white; font-weight: bold; font-size: 1.5rem; }
-        
-        nav a { 
-            color: white; 
-            text-decoration: none; 
-            margin-left: 20px; 
-            font-size: 0.9rem; 
-            font-family: sans-serif; /* Nav usually looks better in sans-serif */
-        }
-
-        .content-container { padding: 50px 5%; }
-        h2 { color: #0A285F; text-align: center; font-size: 2.5rem; margin-bottom: 10px; }
-        
-        .add-btn { 
-            border: 2px solid #D4AF37; 
-            background: white; 
-            color: #0A285F; 
-            padding: 10px 20px; 
-            cursor: pointer; 
-            border-radius: 8px; 
-            font-weight: bold;
-            display: block;
-            margin: 0 auto 30px auto;
-        }
-
-        table { width: 100%; border-collapse: collapse; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        th { background-color: #0A285F; color: white; padding: 15px; border: 1px solid #0A285F; }
-        td { border: 1px solid #ddd; padding: 0; }
-        
-        textarea { 
-            width: 100%; border: none; padding: 15px; min-height: 80px; 
-            display: block; resize: vertical; box-sizing: border-box; font-family: inherit;
-        }
-
-        .delete-btn { color: #B22234; background: none; border: none; font-size: 24px; cursor: pointer; }
-    </style>
-</head>
-<body>
-
-    <header>
-        <div class="logo">We The People</div>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="team.html">Team Members</a>
-            <a href="practice.html">Practice Sets</a>
-            <a href="evidence.html">Evidence Charts</a>
-            <a href="flashcards.html">Flashcards</a>
-            <a href="quizzes.html">Quizzes</a>
-            <a href="about.html">About</a>
-        </nav>
-    </header>
-
-    <div class="content-container">
-        <h2>Evidence Chart</h2>
-        <p style="text-align: center; color: #666; margin-bottom: 40px;">Default 3x10 template. Data saves automatically to this device.</p>
-
-        <button class="add-btn" onclick="addRow()">+ Add Row</button>
-
-        <table id="evidenceTable">
-            <thead>
-                <tr>
-                    <th>Evidence </th>
-                    <th>Constitutional / Historical Connection </th>
-                    <th>Why it relates to Q1/Q3 </th>
-                    <th style="width: 50px; background: white; border: none;"></th>
-                </tr>
-            </thead>
-            <tbody id="tableBody">
-                </tbody>
-        </table>
+        <div style="text-align: right;">
+            <label style="display: block; font-size: 0.8rem; color: #0A285F; font-weight: bold; margin-bottom: 5px;">TEAM MEMBER</label>
+            <select id="memberSelect" onchange="loadData()" style="padding: 10px; border: 1px solid #D4AF37; border-radius: 4px; color: #0A285F; font-weight: bold;">
+                <option value="Luna">Luna</option>
+                <option value="Sarah">Sarah</option>
+                <option value="Bekim">Bekim</option>
+                <option value="Evan">Evan</option>
+            </select>
+        </div>
     </div>
 
-    <script>
-        const tableBody = document.getElementById('tableBody');
+    <div style="margin-bottom: 30px; display: flex; gap: 10px;">
+        <button class="q-btn active" onclick="setQuestion('Q1', this)">Question 1</button>
+        <button class="q-btn" onclick="setQuestion('Q2', this)">Question 2</button>
+        <button class="q-btn" onclick="setQuestion('Q3', this)">Question 3</button>
+    </div>
 
-        // Initialize Page
-        window.onload = () => {
-            const saved = JSON.parse(localStorage.getItem('unit4Evidence')) || [];
-            if (saved.length === 0) {
-                for(let i=0; i<10; i++) addRow(); // Requirement: Default 10 rows 
-            } else {
-                saved.forEach(data => addRow(data.c1, data.c2, data.c3));
-            }
-        };
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+        <h3 id="chartTitle" style="color: #0A285F; margin: 0;">Luna's Q1 Evidence</h3>
+        <button onclick="addRow()" style="background-color: #D4AF37; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; font-weight: bold;">+ New Chart Row</button>
+    </div>
 
-        function addRow(v1='', v2='', v3='') {
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td><textarea oninput="save()">${v1}</textarea></td>
-                <td><textarea oninput="save()">${v2}</textarea></td>
-                <td><textarea oninput="save()">${v3}</textarea></td>
-                <td style="text-align:center;"><button class="delete-btn" onclick="this.parentElement.parentElement.remove(); save();">&times;</button></td>
-            `;
-            tableBody.appendChild(tr);
+    <table style="width: 100%; border-collapse: collapse;">
+        <thead>
+            <tr style="background-color: #0A285F; color: white; text-align: left;">
+                <th style="padding: 12px; border: 1px solid #0A285F;">Evidence</th>
+                <th style="padding: 12px; border: 1px solid #0A285F;">Constitutional / Historical Connection</th>
+                <th style="padding: 12px; border: 1px solid #0A285F;">Why it relates to <span id="qLabel">Q1</span></th>
+                <th style="width: 50px; background: white; border: none;"></th>
+            </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+    </table>
+</div>
+
+<style>
+    .q-btn { 
+        padding: 10px 20px; border: 1px solid #ddd; background: #f9f9f9; 
+        cursor: pointer; font-weight: bold; color: #666; border-radius: 4px; 
+    }
+    .q-btn.active { background: #0A285F; color: white; border-color: #0A285F; }
+    textarea { width: 100%; border: 1px solid #eee; padding: 10px; min-height: 70px; box-sizing: border-box; resize: vertical; }
+</style>
+
+<script>
+    let currentQuestion = 'Q1';
+    const tableBody = document.getElementById('tableBody');
+
+    function setQuestion(q, btn) {
+        currentQuestion = q;
+        document.querySelectorAll('.q-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('qLabel').innerText = q;
+        loadData();
+    }
+
+    function loadData() {
+        const member = document.getElementById('memberSelect').value;
+        document.getElementById('chartTitle').innerText = `${member}'s ${currentQuestion} Evidence`;
+        
+        const storageKey = `unit4_${member}_${currentQuestion}`;
+        const saved = JSON.parse(localStorage.getItem(storageKey)) || [];
+        
+        tableBody.innerHTML = '';
+        if (saved.length === 0) {
+            for(let i=0; i<5; i++) addRow();
+        } else {
+            saved.forEach(data => addRow(data.c1, data.c2, data.c3));
         }
+    }
 
-        function save() {
-            const rows = document.querySelectorAll('#tableBody tr');
-            const data = Array.from(rows).map(r => {
-                const t = r.querySelectorAll('textarea');
-                return { c1: t[0].value, c2: t[1].value, c3: t[2].value };
-            });
-            localStorage.setItem('unit4Evidence', JSON.stringify(data));
-        }
-    </script>
-</body>
-</html>
+    function addRow(v1='', v2='', v3='') {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td style="border: 1px solid #ddd;"><textarea oninput="save()">${v1}</textarea></td>
+            <td style="border: 1px solid #ddd;"><textarea oninput="save()">${v2}</textarea></td>
+            <td style="border: 1px solid #ddd;"><textarea oninput="save()">${v3}</textarea></td>
+            <td style="text-align:center;"><button onclick="this.parentElement.parentElement.remove(); save();" style="color:#B22234; background:none; border:none; font-size:20px; cursor:pointer;">&times;</button></td>
+        `;
+        tableBody.appendChild(tr);
+    }
+
+    function save() {
+        const member = document.getElementById('memberSelect').value;
+        const storageKey = `unit4_${member}_${currentQuestion}`;
+        const rows = document.querySelectorAll('#tableBody tr');
+        const data = Array.from(rows).map(r => {
+            const t = r.querySelectorAll('textarea');
+            return { c1: t[0].value, c2: t[1].value, c3: t[2].value };
+        });
+        localStorage.setItem(storageKey, JSON.stringify(data));
+    }
+
+    window.onload = loadData;
+</script>
