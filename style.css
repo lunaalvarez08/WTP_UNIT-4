@@ -1272,5 +1272,6 @@ function updateTimer() {
     `${days}d ${hours}h ${minutes}m ${seconds}s`;
 }
 
-const timerInterval = setInterval(updateTimer, 1000);
-updateTimer();
+.buttons {
+  text-align: center; /* centers inline/block children */
+}
