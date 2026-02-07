@@ -903,3 +903,28 @@ button:hover {
   justify-content: center; /* optional: centers vertically if needed */
   margin: 0 auto;        /* ensures container itself is centered */
 }
+.hero {
+  min-height: 80vh;
+  display: flex;
+  justify-content: center; /* centers the container horizontally */
+  align-items: center;     /* centers the container vertically */
+  text-align: center;      /* centers text inside */
+  padding: 3rem 1.5rem;
+}
+
+.hero-content {
+  max-width: 700px;        /* keeps text from stretching too wide */
+  width: 100%;
+}
+
+h1, .subtext {
+  margin: 0.5rem 0;
+}
+
+.countdown, .daily-box {
+  margin: 1.5rem 0;
+  padding: 1.5rem;
+  border-radius: 12px;
+  background: #f9f9f9;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
