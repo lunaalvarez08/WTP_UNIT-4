@@ -2,6 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    
+    <script>
+        if (sessionStorage.getItem('unlocked') !== 'true') {
+            window.location.href = "index.html";
+        }
+    </script>
+
     <title>Evidence Charts - Unit 4</title>
     <style>
         /* Base styles matching your Home Page aesthetic */
