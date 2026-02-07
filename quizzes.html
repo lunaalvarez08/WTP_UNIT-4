@@ -2,126 +2,219 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quizzes - Unit 4</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Quiz Engine - Unit 4 Hub</title>
     <style>
-        .quiz-container { padding: 40px; max-width: 600px; margin: auto; text-align: center; }
-        .quiz-card { 
-            border: 2px solid #0A285F; 
-            padding: 30px; 
-            border-radius: 8px; 
-            background: #fcfcfc;
-            min-height: 200px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+        :root {
+            --navy: #0A285F; --red: #B22234; --gold: #D4AF37; --green: #27ae60;
+            --glass: rgba(255, 255, 255, 0.95);
         }
-        .options-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 20px; }
-        .option-btn { 
-            padding: 12px; 
-            border: 1px solid #D4AF37; 
-            background: white; 
-            cursor: pointer; 
-            transition: 0.2s;
+
+        body { 
+            margin: 0; font-family: 'Inter', sans-serif; 
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
         }
-        .option-btn:hover { background: #eee; }
-        .feedback { margin-top: 15px; font-weight: bold; }
-        .correct { color: green; }
-        .wrong { color: #B22234; }
+
+        header { background: var(--navy); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        .logo { color: white; font-weight: 800; font-size: 1.2rem; }
+        nav a { color: white; text-decoration: none; margin-left: 20px; font-size: 0.85rem; opacity: 0.8; }
+
+        .container { max-width: 700px; margin: 50px auto; width: 90%; }
+
+        /* Tech Glass Card */
+        .quiz-card {
+            background: var(--glass); backdrop-filter: blur(15px);
+            border-radius: 28px; padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+            border: 1px solid rgba(255,255,255,0.4);
+            text-align: center; position: relative; overflow: hidden;
+        }
+
+        /* Modern Progress & Timer Header */
+        .quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .timer-pill { background: #eee; padding: 5px 15px; border-radius: 20px; font-weight: 700; font-size: 0.9rem; color: var(--navy); }
+        
+        .progress-bar { width: 100%; height: 8px; background: #eee; border-radius: 10px; margin-bottom: 30px; position: relative; }
+        #progressFill { width: 0%; height: 100%; background: var(--gold); border-radius: 10px; transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+
+        .question-text { font-size: 1.4rem; color: var(--navy); font-family: 'Times New Roman', serif; font-weight: bold; margin-bottom: 30px; }
+
+        /* Option Buttons with Feedback Colors */
+        .options-grid { display: grid; gap: 12px; }
+        .option-btn {
+            background: white; border: 2px solid #f0f0f0; padding: 18px; border-radius: 16px;
+            cursor: pointer; font-size: 1rem; font-weight: 500; transition: 0.2s; color: #444;
+        }
+        .option-btn:hover:not(:disabled) { border-color: var(--gold); background: #fafafa; transform: translateY(-2px); }
+        
+        /* Feedback States */
+        .option-btn.correct { background: var(--green) !important; color: white !important; border-color: var(--green) !important; }
+        .option-btn.wrong { background: var(--red) !important; color: white !important; border-color: var(--red) !important; animation: shake 0.4s; }
+
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+
+        .btn-main { background: var(--navy); color: white; border: none; padding: 14px 28px; border-radius: 12px; cursor: pointer; font-weight: 600; margin-top: 25px; transition: 0.3s; }
+        .btn-main:hover { transform: scale(1.05); }
         .hidden { display: none; }
     </style>
 </head>
 <body>
 
-    <nav class="navbar">
-        <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="evidence.html">Evidence</a></li>
-            <li><a href="flashcards.html">Flashcards</a></li>
-            <li><a href="quizzes.html">Quizzes</a></li>
-        </ul>
-    </nav>
+    <header>
+        <div class="logo">We The People</div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="team.html">Team</a>
+            <a href="practice.html">Practice</a>
+            <a href="evidence.html">Charts</a>
+            <a href="flashcards.html">Flashcards</a>
+            <a href="quizzes.html">Quizzes</a>
+            <a href="about.html">About</a>
+        </nav>
+    </header>
 
-    <div class="quiz-container">
-        <h2>Unit 4 Practice Quiz</h2>
-        <div id="setup-view">
-            <p>Ready to test your knowledge based on your flashcards?</p>
-            <button class="btn" onclick="startQuiz()">Start Quiz</button>
+    <div class="container">
+        <div id="setup-view" class="quiz-card">
+            <h2 style="color: var(--navy); margin-top:0;">Quiz Engine v2.0</h2>
+            <p style="color: #666; font-size: 0.9rem;">Select a team member's deck to begin.</p>
+            
+            <div style="margin: 30px 0; display: flex; flex-direction: column; gap: 15px; align-items: center;">
+                <select id="memberSelect" style="padding: 12px; border-radius: 10px; border: 2px solid var(--gold); font-weight: 700; width: 220px;">
+                    <option value="Luna">Luna</option>
+                    <option value="Sarah">Sarah</option>
+                    <option value="Bekim">Bekim</option>
+                    <option value="Evan">Evan</option>
+                </select>
+                
+                <label style="font-size: 0.8rem; font-weight: 600; color: #888;">
+                    <input type="checkbox" id="timerToggle"> Enable 15s Blitz Timer
+                </label>
+            </div>
+
+            <button class="btn-main" onclick="startQuiz()">Launch Engine</button>
         </div>
 
-        <div id="quiz-view" class="hidden">
-            <div class="quiz-card">
-                <h3 id="question-text">Question goes here?</h3>
-                <div id="options" class="options-grid"></div>
-                <div id="feedback" class="feedback"></div>
+        <div id="quiz-view" class="quiz-card hidden">
+            <div class="quiz-header">
+                <span id="qCount" style="font-size: 0.8rem; color: #888; font-weight: 700;">QUESTION 1/10</span>
+                <div id="timerDisplay" class="timer-pill hidden">15s</div>
             </div>
-            <br>
-            <button class="btn" style="background-color: #0A285F;" onclick="nextQuestion()">Next Question</button>
+            <div class="progress-bar"><div id="progressFill"></div></div>
+            
+            <div id="questionText" class="question-text"></div>
+            <div id="optionsGrid" class="options-grid"></div>
+            
+            <button id="nextBtn" class="btn-main hidden" onclick="nextQuestion()">Next Question &rarr;</button>
         </div>
     </div>
 
     <script>
-        let currentCards = [];
-        let currentIndex = 0;
+        let quizPool = [];
+        let currentIdx = 0;
+        let score = 0;
+        let timerInterval;
+        let timeLeft = 15;
 
         function startQuiz() {
-            const cards = JSON.parse(localStorage.getItem('unit4Cards')) || [];
-            if (cards.length < 2) {
-                alert("Add at least 2 flashcards first to generate a quiz!");
-                return;
-            }
-            currentCards = [...cards].sort(() => 0.5 - Math.random()); // Shuffle
-            currentIndex = 0;
+            const member = document.getElementById('memberSelect').value;
+            const q1 = JSON.parse(localStorage.getItem(`cards_${member}_Q1`)) || [];
+            const q2 = JSON.parse(localStorage.getItem(`cards_${member}_Q2`)) || [];
+            const q3 = JSON.parse(localStorage.getItem(`cards_${member}_Q3`)) || [];
+            
+            // Combine and Shuffle
+            quizPool = [...q1, ...q2, ...q3].sort(() => 0.5 - Math.random());
+
+            if (quizPool.length < 2) return alert("Add more flashcards first!");
+
             document.getElementById('setup-view').classList.add('hidden');
             document.getElementById('quiz-view').classList.remove('hidden');
+            if(document.getElementById('timerToggle').checked) document.getElementById('timerDisplay').classList.remove('hidden');
+            
             showQuestion();
         }
 
         function showQuestion() {
-            const card = currentCards[currentIndex];
-            const feedback = document.getElementById('feedback');
-            feedback.innerText = '';
-            document.getElementById('question-text').innerText = card.front;
-            
-            // Generate multiple choice options
-            const optionsDiv = document.getElementById('options');
-            optionsDiv.innerHTML = '';
-            
-            // Get the correct answer + 2 random wrong ones
-            let answers = [card.back];
-            const otherAnswers = currentCards.filter(c => c.id !== card.id).map(c => c.back);
-            const shuffledOthers = otherAnswers.sort(() => 0.5 - Math.random()).slice(0, 2);
-            answers = [...answers, ...shuffledOthers].sort(() => 0.5 - Math.random());
+            clearInterval(timerInterval);
+            const q = quizPool[currentIdx];
+            document.getElementById('nextBtn').classList.add('hidden');
+            document.getElementById('questionText').innerText = q.front;
+            document.getElementById('qCount').innerText = `QUESTION ${currentIdx + 1}/${quizPool.length}`;
+            document.getElementById('progressFill').style.width = `${((currentIdx) / quizPool.length) * 100}%`;
+
+            // Options
+            const grid = document.getElementById('optionsGrid');
+            grid.innerHTML = '';
+            let answers = [q.back];
+            const distractors = quizPool.filter(c => c.back !== q.back).map(c => c.back).sort(() => 0.5 - Math.random()).slice(0, 3);
+            answers = [...answers, ...distractors].sort(() => 0.5 - Math.random());
 
             answers.forEach(ans => {
                 const btn = document.createElement('button');
                 btn.className = 'option-btn';
                 btn.innerText = ans;
-                btn.onclick = () => checkAnswer(ans, card.back);
-                optionsDiv.appendChild(btn);
+                btn.onclick = () => checkAnswer(btn, ans, q.back);
+                grid.appendChild(btn);
             });
+
+            if(document.getElementById('timerToggle').checked) startTimer();
         }
 
-        function checkAnswer(selected, correct) {
-            const feedback = document.getElementById('feedback');
+        function startTimer() {
+            timeLeft = 15;
+            document.getElementById('timerDisplay').innerText = timeLeft + "s";
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                document.getElementById('timerDisplay').innerText = timeLeft + "s";
+                if(timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    autoFail();
+                }
+            }, 1000);
+        }
+
+        function checkAnswer(btn, selected, correct) {
+            clearInterval(timerInterval);
+            const allBtns = document.querySelectorAll('.option-btn');
+            allBtns.forEach(b => b.disabled = true);
+
             if (selected === correct) {
-                feedback.innerText = "Correct! Well done.";
-                feedback.className = "feedback correct";
+                btn.classList.add('correct');
+                score++;
             } else {
-                feedback.innerText = `Wrong. The correct answer was: ${correct}`;
-                feedback.className = "feedback wrong";
+                btn.classList.add('wrong');
+                allBtns.forEach(b => { if(b.innerText === correct) b.classList.add('correct'); });
             }
+            document.getElementById('nextBtn').classList.remove('hidden');
+            document.getElementById('progressFill').style.width = `${((currentIdx + 1) / quizPool.length) * 100}%`;
+        }
+
+        function autoFail() {
+            const allBtns = document.querySelectorAll('.option-btn');
+            allBtns.forEach(b => {
+                b.disabled = true;
+                if(b.innerText === quizPool[currentIdx].back) b.classList.add('correct');
+            });
+            document.getElementById('nextBtn').classList.remove('hidden');
         }
 
         function nextQuestion() {
-            currentIndex++;
-            if (currentIndex < currentCards.length) {
-                showQuestion();
-            } else {
-                alert("Quiz finished! Great job.");
-                location.reload();
-            }
+            currentIdx++;
+            if (currentIdx < quizPool.length) showQuestion();
+            else showFinalScore();
+        }
+
+        function showFinalScore() {
+            const view = document.getElementById('quiz-view');
+            const percent = Math.round((score/quizPool.length)*100);
+            view.innerHTML = `
+                <h2 style="color: var(--navy);">Engine Complete</h2>
+                <div style="font-size: 4rem; margin: 20px 0; color: var(--gold); font-weight: 800;">${percent}%</div>
+                <p style="color: #666;">You analyzed ${score} of ${quizPool.length} correctly.</p>
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 12px; font-size: 0.8rem; text-align: left; margin: 20px 0;">
+                    <strong>Status:</strong> ${percent >= 80 ? 'National Ready' : 'Keep Reviewing'}
+                </div>
+                <button class="btn-main" onclick="location.reload()">Reset Engine</button>
+            `;
         }
     </script>
 </body>
