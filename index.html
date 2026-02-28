@@ -6,68 +6,43 @@
   <title>We The People Unit 4</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    /* The Gatekeeper Shield Styles */
+    /* ... Your existing Gatekeeper Styles ... */
     #gatekeeper {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: #0A285F; /* Matching your Navy theme */
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 99999; /* Stays on top of everything */
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: #0A285F; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; z-index: 99999;
       font-family: 'Inter', sans-serif;
     }
-
-    .lock-box {
-      text-align: center;
-      background: rgba(255, 255, 255, 0.05);
-      padding: 40px;
-      border-radius: 24px;
-      border: 1px solid rgba(212, 175, 55, 0.3); /* Subtle Gold border */
-    }
-
-    .lock-box input {
-      display: block;
-      width: 200px;
-      padding: 12px;
-      margin: 20px 0;
-      border-radius: 8px;
-      border: none;
-      text-align: center;
-      font-weight: bold;
-      letter-spacing: 2px;
-    }
-
-    .lock-box button {
-      background: #D4AF37; /* Gold */
-      color: #0A285F;
-      border: none;
-      padding: 10px 30px;
-      border-radius: 8px;
-      font-weight: 800;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .lock-box button:hover {
-      transform: scale(1.05);
-      background: #f1c40f;
-    }
-
-    #fail-text {
-      color: #ff7675;
-      margin-top: 15px;
-      font-size: 0.8rem;
-      font-weight: bold;
-      display: none;
-    }
-
-    /* Hide content until unlocked */
+    .lock-box { text-align: center; background: rgba(255, 255, 255, 0.05); padding: 40px; border-radius: 24px; border: 1px solid rgba(212, 175, 55, 0.3); }
+    .lock-box input { display: block; width: 200px; padding: 12px; margin: 20px 0; border-radius: 8px; border: none; text-align: center; font-weight: bold; letter-spacing: 2px; }
+    .lock-box button { background: #D4AF37; color: #0A285F; border: none; padding: 10px 30px; border-radius: 8px; font-weight: 800; cursor: pointer; transition: 0.3s; }
+    #fail-text { color: #ff7675; margin-top: 15px; font-size: 0.8rem; font-weight: bold; display: none; }
     #protected-wrapper { visibility: hidden; }
+
+    /* --- THE LOGO & CENTERING FIXES --- */
+    .hub-logo-container {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .hub-logo {
+      width: 150px; /* Adjust size if needed */
+      height: auto;
+      border-radius: 50%;
+      border: 3px solid #D4AF37;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    /* Force the Hero buttons to center perfectly */
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 30px;
+      width: 100%;
+    }
   </style>
 </head>
 <body>
@@ -77,7 +52,6 @@
       <div style="font-size: 4rem; margin-bottom: 10px;">🛡️</div>
       <h2 style="color: white; margin: 0;">Unit 4 Private Hub</h2>
       <p style="color: #D4AF37; font-size: 0.8rem; margin-top: 5px;">AUTHORIZATION REQUIRED</p>
-      
       <input type="password" id="passInput" placeholder="••••" onkeydown="if(event.key==='Enter') checkPass()">
       <button onclick="checkPass()">UNLOCK</button>
       <p id="fail-text">ACCESS DENIED</p>
@@ -100,6 +74,11 @@
 
     <section class="hero">
       <div class="hero-content">
+        
+        <div class="hub-logo-container">
+            <img src="WethePeople_rgb.jpg" class="hub-logo" alt="We The People Logo">
+        </div>
+
         <h1>We The People Unit 4 Practice Hub</h1>
         <p class="competition-text">National Competition • April 16, 2026</p>
         <p id="competition-timer"></p> 
@@ -118,7 +97,6 @@
 
   <script>
     const P = "U4";
-
     function checkPass() {
       const input = document.getElementById('passInput').value;
       if (input === P) {
@@ -129,18 +107,12 @@
         document.getElementById('passInput').value = "";
       }
     }
-
     function unlockSite() {
       document.getElementById('gatekeeper').style.display = 'none';
       document.getElementById('protected-wrapper').style.visibility = 'visible';
     }
-
-    // Check if they already logged in during this session
-    if (sessionStorage.getItem('unlocked') === 'true') {
-      unlockSite();
-    }
+    if (sessionStorage.getItem('unlocked') === 'true') { unlockSite(); }
   </script>
-  
   <script src="script.js"></script>
 </body>
 </html>
