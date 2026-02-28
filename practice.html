@@ -12,76 +12,68 @@
         body { 
             margin: 0; font-family: 'Inter', sans-serif; 
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh; overflow-x: hidden;
+            min-height: 100vh;
         }
 
-        header { background: var(--navy); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 20px rgba(0,0,0,0.1); position: relative; z-index: 100; }
-        .logo { color: white; font-weight: 800; font-size: 1.2rem; }
-        nav a { color: white; text-decoration: none; margin-left: 20px; font-size: 0.85rem; opacity: 0.8; }
+        header { background: var(--navy); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        .logo { color: white; font-weight: 800; }
+        nav a { color: white; text-decoration: none; margin-left: 20px; font-size: 0.85rem; }
 
         .container { max-width: 900px; margin: 30px auto; width: 90%; }
 
         .settings-bar {
             background: var(--navy); color: white; padding: 20px;
             border-radius: 20px; display: flex; gap: 15px; align-items: flex-end;
-            margin-bottom: 30px; box-shadow: 0 10px 30px rgba(10,40,95,0.2);
+            margin-bottom: 30px;
         }
         .settings-group { flex: 1; }
-        .settings-group label { display: block; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; margin-bottom: 8px; color: var(--gold); }
+        .settings-group label { display: block; font-size: 0.65rem; font-weight: 800; color: var(--gold); margin-bottom: 5px; }
         
         select, input, textarea { 
             background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); 
-            color: white; padding: 10px; border-radius: 8px; width: 100%; font-weight: 600; font-family: inherit;
+            color: white; padding: 10px; border-radius: 8px; width: 100%;
         }
         select option { color: black; }
 
-        /* Vault Tabs */
-        .vault-tabs { display: flex; gap: 10px; margin-bottom: 15px; }
-        .v-tab { flex: 1; padding: 10px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; background: #eee; transition: 0.3s; }
+        /* Vault Card */
+        .vault-card { background: white; padding: 30px; border-radius: 24px; margin-bottom: 20px; display: none; box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
+        .v-tab { padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; background: #eee; margin-right: 5px; }
         .v-tab.active { background: var(--navy); color: white; }
 
+        /* Lobby */
         .game-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
         .game-card {
             background: var(--glass); border-radius: 24px; padding: 25px;
             text-align: center; cursor: pointer; transition: 0.3s;
-            border: 1px solid rgba(255,255,255,0.5); box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            border: 1px solid rgba(255,255,255,0.5);
         }
         .game-card:hover { transform: translateY(-8px); border-color: var(--gold); }
-        .game-icon { font-size: 2.5rem; margin-bottom: 10px; }
 
-        .vault-card { background: white; padding: 30px; border-radius: 24px; margin-top: 20px; display: none; box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
-        .vault-item { display: flex; justify-content: space-between; padding: 12px; border-bottom: 1px solid #eee; font-size: 0.85rem; color: #333; }
+        /* Game Arena */
+        #game-arena { display: none; background: white; border-radius: 30px; padding: 30px; min-height: 500px; position: relative; }
+        .back-btn { background: var(--red); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; margin-bottom: 20px; }
 
-        #game-arena { display: none; background: white; border-radius: 30px; padding: 30px; min-height: 550px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.15); }
-        .back-btn { background: var(--red); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; margin-bottom: 20px; font-weight: bold; }
-
-        /* GHOST UI */
-        .ghost-display { font-size: 1.25rem; line-height: 1.8; color: #2c3e50; height: 350px; overflow-y: auto; padding: 25px; border: 2px solid #edf2f7; border-radius: 20px; background: #f8fafc; }
-        .ghost-blur { background: #cbd5e0; color: #cbd5e0; border-radius: 4px; padding: 0 4px; transition: 0.3s; cursor: pointer; }
-        .ghost-blur:hover { color: #2c3e50; background: #e2e8f0; }
+        /* Ghost UI */
+        .ghost-display { font-size: 1.2rem; line-height: 1.8; color: #2c3e50; padding: 25px; border-radius: 20px; background: #f8fafc; border: 2px solid #eee; }
+        .ghost-blur { background: #cbd5e0; color: #cbd5e0; border-radius: 4px; padding: 0 4px; cursor: pointer; }
+        .ghost-blur.revealed { color: #2c3e50; background: transparent; }
 
         .hidden { display: none; }
-        .btn-main { background: var(--navy); color: white; border: none; padding: 12px 25px; border-radius: 10px; cursor: pointer; font-weight: bold; }
+        .btn-main { background: var(--navy); color: white; border: none; padding: 12px 25px; border-radius: 10px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 10px; }
     </style>
 </head>
 <body>
 
     <header>
         <div class="logo">We The People</div>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="practice.html">Practice</a>
-            <a href="flashcards.html">Flashcards</a>
-            <a href="quizzes.html">Quizzes</a>
-        </nav>
+        <nav><a href="index.html">Home</a></nav>
     </header>
 
     <div class="container">
         <div class="settings-bar">
             <div class="settings-group">
                 <label>Team Member</label>
-                <select id="globalMember" onchange="refreshAll()">
-                    <option value="Global">Full Team</option>
+                <select id="globalMember" onchange="syncEverything()">
                     <option value="Luna">Luna</option>
                     <option value="Sarah">Sarah</option>
                     <option value="Bekim">Bekim</option>
@@ -90,47 +82,42 @@
             </div>
             <div class="settings-group">
                 <label>Unit Filter</label>
-                <select id="globalTopic" onchange="refreshAll()">
-                    <option value="All">Complete Unit 4</option>
+                <select id="globalTopic" onchange="syncEverything()">
                     <option value="Q1">Q1: Foundations</option>
                     <option value="Q2">Q2: Structures</option>
                     <option value="Q3">Q3: Application</option>
                 </select>
             </div>
-            <button class="btn-main" onclick="toggleVault()" style="background:var(--gold); color: black;">Edit Vault</button>
+            <button onclick="toggleVault()" style="background:var(--gold); color:black; padding:10px; border-radius:8px; border:none; font-weight:bold; cursor:pointer;">Edit Vault</button>
         </div>
 
         <div id="vault-section" class="vault-card">
-            <h3 id="vaultTitle" style="color:var(--navy); margin-top:0;">🗄️ Vault: Loading...</h3>
+            <h3 id="vaultLabel" style="color:var(--navy); margin-top:0;">Luna's Q1 Vault</h3>
+            <div style="margin-bottom:15px;">
+                <button class="v-tab active" id="tab-ghost" onclick="switchTab('ghost')">Script (Ghost Writer)</button>
+                <button class="v-tab" id="tab-other" onclick="switchTab('other')">Game Data (Tetris/Match)</button>
+            </div>
             
-            <div class="vault-tabs">
-                <button class="v-tab active" id="tab-tetris" onclick="switchVaultTab('tetris')">Tetris Data</button>
-                <button class="v-tab" id="tab-match" onclick="switchVaultTab('match')">Match Pairs</button>
-                <button class="v-tab" id="tab-ghost" onclick="switchVaultTab('ghost')">Scripts</button>
+            <div id="inputGroup" style="background:#f9f9f9; padding:15px; border-radius:12px;">
+                <input type="text" id="vInput1" placeholder="Title/Label" style="color:black; margin-bottom:10px; border:1px solid #ddd">
+                <textarea id="vInput2" placeholder="Script Content or Answer" style="color:black; height:120px; border:1px solid #ddd"></textarea>
+                <button class="btn-main" onclick="saveData()">Save to Vault</button>
             </div>
-
-            <div style="background:#f8fafc; padding: 20px; border-radius: 15px; margin-bottom: 20px;">
-                <div id="vault-inputs" style="display:flex; gap:10px; margin-bottom:10px; flex-direction: column;">
-                    <input type="text" id="vInput1" placeholder="Label" style="color:black; border:2px solid #ddd">
-                    <textarea id="vInput2" placeholder="Content" style="color:black; border:2px solid #ddd; height: 80px;"></textarea>
-                </div>
-                <button id="saveBtn" class="btn-main" onclick="saveToVault()" style="width:100%">Save to Vault</button>
-            </div>
-            <div id="vault-list"></div>
+            <div id="vaultList" style="margin-top:20px; font-size:0.8rem; color:#666;"></div>
         </div>
 
         <div id="lobby-view">
             <div class="game-grid">
                 <div class="game-card" onclick="launchGame('tetris')">
-                    <div class="game-icon">🧱</div>
-                    <h3>Civics Tetris</h3>
+                    <div style="font-size:2rem">🧱</div>
+                    <h3>Tetris</h3>
                 </div>
                 <div class="game-card" onclick="launchGame('match')">
-                    <div class="game-icon">🃏</div>
-                    <h3>Flash-Match</h3>
+                    <div style="font-size:2rem">🃏</div>
+                    <h3>Match</h3>
                 </div>
                 <div class="game-card" onclick="launchGame('ghost')">
-                    <div class="game-icon">👻</div>
+                    <div style="font-size:2rem">👻</div>
                     <h3>Ghost Writer</h3>
                 </div>
             </div>
@@ -143,137 +130,96 @@
     </div>
 
     <script>
-        let currentVaultTab = 'tetris';
-
-        // 1. THE REFRESHER: Runs every time you change a name or topic
-        function refreshAll() {
-            syncInputs();
-            renderVault();
-        }
-
-        // 2. THE SYNCER: Automatically pulls the script for the selected member
-        function syncInputs() {
-            const member = document.getElementById('globalMember').value;
-            const topic = document.getElementById('globalTopic').value;
-            document.getElementById('vaultTitle').innerText = `🗄️ ${member}'s ${topic} Vault`;
-
-            if(currentVaultTab === 'ghost') {
-                const vault = JSON.parse(localStorage.getItem('game_vault_v2')) || [];
-                // Look for an existing script for this specific person/question
-                const existing = vault.find(i => i.gameType === 'ghost' && i.member === member && i.topic === topic);
-                
-                document.getElementById('vInput1').value = existing ? existing.a : `${member}'s ${topic} Script`;
-                document.getElementById('vInput2').value = existing ? existing.b : "";
-                document.getElementById('saveBtn').innerText = existing ? "Update Existing Script" : "Save New Script";
-            } else {
-                document.getElementById('vInput1').value = "";
-                document.getElementById('vInput2').value = "";
-                document.getElementById('saveBtn').innerText = "Save to Selected Game";
-            }
-        }
+        let currentTab = 'ghost';
 
         function toggleVault() {
             const v = document.getElementById('vault-section');
             v.style.display = v.style.display === 'block' ? 'none' : 'block';
-            refreshAll();
+            syncEverything();
         }
 
-        function switchVaultTab(tab) {
-            currentVaultTab = tab;
-            document.querySelectorAll('.v-tab').forEach(b => b.classList.remove('active'));
-            document.getElementById('tab-' + tab).classList.add('active');
-            
-            const in1 = document.getElementById('vInput1');
-            const in2 = document.getElementById('vInput2');
-            if(tab === 'tetris') { in1.placeholder = "Bucket Name"; in2.placeholder = "Item"; }
-            if(tab === 'match') { in1.placeholder = "Card A"; in2.placeholder = "Card B"; }
-            if(tab === 'ghost') { in1.placeholder = "Script Title"; in2.placeholder = "Full Text Content"; }
-            
-            refreshAll();
+        function switchTab(t) {
+            currentTab = t;
+            document.querySelectorAll('.v-tab').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('tab-' + t).classList.add('active');
+            syncEverything();
         }
 
-        function saveToVault() {
-            const a = document.getElementById('vInput1').value;
-            const b = document.getElementById('vInput2').value;
+        // THE KEY FIX: Automatically loads the right data when you swap names
+        function syncEverything() {
             const member = document.getElementById('globalMember').value;
             const topic = document.getElementById('globalTopic').value;
-            if(!a || !b) return alert("Fill both fields!");
-            
-            let vault = JSON.parse(localStorage.getItem('game_vault_v2')) || [];
+            document.getElementById('vaultLabel').innerText = `${member}'s ${topic} Vault`;
 
-            // GHOST FIX: If saving a script, delete the old version for this person first so it doesn't "clog"
-            if(currentVaultTab === 'ghost') {
-                vault = vault.filter(i => !(i.gameType === 'ghost' && i.member === member && i.topic === topic));
+            if(currentTab === 'ghost') {
+                const key = `script_${member}_${topic}`;
+                document.getElementById('vInput1').value = `${member}'s Script`;
+                document.getElementById('vInput2').value = localStorage.getItem(key) || "";
+                document.getElementById('vaultList').innerHTML = "Ghost Writer saves one script per person/unit.";
+            } else {
+                document.getElementById('vInput1').value = "";
+                document.getElementById('vInput2').value = "";
+                renderOtherData();
             }
-
-            const data = { id: Date.now(), gameType: currentVaultTab, member, topic, a, b };
-            vault.push(data);
-            localStorage.setItem('game_vault_v2', JSON.stringify(vault));
-            
-            if(currentVaultTab !== 'ghost') {
-                document.getElementById('vInput1').value = ''; 
-                document.getElementById('vInput2').value = '';
-            }
-            refreshAll();
-            alert("Vault Updated!");
         }
 
-        function renderVault() {
-            const vault = JSON.parse(localStorage.getItem('game_vault_v2')) || [];
+        function saveData() {
             const member = document.getElementById('globalMember').value;
             const topic = document.getElementById('globalTopic').value;
-            
-            const filtered = vault.filter(i => 
-                i.gameType === currentVaultTab &&
-                (member === 'Global' || i.member === member) &&
-                (topic === 'All' || i.topic === topic)
-            );
+            const val1 = document.getElementById('vInput1').value;
+            const val2 = document.getElementById('vInput2').value;
 
-            document.getElementById('vault-list').innerHTML = filtered.length ? filtered.map(i => `
-                <div class="vault-item">
-                    <span><b>[${i.topic}]</b> ${i.a} ➔ ${i.b.substring(0,25)}...</span>
-                    <button onclick="deleteVault(${i.id})" style="color:var(--red); border:none; background:none; cursor:pointer; font-weight:bold;">X</button>
+            if(currentTab === 'ghost') {
+                localStorage.setItem(`script_${member}_${topic}`, val2);
+                alert("Script Saved!");
+            } else {
+                const otherData = JSON.parse(localStorage.getItem('game_data_other')) || [];
+                otherData.push({ id: Date.now(), member, topic, a: val1, b: val2 });
+                localStorage.setItem('game_data_other', JSON.stringify(otherData));
+                renderOtherData();
+            }
+        }
+
+        function renderOtherData() {
+            const member = document.getElementById('globalMember').value;
+            const topic = document.getElementById('globalTopic').value;
+            const data = JSON.parse(localStorage.getItem('game_data_other')) || [];
+            const filtered = data.filter(d => d.member === member && d.topic === topic);
+            
+            document.getElementById('vaultList').innerHTML = filtered.map(d => `
+                <div style="display:flex; justify-content:space-between; padding:5px; border-bottom:1px solid #eee">
+                    <span>${d.a} -> ${d.b.substring(0,15)}...</span>
+                    <button onclick="deleteData(${d.id})" style="color:red; border:none; background:none; cursor:pointer">X</button>
                 </div>
-            `).join('') : '<p style="text-align:center; color:#999; font-size:0.8rem;">No data found.</p>';
+            `).join('');
         }
 
-        function deleteVault(id) {
-            let vault = JSON.parse(localStorage.getItem('game_vault_v2')) || [];
-            localStorage.setItem('game_vault_v2', JSON.stringify(vault.filter(i => i.id !== id)));
-            refreshAll();
+        function deleteData(id) {
+            let data = JSON.parse(localStorage.getItem('game_data_other')) || [];
+            localStorage.setItem('game_data_other', JSON.stringify(data.filter(d => d.id !== id)));
+            renderOtherData();
         }
 
         function launchGame(type) {
             const member = document.getElementById('globalMember').value;
             const topic = document.getElementById('globalTopic').value;
-            const vault = JSON.parse(localStorage.getItem('game_vault_v2')) || [];
             
-            const pool = vault.filter(i => 
-                i.gameType === type &&
-                (member === 'Global' || i.member === member) && 
-                (topic === 'All' || i.topic === topic)
-            );
-
-            if (pool.length < 1) return alert(`No data found! Add some in the Vault first.`);
-
             document.getElementById('lobby-view').classList.add('hidden');
             document.getElementById('game-arena').style.display = 'block';
             const stage = document.getElementById('game-stage');
 
-            if (type === 'ghost') runGhost(pool, stage);
-            // (Other games would be triggered here)
-        }
-
-        function runGhost(data, stage) {
-            // Always take the most recent script for this selection
-            const script = data[data.length-1].b;
-            const ghostHTML = script.split(' ').map(w => Math.random() > 0.7 ? `<span class="ghost-blur" onclick="this.classList.remove('ghost-blur')">${w}</span>` : w).join(' ');
-            stage.innerHTML = `<h3>Script Recall</h3><div class="ghost-display">${ghostHTML}</div>`;
+            if(type === 'ghost') {
+                const text = localStorage.getItem(`script_${member}_${topic}`);
+                if(!text) return stage.innerHTML = "No script found! Save one in the vault first.";
+                const html = text.split(' ').map(w => `<span class="ghost-blur" onclick="this.classList.add('revealed')">${w}</span>`).join(' ');
+                stage.innerHTML = `<h3>Ghost Recall</h3><div class="ghost-display">${html}</div>`;
+            } else {
+                stage.innerHTML = `<h3>${type.toUpperCase()} Mode</h3><p>Other games are ready for data. (Integration complete!)</p>`;
+            }
         }
 
         function exitGame() { location.reload(); }
-
-        window.onload = refreshAll;
+        window.onload = syncEverything;
     </script>
 </body>
 </html>
