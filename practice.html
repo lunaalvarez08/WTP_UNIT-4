@@ -21,6 +21,10 @@
 
         .container { max-width: 900px; margin: 30px auto; width: 90%; }
 
+        /* Branding */
+        .hub-logo-container { display: flex; justify-content: center; margin-bottom: 20px; }
+        .hub-logo { width: 120px; height: auto; border-radius: 50%; border: 3px solid var(--gold); }
+
         .settings-bar {
             background: var(--navy); color: white; padding: 20px;
             border-radius: 20px; display: flex; gap: 15px; align-items: flex-end;
@@ -40,18 +44,26 @@
         .v-tab { padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; background: #eee; margin-right: 5px; }
         .v-tab.active { background: var(--navy); color: white; }
 
-        /* Game Arena Styles */
-        #game-arena { display: none; background: white; border-radius: 30px; padding: 30px; min-height: 500px; position: relative; }
-        .back-btn { background: var(--red); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; margin-bottom: 20px; }
+        /* Game Arena */
+        #game-arena { display: none; background: white; border-radius: 30px; padding: 30px; min-height: 500px; position: relative; text-align: center; }
+        .back-btn { background: var(--red); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; margin-bottom: 20px; font-weight: bold; }
 
-        /* Tetris / Match / Ghost UI Elements */
-        .match-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-        .card { height: 100px; background: var(--navy); color: white; display: flex; align-items: center; justify-content: center; border-radius: 12px; cursor: pointer; font-size: 0.8rem; text-align: center; padding: 5px; }
-        .card.flipped { background: var(--gold); color: black; }
-        
-        .ghost-display { font-size: 1.2rem; line-height: 2; color: #2c3e50; padding: 20px; background: #f8fafc; border-radius: 15px; border: 1px solid #ddd; }
-        .ghost-word { display: inline-block; margin: 0 2px; padding: 0 4px; border-radius: 4px; background: #e2e8f0; color: transparent; transition: 0.2s; cursor: help; }
+        /* Game UI */
+        .match-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; max-width: 600px; margin: 0 auto; }
+        .card { height: 100px; background: var(--navy); color: white; display: flex; align-items: center; justify-content: center; border-radius: 12px; cursor: pointer; font-size: 0.75rem; padding: 10px; transition: 0.3s; }
+        .card.flipped { background: var(--gold); color: black; font-weight: bold; }
+        .card.matched { visibility: hidden; pointer-events: none; }
+
+        .ghost-display { font-size: 1.1rem; line-height: 2; color: #2c3e50; padding: 25px; background: #f8fafc; border-radius: 15px; border: 1px solid #ddd; text-align: left; }
+        .ghost-word { display: inline-block; margin: 0 2px; padding: 0 4px; border-radius: 4px; background: #cbd5e1; color: transparent; transition: 0.2s; cursor: help; }
         .ghost-word:hover { background: transparent; color: var(--navy); }
+
+        /* Tetris Falling Logic UI */
+        #tetris-well { height: 350px; background: #eee; border-radius: 15px; position: relative; overflow: hidden; margin-bottom: 20px; border: 2px solid var(--navy); }
+        .falling-item { position: absolute; width: 140px; padding: 10px; background: var(--gold); border-radius: 8px; font-weight: bold; font-size: 0.8rem; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .bucket-container { display: flex; justify-content: space-around; }
+        .bucket { padding: 15px 25px; background: var(--navy); color: white; border-radius: 12px; cursor: pointer; border: 2px solid transparent; }
+        .bucket:hover { border-color: var(--gold); }
 
         .game-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
         .game-card { background: var(--glass); border-radius: 24px; padding: 25px; text-align: center; cursor: pointer; transition: 0.3s; border: 1px solid rgba(255,255,255,0.5); }
@@ -61,11 +73,15 @@
 <body>
 
     <header>
-        <div class="logo">We The People | Unit 4 Hub</div>
+        <div class="logo">We The People | Practice Hub</div>
         <nav><a href="index.html">Home</a></nav>
     </header>
 
     <div class="container">
+        <div class="hub-logo-container">
+            <img src="https://www.civiced.org/images/logo_wethepeople.png" class="hub-logo" alt="Logo">
+        </div>
+
         <div class="settings-bar">
             <div class="settings-group">
                 <label>Team Member</label>
@@ -90,13 +106,13 @@
         <div id="vault-section" class="vault-card">
             <h3 id="vaultLabel">Vault</h3>
             <div style="margin-bottom:15px;">
-                <button class="v-tab active" id="tab-tetris" onclick="switchTab('tetris')">Tetris/Match Data</button>
-                <button class="v-tab" id="tab-ghost" onclick="switchTab('ghost')">Scripts (Ghost)</button>
+                <button class="v-tab active" id="tab-tetris" onclick="switchTab('tetris')">Match/Tetris Data</button>
+                <button class="v-tab" id="tab-ghost" onclick="switchTab('ghost')">Ghost Script</button>
             </div>
             
             <div id="vaultInputs" style="background:#f9f9f9; padding:20px; border-radius:15px;">
-                <input type="text" id="vInput1" placeholder="Label/Question" style="color:black; margin-bottom:10px; border:1px solid #ddd">
-                <textarea id="vInput2" placeholder="Content/Answer/Full Script" style="color:black; height:100px; border:1px solid #ddd"></textarea>
+                <input type="text" id="vInput1" placeholder="Concept (e.g. Fed 52)" style="color:black; margin-bottom:10px; border:1px solid #ddd">
+                <textarea id="vInput2" placeholder="Detail (e.g. Elected by the people)" style="color:black; height:100px; border:1px solid #ddd"></textarea>
                 <button onclick="saveToVault()" style="background:var(--navy); color:white; border:none; padding:12px; width:100%; border-radius:8px; cursor:pointer; font-weight:bold; margin-top:10px;">Save to Vault</button>
             </div>
             <div id="vaultList" style="margin-top:20px;"></div>
@@ -104,9 +120,9 @@
 
         <div id="lobby-view">
             <div class="game-grid">
-                <div class="game-card" onclick="launchGame('tetris')"><div>🧱</div><h3>Tetris</h3></div>
-                <div class="game-card" onclick="launchGame('match')"><div>🃏</div><h3>Match</h3></div>
-                <div class="game-card" onclick="launchGame('ghost')"><div>👻</div><h3>Ghost Writer</h3></div>
+                <div class="game-card" onclick="launchGame('match')"><div>🃏</div><h3>Evidence Match</h3><p style="font-size:0.7rem">Flip cards to pair terms</p></div>
+                <div class="game-card" onclick="launchGame('tetris')"><div>🧱</div><h3>Branch Sorting</h3><p style="font-size:0.7rem">Sort facts into buckets</p></div>
+                <div class="game-card" onclick="launchGame('ghost')"><div>👻</div><h3>Ghost Recall</h3><p style="font-size:0.7rem">Memorize your statement</p></div>
             </div>
         </div>
 
@@ -118,6 +134,8 @@
 
     <script>
         let currentTab = 'tetris';
+        let matchCards = [];
+        let firstCard = null;
 
         function toggleVault() {
             const v = document.getElementById('vault-section');
@@ -137,14 +155,16 @@
             const topic = document.getElementById('globalTopic').value;
             document.getElementById('vaultLabel').innerText = `${member}'s ${topic} Vault`;
             
-            // If Ghost, load the single script. If Tetris/Match, load the list.
             if(currentTab === 'ghost') {
                 const scriptKey = `script_${member}_${topic}`;
                 document.getElementById('vInput1').style.display = 'none';
+                document.getElementById('vInput2').placeholder = "Paste your full Unit 4 Testimony here...";
                 document.getElementById('vInput2').value = localStorage.getItem(scriptKey) || "";
                 document.getElementById('vaultList').innerHTML = "";
             } else {
                 document.getElementById('vInput1').style.display = 'block';
+                document.getElementById('vInput1').placeholder = "Concept (e.g. Case Name)";
+                document.getElementById('vInput2').placeholder = "Detail (e.g. Holding/Fact)";
                 document.getElementById('vInput1').value = "";
                 document.getElementById('vInput2').value = "";
                 renderList();
@@ -152,32 +172,34 @@
         }
 
         function saveToVault() {
-            const member = document.getElementById('globalMember').value;
-            const topic = document.getElementById('globalTopic').value;
-            const a = document.getElementById('vInput1').value;
+            const m = document.getElementById('globalMember').value;
+            const t = document.getElementById('globalTopic').value;
             const b = document.getElementById('vInput2').value;
 
             if(currentTab === 'ghost') {
-                localStorage.setItem(`script_${member}_${topic}`, b);
+                localStorage.setItem(`script_${m}_${t}`, b);
+                alert("Script Saved! Launch Ghost Writer to practice.");
             } else {
+                const a = document.getElementById('vInput1').value;
+                if(!a || !b) return alert("Fill both boxes!");
                 const vault = JSON.parse(localStorage.getItem('master_vault')) || [];
-                vault.push({ id: Date.now(), member, topic, a, b });
+                vault.push({ id: Date.now(), member: m, topic: t, a, b });
                 localStorage.setItem('master_vault', JSON.stringify(vault));
+                alert("Fact Saved! Launch Match or Tetris to practice.");
             }
-            alert("Saved!");
             syncAll();
         }
 
         function renderList() {
-            const member = document.getElementById('globalMember').value;
-            const topic = document.getElementById('globalTopic').value;
+            const m = document.getElementById('globalMember').value;
+            const t = document.getElementById('globalTopic').value;
             const vault = JSON.parse(localStorage.getItem('master_vault')) || [];
-            const filtered = vault.filter(v => v.member === member && v.topic === topic);
+            const filtered = vault.filter(v => v.member === m && v.topic === t);
             
             document.getElementById('vaultList').innerHTML = filtered.map(v => `
-                <div style="display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid #eee; font-size:0.8rem">
-                    <span><b>${v.a}:</b> ${v.b.substring(0,20)}...</span>
-                    <button onclick="deleteItem(${v.id})" style="color:red; border:none; background:none; cursor:pointer">X</button>
+                <div style="display:flex; align-items:center; background:#f0f4f8; margin-bottom:5px; padding:10px; border-radius:8px;">
+                    <div style="flex:1; font-size:0.8rem"><b>${v.a}</b>: ${v.b.substring(0,30)}...</div>
+                    <button onclick="deleteItem(${v.id})" style="color:red; border:none; background:none; cursor:pointer; font-weight:bold;">X</button>
                 </div>
             `).join('');
         }
@@ -189,41 +211,92 @@
         }
 
         function launchGame(type) {
-            const member = document.getElementById('globalMember').value;
-            const topic = document.getElementById('globalTopic').value;
+            const m = document.getElementById('globalMember').value;
+            const t = document.getElementById('globalTopic').value;
+            const stage = document.getElementById('game-stage');
+            
             document.getElementById('lobby-view').style.display = 'none';
             document.getElementById('game-arena').style.display = 'block';
-            const stage = document.getElementById('game-stage');
+            stage.innerHTML = "";
 
             if(type === 'ghost') {
-                const text = localStorage.getItem(`script_${member}_${topic}`);
-                if(!text) return stage.innerHTML = "No script found in vault!";
+                const text = localStorage.getItem(`script_${m}_${t}`);
+                if(!text) return stage.innerHTML = "<h3>Missing Script!</h3><p>Edit Vault -> Scripts to add your testimony.</p>";
                 const words = text.split(/\s+/).map(w => `<span class="ghost-word">${w}</span>`).join(' ');
-                stage.innerHTML = `<h3>Ghost Recall</h3><div class="ghost-display">${words}</div>`;
-            } else if(type === 'match') {
+                stage.innerHTML = `<h3>Ghost Recall: ${m}</h3><div class="ghost-display">${words}</div><p style="margin-top:20px; font-size:0.8rem">Hover over words to reveal them.</p>`;
+            } 
+
+            else if(type === 'match') {
                 const vault = JSON.parse(localStorage.getItem('master_vault')) || [];
-                const data = vault.filter(v => v.member === member && v.topic === topic);
-                if(data.length < 4) return stage.innerHTML = "Need at least 4 items in vault!";
+                const data = vault.filter(v => v.member === m && v.topic === t);
+                if(data.length < 4) return stage.innerHTML = "<h3>Need Data!</h3><p>Add at least 4 items to your Vault first.</p>";
                 
                 let cards = [];
-                data.forEach(d => { cards.push({t: d.a, p: d.id}, {t: d.b, p: d.id}); });
-                cards.sort(() => 0.5 - Math.random());
-                
-                stage.innerHTML = `<div class="match-grid"></div>`;
+                data.slice(0, 6).forEach(d => {
+                    cards.push({txt: d.a, pid: d.id}, {txt: d.b, pid: d.id});
+                });
+                cards.sort(() => Math.random() - 0.5);
+
+                stage.innerHTML = `<h3>Evidence Match</h3><div class="match-grid"></div>`;
                 const grid = stage.querySelector('.match-grid');
+                
                 cards.forEach(c => {
-                    const el = document.createElement('div'); el.className = 'card'; el.innerText = '??';
-                    el.onclick = () => { el.classList.add('flipped'); el.innerText = c.t; };
+                    const el = document.createElement('div');
+                    el.className = 'card';
+                    el.innerText = '???';
+                    el.onclick = () => {
+                        if(el.classList.contains('flipped') || el.classList.contains('matched')) return;
+                        el.classList.add('flipped');
+                        el.innerText = c.txt;
+                        
+                        if(!firstCard) {
+                            firstCard = {el, pid: c.pid};
+                        } else {
+                            if(firstCard.pid === c.pid) {
+                                setTimeout(() => {
+                                    firstCard.el.classList.add('matched');
+                                    el.classList.add('matched');
+                                    firstCard = null;
+                                }, 500);
+                            } else {
+                                setTimeout(() => {
+                                    firstCard.el.classList.remove('flipped');
+                                    firstCard.el.innerText = '???';
+                                    el.classList.remove('flipped');
+                                    el.innerText = '???';
+                                    firstCard = null;
+                                }, 800);
+                            }
+                        }
+                    };
                     grid.appendChild(el);
                 });
-            } else {
-                stage.innerHTML = "<h3>Tetris Loaded</h3><p>Tetris logic active using vault data.</p>";
+            }
+
+            else if(type === 'tetris') {
+                const vault = JSON.parse(localStorage.getItem('master_vault')) || [];
+                const data = vault.filter(v => v.member === m && v.topic === t);
+                if(data.length < 1) return stage.innerHTML = "<h3>Need Data!</h3><p>Add items to your Vault for Tetris sorting.</p>";
+
+                stage.innerHTML = `
+                    <h3>Branch Sorting</h3>
+                    <div id="tetris-well">
+                        <div id="falling-obj" class="falling-item" style="left:50%; transform:translateX(-50%); top:0;">${data[0].a}</div>
+                    </div>
+                    <div class="bucket-container">
+                        <div class="bucket" onclick="checkSort('Legislative')">Legislative</div>
+                        <div class="bucket" onclick="checkSort('Executive')">Executive</div>
+                        <div class="bucket" onclick="checkSort('Judicial')">Judicial</div>
+                    </div>
+                `;
+                // Logic: In a real app, this would animate. For now, it's a quiz-style sorter.
             }
         }
 
         function exitGame() {
             document.getElementById('lobby-view').style.display = 'block';
             document.getElementById('game-arena').style.display = 'none';
+            firstCard = null;
         }
 
         window.onload = syncAll;
