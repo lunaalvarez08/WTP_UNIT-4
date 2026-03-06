@@ -49,13 +49,13 @@
         .back-btn { background: var(--red); color: white; border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; margin-bottom: 30px; font-weight: bold; }
 
         .match-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; max-width: 800px; margin: 0 auto; }
-        .card { height: 100px; background: var(--navy); color: white; display: flex; align-items: center; justify-content: center; border-radius: 12px; cursor: pointer; font-size: 0.7rem; padding: 10px; transition: 0.2s; overflow: hidden; }
-        .card.flipped { background: var(--gold); color: black; font-weight: bold; }
+        .card { height: 100px; background: var(--navy); color: white; display: flex; align-items: center; justify-content: center; border-radius: 12px; cursor: pointer; font-size: 0.7rem; padding: 10px; transition: 0.2s; overflow: hidden; border: 1px solid transparent; }
+        .card.flipped { background: var(--gold); color: black; font-weight: bold; border-color: var(--navy); }
         .card.matched { visibility: hidden; }
 
         .sort-well, .verdict-box { background: #f1f5f9; padding: 40px; border-radius: 20px; margin: 20px 0; font-size: 1.3rem; font-weight: bold; min-height: 120px; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 2px dashed #cbd5e1; }
         .bucket-container { display: flex; justify-content: center; gap: 15px; margin-top: 20px; }
-        .bucket { flex: 1; padding: 20px; background: var(--navy); color: white; border-radius: 12px; cursor: pointer; font-weight: bold; border: none; }
+        .bucket { flex: 1; padding: 20px; background: var(--navy); color: white; border-radius: 12px; cursor: pointer; font-weight: bold; border: none; font-size: 0.9rem; }
         .bucket:hover { background: var(--gold); color: black; }
     </style>
 </head>
@@ -73,20 +73,19 @@
     <div class="container">
         <div class="settings-bar">
             <div class="settings-group">
-                <label>Current Mode</label>
+                <label>Question Topic</label>
                 <select id="globalTopic" onchange="resetLobby()">
-                    <option value="Q1">Q1: Foundations</option>
-                    <option value="Q2">Q2: Structures (Coming Soon)</option>
+                    <option value="Q1">Q1: Separation of Powers & Foundations</option>
                 </select>
             </div>
-            <div style="color:var(--gold); font-size: 0.7rem; font-weight: bold; text-align: right;">NATIONALS PREP 2026</div>
+            <div style="color:var(--gold); font-size: 0.7rem; font-weight: bold; text-align: right;">NATIONALS PREP <br> 2026 EDITION</div>
         </div>
 
         <div id="lobby-view">
             <div class="game-grid">
-                <div class="game-card" onclick="launchGame('match')"><div>🃏</div><h3>Match</h3><p style="font-size:0.7rem;">Pairs</p></div>
-                <div class="game-card" onclick="launchGame('sort')"><div>⚖️</div><h3>Sort</h3><p style="font-size:0.7rem;">Branches</p></div>
-                <div class="game-card" onclick="launchGame('verdict')"><div>🚨</div><h3>Verdict</h3><p style="font-size:0.7rem;">Fact or Myth</p></div>
+                <div class="game-card" onclick="launchGame('match')"><div>🃏</div><h3>Evidence Match</h3><p style="font-size:0.7rem;">Pair Cases & Principles</p></div>
+                <div class="game-card" onclick="launchGame('sort')"><div>⚖️</div><h3>Power Sorter</h3><p style="font-size:0.7rem;">Article I, II, or III?</p></div>
+                <div class="game-card" onclick="launchGame('verdict')"><div>🚨</div><h3>Case Verdict</h3><p style="font-size:0.7rem;">Rapid Fire Fact Check</p></div>
             </div>
         </div>
 
@@ -100,58 +99,78 @@
         const database = {
             "Q1": {
                 match: [
-                    {t: "Federalist 70", d: "Hamilton says energy in the executive means one person can act fast"},
-                    {t: "Marbury v Madison", d: "Established judicial review so the court is shielded from politics"},
-                    {t: "Hampton v US", d: "Created the intelligible principle test for delegating power"},
-                    {t: "Loper Bright 2024", d: "Overruled Chevron and said agencies cannot interpret the law"},
-                    {t: "Trump v Slaughter 2025", d: "Case about the president firing independent agency members"},
-                    {t: "Federalist 63", d: "Senate acts as a stable fence against the whims of the people"},
-                    {t: "Clean Air Act", d: "Congress gave the EPA power to control air pollution sources"},
-                    {t: "West Virginia v EPA", d: "The court said agencies need clear permission for major questions"},
-                    {t: "Affordable Care Act", d: "Shows how agencies handle massive health care regulations"},
-                    {t: "National Emergencies Act", d: "Requires presidents to formally declare emergencies to Congress"},
-                    {t: "Federalist 51", d: "Ambition must be made to counteract ambition through checks"},
-                    {t: "Trade Expansion Act", d: "Section 232 lets the president use tariffs for national security"},
-                    {t: "Article II", d: "Vests executive power in a single president for a four year term"},
-                    {t: "Gundy v United States", d: "A case where the court kept the nondelegation doctrine weak"},
-                    {t: "Federal Reserve Board", d: "Independent body that sets monetary policy for the country"},
-                    {t: "Rules Enabling Act", d: "Allows the Supreme Court to make rules for federal courts"},
-                    {t: "Federalist 78", d: "The judiciary is the weakest branch because it has no sword or purse"},
-                    {t: "United States v Nixon", d: "Confirmed that the president is not above the rule of law"},
-                    {t: "INS v Chadha", d: "Ruled that the legislative veto was unconstitutional"},
-                    {t: "Granholm v Heald", d: "States cannot stop out of state wine shipments under commerce clause"},
-                    {t: "Jacob Ruppert v Caffey", d: "Case about whether contracts can be changed by outside evidence"},
-                    {t: "Article III", d: "Establishes the judicial branch and the Supreme Court"},
-                    {t: "Gulf of Tonkin", d: "Gave the president power to act in Vietnam without a war declaration"},
-                    {t: "Bully Pulpit", d: "The president uses public pressure to influence what Congress does"},
-                    {t: "War Powers Resolution", d: "Congress tried to limit the executive ability to deploy troops"},
-                    {t: "US Patriot Act", d: "Gave agencies broad surveillance powers after the 911 attacks"},
-                    {t: "Federalist 62", d: "Madison explains why the Senate structure checks other branches"},
-                    {t: "Plaut v Spendthrift Farm", d: "Congress cannot pass laws that reopen final court decisions"},
-                    {t: "Hayburns Case", d: "Early proof that courts cannot be used as administrative bodies"},
-                    {t: "Article I Section 8", d: "The necessary and proper clause allows for delegated powers"},
-                    {t: "OSHA 1970", d: "Created to handle technical workplace safety standards"},
-                    {t: "Internal Revenue Service", d: "Agency delegated with broad powers to enforce tax laws"},
-                    {t: "Federalist 48", d: "Madison warns that the legislature is the most dangerous branch"},
-                    {t: "FCC v Consumers Research", d: "Agencies cannot use high power without clear authorization"},
-                    {t: "Dodd Frank Act", d: "Delegated power to new agencies to regulate the financial markets"},
-                    {t: "Iraq 2003 Lapses", d: "Evidence of what happens when congressional oversight fails"},
-                    {t: "Vesting Clause", d: "Language in Article II that limits the presidents specific powers"},
-                    {t: "Judicial Activism", d: "Philosophy that courts should shape policy and expand rights"},
-                    {t: "Legislate from the bench", d: "Criticism that judges are violating the separation of powers"},
-                    {t: "Chevron Doctrine", d: "Former rule where courts deferred to agency interpretations"}
+                    {t: "Federalist 70", d: "Hamilton argues that a single executive ensures accountability and 'energy'"},
+                    {t: "Marbury v Madison", d: "The Court claimed the power to strike down laws that violate the Constitution"},
+                    {t: "Hampton v US", d: "The 'Intelligible Principle' doctrine allows Congress to delegate power to agencies"},
+                    {t: "Loper Bright 2024", d: "Ended Chevron deference; judges, not agencies, must interpret vague laws"},
+                    {t: "Humphrey's Executor", d: "Limits the President's removal power over independent agency heads"},
+                    {t: "Federalist 63", d: "The Senate's long terms provide a 'temperate and respectable' check on public whims"},
+                    {t: "Clean Air Act", d: "Broad delegation example where the EPA sets technical pollution standards"},
+                    {t: "West Virginia v EPA", d: "Major Questions Doctrine: Agencies need clear Congressional intent for huge policies"},
+                    {t: "Affordable Care Act", d: "Modern delegation to HHS to define health insurance rules and mandates"},
+                    {t: "National Emergencies Act", d: "Established a formal process for the President to invoke emergency powers"},
+                    {t: "Federalist 51", d: "Madison's argument that 'Ambition must be made to counteract ambition'"},
+                    {t: "Trade Expansion Act", d: "Section 232 allows the President to adjust imports for 'National Security'"},
+                    {t: "Article II Vesting Clause", d: "Grants 'The Executive Power' to a single President of the United States"},
+                    {t: "Gundy v United States", d: "A 2019 case where the Court declined to revive the Non-Delegation Doctrine"},
+                    {t: "Federal Reserve Board", d: "Independent agency that controls monetary policy without political interference"},
+                    {t: "Rules Enabling Act", d: "Congress delegated the power to the Court to set federal procedural rules"},
+                    {t: "Federalist 78", d: "Judiciary is the 'least dangerous' because it lacks the 'sword' and 'purse'"},
+                    {t: "United States v Nixon", d: "Executive privilege is not absolute in the face of criminal proceedings"},
+                    {t: "INS v Chadha", d: "The Legislative Veto is unconstitutional because it bypasses Presentment"},
+                    {t: "Granholm v Heald", d: "Dormant Commerce Clause: States cannot discriminate against out-of-state trade"},
+                    {t: "Mistretta v US", d: "Upheld the Sentencing Commission as a valid delegation of power"},
+                    {t: "Article III", d: "Grants 'The Judicial Power' and establishes original jurisdiction limits"},
+                    {t: "2002 Iraq AUMF", d: "Broad authorization delegating war-making discretion to the President"},
+                    {t: "Bully Pulpit", d: "The President's informal power to use media to pressure the Legislature"},
+                    {t: "War Powers Resolution", d: "1973 attempt by Congress to limit unilateral executive troop deployment"},
+                    {t: "USA PATRIOT Act", d: "Delegated broad surveillance and intelligence powers to the Executive"},
+                    {t: "Federalist 62", d: "Madison argues Senate stability prevents 'mutable' and messy lawmaking"},
+                    {t: "Plaut v Spendthrift Farm", d: "Congress cannot force the Judiciary to reopen previously closed cases"},
+                    {t: "Hayburn's Case", d: "Early SCOTUS refusal to perform administrative tasks for the Executive"},
+                    {t: "Necessary & Proper Clause", d: "Article I, Sec 8: Power to make laws for carrying out expressed duties"},
+                    {t: "OSHA Act of 1970", d: "Delegated workplace safety regulation to the Department of Labor"},
+                    {t: "Internal Revenue Service", d: "Agency given authority to interpret and enforce the federal tax code"},
+                    {t: "Federalist 48", d: "Warning that 'parchment barriers' cannot stop the legislative 'vortex'"},
+                    {t: "Jarkesy v SEC (2024)", d: "7th Amendment limits an agency's power to fine without a jury trial"},
+                    {t: "Dodd-Frank Act", d: "Created the CFPB, testing independent agency structure and funding"},
+                    {t: "Curtiss-Wright (1936)", d: "Described the President as the 'Sole Organ' in foreign affairs"},
+                    {t: "Youngstown v Sawyer", d: "Established the three-tier framework for evaluating Presidential power"},
+                    {t: "Judicial Activism", d: "Philosophy that the Court should correct social injustices via rulings"},
+                    {t: "Originalism", d: "Interpretation looking for the meaning of the text at the time of adoption"},
+                    {t: "Non-Delegation Doctrine", d: "The theory that Article I prevents Congress from divesting its powers"}
                 ],
                 sort: [
-                    {f: "Vesting power in one president", b: "Executive"},
-                    {f: "Determining if a law is unconstitutional", b: "Judicial"},
-                    {f: "Voting to override a veto", b: "Legislative"},
-                    {f: "Declaring a state of emergency", b: "Executive"},
-                    {f: "Confirming human rights in court", b: "Judicial"},
-                    {f: "Raising tariffs on foreign goods", b: "Executive"},
-                    {f: "Passing necessary and proper laws", b: "Legislative"},
-                    {f: "Deploying troops to a conflict", b: "Executive"},
-                    {f: "Interpreting ambiguous statutes", b: "Judicial"},
-                    {f: "Creating federal agencies like OSHA", b: "Legislative"}
+                    {f: "Granting Reprieves and Pardons", b: "Executive"},
+                    {f: "Declaring War", b: "Legislative"},
+                    {f: "Interpreting Treaties", b: "Judicial"},
+                    {f: "Receiving Ambassadors", b: "Executive"},
+                    {f: "Establishing Post Offices", b: "Legislative"},
+                    {f: "Settling disputes between States", b: "Judicial"},
+                    {f: "Coining Money", b: "Legislative"},
+                    {f: "Acting as Commander in Chief", b: "Executive"},
+                    {f: "Originating Revenue Bills", b: "Legislative"},
+                    {f: "Issuing Writs of Mandamus", b: "Judicial"},
+                    {f: "Nominating Federal Judges", b: "Executive"},
+                    {f: "Advice and Consent for Treaties", b: "Legislative"},
+                    {f: "Adjudicating 'Cases and Controversies'", b: "Judicial"},
+                    {f: "Calling forth the Militia", b: "Legislative"},
+                    {f: "Commissioning Officers of the US", b: "Executive"},
+                    {f: "Granting Letters of Marque", b: "Legislative"},
+                    {f: "Deciding cases of Admiralty", b: "Judicial"},
+                    {f: "State of the Union Information", b: "Executive"},
+                    {f: "Impeachment of Civil Officers", b: "Legislative"},
+                    {f: "Punishing Piracies on the High Seas", b: "Legislative"},
+                    {f: "Executing the Laws", b: "Executive"},
+                    {f: "Reviewing the constitutionality of laws", b: "Judicial"},
+                    {f: "Regulating Commerce with Foreign Nations", b: "Legislative"},
+                    {f: "Requiring Opinions of Department Heads", b: "Executive"},
+                    {f: "Defining and Punishing Offenses", b: "Legislative"},
+                    {f: "Presiding over Impeachment Trials", b: "Judicial"},
+                    {f: "Vetoing Congressional Legislation", b: "Executive"},
+                    {f: "Appropriating Funds (Power of Purse)", b: "Legislative"},
+                    {f: "Exercising Original Jurisdiction", b: "Judicial"},
+                    {f: "Convening Extraordinary Sessions", b: "Executive"}
                 ]
             }
         };
@@ -167,9 +186,8 @@
             stage.innerHTML = "";
 
             if(type === 'match') {
-                stage.innerHTML = `<div class="match-grid" id="grid"></div>`;
+                stage.innerHTML = `<h2>Evidence Match</h2><div class="match-grid" id="grid"></div>`;
                 let cards = [];
-                // Shuffle and pick 8 pairs for the grid
                 let shuffled = [...data.match].sort(() => 0.5 - Math.random()).slice(0, 8);
                 shuffled.forEach((item, i) => { cards.push({txt: item.t, id: i}, {txt: item.d, id: i}); });
                 cards.sort(() => 0.5 - Math.random());
@@ -177,7 +195,7 @@
                     const card = document.createElement('div');
                     card.className = 'card'; card.innerText = '???';
                     card.onclick = () => {
-                        if(lockBoard || card.classList.contains('flipped')) return;
+                        if(lockBoard || card.classList.contains('flipped') || card.classList.contains('matched')) return;
                         card.classList.add('flipped'); card.innerText = c.txt;
                         if(!firstCard) { firstCard = {card, id: c.id}; } 
                         else {
@@ -185,17 +203,17 @@
                                 setTimeout(() => { card.classList.add('matched'); firstCard.card.classList.add('matched'); firstCard = null; }, 400);
                             } else {
                                 lockBoard = true;
-                                setTimeout(() => { card.classList.remove('flipped'); card.innerText = '???'; firstCard.card.classList.remove('flipped'); firstCard.card.innerText = '???'; firstCard = null; lockBoard = false; }, 800);
+                                setTimeout(() => { card.classList.remove('flipped'); card.innerText = '???'; firstCard.card.classList.remove('flipped'); firstCard.card.innerText = '???'; firstCard = null; lockBoard = false; }, 1000);
                             }
                         }
                     };
                     document.getElementById('grid').appendChild(card);
                 });
             } else if(type === 'sort') {
-                stage.innerHTML = `<h2>Branch Sorter</h2><div class="sort-well" id="sd"></div><div class="bucket-container"><button class="bucket" onclick="checkS('Legislative')">Leg</button><button class="bucket" onclick="checkS('Executive')">Exec</button><button class="bucket" onclick="checkS('Judicial')">Jud</button></div><div id="sc">Score: 0</div>`;
+                stage.innerHTML = `<h2>Constitutional Power Sorter</h2><div class="sort-well" id="sd"></div><div class="bucket-container"><button class="bucket" onclick="checkS('Legislative')">Article I (Leg)</button><button class="bucket" onclick="checkS('Executive')">Article II (Exec)</button><button class="bucket" onclick="checkS('Judicial')">Article III (Jud)</button></div><div id="sc" style="margin-top:15px; font-weight:bold;">Score: 0</div>`;
                 score = 0; nextS();
             } else if(type === 'verdict') {
-                stage.innerHTML = `<h2>Case Verdict</h2><div class="verdict-box"><h3 id="vT" style="color:var(--red)"></h3><p id="vD"></p></div><div class="bucket-container"><button class="bucket" style="background:var(--green)" onclick="checkV(true)">TRUTH</button><button class="bucket" style="background:var(--red)" onclick="checkV(false)">MYTH</button></div><div id="sc">Streak: 0</div>`;
+                stage.innerHTML = `<h2>Case Verdict</h2><div class="verdict-box"><h3 id="vT" style="color:var(--red)"></h3><p id="vD"></p></div><div class="bucket-container"><button class="bucket" style="background:var(--green)" onclick="checkV(true)">TRUTH</button><button class="bucket" style="background:var(--red)" onclick="checkV(false)">MYTH</button></div><div id="sc" style="margin-top:15px; font-weight:bold;">Streak: 0</div>`;
                 score = 0; nextV();
             }
         }
@@ -207,7 +225,7 @@
         }
         function checkS(a) {
             if(a === currentItem.b) { score++; document.getElementById('sc').innerText = "Score: " + score; }
-            else { alert("Nope! " + currentItem.f + " is " + currentItem.b); score = 0; }
+            else { alert("Incorrect. " + currentItem.f + " is an " + currentItem.b + " power."); score = 0; document.getElementById('sc').innerText = "Score: 0"; }
             nextS();
         }
 
@@ -225,10 +243,10 @@
         }
         function checkV(a) {
             if(a === isTrue) { score++; document.getElementById('sc').innerText = "Streak: " + score; nextV(); }
-            else { alert("Wrong! That fact was a myth for that case."); score = 0; document.getElementById('sc').innerText = "Streak: 0"; nextV(); }
+            else { alert("That fact was a myth! Your streak has reset."); score = 0; document.getElementById('sc').innerText = "Streak: 0"; nextV(); }
         }
 
-        function exitGame() { document.getElementById('lobby-view').style.display = 'block'; document.getElementById('game-arena').style.display = 'none'; }
+        function exitGame() { document.getElementById('lobby-view').style.display = 'block'; document.getElementById('game-arena').style.display = 'none'; firstCard = null; }
         function resetLobby() { exitGame(); }
     </script>
 </body>
