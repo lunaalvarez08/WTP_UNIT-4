@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Practice Hub - Master Edition</title>
+    <title>Practice Hub | We The People</title>
     <style>
         :root {
             --navy: #0A285F; --red: #B22234; --gold: #D4AF37; --green: #27ae60;
@@ -15,282 +15,225 @@
             min-height: 100vh;
         }
 
-        header { background: var(--navy); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; }
-        .logo { color: white; font-weight: 800; }
-        nav a { color: white; text-decoration: none; margin-left: 20px; font-size: 0.85rem; }
+        header { background: var(--navy); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 3px solid var(--gold); }
+        .logo { color: white; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
+        nav a { color: white; text-decoration: none; margin-left: 20px; font-size: 0.85rem; opacity: 0.8; }
+        nav a:hover { opacity: 1; color: var(--gold); }
 
         .container { max-width: 900px; margin: 30px auto; width: 90%; }
 
-        /* Branding */
-        .hub-logo-container { display: flex; justify-content: center; margin-bottom: 20px; }
-        .hub-logo { width: 120px; height: auto; border-radius: 50%; border: 3px solid var(--gold); }
-
+        /* Filter Bar */
         .settings-bar {
             background: var(--navy); color: white; padding: 20px;
             border-radius: 20px; display: flex; gap: 15px; align-items: flex-end;
-            margin-bottom: 30px;
+            margin-bottom: 30px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
         .settings-group { flex: 1; }
-        .settings-group label { display: block; font-size: 0.65rem; font-weight: 800; color: var(--gold); margin-bottom: 5px; }
+        .settings-group label { display: block; font-size: 0.65rem; font-weight: 800; color: var(--gold); margin-bottom: 5px; text-transform: uppercase; }
         
-        select, input, textarea { 
+        select { 
             background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); 
-            color: white; padding: 10px; border-radius: 8px; width: 100%;
+            color: white; padding: 10px; border-radius: 8px; width: 100%; cursor: pointer;
         }
         select option { color: black; }
 
-        /* Vault Section */
-        .vault-card { background: white; padding: 30px; border-radius: 24px; margin-bottom: 20px; display: none; box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
-        .v-tab { padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; background: #eee; margin-right: 5px; }
-        .v-tab.active { background: var(--navy); color: white; }
+        /* Lobby Grid */
+        #lobby-view { display: block; }
+        .game-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .game-card { 
+            background: var(--glass); border-radius: 24px; padding: 40px 25px; 
+            text-align: center; cursor: pointer; transition: 0.3s; 
+            border: 1px solid rgba(255,255,255,0.5); box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .game-card:hover { transform: translateY(-8px); border-color: var(--gold); box-shadow: 0 12px 30px rgba(0,0,0,0.1); }
+        .game-card div { font-size: 3rem; margin-bottom: 15px; }
 
-        /* Game Arena */
-        #game-arena { display: none; background: white; border-radius: 30px; padding: 30px; min-height: 500px; position: relative; text-align: center; }
-        .back-btn { background: var(--red); color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; margin-bottom: 20px; font-weight: bold; }
+        /* Game Arena (The Sub-Page) */
+        #game-arena { display: none; background: white; border-radius: 30px; padding: 40px; min-height: 500px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
+        .back-btn { background: var(--red); color: white; border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; margin-bottom: 30px; font-weight: bold; }
 
-        /* Game UI */
-        .match-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; max-width: 600px; margin: 0 auto; }
-        .card { height: 100px; background: var(--navy); color: white; display: flex; align-items: center; justify-content: center; border-radius: 12px; cursor: pointer; font-size: 0.75rem; padding: 10px; transition: 0.3s; }
+        /* Match UI */
+        .match-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; max-width: 800px; margin: 0 auto; }
+        .card { height: 110px; background: var(--navy); color: white; display: flex; align-items: center; justify-content: center; border-radius: 12px; cursor: pointer; font-size: 0.75rem; padding: 12px; transition: 0.2s; }
         .card.flipped { background: var(--gold); color: black; font-weight: bold; }
         .card.matched { visibility: hidden; pointer-events: none; }
 
-        .ghost-display { font-size: 1.1rem; line-height: 2; color: #2c3e50; padding: 25px; background: #f8fafc; border-radius: 15px; border: 1px solid #ddd; text-align: left; }
-        .ghost-word { display: inline-block; margin: 0 2px; padding: 0 4px; border-radius: 4px; background: #cbd5e1; color: transparent; transition: 0.2s; cursor: help; }
-        .ghost-word:hover { background: transparent; color: var(--navy); }
-
-        /* Tetris Falling Logic UI */
-        #tetris-well { height: 350px; background: #eee; border-radius: 15px; position: relative; overflow: hidden; margin-bottom: 20px; border: 2px solid var(--navy); }
-        .falling-item { position: absolute; width: 140px; padding: 10px; background: var(--gold); border-radius: 8px; font-weight: bold; font-size: 0.8rem; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        .bucket-container { display: flex; justify-content: space-around; }
-        .bucket { padding: 15px 25px; background: var(--navy); color: white; border-radius: 12px; cursor: pointer; border: 2px solid transparent; }
-        .bucket:hover { border-color: var(--gold); }
-
-        .game-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-        .game-card { background: var(--glass); border-radius: 24px; padding: 25px; text-align: center; cursor: pointer; transition: 0.3s; border: 1px solid rgba(255,255,255,0.5); }
-        .game-card:hover { transform: translateY(-8px); border-color: var(--gold); }
+        /* Sort UI */
+        .sort-well { background: #f1f5f9; padding: 40px; border-radius: 20px; margin: 20px 0; font-size: 1.4rem; font-weight: bold; min-height: 100px; display: flex; align-items: center; justify-content: center; border: 2px dashed #cbd5e1; }
+        .bucket-container { display: flex; justify-content: center; gap: 15px; margin-top: 20px; }
+        .bucket { flex: 1; padding: 20px; background: var(--navy); color: white; border-radius: 12px; cursor: pointer; font-weight: bold; transition: 0.2s; }
+        .bucket:hover { transform: scale(1.05); background: var(--gold); color: black; }
     </style>
 </head>
 <body>
 
     <header>
         <div class="logo">We The People | Practice Hub</div>
-        <nav><a href="index.html">Home</a></nav>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="team.html">Team</a>
+            <a href="practice.html" style="color:var(--gold)">Practice</a>
+            <a href="about.html">About</a>
+        </nav>
     </header>
 
     <div class="container">
-        <div class="hub-logo-container">
-            <img src="https://www.civiced.org/images/logo_wethepeople.png" class="hub-logo" alt="Logo">
-        </div>
-
         <div class="settings-bar">
             <div class="settings-group">
-                <label>Team Member</label>
-                <select id="globalMember" onchange="syncAll()">
-                    <option value="Luna">Luna</option>
-                    <option value="Sarah">Sarah</option>
-                    <option value="Bekim">Bekim</option>
-                    <option value="Evan">Evan</option>
-                </select>
-            </div>
-            <div class="settings-group">
-                <label>Unit Filter</label>
-                <select id="globalTopic" onchange="syncAll()">
+                <label>Current Mode</label>
+                <select id="globalTopic" onchange="resetLobby()">
                     <option value="Q1">Q1: Foundations</option>
-                    <option value="Q2">Q2: Structures</option>
-                    <option value="Q3">Q3: Application</option>
+                    <option value="Q2">Q2: Structures (Coming Soon)</option>
+                    <option value="Q3">Q3: Application (Coming Soon)</option>
                 </select>
             </div>
-            <button onclick="toggleVault()" style="background:var(--gold); border:none; padding:10px 15px; border-radius:8px; cursor:pointer; font-weight:bold;">Edit Vault</button>
-        </div>
-
-        <div id="vault-section" class="vault-card">
-            <h3 id="vaultLabel">Vault</h3>
-            <div style="margin-bottom:15px;">
-                <button class="v-tab active" id="tab-tetris" onclick="switchTab('tetris')">Match/Tetris Data</button>
-                <button class="v-tab" id="tab-ghost" onclick="switchTab('ghost')">Ghost Script</button>
+            <div style="color:var(--gold); font-size: 0.7rem; font-weight: bold; text-align: right;">
+                NATIONALS PREP <br> 2025 EDITION
             </div>
-            
-            <div id="vaultInputs" style="background:#f9f9f9; padding:20px; border-radius:15px;">
-                <input type="text" id="vInput1" placeholder="Concept (e.g. Fed 52)" style="color:black; margin-bottom:10px; border:1px solid #ddd">
-                <textarea id="vInput2" placeholder="Detail (e.g. Elected by the people)" style="color:black; height:100px; border:1px solid #ddd"></textarea>
-                <button onclick="saveToVault()" style="background:var(--navy); color:white; border:none; padding:12px; width:100%; border-radius:8px; cursor:pointer; font-weight:bold; margin-top:10px;">Save to Vault</button>
-            </div>
-            <div id="vaultList" style="margin-top:20px;"></div>
         </div>
 
         <div id="lobby-view">
             <div class="game-grid">
-                <div class="game-card" onclick="launchGame('match')"><div>🃏</div><h3>Evidence Match</h3><p style="font-size:0.7rem">Flip cards to pair terms</p></div>
-                <div class="game-card" onclick="launchGame('tetris')"><div>🧱</div><h3>Branch Sorting</h3><p style="font-size:0.7rem">Sort facts into buckets</p></div>
-                <div class="game-card" onclick="launchGame('ghost')"><div>👻</div><h3>Ghost Recall</h3><p style="font-size:0.7rem">Memorize your statement</p></div>
+                <div class="game-card" onclick="launchGame('match')">
+                    <div>🃏</div>
+                    <h3>Evidence Match</h3>
+                    <p style="font-size:0.75rem; color:#666;">Match cases and papers to their key principles.</p>
+                </div>
+                <div class="game-card" onclick="launchGame('sort')">
+                    <div>⚖️</div>
+                    <h3>Branch Sorter</h3>
+                    <p style="font-size:0.75rem; color:#666;">Categorize powers by Legislative, Executive, or Judicial.</p>
+                </div>
             </div>
         </div>
 
         <div id="game-arena">
-            <button class="back-btn" onclick="exitGame()">EXIT TO LOBBY</button>
+            <button class="back-btn" onclick="exitGame()">← EXIT TO LOBBY</button>
             <div id="game-stage"></div>
         </div>
     </div>
 
     <script>
-        let currentTab = 'tetris';
-        let matchCards = [];
+        // MASTER EVIDENCE DATABASE (Human-coded, no hyphens/slashes)
+        const database = {
+            "Q1": {
+                match: [
+                    {t: "Federalist 70", d: "Hamilton says energy in the executive means one person can act fast"},
+                    {t: "Marbury v Madison", d: "Established judicial review so the court is shielded from politics"},
+                    {t: "Hampton v US", d: "Created the intelligible principle test for delegating power"},
+                    {t: "Loper Bright 2024", d: "Overruled Chevron and said agencies cannot interpret the law"},
+                    {t: "Trump v Slaughter 2025", d: "Case about the president firing independent agency members"},
+                    {t: "Federalist 63", d: "Senate acts as a stable fence against the whims of the people"},
+                    {t: "Clean Air Act", d: "Congress gave the EPA power to control air pollution sources"},
+                    {t: "West Virginia v EPA", d: "The court said agencies need clear permission for major questions"}
+                ],
+                sort: [
+                    {f: "Vesting power in one president", b: "Executive"},
+                    {f: "Determining if a law is unconstitutional", b: "Judicial"},
+                    {f: "Voting to override a veto", b: "Legislative"},
+                    {f: "Declaring a state of emergency", b: "Executive"},
+                    {f: "Confirming human rights in court", b: "Judicial"},
+                    {f: "Raising tariffs on foreign goods", b: "Executive"},
+                    {f: "Passing necessary and proper laws", b: "Legislative"}
+                ]
+            }
+        };
+
         let firstCard = null;
-
-        function toggleVault() {
-            const v = document.getElementById('vault-section');
-            v.style.display = v.style.display === 'block' ? 'none' : 'block';
-            syncAll();
-        }
-
-        function switchTab(t) {
-            currentTab = t;
-            document.querySelectorAll('.v-tab').forEach(b => b.classList.remove('active'));
-            document.getElementById('tab-'+t).classList.add('active');
-            syncAll();
-        }
-
-        function syncAll() {
-            const member = document.getElementById('globalMember').value;
-            const topic = document.getElementById('globalTopic').value;
-            document.getElementById('vaultLabel').innerText = `${member}'s ${topic} Vault`;
-            
-            if(currentTab === 'ghost') {
-                const scriptKey = `script_${member}_${topic}`;
-                document.getElementById('vInput1').style.display = 'none';
-                document.getElementById('vInput2').placeholder = "Paste your full Unit 4 Testimony here...";
-                document.getElementById('vInput2').value = localStorage.getItem(scriptKey) || "";
-                document.getElementById('vaultList').innerHTML = "";
-            } else {
-                document.getElementById('vInput1').style.display = 'block';
-                document.getElementById('vInput1').placeholder = "Concept (e.g. Case Name)";
-                document.getElementById('vInput2').placeholder = "Detail (e.g. Holding/Fact)";
-                document.getElementById('vInput1').value = "";
-                document.getElementById('vInput2').value = "";
-                renderList();
-            }
-        }
-
-        function saveToVault() {
-            const m = document.getElementById('globalMember').value;
-            const t = document.getElementById('globalTopic').value;
-            const b = document.getElementById('vInput2').value;
-
-            if(currentTab === 'ghost') {
-                localStorage.setItem(`script_${m}_${t}`, b);
-                alert("Script Saved! Launch Ghost Writer to practice.");
-            } else {
-                const a = document.getElementById('vInput1').value;
-                if(!a || !b) return alert("Fill both boxes!");
-                const vault = JSON.parse(localStorage.getItem('master_vault')) || [];
-                vault.push({ id: Date.now(), member: m, topic: t, a, b });
-                localStorage.setItem('master_vault', JSON.stringify(vault));
-                alert("Fact Saved! Launch Match or Tetris to practice.");
-            }
-            syncAll();
-        }
-
-        function renderList() {
-            const m = document.getElementById('globalMember').value;
-            const t = document.getElementById('globalTopic').value;
-            const vault = JSON.parse(localStorage.getItem('master_vault')) || [];
-            const filtered = vault.filter(v => v.member === m && v.topic === t);
-            
-            document.getElementById('vaultList').innerHTML = filtered.map(v => `
-                <div style="display:flex; align-items:center; background:#f0f4f8; margin-bottom:5px; padding:10px; border-radius:8px;">
-                    <div style="flex:1; font-size:0.8rem"><b>${v.a}</b>: ${v.b.substring(0,30)}...</div>
-                    <button onclick="deleteItem(${v.id})" style="color:red; border:none; background:none; cursor:pointer; font-weight:bold;">X</button>
-                </div>
-            `).join('');
-        }
-
-        function deleteItem(id) {
-            let vault = JSON.parse(localStorage.getItem('master_vault')) || [];
-            localStorage.setItem('master_vault', JSON.stringify(vault.filter(v => v.id !== id)));
-            renderList();
-        }
+        let lockBoard = false;
 
         function launchGame(type) {
-            const m = document.getElementById('globalMember').value;
-            const t = document.getElementById('globalTopic').value;
+            const topic = document.getElementById('globalTopic').value;
             const stage = document.getElementById('game-stage');
-            
+            const data = database[topic];
+
+            if(!data) {
+                alert("Data for this question is not loaded yet!");
+                return;
+            }
+
             document.getElementById('lobby-view').style.display = 'none';
             document.getElementById('game-arena').style.display = 'block';
             stage.innerHTML = "";
 
-            if(type === 'ghost') {
-                const text = localStorage.getItem(`script_${m}_${t}`);
-                if(!text) return stage.innerHTML = "<h3>Missing Script!</h3><p>Edit Vault -> Scripts to add your testimony.</p>";
-                const words = text.split(/\s+/).map(w => `<span class="ghost-word">${w}</span>`).join(' ');
-                stage.innerHTML = `<h3>Ghost Recall: ${m}</h3><div class="ghost-display">${words}</div><p style="margin-top:20px; font-size:0.8rem">Hover over words to reveal them.</p>`;
-            } 
-
-            else if(type === 'match') {
-                const vault = JSON.parse(localStorage.getItem('master_vault')) || [];
-                const data = vault.filter(v => v.member === m && v.topic === t);
-                if(data.length < 4) return stage.innerHTML = "<h3>Need Data!</h3><p>Add at least 4 items to your Vault first.</p>";
-                
+            if(type === 'match') {
+                stage.innerHTML = `<h2>Evidence Match: ${topic}</h2><div class="match-grid" id="grid"></div>`;
+                const grid = document.getElementById('grid');
                 let cards = [];
-                data.slice(0, 6).forEach(d => {
-                    cards.push({txt: d.a, pid: d.id}, {txt: d.b, pid: d.id});
+                data.match.forEach((item, i) => {
+                    cards.push({txt: item.t, id: i}, {txt: item.d, id: i});
                 });
                 cards.sort(() => Math.random() - 0.5);
 
-                stage.innerHTML = `<h3>Evidence Match</h3><div class="match-grid"></div>`;
-                const grid = stage.querySelector('.match-grid');
-                
                 cards.forEach(c => {
-                    const el = document.createElement('div');
-                    el.className = 'card';
-                    el.innerText = '???';
-                    el.onclick = () => {
-                        if(el.classList.contains('flipped') || el.classList.contains('matched')) return;
-                        el.classList.add('flipped');
-                        el.innerText = c.txt;
-                        
-                        if(!firstCard) {
-                            firstCard = {el, pid: c.pid};
-                        } else {
-                            if(firstCard.pid === c.pid) {
-                                setTimeout(() => {
-                                    firstCard.el.classList.add('matched');
-                                    el.classList.add('matched');
-                                    firstCard = null;
-                                }, 500);
-                            } else {
-                                setTimeout(() => {
-                                    firstCard.el.classList.remove('flipped');
-                                    firstCard.el.innerText = '???';
-                                    el.classList.remove('flipped');
-                                    el.innerText = '???';
-                                    firstCard = null;
-                                }, 800);
-                            }
-                        }
-                    };
-                    grid.appendChild(el);
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    card.innerText = '???';
+                    card.onclick = () => handleMatch(card, c);
+                    grid.appendChild(card);
                 });
-            }
-
-            else if(type === 'tetris') {
-                const vault = JSON.parse(localStorage.getItem('master_vault')) || [];
-                const data = vault.filter(v => v.member === m && v.topic === t);
-                if(data.length < 1) return stage.innerHTML = "<h3>Need Data!</h3><p>Add items to your Vault for Tetris sorting.</p>";
-
+            } else if(type === 'sort') {
                 stage.innerHTML = `
-                    <h3>Branch Sorting</h3>
-                    <div id="tetris-well">
-                        <div id="falling-obj" class="falling-item" style="left:50%; transform:translateX(-50%); top:0;">${data[0].a}</div>
-                    </div>
+                    <h2>Branch Sorter: ${topic}</h2>
+                    <div class="sort-well" id="sortDisplay"></div>
                     <div class="bucket-container">
                         <div class="bucket" onclick="checkSort('Legislative')">Legislative</div>
                         <div class="bucket" onclick="checkSort('Executive')">Executive</div>
                         <div class="bucket" onclick="checkSort('Judicial')">Judicial</div>
                     </div>
+                    <div id="score" style="margin-top:20px; font-weight:bold;">Score: 0</div>
                 `;
-                // Logic: In a real app, this would animate. For now, it's a quiz-style sorter.
+                nextSort();
             }
+        }
+
+        // MATCH LOGIC
+        function handleMatch(card, data) {
+            if(lockBoard || card.classList.contains('flipped')) return;
+            card.classList.add('flipped');
+            card.innerText = data.txt;
+
+            if(!firstCard) {
+                firstCard = {card, id: data.id};
+            } else {
+                if(firstCard.id === data.id) {
+                    setTimeout(() => {
+                        card.classList.add('matched');
+                        firstCard.card.classList.add('matched');
+                        firstCard = null;
+                    }, 400);
+                } else {
+                    lockBoard = true;
+                    setTimeout(() => {
+                        card.classList.remove('flipped');
+                        card.innerText = '???';
+                        firstCard.card.classList.remove('flipped');
+                        firstCard.card.innerText = '???';
+                        firstCard = null;
+                        lockBoard = false;
+                    }, 800);
+                }
+            }
+        }
+
+        // SORT LOGIC
+        let currentItem = null;
+        let score = 0;
+        function nextSort() {
+            const topic = document.getElementById('globalTopic').value;
+            const items = database[topic].sort;
+            currentItem = items[Math.floor(Math.random() * items.length)];
+            document.getElementById('sortDisplay').innerText = currentItem.f;
+        }
+
+        function checkSort(ans) {
+            if(ans === currentItem.b) {
+                score++;
+                document.getElementById('score').innerText = "Score: " + score;
+            } else {
+                alert("Actually, " + currentItem.f + " is a " + currentItem.b + " power.");
+            }
+            nextSort();
         }
 
         function exitGame() {
@@ -299,7 +242,9 @@
             firstCard = null;
         }
 
-        window.onload = syncAll;
+        function resetLobby() {
+            exitGame();
+        }
     </script>
 </body>
 </html>
