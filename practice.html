@@ -114,30 +114,74 @@
     </div>
 
     <script>
-        // MASTER EVIDENCE DATABASE (Human-coded, no hyphens/slashes)
-        const database = {
-            "Q1": {
-                match: [
-                    {t: "Federalist 70", d: "Hamilton says energy in the executive means one person can act fast"},
-                    {t: "Marbury v Madison", d: "Established judicial review so the court is shielded from politics"},
-                    {t: "Hampton v US", d: "Created the intelligible principle test for delegating power"},
-                    {t: "Loper Bright 2024", d: "Overruled Chevron and said agencies cannot interpret the law"},
-                    {t: "Trump v Slaughter 2025", d: "Case about the president firing independent agency members"},
-                    {t: "Federalist 63", d: "Senate acts as a stable fence against the whims of the people"},
-                    {t: "Clean Air Act", d: "Congress gave the EPA power to control air pollution sources"},
-                    {t: "West Virginia v EPA", d: "The court said agencies need clear permission for major questions"}
-                ],
-                sort: [
-                    {f: "Vesting power in one president", b: "Executive"},
-                    {f: "Determining if a law is unconstitutional", b: "Judicial"},
-                    {f: "Voting to override a veto", b: "Legislative"},
-                    {f: "Declaring a state of emergency", b: "Executive"},
-                    {f: "Confirming human rights in court", b: "Judicial"},
-                    {f: "Raising tariffs on foreign goods", b: "Executive"},
-                    {f: "Passing necessary and proper laws", b: "Legislative"}
-                ]
-            }
-        };
+       const database = {
+    "Q1": {
+        match: [
+            {t: "Federalist 70", d: "Hamilton says energy in the executive means one person can act fast"},
+            {t: "Marbury v Madison", d: "Established judicial review so the court is shielded from politics"},
+            {t: "Hampton v US", d: "Created the intelligible principle test for delegating power"},
+            {t: "Loper Bright 2024", d: "Overruled Chevron and said agencies cannot interpret the law"},
+            {t: "Trump v Slaughter 2025", d: "Case about the president firing independent agency members"},
+            {t: "Federalist 63", d: "Senate acts as a stable fence against the whims of the people"},
+            {t: "Clean Air Act", d: "Congress gave the EPA power to control air pollution sources"},
+            {t: "West Virginia v EPA", d: "The court said agencies need clear permission for major questions"},
+            {t: "Affordable Care Act", d: "Shows how agencies handle massive health care regulations"},
+            {t: "National Emergencies Act", d: "Requires presidents to formally declare emergencies to Congress"},
+            {t: "Federalist 51", d: "Ambition must be made to counteract ambition through checks"},
+            {t: "Trade Expansion Act", d: "Section 232 lets the president use tariffs for national security"},
+            {t: "Article II", d: "Vests executive power in a single president for a four year term"},
+            {t: "Gundy v United States", d: "A case where the court kept the nondelegation doctrine weak"},
+            {t: "Federal Reserve Board", d: "Independent body that sets monetary policy for the country"},
+            {t: "Rules Enabling Act", d: "Allows the Supreme Court to make rules for federal courts"},
+            {t: "Federalist 78", d: "The judiciary is the weakest branch because it has no sword or purse"},
+            {t: "United States v Nixon", d: "Confirmed that the president is not above the rule of law"},
+            {t: "INS v Chadha", d: "Ruled that the legislative veto was unconstitutional"},
+            {t: "Granholm v Heald", d: "States cannot stop out of state wine shipments under commerce clause"},
+            {t: "Jacob Ruppert v Caffey", d: "Case about whether contracts can be changed by outside evidence"},
+            {t: "Article III", d: "Establishes the judicial branch and the Supreme Court"},
+            {t: "Gulf of Tonkin", d: "Gave the president power to act in Vietnam without a war declaration"},
+            {t: "Bully Pulpit", d: "The president uses public pressure to influence what Congress does"},
+            {t: "War Powers Resolution", d: "Congress tried to limit the executive ability to deploy troops"},
+            {t: "US Patriot Act", d: "Gave agencies broad surveillance powers after the 911 attacks"},
+            {t: "Federalist 62", d: "Madison explains why the Senate structure checks other branches"},
+            {t: "Plaut v Spendthrift Farm", d: "Congress cannot pass laws that reopen final court decisions"},
+            {t: "Hayburns Case", d: "Early proof that courts cannot be used as administrative bodies"},
+            {t: "Article I Section 8", d: "The necessary and proper clause allows for delegated powers"},
+            {t: "OSHA 1970", d: "Created to handle technical workplace safety standards"},
+            {t: "Internal Revenue Service", d: "Agency delegated with broad powers to enforce tax laws"},
+            {t: "Federalist 48", d: "Madison warns that the legislature is the most dangerous branch"},
+            {t: "FCC v Consumers Research", d: "Agencies cannot use high power without clear authorization"},
+            {t: "Dodd Frank Act", d: "Delegated power to new agencies to regulate the financial markets"},
+            {t: "Iraq 2003 Lapses", d: "Evidence of what happens when congressional oversight fails"},
+            {t: "Vesting Clause", d: "Language in Article II that limits the presidents specific powers"},
+            {t: "Judicial Activism", d: "Philosophy that courts should shape policy and expand rights"},
+            {t: "Legislate from the bench", d: "Criticism that judges are violating the separation of powers"},
+            {t: "Chevron Doctrine", d: "Former rule where courts deferred to agency interpretations"}
+        ],
+        sort: [
+            {f: "Vesting power in one president", b: "Executive"},
+            {f: "Determining if a law is unconstitutional", b: "Judicial"},
+            {f: "Voting to override a veto", b: "Legislative"},
+            {f: "Declaring a state of emergency", b: "Executive"},
+            {f: "Confirming human rights in court", b: "Judicial"},
+            {f: "Raising tariffs on foreign goods", b: "Executive"},
+            {f: "Passing necessary and proper laws", b: "Legislative"},
+            {f: "Deploying troops to a conflict", b: "Executive"},
+            {f: "Interpreting ambiguous statutes", b: "Judicial"},
+            {f: "Creating federal agencies like OSHA", b: "Legislative"},
+            {f: "Issuing a pardon", b: "Executive"},
+            {f: "Setting procedural rules for courts", b: "Judicial"},
+            {f: "Regulating interstate commerce", b: "Legislative"},
+            {f: "Firing an FTC commissioner", b: "Executive"},
+            {f: "Reviewing executive privilege claims", b: "Judicial"},
+            {f: "Conducting oversight hearings", b: "Legislative"},
+            {f: "Negotiating a treaty", b: "Executive"},
+            {f: "Appointing federal judges", b: "Executive"},
+            {f: "Confirming presidential appointments", b: "Legislative"},
+            {f: "Settling disputes between states", b: "Judicial"}
+        ]
+    }
+};
 
         let firstCard = null;
         let lockBoard = false;
@@ -187,7 +231,7 @@
             }
         }
 
-        // MATCH LOGIC
+        MATCH LOGIC
         function handleMatch(card, data) {
             if(lockBoard || card.classList.contains('flipped')) return;
             card.classList.add('flipped');
