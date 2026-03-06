@@ -18,11 +18,13 @@
         #arena { display: none; background: white; border-radius: 25px; padding: 40px; text-align: center; box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
         .back-btn { background: var(--red); color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; margin-bottom: 20px; font-weight: bold; }
         .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 20px; }
-        .tile { height: 110px; background: var(--navy); color: white; border-radius: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 0.6rem; padding: 8px; transition: 0.2s; border: 2px solid transparent; overflow: hidden; }
+        .tile { height: 110px; background: var(--navy); color: white; border-radius: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 0.6rem; padding: 8px; transition: 0.2s; border: 2px solid transparent; }
         .tile.flipped { background: var(--gold); color: black; font-weight: bold; }
         .tile.matched { visibility: hidden; }
-        .display-box { background: #f8fafc; padding: 40px; border-radius: 15px; margin-bottom: 20px; font-size: 1.1rem; font-weight: bold; border: 2px dashed #cbd5e1; min-height: 100px; display: flex; align-items: center; justify-content: center; }
-        .btn-group { display: flex; gap: 15px; justify-content: center; }
+        .display-box { background: #f8fafc; padding: 30px; border-radius: 15px; margin-bottom: 20px; font-size: 1.2rem; font-weight: bold; border: 2px solid var(--navy); min-height: 80px; display: flex; align-items: center; justify-content: center; color: var(--navy); }
+        .mc-container { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
+        .mc-btn { padding: 18px; border-radius: 10px; border: 2px solid #e1e8ed; background: white; cursor: pointer; font-weight: 600; text-align: left; transition: 0.2s; font-size: 0.95rem; }
+        .mc-btn:hover { background: #f0f4f8; border-color: var(--gold); }
         .action-btn { flex: 1; padding: 20px; border-radius: 10px; border: none; font-weight: bold; cursor: pointer; color: white; background: var(--navy); }
     </style>
 </head>
@@ -30,23 +32,23 @@
 
 <header>
     <div class="logo">WTP National Training Hub</div>
-    <div style="font-size: 0.8rem; font-weight: bold;">2026 FULL 120+ DATABASE</div>
+    <div style="font-size: 0.8rem; font-weight: bold;">VERIFIED 120+ DATABASE</div>
 </header>
 
 <div class="container">
     <div class="selector-box">
         <label>Select Unit Question</label>
         <select id="topicSwitch" onchange="exitGame()">
-            <option value="Q1">Q1: Separation of Powers & Foundations</option>
-            <option value="Q2">Q2: Courts & Major Questions Doctrine</option>
-            <option value="Q3">Q3: Bill of Rights & Detention</option>
+            <option value="Q1">Q1</option>
+            <option value="Q2">Q2</option>
+            <option value="Q3">Q3</option>
         </select>
     </div>
 
     <div id="lobby">
         <div class="game-card" onclick="launch('match')"><div>🃏</div><h3>Evidence Match</h3></div>
         <div class="game-card" onclick="launch('sort')"><div>⚖️</div><h3>Power Sorter</h3></div>
-        <div class="game-card" onclick="launch('verdict')"><div>🚨</div><h3>Fact Verdict</h3></div>
+        <div class="game-card" onclick="launch('mc')"><div>🎯</div><h3>Multi-Choice Gauntlet</h3></div>
     </div>
 
     <div id="arena">
@@ -104,11 +106,7 @@ const database = {
             {f: "Vetoing a Bill", b: "Executive"}, {f: "Declaring War", b: "Legislative"},
             {f: "Judicial Review", b: "Judicial"}, {f: "Coining Money", b: "Legislative"},
             {f: "Commanding the Army", b: "Executive"}, {f: "Granting Pardons", b: "Executive"},
-            {f: "Passing a Budget", b: "Legislative"}, {f: "Interpreting Statutes", b: "Judicial"},
-            {f: "Appointing Judges", b: "Executive"}, {f: "Impeaching Officers", b: "Legislative"},
-            {f: "Ratifying Treaties", b: "Legislative"}, {f: "Issuing Injunctions", b: "Judicial"},
-            {f: "Enforcing Federal Law", b: "Executive"}, {f: "Regulating Commerce", b: "Legislative"},
-            {f: "Conducting Trials", b: "Judicial"}, {f: "Negotiating Treaties", b: "Executive"}
+            {f: "Passing a Budget", b: "Legislative"}, {f: "Interpreting Statutes", b: "Judicial"}
         ]
     },
     "Q2": {
@@ -156,9 +154,7 @@ const database = {
         ],
         sort: [
             {f: "Invokes Major Questions Doctrine", b: "Judicial"}, {f: "Issues Tailpipe Emissions rules", b: "Executive"},
-            {f: "Writes Clear Authorization Clause", b: "Legislative"}, {f: "Overrules Chevron Deference", b: "Judicial"},
-            {f: "Drafts Enabling Statute", b: "Legislative"}, {f: "Finalizes EPA Regulations", b: "Executive"},
-            {f: "Sues Agency for Overreach", b: "Judicial"}, {f: "Grants Agency Subpoena Power", b: "Legislative"}
+            {f: "Writes Clear Authorization Clause", b: "Legislative"}, {f: "Overrules Chevron Deference", b: "Judicial"}
         ]
     },
     "Q3": {
@@ -206,14 +202,12 @@ const database = {
         ],
         sort: [
             {f: "Ordering a Writ of Habeas Corpus", b: "Judicial"}, {f: "Enacting the Bail Reform Act", b: "Legislative"},
-            {f: "Conducting warrantless ICE arrests", b: "Executive"}, {f: "Establishing the FISA Court", b: "Legislative"},
-            {f: "Setting Excessive Bail", b: "Judicial"}, {f: "Managing Pretrial Jail Safety", b: "Executive"},
-            {f: "Defining Serious Felony Crimes", b: "Legislative"}, {f: "Reviewing Detention Factuality", b: "Judicial"}
+            {f: "Conducting warrantless ICE arrests", b: "Executive"}, {f: "Establishing the FISA Court", b: "Legislative"}
         ]
     }
 };
 
-let selectedTopic = "Q1", score = 0, firstTile = null, lock = false, currentItem = null, verdictTruth = true;
+let selectedTopic = "Q1", score = 0, firstTile = null, lock = false, currentItem = null, correctAns = "";
 
 function launch(type) {
     selectedTopic = document.getElementById('topicSwitch').value;
@@ -243,9 +237,9 @@ function launch(type) {
     } else if(type === 'sort') {
         stage.innerHTML = "<h3>Power Sorter</h3><div class='display-box' id='db'></div><div class='btn-group'><button class='action-btn' onclick='chkS(\"Legislative\")'>Art I</button><button class='action-btn' onclick='chkS(\"Executive\")'>Art II</button><button class='action-btn' onclick='chkS(\"Judicial\")'>Art III</button></div><p id='sc'>Score: 0</p>";
         score = 0; nxtS();
-    } else if(type === 'verdict') {
-        stage.innerHTML = "<h3>Fact Verdict</h3><div class='display-box' id='db'></div><div class='btn-group'><button class='action-btn' style='background:var(--green)' onclick='chkV(true)'>TRUTH</button><button class='action-btn' style='background:var(--red)' onclick='chkV(false)'>MYTH</button></div><p id='sc'>Streak: 0</p>";
-        score = 0; nxtV();
+    } else if(type === 'mc') {
+        stage.innerHTML = "<h3>The Multi-Choice Gauntlet</h3><div class='display-box' id='db'></div><div class='mc-container' id='mc-opts'></div><p id='sc' style='margin-top:20px; font-weight:bold;'>Streak: 0</p>";
+        score = 0; nxtMC();
     }
 }
 
@@ -256,13 +250,42 @@ function nxtS() {
 }
 function chkS(a) { if(a === currentItem.b) { score++; document.getElementById('sc').innerText = "Score: " + score; nxtS(); } else { alert("Correct Answer: " + currentItem.b); score = 0; document.getElementById('sc').innerText = "Score: 0"; nxtS(); } }
 
-function nxtV() {
+function nxtMC() {
     const list = database[selectedTopic].match;
-    const r = list[Math.floor(Math.random()*list.length)];
-    verdictTruth = Math.random() > 0.5;
-    document.getElementById('db').innerHTML = `<div style="text-align:center"><span style="color:var(--red)">${r.t}</span><br><small style="font-size:0.8rem; font-weight:normal;">${verdictTruth ? r.d : list[Math.floor(Math.random()*list.length)].d}</small></div>`;
+    const target = list[Math.floor(Math.random()*list.length)];
+    correctAns = target.d;
+    document.getElementById('db').innerText = target.t;
+    
+    let options = [target.d];
+    while(options.length < 4) {
+        let r = list[Math.floor(Math.random()*list.length)].d;
+        if(!options.includes(r)) options.push(r);
+    }
+    options.sort(() => 0.5 - Math.random());
+    
+    const optBox = document.getElementById('mc-opts');
+    optBox.innerHTML = "";
+    options.forEach(o => {
+        const btn = document.createElement('button');
+        btn.className = 'mc-btn';
+        btn.innerText = o;
+        btn.onclick = () => chkMC(o);
+        optBox.appendChild(btn);
+    });
 }
-function chkV(a) { if(a === verdictTruth) { score++; document.getElementById('sc').innerText = "Streak: " + score; nxtV(); } else { alert("Incorrect verdict!"); score = 0; document.getElementById('sc').innerText = "Streak: 0"; nxtV(); } }
+
+function chkMC(choice) {
+    if(choice === correctAns) {
+        score++;
+        document.getElementById('sc').innerText = "Streak: " + score;
+        nxtMC();
+    } else {
+        alert("Incorrect! The correct definition was: " + correctAns);
+        score = 0;
+        document.getElementById('sc').innerText = "Streak: 0";
+        nxtMC();
+    }
+}
 
 function exitGame() { document.getElementById('lobby').style.display = 'grid'; document.getElementById('arena').style.display = 'none'; firstTile = null; }
 </script>
