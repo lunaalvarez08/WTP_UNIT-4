@@ -32,7 +32,7 @@
 
 <header>
     <div class="logo">WTP National Training Hub</div>
-    <div style="font-size: 0.8rem; font-weight: bold;">VERIFIED 120+ DATABASE</div>
+    <div style="font-size: 0.8rem; font-weight: bold;">Practice</div>
 </header>
 
 <div class="container">
@@ -48,7 +48,7 @@
     <div id="lobby">
         <div class="game-card" onclick="launch('match')"><div>🃏</div><h3>Evidence Match</h3></div>
         <div class="game-card" onclick="launch('sort')"><div>⚖️</div><h3>Power Sorter</h3></div>
-        <div class="game-card" onclick="launch('mc')"><div>🎯</div><h3>Multi-Choice Gauntlet</h3></div>
+        <div class="game-card" onclick="launch('mc')"><div>🎯</div><h3>Multichoice</h3></div>
     </div>
 
     <div id="arena">
@@ -238,7 +238,7 @@ function launch(type) {
         stage.innerHTML = "<h3>Power Sorter</h3><div class='display-box' id='db'></div><div class='btn-group'><button class='action-btn' onclick='chkS(\"Legislative\")'>Art I</button><button class='action-btn' onclick='chkS(\"Executive\")'>Art II</button><button class='action-btn' onclick='chkS(\"Judicial\")'>Art III</button></div><p id='sc'>Score: 0</p>";
         score = 0; nxtS();
     } else if(type === 'mc') {
-        stage.innerHTML = "<h3>The Multi-Choice Gauntlet</h3><div class='display-box' id='db'></div><div class='mc-container' id='mc-opts'></div><p id='sc' style='margin-top:20px; font-weight:bold;'>Streak: 0</p>";
+        stage.innerHTML = "<h3>The Multichoice</h3><div class='display-box' id='db'></div><div class='mc-container' id='mc-opts'></div><p id='sc' style='margin-top:20px; font-weight:bold;'>Streak: 0</p>";
         score = 0; nxtMC();
     }
 }
