@@ -73,19 +73,19 @@
     <div class="container">
         <div class="settings-bar">
             <div class="settings-group">
-                <label>Question Topic</label>
+                <label>Active Study Unit</label>
                 <select id="globalTopic" onchange="resetLobby()">
-                    <option value="Q1">Q1: Separation of Powers & Foundations</option>
+                    <option value="Q1">Q1: Separation of Powers & Administrative State</option>
                 </select>
             </div>
-            <div style="color:var(--gold); font-size: 0.7rem; font-weight: bold; text-align: right;">NATIONALS PREP <br> 2026 EDITION</div>
+            <div style="color:var(--gold); font-size: 0.7rem; font-weight: bold; text-align: right;">VERIFIED FOR <br> NATIONALS 2026</div>
         </div>
 
         <div id="lobby-view">
             <div class="game-grid">
                 <div class="game-card" onclick="launchGame('match')"><div>🃏</div><h3>Evidence Match</h3><p style="font-size:0.7rem;">Pair Cases & Principles</p></div>
-                <div class="game-card" onclick="launchGame('sort')"><div>⚖️</div><h3>Power Sorter</h3><p style="font-size:0.7rem;">Article I, II, or III?</p></div>
-                <div class="game-card" onclick="launchGame('verdict')"><div>🚨</div><h3>Case Verdict</h3><p style="font-size:0.7rem;">Rapid Fire Fact Check</p></div>
+                <div class="game-card" onclick="launchGame('sort')"><div>⚖️</div><h3>Article Sorter</h3><p style="font-size:0.7rem;">Article I, II, or III?</p></div>
+                <div class="game-card" onclick="launchGame('verdict')"><div>🚨</div><h3>Fact Verdict</h3><p style="font-size:0.7rem;">Instant Recognition</p></div>
             </div>
         </div>
 
@@ -101,44 +101,44 @@
                 match: [
                     {t: "Federalist 70", d: "Hamilton argues that a single executive ensures accountability and 'energy'"},
                     {t: "Marbury v Madison", d: "The Court claimed the power to strike down laws that violate the Constitution"},
-                    {t: "Hampton v US", d: "The 'Intelligible Principle' doctrine allows Congress to delegate power to agencies"},
-                    {t: "Loper Bright 2024", d: "Ended Chevron deference; judges, not agencies, must interpret vague laws"},
-                    {t: "Humphrey's Executor", d: "Limits the President's removal power over independent agency heads"},
-                    {t: "Federalist 63", d: "The Senate's long terms provide a 'temperate and respectable' check on public whims"},
-                    {t: "Clean Air Act", d: "Broad delegation example where the EPA sets technical pollution standards"},
-                    {t: "West Virginia v EPA", d: "Major Questions Doctrine: Agencies need clear Congressional intent for huge policies"},
-                    {t: "Affordable Care Act", d: "Modern delegation to HHS to define health insurance rules and mandates"},
-                    {t: "National Emergencies Act", d: "Established a formal process for the President to invoke emergency powers"},
-                    {t: "Federalist 51", d: "Madison's argument that 'Ambition must be made to counteract ambition'"},
-                    {t: "Trade Expansion Act", d: "Section 232 allows the President to adjust imports for 'National Security'"},
-                    {t: "Article II Vesting Clause", d: "Grants 'The Executive Power' to a single President of the United States"},
-                    {t: "Gundy v United States", d: "A 2019 case where the Court declined to revive the Non-Delegation Doctrine"},
-                    {t: "Federal Reserve Board", d: "Independent agency that controls monetary policy without political interference"},
-                    {t: "Rules Enabling Act", d: "Congress delegated the power to the Court to set federal procedural rules"},
-                    {t: "Federalist 78", d: "Judiciary is the 'least dangerous' because it lacks the 'sword' and 'purse'"},
-                    {t: "United States v Nixon", d: "Executive privilege is not absolute in the face of criminal proceedings"},
-                    {t: "INS v Chadha", d: "The Legislative Veto is unconstitutional because it bypasses Presentment"},
-                    {t: "Granholm v Heald", d: "Dormant Commerce Clause: States cannot discriminate against out-of-state trade"},
-                    {t: "Mistretta v US", d: "Upheld the Sentencing Commission as a valid delegation of power"},
-                    {t: "Article III", d: "Grants 'The Judicial Power' and establishes original jurisdiction limits"},
-                    {t: "2002 Iraq AUMF", d: "Broad authorization delegating war-making discretion to the President"},
-                    {t: "Bully Pulpit", d: "The President's informal power to use media to pressure the Legislature"},
-                    {t: "War Powers Resolution", d: "1973 attempt by Congress to limit unilateral executive troop deployment"},
-                    {t: "USA PATRIOT Act", d: "Delegated broad surveillance and intelligence powers to the Executive"},
-                    {t: "Federalist 62", d: "Madison argues Senate stability prevents 'mutable' and messy lawmaking"},
-                    {t: "Plaut v Spendthrift Farm", d: "Congress cannot force the Judiciary to reopen previously closed cases"},
-                    {t: "Hayburn's Case", d: "Early SCOTUS refusal to perform administrative tasks for the Executive"},
-                    {t: "Necessary & Proper Clause", d: "Article I, Sec 8: Power to make laws for carrying out expressed duties"},
+                    {t: "Hampton v US", d: "Established the 'Intelligible Principle' test for delegation of power"},
+                    {t: "Loper Bright 2024", d: "Overruled Chevron; courts must exercise independent judgment on vague laws"},
+                    {t: "Humphrey's Executor", d: "Upheld for-cause removal protections for independent agency commissioners"},
+                    {t: "Federalist 63", d: "Argues the Senate provides a stable check against temporary public passions"},
+                    {t: "Clean Air Act", d: "A prime example of Congress delegating technical rulemaking to an agency"},
+                    {t: "West Virginia v EPA", d: "Major Questions Doctrine: Agencies need clear authority for major policies"},
+                    {t: "Affordable Care Act", d: "Case study in broad delegation to the Department of Health and Human Services"},
+                    {t: "National Emergencies Act", d: "1976 Act requiring formal procedures for the use of emergency powers"},
+                    {t: "Federalist 51", d: "Famous for the phrase 'Ambition must be made to counteract ambition'"},
+                    {t: "Trade Expansion Act", d: "Sect. 232 allows the President to adjust imports for 'National Security'"},
+                    {t: "Article II Vesting", d: "Grants 'The Executive Power' to a single President, sparking Unitary debate"},
+                    {t: "Gundy v United States", d: "2019 case where SCOTUS declined to revive the Non-Delegation Doctrine"},
+                    {t: "Federal Reserve Board", d: "Independent body controlling monetary policy without political oversight"},
+                    {t: "Rules Enabling Act", d: "Congress delegated procedural rulemaking power to the Supreme Court"},
+                    {t: "Federalist 78", d: "Judiciary is 'least dangerous' because it lacks both 'sword' and 'purse'"},
+                    {t: "United States v Nixon", d: "Executive privilege is not absolute during criminal investigations"},
+                    {t: "INS v Chadha", d: "Struck down the Legislative Veto for violating the Presentment Clause"},
+                    {t: "Granholm v Heald", d: "Dormant Commerce Clause prevents states from favoring local businesses"},
+                    {t: "Mistretta v US", d: "Upheld the Sentencing Commission as a valid use of delegated authority"},
+                    {t: "Article III", d: "Vests the 'Judicial Power' and limits original jurisdiction categories"},
+                    {t: "2002 Iraq AUMF", d: "Example of broad delegation of the war power to the Executive Branch"},
+                    {t: "Bully Pulpit", d: "The President's informal power to use public media to drive policy"},
+                    {t: "War Powers Resolution", d: "1973 attempt by Congress to limit unilateral presidential troop use"},
+                    {t: "USA PATRIOT Act", d: "Broadly delegated surveillance and intelligence authority to the Executive"},
+                    {t: "Federalist 62", d: "Madison argues Senate stability prevents 'mutable' and inconsistent law"},
+                    {t: "Plaut v Spendthrift Farm", d: "Separation of Powers: Congress cannot force the reopening of court cases"},
+                    {t: "Hayburn's Case", d: "Found that courts cannot be used for purely administrative functions"},
+                    {t: "Necessary & Proper Clause", d: "The Article I source of Congress's implied and delegated powers"},
                     {t: "OSHA Act of 1970", d: "Delegated workplace safety regulation to the Department of Labor"},
-                    {t: "Internal Revenue Service", d: "Agency given authority to interpret and enforce the federal tax code"},
-                    {t: "Federalist 48", d: "Warning that 'parchment barriers' cannot stop the legislative 'vortex'"},
-                    {t: "Jarkesy v SEC (2024)", d: "7th Amendment limits an agency's power to fine without a jury trial"},
-                    {t: "Dodd-Frank Act", d: "Created the CFPB, testing independent agency structure and funding"},
-                    {t: "Curtiss-Wright (1936)", d: "Described the President as the 'Sole Organ' in foreign affairs"},
-                    {t: "Youngstown v Sawyer", d: "Established the three-tier framework for evaluating Presidential power"},
-                    {t: "Judicial Activism", d: "Philosophy that the Court should correct social injustices via rulings"},
-                    {t: "Originalism", d: "Interpretation looking for the meaning of the text at the time of adoption"},
-                    {t: "Non-Delegation Doctrine", d: "The theory that Article I prevents Congress from divesting its powers"}
+                    {t: "Internal Revenue Service", d: "Agency authorized to interpret and enforce the federal tax code"},
+                    {t: "Federalist 48", d: "Warns that the legislature is the 'impetuous vortex' of power"},
+                    {t: "Jarkesy v SEC (2024)", d: "Agencies cannot fine for fraud in-house; the 7th Amendment requires a jury"},
+                    {t: "Trump v Slaughter (2025)", d: "Pending challenge to the President's ability to fire FTC commissioners"},
+                    {t: "Curtiss-Wright (1936)", d: "Established the President as the 'Sole Organ' in foreign relations"},
+                    {t: "Youngstown v Sawyer", d: "Created the three-tier framework for assessing Presidential authority"},
+                    {t: "Judicial Activism", d: "The view that courts should use their power to address social issues"},
+                    {t: "Originalism", d: "Interpretation based on the meaning of the text at its time of adoption"},
+                    {t: "Non-Delegation Doctrine", d: "The theory that Congress cannot give away its core lawmaking power"}
                 ],
                 sort: [
                     {f: "Granting Reprieves and Pardons", b: "Executive"},
@@ -160,15 +160,15 @@
                     {f: "Deciding cases of Admiralty", b: "Judicial"},
                     {f: "State of the Union Information", b: "Executive"},
                     {f: "Impeachment of Civil Officers", b: "Legislative"},
-                    {f: "Punishing Piracies on the High Seas", b: "Legislative"},
+                    {f: "Punishing Piracies on High Seas", b: "Legislative"},
                     {f: "Executing the Laws", b: "Executive"},
-                    {f: "Reviewing the constitutionality of laws", b: "Judicial"},
-                    {f: "Regulating Commerce with Foreign Nations", b: "Legislative"},
-                    {f: "Requiring Opinions of Department Heads", b: "Executive"},
+                    {f: "Reviewing constitutionality of laws", b: "Judicial"},
+                    {f: "Regulating Foreign Commerce", b: "Legislative"},
+                    {f: "Requiring Opinions of Dept Heads", b: "Executive"},
                     {f: "Defining and Punishing Offenses", b: "Legislative"},
                     {f: "Presiding over Impeachment Trials", b: "Judicial"},
                     {f: "Vetoing Congressional Legislation", b: "Executive"},
-                    {f: "Appropriating Funds (Power of Purse)", b: "Legislative"},
+                    {f: "Appropriating Public Funds", b: "Legislative"},
                     {f: "Exercising Original Jurisdiction", b: "Judicial"},
                     {f: "Convening Extraordinary Sessions", b: "Executive"}
                 ]
@@ -210,10 +210,10 @@
                     document.getElementById('grid').appendChild(card);
                 });
             } else if(type === 'sort') {
-                stage.innerHTML = `<h2>Constitutional Power Sorter</h2><div class="sort-well" id="sd"></div><div class="bucket-container"><button class="bucket" onclick="checkS('Legislative')">Article I (Leg)</button><button class="bucket" onclick="checkS('Executive')">Article II (Exec)</button><button class="bucket" onclick="checkS('Judicial')">Article III (Jud)</button></div><div id="sc" style="margin-top:15px; font-weight:bold;">Score: 0</div>`;
+                stage.innerHTML = `<h2>Article Power Sorter</h2><div class="sort-well" id="sd"></div><div class="bucket-container"><button class="bucket" onclick="checkS('Legislative')">Art. I (Leg)</button><button class="bucket" onclick="checkS('Executive')">Art. II (Exec)</button><button class="bucket" onclick="checkS('Judicial')">Art. III (Jud)</button></div><div id="sc" style="margin-top:15px; font-weight:bold;">Score: 0</div>`;
                 score = 0; nextS();
             } else if(type === 'verdict') {
-                stage.innerHTML = `<h2>Case Verdict</h2><div class="verdict-box"><h3 id="vT" style="color:var(--red)"></h3><p id="vD"></p></div><div class="bucket-container"><button class="bucket" style="background:var(--green)" onclick="checkV(true)">TRUTH</button><button class="bucket" style="background:var(--red)" onclick="checkV(false)">MYTH</button></div><div id="sc" style="margin-top:15px; font-weight:bold;">Streak: 0</div>`;
+                stage.innerHTML = `<h2>Fact Verdict</h2><div class="verdict-box"><h3 id="vT" style="color:var(--red)"></h3><p id="vD"></p></div><div class="bucket-container"><button class="bucket" style="background:var(--green)" onclick="checkV(true)">TRUTH</button><button class="bucket" style="background:var(--red)" onclick="checkV(false)">MYTH</button></div><div id="sc" style="margin-top:15px; font-weight:bold;">Streak: 0</div>`;
                 score = 0; nextV();
             }
         }
@@ -225,7 +225,7 @@
         }
         function checkS(a) {
             if(a === currentItem.b) { score++; document.getElementById('sc').innerText = "Score: " + score; }
-            else { alert("Incorrect. " + currentItem.f + " is an " + currentItem.b + " power."); score = 0; document.getElementById('sc').innerText = "Score: 0"; }
+            else { alert("Incorrect. This is an " + currentItem.b + " power."); score = 0; document.getElementById('sc').innerText = "Score: 0"; }
             nextS();
         }
 
@@ -243,10 +243,10 @@
         }
         function checkV(a) {
             if(a === isTrue) { score++; document.getElementById('sc').innerText = "Streak: " + score; nextV(); }
-            else { alert("That fact was a myth! Your streak has reset."); score = 0; document.getElementById('sc').innerText = "Streak: 0"; nextV(); }
+            else { alert("False! Your streak has reset."); score = 0; document.getElementById('sc').innerText = "Streak: 0"; nextV(); }
         }
 
-        function exitGame() { document.getElementById('lobby-view').style.display = 'block'; document.getElementById('game-arena').style.display = 'none'; firstCard = null; }
+        function exitGame() { document.getElementById('lobby-view').style.display = 'block'; document.getElementById('game-arena').style.display = 'none'; }
         function resetLobby() { exitGame(); }
     </script>
 </body>
