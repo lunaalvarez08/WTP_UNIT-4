@@ -34,30 +34,29 @@
             background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); 
             color: white; padding: 10px; border-radius: 8px; width: 100%; cursor: pointer;
         }
-        select option { color: black; }
 
         #lobby-view { display: block; }
-        .game-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .game-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
         .game-card { 
-            background: var(--glass); border-radius: 24px; padding: 40px 25px; 
+            background: var(--glass); border-radius: 24px; padding: 30px 15px; 
             text-align: center; cursor: pointer; transition: 0.3s; 
             border: 1px solid rgba(255,255,255,0.5); box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
         .game-card:hover { transform: translateY(-8px); border-color: var(--gold); box-shadow: 0 12px 30px rgba(0,0,0,0.1); }
-        .game-card div { font-size: 3rem; margin-bottom: 15px; }
+        .game-card div { font-size: 2.5rem; margin-bottom: 10px; }
 
         #game-arena { display: none; background: white; border-radius: 30px; padding: 40px; min-height: 500px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
         .back-btn { background: var(--red); color: white; border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; margin-bottom: 30px; font-weight: bold; }
 
-        .match-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; max-width: 800px; margin: 0 auto; }
-        .card { height: 110px; background: var(--navy); color: white; display: flex; align-items: center; justify-content: center; border-radius: 12px; cursor: pointer; font-size: 0.75rem; padding: 12px; transition: 0.2s; }
+        .match-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; max-width: 800px; margin: 0 auto; }
+        .card { height: 100px; background: var(--navy); color: white; display: flex; align-items: center; justify-content: center; border-radius: 12px; cursor: pointer; font-size: 0.7rem; padding: 10px; transition: 0.2s; overflow: hidden; }
         .card.flipped { background: var(--gold); color: black; font-weight: bold; }
-        .card.matched { visibility: hidden; pointer-events: none; }
+        .card.matched { visibility: hidden; }
 
-        .sort-well { background: #f1f5f9; padding: 40px; border-radius: 20px; margin: 20px 0; font-size: 1.4rem; font-weight: bold; min-height: 100px; display: flex; align-items: center; justify-content: center; border: 2px dashed #cbd5e1; }
+        .sort-well, .verdict-box { background: #f1f5f9; padding: 40px; border-radius: 20px; margin: 20px 0; font-size: 1.3rem; font-weight: bold; min-height: 120px; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 2px dashed #cbd5e1; }
         .bucket-container { display: flex; justify-content: center; gap: 15px; margin-top: 20px; }
-        .bucket { flex: 1; padding: 20px; background: var(--navy); color: white; border-radius: 12px; cursor: pointer; font-weight: bold; transition: 0.2s; }
-        .bucket:hover { transform: scale(1.05); background: var(--gold); color: black; }
+        .bucket { flex: 1; padding: 20px; background: var(--navy); color: white; border-radius: 12px; cursor: pointer; font-weight: bold; border: none; }
+        .bucket:hover { background: var(--gold); color: black; }
     </style>
 </head>
 <body>
@@ -68,7 +67,6 @@
             <a href="index.html">Home</a>
             <a href="team.html">Team</a>
             <a href="practice.html" style="color:var(--gold)">Practice</a>
-            <a href="about.html">About</a>
         </nav>
     </header>
 
@@ -79,26 +77,16 @@
                 <select id="globalTopic" onchange="resetLobby()">
                     <option value="Q1">Q1: Foundations</option>
                     <option value="Q2">Q2: Structures (Coming Soon)</option>
-                    <option value="Q3">Q3: Application (Coming Soon)</option>
                 </select>
             </div>
-            <div style="color:var(--gold); font-size: 0.7rem; font-weight: bold; text-align: right;">
-                NATIONALS PREP <br> 2025 EDITION
-            </div>
+            <div style="color:var(--gold); font-size: 0.7rem; font-weight: bold; text-align: right;">NATIONALS PREP 2026</div>
         </div>
 
         <div id="lobby-view">
             <div class="game-grid">
-                <div class="game-card" onclick="launchGame('match')">
-                    <div>🃏</div>
-                    <h3>Evidence Match</h3>
-                    <p style="font-size:0.75rem; color:#666;">Match cases and papers to their key principles.</p>
-                </div>
-                <div class="game-card" onclick="launchGame('sort')">
-                    <div>⚖️</div>
-                    <h3>Branch Sorter</h3>
-                    <p style="font-size:0.75rem; color:#666;">Categorize powers by Legislative, Executive, or Judicial.</p>
-                </div>
+                <div class="game-card" onclick="launchGame('match')"><div>🃏</div><h3>Match</h3><p style="font-size:0.7rem;">Pairs</p></div>
+                <div class="game-card" onclick="launchGame('sort')"><div>⚖️</div><h3>Sort</h3><p style="font-size:0.7rem;">Branches</p></div>
+                <div class="game-card" onclick="launchGame('verdict')"><div>🚨</div><h3>Verdict</h3><p style="font-size:0.7rem;">Fact or Myth</p></div>
             </div>
         </div>
 
@@ -163,126 +151,85 @@
                     {f: "Passing necessary and proper laws", b: "Legislative"},
                     {f: "Deploying troops to a conflict", b: "Executive"},
                     {f: "Interpreting ambiguous statutes", b: "Judicial"},
-                    {f: "Creating federal agencies like OSHA", b: "Legislative"},
-                    {f: "Issuing a pardon", b: "Executive"},
-                    {f: "Setting procedural rules for courts", b: "Judicial"},
-                    {f: "Regulating interstate commerce", b: "Legislative"},
-                    {f: "Firing an FTC commissioner", b: "Executive"},
-                    {f: "Reviewing executive privilege claims", b: "Judicial"},
-                    {f: "Conducting oversight hearings", b: "Legislative"},
-                    {f: "Negotiating a treaty", b: "Executive"},
-                    {f: "Appointing federal judges", b: "Executive"},
-                    {f: "Confirming presidential appointments", b: "Legislative"},
-                    {f: "Settling disputes between states", b: "Judicial"}
+                    {f: "Creating federal agencies like OSHA", b: "Legislative"}
                 ]
             }
         };
 
-        let firstCard = null;
-        let lockBoard = false;
+        let firstCard = null, lockBoard = false, currentItem = null, score = 0, isTrue = true;
 
         function launchGame(type) {
             const topic = document.getElementById('globalTopic').value;
             const stage = document.getElementById('game-stage');
             const data = database[topic];
-
-            if(!data || data.match.length === 0) {
-                alert("Data for this question is not loaded yet!");
-                return;
-            }
-
             document.getElementById('lobby-view').style.display = 'none';
             document.getElementById('game-arena').style.display = 'block';
             stage.innerHTML = "";
 
             if(type === 'match') {
-                stage.innerHTML = `<h2>Evidence Match: ${topic}</h2><div class="match-grid" id="grid"></div>`;
-                const grid = document.getElementById('grid');
+                stage.innerHTML = `<div class="match-grid" id="grid"></div>`;
                 let cards = [];
-                // We pick the first 8 items for a manageable 16-card grid
-                data.match.slice(0, 8).forEach((item, i) => {
-                    cards.push({txt: item.t, id: i}, {txt: item.d, id: i});
-                });
-                cards.sort(() => Math.random() - 0.5);
-
+                // Shuffle and pick 8 pairs for the grid
+                let shuffled = [...data.match].sort(() => 0.5 - Math.random()).slice(0, 8);
+                shuffled.forEach((item, i) => { cards.push({txt: item.t, id: i}, {txt: item.d, id: i}); });
+                cards.sort(() => 0.5 - Math.random());
                 cards.forEach(c => {
                     const card = document.createElement('div');
-                    card.className = 'card';
-                    card.innerText = '???';
-                    card.onclick = () => handleMatch(card, c);
-                    grid.appendChild(card);
+                    card.className = 'card'; card.innerText = '???';
+                    card.onclick = () => {
+                        if(lockBoard || card.classList.contains('flipped')) return;
+                        card.classList.add('flipped'); card.innerText = c.txt;
+                        if(!firstCard) { firstCard = {card, id: c.id}; } 
+                        else {
+                            if(firstCard.id === c.id) { 
+                                setTimeout(() => { card.classList.add('matched'); firstCard.card.classList.add('matched'); firstCard = null; }, 400);
+                            } else {
+                                lockBoard = true;
+                                setTimeout(() => { card.classList.remove('flipped'); card.innerText = '???'; firstCard.card.classList.remove('flipped'); firstCard.card.innerText = '???'; firstCard = null; lockBoard = false; }, 800);
+                            }
+                        }
+                    };
+                    document.getElementById('grid').appendChild(card);
                 });
             } else if(type === 'sort') {
-                stage.innerHTML = `
-                    <h2>Branch Sorter: ${topic}</h2>
-                    <div class="sort-well" id="sortDisplay"></div>
-                    <div class="bucket-container">
-                        <div class="bucket" onclick="checkSort('Legislative')">Legislative</div>
-                        <div class="bucket" onclick="checkSort('Executive')">Executive</div>
-                        <div class="bucket" onclick="checkSort('Judicial')">Judicial</div>
-                    </div>
-                    <div id="score" style="margin-top:20px; font-weight:bold;">Score: 0</div>
-                `;
-                nextSort();
+                stage.innerHTML = `<h2>Branch Sorter</h2><div class="sort-well" id="sd"></div><div class="bucket-container"><button class="bucket" onclick="checkS('Legislative')">Leg</button><button class="bucket" onclick="checkS('Executive')">Exec</button><button class="bucket" onclick="checkS('Judicial')">Jud</button></div><div id="sc">Score: 0</div>`;
+                score = 0; nextS();
+            } else if(type === 'verdict') {
+                stage.innerHTML = `<h2>Case Verdict</h2><div class="verdict-box"><h3 id="vT" style="color:var(--red)"></h3><p id="vD"></p></div><div class="bucket-container"><button class="bucket" style="background:var(--green)" onclick="checkV(true)">TRUTH</button><button class="bucket" style="background:var(--red)" onclick="checkV(false)">MYTH</button></div><div id="sc">Streak: 0</div>`;
+                score = 0; nextV();
             }
         }
 
-        function handleMatch(card, data) {
-            if(lockBoard || card.classList.contains('flipped') || card.classList.contains('matched')) return;
-            card.classList.add('flipped');
-            card.innerText = data.txt;
+        function nextS() {
+            const items = database[document.getElementById('globalTopic').value].sort;
+            currentItem = items[Math.floor(Math.random()*items.length)];
+            document.getElementById('sd').innerText = currentItem.f;
+        }
+        function checkS(a) {
+            if(a === currentItem.b) { score++; document.getElementById('sc').innerText = "Score: " + score; }
+            else { alert("Nope! " + currentItem.f + " is " + currentItem.b); score = 0; }
+            nextS();
+        }
 
-            if(!firstCard) {
-                firstCard = {card, id: data.id};
-            } else {
-                if(firstCard.id === data.id) {
-                    setTimeout(() => {
-                        card.classList.add('matched');
-                        firstCard.card.classList.add('matched');
-                        firstCard = null;
-                    }, 400);
-                } else {
-                    lockBoard = true;
-                    setTimeout(() => {
-                        card.classList.remove('flipped');
-                        card.innerText = '???';
-                        firstCard.card.classList.remove('flipped');
-                        firstCard.card.innerText = '???';
-                        firstCard = null;
-                        lockBoard = false;
-                    }, 800);
-                }
+        function nextV() {
+            const items = database[document.getElementById('globalTopic').value].match;
+            const r = items[Math.floor(Math.random()*items.length)];
+            isTrue = Math.random() > 0.5;
+            document.getElementById('vT').innerText = r.t;
+            if(isTrue) document.getElementById('vD').innerText = r.d;
+            else {
+                let w = items[Math.floor(Math.random()*items.length)];
+                while(w.t === r.t) w = items[Math.floor(Math.random()*items.length)];
+                document.getElementById('vD').innerText = w.d;
             }
         }
-
-        let currentItem = null;
-        let score = 0;
-        function nextSort() {
-            const topic = document.getElementById('globalTopic').value;
-            const items = database[topic].sort;
-            currentItem = items[Math.floor(Math.random() * items.length)];
-            document.getElementById('sortDisplay').innerText = currentItem.f;
+        function checkV(a) {
+            if(a === isTrue) { score++; document.getElementById('sc').innerText = "Streak: " + score; nextV(); }
+            else { alert("Wrong! That fact was a myth for that case."); score = 0; document.getElementById('sc').innerText = "Streak: 0"; nextV(); }
         }
 
-        function checkSort(ans) {
-            if(ans === currentItem.b) {
-                score++;
-                document.getElementById('score').innerText = "Score: " + score;
-            } else {
-                alert("Actually, " + currentItem.f + " is a " + currentItem.b + " power.");
-            }
-            nextSort();
-        }
-
-        function exitGame() {
-            document.getElementById('lobby-view').style.display = 'block';
-            document.getElementById('game-arena').style.display = 'none';
-            firstCard = null;
-        }
-
-        function resetLobby() {
-            exitGame();
-        }
+        function exitGame() { document.getElementById('lobby-view').style.display = 'block'; document.getElementById('game-arena').style.display = 'none'; }
+        function resetLobby() { exitGame(); }
     </script>
 </body>
 </html>
