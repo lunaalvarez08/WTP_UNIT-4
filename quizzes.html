@@ -2116,19 +2116,15 @@ let currentQuestions = [];
 let streak = 0;
 
 function switchTab(tab) {
-    // Selects and hides views while managing active tab states
-    const tabs = ['play', 'arch', 'bank', 'active'];
-    tabs.forEach(t => {
-        const view = document.getElementById('view' + t);
-        const tabBtn = document.getElementById('tab' + t);
+    ['play', 'arch', 'bank', 'active'].forEach(t => {
+        const view = document.getElementById('view-' + t);
+        const tabBtn = document.getElementById('tab-' + t);
         if (view) view.classList.add('hidden');
         if (tabBtn) tabBtn.classList.remove('active');
     });
-
-    const targetView = document.getElementById('view' + tab);
+    const targetView = document.getElementById('view-' + tab);
     if (targetView) targetView.classList.remove('hidden');
-
-    const targetTab = document.getElementById('tab' + tab);
+    const targetTab = document.getElementById('tab-' + tab);
     if (targetTab) targetTab.classList.add('active');
 }
 
@@ -2136,7 +2132,6 @@ function startSpecialistQuiz() {
     const mem = document.getElementById('playMember').value;
     const top = document.getElementById('playTopic').value;
     
-    // Direct access to the master bank created for Sarah, Evan, and Bekim
     if (masterQuestionBank[mem] && masterQuestionBank[mem][top]) {
         currentQuestions = masterQuestionBank[mem][top];
     } else {
@@ -2144,22 +2139,18 @@ function startSpecialistQuiz() {
     }
 
     if (currentQuestions.length === 0) {
-        alert("Data Pack for " + mem + " " + top + " is still being assembled. Check your brackets!");
+        alert("Data Pack for " + mem + " " + top + " is still being assembled.");
         return;
     }
 
     streak = 0;
-    // Labels updated to be hyphen free
-    document.getElementById('memberLabel').innerText = mem + " Specialist Drill for " + top;
+    document.getElementById('memberLabel').innerText = mem + " Specialist Drill " + top;
     switchTab('active');
     renderQuestion();
 }
 
 function renderQuestion() {
-    // Pulls a concrete piece of evidence from the selected specialist and question set
-    const randomIndex = Math.floor(Math.random() * currentQuestions.length);
-    const q = currentQuestions[randomIndex];
-    
+    const q = currentQuestions[Math.floor(Math.random() * currentQuestions.length)];
     document.getElementById('qText').innerText = q.scenario;
     document.getElementById('streakLabel').innerText = "STREAK " + streak;
     
@@ -2168,7 +2159,7 @@ function renderQuestion() {
 
     q.options.forEach(opt => {
         const btn = document.createElement('button');
-        btn.className = 'option btn';
+        btn.className = 'option-btn';
         btn.innerText = opt;
         btn.onclick = () => checkAnswer(opt, q.correct, btn);
         grid.appendChild(btn);
@@ -2176,22 +2167,19 @@ function renderQuestion() {
 }
 
 function checkAnswer(selected, correct, btn) {
-    const buttons = document.querySelectorAll('.option btn');
+    const buttons = document.querySelectorAll('.option-btn');
     buttons.forEach(b => b.disabled = true);
 
     if (selected === correct) {
         btn.classList.add('correct');
         streak++;
-        // Quick transition for a correct answer
         setTimeout(renderQuestion, 1000);
     } else {
         btn.classList.add('wrong');
-        // Shows the correct answer for clarity before resetting
         buttons.forEach(b => {
             if (b.innerText === correct) b.classList.add('correct');
         });
         streak = 0;
-        // Longer pause on a wrong answer to allow for review
         setTimeout(renderQuestion, 2500);
     }
 }
