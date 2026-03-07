@@ -2115,72 +2115,82 @@
         correct: "B) The 8th Amendment."
     }
 ]                
-            ] }
-        };
+         } // This closes the last Q3 array
+  ] // This closes the last member's object
+ } 
+}; // this seals(get it hahahahhahhahahahahhahahahah) the master bank properly
 
-        // UI LOGIC
-        let currentQuestions = [];
-        let streak = 0;
+// UI LOGIC
+let currentQuestions = [];
+let streak = 0;
 
-        function switchTab(tab) {
-            ['play', 'arch', 'bank', 'active'].forEach(t => {
-                document.getElementById('view-' + t)?.classList.add('hidden');
-                document.getElementById('tab-' + t)?.classList.remove('active');
-            });
-            document.getElementById('view-' + tab).classList.remove('hidden');
-            document.getElementById('tab-' + tab)?.classList.add('active');
-        }
+function switchTab(tab) {
+    ['play', 'arch', 'bank', 'active'].forEach(t => {
+        const view = document.getElementById('view-' + t);
+        const tabBtn = document.getElementById('tab-' + t);
+        if (view) view.classList.add('hidden');
+        if (tabBtn) tabBtn.classList.remove('active');
+    });
+    const targetView = document.getElementById('view-' + tab);
+    if (targetView) targetView.classList.remove('hidden');
+    const targetTab = document.getElementById('tab-' + tab);
+    if (targetTab) targetTab.classList.add('active');
+}
 
-        function startSpecialistQuiz() {
-            const mem = document.getElementById('playMember').value;
-            const top = document.getElementById('playTopic').value;
-            currentQuestions = masterQuestionBank[mem][top];
+function startSpecialistQuiz() {
+    const mem = document.getElementById('playMember').value;
+    const top = document.getElementById('playTopic').value;
+    
+    // Safety check to make sure the data exists before trying to load it
+    if (masterQuestionBank[mem] && masterQuestionBank[mem][top]) {
+        currentQuestions = masterQuestionBank[mem][top];
+    } else {
+        currentQuestions = [];
+    }
 
-            if (currentQuestions.length === 0) {
-                alert("Data Pack for " + mem + " " + top + " is still being assembled. Please paste the questions into the script!");
-                return;
-            }
+    if (currentQuestions.length === 0) {
+        alert("Data Pack for " + mem + " " + top + " is still being assembled. Check your brackets!");
+        return;
+    }
 
-            streak = 0;
-            document.getElementById('memberLabel').innerText = mem + " Specialist Drill (" + top + ")";
-            switchTab('active');
-            renderQuestion();
-        }
+    streak = 0;
+    document.getElementById('memberLabel').innerText = mem + " Specialist Drill (" + top + ")";
+    switchTab('active');
+    renderQuestion();
+}
 
-        function renderQuestion() {
-            const q = currentQuestions[Math.floor(Math.random() * currentQuestions.length)];
-            document.getElementById('qText').innerText = q.scenario;
-            document.getElementById('streakLabel').innerText = "STREAK: " + streak;
-            
-            const grid = document.getElementById('options');
-            grid.innerHTML = '';
+function renderQuestion() {
+    // This pulls a random question from your 2,000+ line bank
+    const q = currentQuestions[Math.floor(Math.random() * currentQuestions.length)];
+    document.getElementById('qText').innerText = q.scenario;
+    document.getElementById('streakLabel').innerText = "STREAK: " + streak;
+    
+    const grid = document.getElementById('options');
+    grid.innerHTML = '';
 
-            q.options.forEach(opt => {
-                const btn = document.createElement('button');
-                btn.className = 'option-btn';
-                btn.innerText = opt;
-                btn.onclick = () => checkAnswer(opt, q.correct, btn);
-                grid.appendChild(btn);
-            });
-        }
+    q.options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.innerText = opt;
+        btn.onclick = () => checkAnswer(opt, q.correct, btn);
+        grid.appendChild(btn);
+    });
+}
 
-        function checkAnswer(selected, correct, btn) {
-            const buttons = document.querySelectorAll('.option-btn');
-            buttons.forEach(b => b.disabled = true);
+function checkAnswer(selected, correct, btn) {
+    const buttons = document.querySelectorAll('.option-btn');
+    buttons.forEach(b => b.disabled = true);
 
-            if (selected === correct) {
-                btn.classList.add('correct');
-                streak++;
-                setTimeout(renderQuestion, 1000);
-            } else {
-                btn.classList.add('wrong');
-                buttons.forEach(b => {
-                    if (b.innerText === correct) b.classList.add('correct');
-                });
-                streak = 0;
-                setTimeout(renderQuestion, 2500);
-            }
-        }
-    </script>
-</body>
-</html>
+    if (selected === correct) {
+        btn.classList.add('correct');
+        streak++;
+        setTimeout(renderQuestion, 1000);
+    } else {
+        btn.classList.add('wrong');
+        buttons.forEach(b => {
+            if (b.innerText === correct) b.classList.add('correct');
+        });
+        streak = 0;
+        setTimeout(renderQuestion, 2500);
+    }
+}
