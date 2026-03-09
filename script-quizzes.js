@@ -1,123 +1,82 @@
-alert("Quizzes Script Loaded");
+alert("Specialist Engine Loaded");
 
-// ===== Team Data =====
-const teamMembers = [
-  { name: "Luna", quizzes: [
-      { question: "What is cellular respiration?", options: ["Energy creation", "Photosynthesis", "Protein synthesis", "None"], answer: "Energy creation" },
-      { question: "Where does glycolysis occur?", options: ["Mitochondria", "Cytoplasm", "Nucleus", "ER"], answer: "Cytoplasm" }
-    ] },
-  { name: "Sarah", quizzes: [
-      { question: "What is the capital of France?", options: ["Paris", "London", "Berlin", "Madrid"], answer: "Paris" }
-    ] },
-  { name: "Bekim", quizzes: [
-      { question: "What is H2O?", options: ["Oxygen", "Water", "Hydrogen", "Salt"], answer: "Water" }
-    ] },
-  { name: "Evan", quizzes: [] }
-];
+// ===== UI Logic for the Specialist Engine =====
+let currentQuestions = [];
+let streak = 0;
 
-// ===== References =====
-const teamSelect = document.getElementById("team-member");
-const quizSelect = document.getElementById("quiz-select");
-const shuffleCheck = document.getElementById("shuffle");
-const startBtn = document.getElementById("start-quiz");
-const quizContainer = document.getElementById("quiz-container");
-const questionNumber = document.getElementById("question-number");
-const questionText = document.getElementById("question-text");
-const optionsDiv = document.getElementById("options");
-const nextBtn = document.getElementById("next-question");
-const feedback = document.getElementById("feedback");
+// Tab Switching Logic
+function switchTab(tab) {
+    const views = ['play', 'arch', 'bank', 'active'];
+    views.forEach(t => {
+        const view = document.getElementById('view-' + t);
+        const tabBtn = document.getElementById('tab-' + t);
+        if (view) view.classList.add('hidden');
+        if (tabBtn) tabBtn.classList.remove('active');
+    });
+    const targetView = document.getElementById('view-' + tab);
+    if (targetView) targetView.classList.remove('hidden');
+    const targetTab = document.getElementById('tab-' + tab);
+    if (targetTab) targetTab.classList.add('active');
+}
 
-let currentQuiz = [];
-let currentQuestionIndex = 0;
-
-// ===== Populate Team Dropdown =====
-teamMembers.forEach(member => {
-  const option = document.createElement("option");
-  option.value = member.name.toLowerCase();
-  option.textContent = member.name;
-  teamSelect.appendChild(option);
-});
-
-// ===== Populate Quiz Dropdown =====
-function updateQuizSelect() {
-  quizSelect.innerHTML = '<option value="all">All Quizzes</option>';
-  const selectedMember = teamSelect.value;
-  teamMembers.forEach(member => {
-    if(selectedMember === "all" || selectedMember === member.name.toLowerCase()) {
-      member.quizzes.forEach((q, i) => {
-        const opt = document.createElement("option");
-        opt.value = `${member.name}-${i}`;
-        opt.textContent = `${member.name} Quiz ${i+1}`;
-        quizSelect.appendChild(opt);
-      });
+// Launching the actual drill from the drop downs
+function startSpecialistQuiz() {
+    const mem = document.getElementById('playMember').value;
+    const top = document.getElementById('playTopic').value;
+    
+    // Check the master bank (which should be in your HTML script)
+    if (window.masterQuestionBank && window.masterQuestionBank[mem] && window.masterQuestionBank[mem][top]) {
+        currentQuestions = window.masterQuestionBank[mem][top];
+    } else {
+        alert("Evidence for " + mem + " " + top + " not found. Check your bank assembly.");
+        return;
     }
-  });
-}
-updateQuizSelect();
-teamSelect.addEventListener("change", updateQuizSelect);
 
-// ===== Start Quiz =====
-startBtn.addEventListener("click", () => {
-  const selectedMember = teamSelect.value;
-  const selectedQuiz = quizSelect.value;
+    if (currentQuestions.length === 0) {
+        alert("This specialist currently has zero scenarios for this question.");
+        return;
+    }
 
-  currentQuiz = [];
-
-  teamMembers.forEach(member => {
-    if(selectedMember !== "all" && selectedMember !== member.name.toLowerCase()) return;
-
-    member.quizzes.forEach((q, i) => {
-      if(selectedQuiz === "all" || selectedQuiz === `${member.name}-${i}`) {
-        currentQuiz.push({...q, member: member.name});
-      }
-    });
-  });
-
-  if(shuffleCheck.checked) {
-    currentQuiz.sort(() => Math.random() - 0.5);
-  }
-
-  if(currentQuiz.length === 0) {
-    alert("No questions available for selected filters.");
-    return;
-  }
-
-  currentQuestionIndex = 0;
-  quizContainer.style.display = "block";
-  showQuestion();
-});
-
-// ===== Show Question =====
-function showQuestion() {
-  feedback.textContent = "";
-  const q = currentQuiz[currentQuestionIndex];
-  questionNumber.textContent = `Question ${currentQuestionIndex + 1} of ${currentQuiz.length}`;
-  questionText.textContent = q.question;
-
-  optionsDiv.innerHTML = "";
-  q.options.forEach(opt => {
-    const btn = document.createElement("button");
-    btn.textContent = opt;
-    btn.addEventListener("click", () => {
-      if(opt === q.answer) {
-        feedback.textContent = "✅ Correct!";
-        feedback.style.color = "green";
-      } else {
-        feedback.textContent = `❌ Incorrect. Correct answer: ${q.answer}`;
-        feedback.style.color = "red";
-      }
-    });
-    optionsDiv.appendChild(btn);
-  });
+    streak = 0;
+    // Human style label (No dashes)
+    document.getElementById('memberLabel').innerText = mem + " Specialist Drill " + top;
+    switchTab('active');
+    renderQuestion();
 }
 
-// ===== Next Question =====
-nextBtn.addEventListener("click", () => {
-  if(currentQuestionIndex < currentQuiz.length - 1) {
-    currentQuestionIndex++;
-    showQuestion();
-  } else {
-    alert("Quiz finished!");
-    quizContainer.style.display = "none";
-  }
-});
+// Displaying the concrete evidence
+function renderQuestion() {
+    const q = currentQuestions[Math.floor(Math.random() * currentQuestions.length)];
+    document.getElementById('qText').innerText = q.scenario;
+    document.getElementById('streakLabel').innerText = "STREAK " + streak;
+    
+    const grid = document.getElementById('options');
+    grid.innerHTML = '';
+
+    q.options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.innerText = opt;
+        btn.onclick = () => checkAnswer(opt, q.correct, btn);
+        grid.appendChild(btn);
+    });
+}
+
+// Answer Logic
+function checkAnswer(selected, correct, btn) {
+    const buttons = document.querySelectorAll('.option-btn');
+    buttons.forEach(b => b.disabled = true);
+
+    if (selected === correct) {
+        btn.classList.add('correct');
+        streak++;
+        setTimeout(renderQuestion, 1000);
+    } else {
+        btn.classList.add('wrong');
+        buttons.forEach(b => {
+            if (b.innerText === correct) b.classList.add('correct');
+        });
+        streak = 0;
+        setTimeout(renderQuestion, 2500);
+    }
+}
