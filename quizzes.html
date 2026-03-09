@@ -15,7 +15,6 @@
             min-height: 100vh;
         }
 
-        /* Restoration of your Navigation */
         header { background: var(--navy); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
         .logo { color: white; font-weight: 800; font-size: 1.2rem; }
         nav a { color: white; text-decoration: none; margin-left: 20px; font-size: 0.85rem; opacity: 0.8; transition: 0.3s; }
@@ -23,7 +22,6 @@
 
         .container { max-width: 900px; margin: 40px auto; width: 95%; }
 
-        /* Modern Tab Navigation */
         .tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 25px; }
         .tab-btn { 
             background: white; border: 1px solid #ddd; padding: 10px 20px; 
@@ -32,7 +30,6 @@
         }
         .tab-btn.active { background: var(--navy); color: white; border-color: var(--navy); box-shadow: 0 4px 12px rgba(10,40,95,0.2); }
 
-        /* Glass Cards */
         .quiz-card {
             background: var(--glass); backdrop-filter: blur(15px);
             border-radius: 28px; padding: 35px;
@@ -50,7 +47,6 @@
             font-family: inherit; font-size: 0.9rem; box-sizing: border-box;
         }
 
-        /* Specialized Question Styles */
         .q-header { display: flex; justify-content: space-between; margin-bottom: 20px; font-weight: 800; font-size: 0.8rem; color: #64748b; text-transform: uppercase; }
         .q-text { font-size: 1.3rem; color: var(--navy); font-weight: 700; margin-bottom: 30px; line-height: 1.4; text-align: left; }
         .options-grid { display: grid; gap: 12px; }
@@ -83,197 +79,190 @@
 
     <div class="container">
         <div class="tabs">
-    <button id="tab-play" class="tab-btn active" onclick="switchTab('play')">Quizzes</button>
-</div>
-
-<div id="view-play" class="quiz-card">
-    <h2 style="color: var(--navy); margin:0 0 10px 0;">Quizzes</h2>
-    <p style="color: #64748b; margin-bottom: 30px;">Select your focus area to begin.</p>
-
-    <div class="input-row">
-        <div class="input-group">
-            <label>Specialist Member</label>
-            <select id="playMember">
-                <option value="Luna">Luna</option>
-                <option value="Sarah">Sarah</option>
-                <option value="Evan">Evan</option>
-                <option value="Bekim">Bekim</option>
-            </select>
+            <button id="tab-play" class="tab-btn active" onclick="switchTab('play')">Quizzes</button>
         </div>
 
-        <div class="input-group">
-            <label>Assigned Question</label>
-            <select id="playTopic">
-                <option value="Q1">Question 1</option>
-                <option value="Q2">Question 2</option>
-                <option value="Q3">Question 3</option>
-            </select>
+        <div id="view-play" class="quiz-card">
+            <h2 style="color: var(--navy); margin:0 0 10px 0;">Specialist Drill</h2>
+            <p style="color: #64748b; margin-bottom: 30px;">Select your focus area to begin testing your evidence bank.</p>
+
+            <div class="input-row">
+                <div class="input-group">
+                    <label>Specialist Member</label>
+                    <select id="playMember">
+                        <option value="Luna">Luna</option>
+                        <option value="Sarah">Sarah</option>
+                        <option value="Evan">Evan</option>
+                        <option value="Bekim">Bekim</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label>Assigned Question</label>
+                    <select id="playTopic">
+                        <option value="Q1">Question 1</option>
+                        <option value="Q2">Question 2</option>
+                        <option value="Q3">Question 3</option>
+                    </select>
+                </div>
+            </div>
+
+            <button class="btn-main" onclick="startSpecialistQuiz()">Launch Quiz</button>
+        </div>
+
+        <div id="view-active" class="quiz-card hidden">
+            <div class="q-header">
+                <span id="memberLabel">QUIZ MODE</span>
+                <span id="streakLabel">STREAK: 0</span>
+            </div>
+            <div id="qText" class="q-text">Loading scenario...</div>
+            <div id="options" class="options-grid"></div>
         </div>
     </div>
-
-    <button class="btn-main" onclick="startSpecialistQuiz()">Launch Quiz</button>
-</div>
-
-<div id="view-active" class="quiz-card hidden">
-    <div class="q-header">
-        <span id="memberLabel">QUIZ MODE</span>
-        <span id="streakLabel">STREAK: 0</span>
-    </div>
-    <div id="qText" class="q-text">Loading question...</div>
-    <div id="options" class="options-grid"></div>
-</div>
-
 
     <script>
+        const masterQuestionBank = {
+            "Luna": {
+                "Q1": [
+                    {
+                        scenario: "Congress passes a law to create a safety agency but provides no clear guidance on its limits. Which doctrine would a court likely use to challenge this?",
+                        options: ["A) The Vesting Clause", "B) Major Questions Doctrine", "C) The Supremacy Clause", "D) The 2nd Amendment"],
+                        correct: "B) Major Questions Doctrine"
+                    },
+                    {
+                        scenario: "Why does the 1970 OSHA Act allow Congress to delegate power to administrative agencies?",
+                        options: ["A) To bypass the Supreme Court", "B) To handle technical workplace safety issues that Congress lacks the expertise to manage daily", "C) Because the President ordered it in an Executive Order", "D) To remove power from the States"],
+                        correct: "B) To handle technical workplace safety issues that Congress lacks the expertise to manage daily"
+                    }
+                ],
+                "Q2": [],
+                "Q3": [
+                    {
+                        scenario: "In Hamdi v. Rumsfeld, the Court decided that U.S. citizen detainees have a right to what?",
+                        options: ["A) Immediate release", "B) A chance to challenge their detention before a neutral decision maker", "C) A trial in military court only", "D) No rights if they are captured on a battlefield"],
+                        correct: "B) A chance to challenge their detention before a neutral decision maker"
+                    }
+                ]
+            },
+            "Sarah": {
+                "Q1": [],
+                "Q2": [],
+                "Q3": [
+                    {
+                        scenario: "Sarah's 2026 evidence includes the Liam Conejo case. What is the central focus of this legal challenge?",
+                        options: ["A) Patent law and technology", "B) The detention practices of ICE", "C) Freedom of speech in schools", "D) Tax collection procedures"],
+                        correct: "B) The detention practices of ICE"
+                    },
+                    {
+                        scenario: "Which case established that the state cannot detain a person in a mental facility if they are not dangerous and no longer mentally ill?",
+                        options: ["A) Bell v. Wolfish", "B) Foucha v. Louisiana", "C) Kansas v. Hendricks", "D) Marbury v. Madison"],
+                        correct: "B) Foucha v. Louisiana"
+                    }
+                ]
+            },
+            "Evan": {
+                "Q1": [],
+                "Q2": [],
+                "Q3": [
+                    {
+                        scenario: "In SEC v. Jarkesy (2024), the Court ruled that the 7th Amendment entitles defendants to a jury trial for what?",
+                        options: ["A) Criminal murder cases", "B) Civil penalties for fraud brought by an agency", "C) All speeding tickets", "D) Disputes between two different states"],
+                        correct: "B) Civil penalties for fraud brought by an agency"
+                    },
+                    {
+                        scenario: "Which landmark case is used to argue that bail cannot be set higher than what is needed to ensure the defendant shows up for trial?",
+                        options: ["A) Demore v. Kim", "B) Stack v. Boyle", "C) United States v. Nixon", "D) Hamdi v. Rumsfeld"],
+                        correct: "B) Stack v. Boyle"
+                    }
+                ]
+            },
+            "Bekim": {
+                "Q1": [],
+                "Q2": [],
+                "Q3": [
+                    {
+                        scenario: "Section 412 of the U.S. Patriot Act is often criticized by Bekim for potentially violating which right?",
+                        options: ["A) The 2nd Amendment", "B) Due process and the right to a speedy trial for non citizens", "C) The right to property", "D) Freedom of the press"],
+                        correct: "B) Due process and the right to a speedy trial for non citizens"
+                    },
+                    {
+                        scenario: "The case Carlson v. Landon (1952) dealt with the detention of active Communist Party members. What was the court's stance on bail in that instance?",
+                        options: ["A) Bail is a mandatory right for everyone", "B) The Executive can deny bail to non citizens deemed a threat to national security", "C) Only Congress can set bail amounts", "D) Non citizens have no rights under the 8th Amendment"],
+                        correct: "B) The Executive can deny bail to non citizens deemed a threat to national security"
+                    }
+                ]
+            }
+        };
 
-                }
-    // ===== SPECIALIST ENGINE LOGIC =====
-let currentQuestions = [];
-let streak = 0;
+        let currentQuestions = [];
+        let streak = 0;
 
-// Tab switching logic
-function switchTab(tab) {
-    const views = ['play', 'arch', 'bank', 'active'];
-    views.forEach(t => {
-        const view = document.getElementById('view-' + t);
-        const tabBtn = document.getElementById('tab-' + t);
-        if (view) view.classList.add('hidden');
-        if (tabBtn) tabBtn.classList.remove('active');
-    });
-    const targetView = document.getElementById('view-' + tab);
-    if (targetView) targetView.classList.remove('hidden');
-    const targetTab = document.getElementById('tab-' + tab);
-    if (targetTab) targetTab.classList.add('active');
-}
+        function switchTab(tab) {
+            const views = ['play', 'active'];
+            views.forEach(v => {
+                const view = document.getElementById('view-' + v);
+                const btn = document.getElementById('tab-' + v);
+                if (view) view.classList.add('hidden');
+                if (btn) btn.classList.remove('active');
+            });
+            document.getElementById('view-' + tab).classList.remove('hidden');
+            if (document.getElementById('tab-' + tab)) document.getElementById('tab-' + tab).classList.add('active');
+        }
 
-// Function to trigger the drill
-function startSpecialistQuiz() {
-    const mem = document.getElementById('playMember').value;
-    const top = document.getElementById('playTopic').value;
-    
-    // Check the bank
-    if (masterQuestionBank[mem] && masterQuestionBank[mem][top]) {
-        currentQuestions = masterQuestionBank[mem][top];
-    }
+        function startSpecialistQuiz() {
+            const member = document.getElementById('playMember').value;
+            const topic = document.getElementById('playTopic').value;
+            
+            if (masterQuestionBank[member] && masterQuestionBank[member][topic] && masterQuestionBank[member][topic].length > 0) {
+                currentQuestions = [...masterQuestionBank[member][topic]];
+                streak = 0;
+                document.getElementById('memberLabel').innerText = member + " Specialist " + topic;
+                switchTab('active');
+                renderQuestion();
+            } else {
+                alert("The bank for " + member + " " + topic + " is currently empty.");
+            }
+        }
 
-    if (currentQuestions.length === 0) {
-        alert("The evidence for " + mem + " " + top + " is still being loaded.");
-        return;
-    }
+        function renderQuestion() {
+            if (currentQuestions.length === 0) {
+                alert("Session complete! Restarting the drill.");
+                startSpecialistQuiz();
+                return;
+            }
+            
+            const qIndex = Math.floor(Math.random() * currentQuestions.length);
+            const q = currentQuestions[qIndex];
+            document.getElementById('qText').innerText = q.scenario;
+            document.getElementById('streakLabel').innerText = "STREAK: " + streak;
+            
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = '';
+            
+            q.options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.innerText = opt;
+                btn.onclick = () => handleAnswer(opt, q.correct, btn);
+                optionsDiv.appendChild(btn);
+            });
+        }
 
-    streak = 0;
-    document.getElementById('memberLabel').innerText = mem + " Specialist Drill " + top;
-    switchTab('active');
-    renderQuestion();
-}
+        function handleAnswer(selected, correct, btn) {
+            const btns = document.querySelectorAll('.option-btn');
+            btns.forEach(b => b.style.pointerEvents = 'none');
 
-// Function to display scenarios
-function renderQuestion() {
-    const q = currentQuestions[Math.floor(Math.random() * currentQuestions.length)];
-    document.getElementById('qText').innerText = q.scenario;
-    document.getElementById('streakLabel').innerText = "STREAK " + streak;
-    
-    const grid = document.getElementById('options');
-    grid.innerHTML = '';
-
-    q.options.forEach(opt => {
-        const btn = document.createElement('button');
-        btn.className = 'option-btn'; 
-        btn.innerText = opt;
-        btn.onclick = () => checkAnswer(opt, q.correct, btn);
-        grid.appendChild(btn);
-    });
-}
-
-// Answer checking logic
-function checkAnswer(selected, correct, btn) {
-    const buttons = document.querySelectorAll('.option-btn');
-    buttons.forEach(b => b.disabled = true);
-
-    if (selected === correct) {
-        btn.classList.add('correct');
-        streak++;
-        setTimeout(renderQuestion, 1000);
-    } else {
-        btn.classList.add('wrong');
-        buttons.forEach(b => {
-            if (b.innerText === correct) b.classList.add('correct');
-        });
-        streak = 0;
-        setTimeout(renderQuestion, 2500);
-    }
-}            // UI LOGIC 
-let currentQuestions = [];
-let streak = 0;
-
-function switchTab(tab) {
-    // Keep the dashes here so they match your CSS/HTML IDs
-    ['play', 'arch', 'bank', 'active'].forEach(t => {
-        const view = document.getElementById('view-' + t);
-        const tabBtn = document.getElementById('tab-' + t);
-        if (view) view.classList.add('hidden');
-        if (tabBtn) tabBtn.classList.remove('active');
-    });
-    const targetView = document.getElementById('view-' + tab);
-    if (targetView) targetView.classList.remove('hidden');
-    const targetTab = document.getElementById('tab-' + tab);
-    if (targetTab) targetTab.classList.add('active');
-}
-
-function startSpecialistQuiz() {
-    const mem = document.getElementById('playMember').value;
-    const top = document.getElementById('playTopic').value;
-    
-    // Grabs the evidence from your master bank
-    if (masterQuestionBank[mem] && masterQuestionBank[mem][top]) {
-        currentQuestions = masterQuestionBank[mem][top];
-    }
-
-    if (!currentQuestions || currentQuestions.length === 0) {
-        alert("Evidence for " + mem + " " + top + " is still being loaded.");
-        return;
-    }
-
-    streak = 0;
-    // Human style text (No dashes)
-    document.getElementById('memberLabel').innerText = mem + " Specialist Drill for " + top;
-    switchTab('active');
-    renderQuestion();
-}
-
-function renderQuestion() {
-    const q = currentQuestions[Math.floor(Math.random() * currentQuestions.length)];
-    
-    // These match your HTML IDs exactly
-    document.getElementById('qText').innerText = q.scenario;
-    document.getElementById('streakLabel').innerText = "STREAK " + streak;
-    
-    const grid = document.getElementById('options');
-    grid.innerHTML = '';
-
-    q.options.forEach(opt => {
-        const btn = document.createElement('button');
-        btn.className = 'option-btn'; // Restored dash for CSS
-        btn.innerText = opt;
-        btn.onclick = () => checkAnswer(opt, q.correct, btn);
-        grid.appendChild(btn);
-    });
-}
-
-function checkAnswer(selected, correct, btn) {
-    const buttons = document.querySelectorAll('.option-btn');
-    buttons.forEach(b => b.disabled = true);
-
-    if (selected === correct) {
-        btn.classList.add('correct');
-        streak++;
-        setTimeout(renderQuestion, 1000);
-    } else {
-        btn.classList.add('wrong');
-        buttons.forEach(b => {
-            if (b.innerText === correct) b.classList.add('correct');
-        });
-        streak = 0;
-        setTimeout(renderQuestion, 2500);
-    }
-}
+            if (selected === correct) {
+                btn.classList.add('correct');
+                streak++;
+                setTimeout(renderQuestion, 1000);
+            } else {
+                btn.classList.add('wrong');
+                btns.forEach(b => { if (b.innerText === correct) b.classList.add('correct'); });
+                streak = 0;
+                setTimeout(renderQuestion, 2000);
+            }
+        }
+    </script>
+</body>
+</html>
