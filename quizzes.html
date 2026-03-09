@@ -2111,11 +2111,12 @@
                     options: ["A) The 2nd Amendment.", "B) The 8th Amendment.", "C) The 10th Amendment.", "D) The 12th Amendment."],
                     correct: "B) The 8th Amendment."
                 }
-            // UI LOGIC
+            // UI LOGIC 
 let currentQuestions = [];
 let streak = 0;
 
 function switchTab(tab) {
+    // Keep the dashes here so they match your CSS/HTML IDs
     ['play', 'arch', 'bank', 'active'].forEach(t => {
         const view = document.getElementById('view-' + t);
         const tabBtn = document.getElementById('tab-' + t);
@@ -2132,25 +2133,27 @@ function startSpecialistQuiz() {
     const mem = document.getElementById('playMember').value;
     const top = document.getElementById('playTopic').value;
     
+    // Grabs the evidence from your master bank
     if (masterQuestionBank[mem] && masterQuestionBank[mem][top]) {
         currentQuestions = masterQuestionBank[mem][top];
-    } else {
-        currentQuestions = [];
     }
 
-    if (currentQuestions.length === 0) {
-        alert("Data Pack for " + mem + " " + top + " is still being assembled.");
+    if (!currentQuestions || currentQuestions.length === 0) {
+        alert("Evidence for " + mem + " " + top + " is still being loaded.");
         return;
     }
 
     streak = 0;
-    document.getElementById('memberLabel').innerText = mem + " Specialist Drill " + top;
+    // Human style text (No dashes)
+    document.getElementById('memberLabel').innerText = mem + " Specialist Drill for " + top;
     switchTab('active');
     renderQuestion();
 }
 
 function renderQuestion() {
     const q = currentQuestions[Math.floor(Math.random() * currentQuestions.length)];
+    
+    // These match your HTML IDs exactly
     document.getElementById('qText').innerText = q.scenario;
     document.getElementById('streakLabel').innerText = "STREAK " + streak;
     
@@ -2159,7 +2162,7 @@ function renderQuestion() {
 
     q.options.forEach(opt => {
         const btn = document.createElement('button');
-        btn.className = 'option-btn';
+        btn.className = 'option-btn'; // Restored dash for CSS
         btn.innerText = opt;
         btn.onclick = () => checkAnswer(opt, q.correct, btn);
         grid.appendChild(btn);
