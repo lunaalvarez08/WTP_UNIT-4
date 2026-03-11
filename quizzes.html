@@ -121,78 +121,1261 @@
     </div>
 
     <script>
-        const masterQuestionBank = {
-            "Luna": {
-                "Q1": [
-                    {
-                        scenario: "Congress passes a law to create a safety agency but provides no clear guidance on its limits. Which doctrine would a court likely use to challenge this?",
-                        options: ["A) The Vesting Clause", "B) Major Questions Doctrine", "C) The Supremacy Clause", "D) The 2nd Amendment"],
-                        correct: "B) Major Questions Doctrine"
-                    },
-                    {
-                        scenario: "Why does the 1970 OSHA Act allow Congress to delegate power to administrative agencies?",
-                        options: ["A) To bypass the Supreme Court", "B) To handle technical workplace safety issues that Congress lacks the expertise to manage daily", "C) Because the President ordered it in an Executive Order", "D) To remove power from the States"],
-                        correct: "B) To handle technical workplace safety issues that Congress lacks the expertise to manage daily"
-                    }
-                ],
-                "Q2": [],
-                "Q3": [
-                    {
-                        scenario: "In Hamdi v. Rumsfeld, the Court decided that U.S. citizen detainees have a right to what?",
-                        options: ["A) Immediate release", "B) A chance to challenge their detention before a neutral decision maker", "C) A trial in military court only", "D) No rights if they are captured on a battlefield"],
-                        correct: "B) A chance to challenge their detention before a neutral decision maker"
-                    }
-                ]
+       const masterQuestionBank = {
+    "Luna": {
+        "Q1": [
+            {
+                scenario: "Congress passes a law creating a new 'Artificial Intelligence Safety Agency' to handle technical coding hazards. Which principle from the 1970 OSHA Act justifies this delegation?",
+                options: ["A) The President's Article II 'Commander' power.", "B) Congress's ability to create agencies to handle complex, technical policy issues.", "C) The Supreme Court's power to write safety regulations.", "D) The 10th Amendment's reservation of safety to the States."],
+                correct: "B) Congress's ability to create agencies to handle complex, technical policy issues."
             },
-            "Sarah": {
-                "Q1": [],
-                "Q2": [],
-                "Q3": [
-                    {
-                        scenario: "Sarah's 2026 evidence includes the Liam Conejo case. What is the central focus of this legal challenge?",
-                        options: ["A) Patent law and technology", "B) The detention practices of ICE", "C) Freedom of speech in schools", "D) Tax collection procedures"],
-                        correct: "B) The detention practices of ICE"
-                    },
-                    {
-                        scenario: "Which case established that the state cannot detain a person in a mental facility if they are not dangerous and no longer mentally ill?",
-                        options: ["A) Bell v. Wolfish", "B) Foucha v. Louisiana", "C) Kansas v. Hendricks", "D) Marbury v. Madison"],
-                        correct: "B) Foucha v. Louisiana"
-                    }
-                ]
+            {
+                scenario: "An agency issues a massive new rule regarding 'Heat Stress' that affects every business in America. What must a Court check to ensure the agency isn't overstepping its constitutional bounds?",
+                options: ["A) If the President personally wrote the rule.", "B) If the rule was approved by a national popular vote.", "C) Whether Congress actually intended to give the agency that specific power.", "D) If the agency head is an Article III judge."],
+                correct: "C) Whether Congress actually intended to give the agency that specific power."
             },
-            "Evan": {
-                "Q1": [],
-                "Q2": [],
-                "Q3": [
-                    {
-                        scenario: "In SEC v. Jarkesy (2024), the Court ruled that the 7th Amendment entitles defendants to a jury trial for what?",
-                        options: ["A) Criminal murder cases", "B) Civil penalties for fraud brought by an agency", "C) All speeding tickets", "D) Disputes between two different states"],
-                        correct: "B) Civil penalties for fraud brought by an agency"
-                    },
-                    {
-                        scenario: "Which landmark case is used to argue that bail cannot be set higher than what is needed to ensure the defendant shows up for trial?",
-                        options: ["A) Demore v. Kim", "B) Stack v. Boyle", "C) United States v. Nixon", "D) Hamdi v. Rumsfeld"],
-                        correct: "B) Stack v. Boyle"
-                    }
-                ]
+            {
+                scenario: "A critic argues that federal agencies shouldn't exist because only Congress can make rules. How does the 1970 OSHA Act provide a counter argument?",
+                options: ["A) Agencies are a fourth branch of government not found in the Constitution.", "B) Congress can delegate authority to agencies to enforce workplace standards via statute.", "C) The President can create any agency he wants via Executive Order.", "D) Safety agencies were created by the Supreme Court in 1970."],
+                correct: "B) Congress can delegate authority to agencies to enforce workplace standards via statute."
             },
-            "Bekim": {
-                "Q1": [],
-                "Q2": [],
-                "Q3": [
-                    {
-                        scenario: "Section 412 of the U.S. Patriot Act is often criticized by Bekim for potentially violating which right?",
-                        options: ["A) The 2nd Amendment", "B) Due process and the right to a speedy trial for non citizens", "C) The right to property", "D) Freedom of the press"],
-                        correct: "B) Due process and the right to a speedy trial for non citizens"
-                    },
-                    {
-                        scenario: "The case Carlson v. Landon (1952) dealt with the detention of active Communist Party members. What was the court's stance on bail in that instance?",
-                        options: ["A) Bail is a mandatory right for everyone", "B) The Executive can deny bail to non citizens deemed a threat to national security", "C) Only Congress can set bail amounts", "D) Non citizens have no rights under the 8th Amendment"],
-                        correct: "B) The Executive can deny bail to non citizens deemed a threat to national security"
-                    }
-                ]
+            {
+                scenario: "If an agency conducts an inspection without a specific law authorizing that exact type of search, what does the principle of 'Legislative Intent' require the Court to do?",
+                options: ["A) Ignore the law and support the agency's expertise.", "B) Check the original intent of the lawmakers who passed the Act.", "C) Allow the Executive branch to decide if the search was fair.", "D) Defer to the agency's interpretation automatically."],
+                correct: "B) Check the original intent of the lawmakers who passed the Act."
+            },
+            {
+                scenario: "Why does Congress typically give agencies the power to 'set and enforce' standards rather than writing every specific regulation itself?",
+                options: ["A) Congress lacks the technical expertise to manage every specific workplace hazard.", "B) Article I forbids Congress from writing specific safety laws.", "C) The Supreme Court ordered Congress to stop writing safety laws in 1970.", "D) Agencies are considered an independent branch of the military."],
+                correct: "A) Congress lacks the technical expertise to manage every specific workplace hazard."
+            },
+            {
+                scenario: "An agency interprets a new tax code provision in a way that significantly increases taxes on small businesses. Under 'Major Questions' logic, what is the court's primary role?",
+                options: ["A) To automatically support the agency to ensure the government stays funded.", "B) To ensure the agency followed the goals Congress set for big economic decisions.", "C) To let the Agency Commissioner decide the law without judicial interference.", "D) To ask the President to rewrite the tax code via Executive Order."],
+                correct: "B) To ensure the agency followed the goals Congress set for big economic decisions."
+            },
+            {
+                scenario: "Which source of authority does Congress use to delegate the power of tax collection and regulation to an executive agency?",
+                options: ["A) The Declaration of Independence.", "B) Federal statutes, such as the Internal Revenue Code.", "C) A treaty with a foreign sovereign.", "D) An inherent power found only in Article III."],
+                correct: "B) Federal statutes, such as the Internal Revenue Code."
+            },
+            {
+                scenario: "If a tax regulation is found to be 'highly consequential' but the underlying law is vague, what does the evidence regarding agency limits suggest the Court should do?",
+                options: ["A) Uphold it as long as the agency thinks it is a good idea.", "B) Strike it down for lack of clear legislative authorization.", "C) Ask the agency to hold an internal vote on the matter.", "D) Wait for Congress to be impeached before taking action."],
+                correct: "B) Strike it down for lack of clear legislative authorization."
+            },
+            {
+                scenario: "An agency claims it has 'inherent' power to tax a new commodity without a new law. Why would a Court check 'Legislative Intent' in this case?",
+                options: ["A) To see if the agency is a 'Unitary' body.", "B) To ensure the agency is not making policy that belongs to elected lawmakers.", "C) To determine if the agency is part of the Judicial branch.", "D) To check if the Commissioner was appointed by the Senate."],
+                correct: "B) To ensure the agency is not making policy that belongs to elected lawmakers."
+            },
+            {
+                scenario: "What is the primary danger of an agency exercising broad economic power without strict judicial interpretation of the law?",
+                options: ["A) The agency might become too small to function properly.", "B) It could result in unelected bureaucrats making major policy decisions for the nation.", "C) The President might lose his power to collect taxes entirely.", "D) Congress would have to work too hard to pass laws."],
+                correct: "B) It could result in unelected bureaucrats making major policy decisions for the nation."
+            },
+            {
+                scenario: "A 2026 law requires federal judges to determine social security eligibility, but says the President can 'veto' the judge's decision. Which case stops this arrangement?",
+                options: ["A) Marbury v. Madison.", "B) Hayburn's Case.", "C) Federalist No. 10.", "D) The Dodd Frank Act."],
+                correct: "B) Hayburn's Case."
+            },
+            {
+                scenario: "In 1792, why did federal judges refuse to evaluate pension claims for Revolutionary War veterans as requested by Congress?",
+                options: ["A) They believed the veterans were not entitled to the money.", "B) The judicial decisions were subject to review by an Executive branch official.", "C) The judges were not being paid for the extra labor.", "D) Congress had not yet passed a formal law authorizing the payments."],
+                correct: "B) The judicial decisions were subject to review by an Executive branch official."
+            },
+            {
+                scenario: "Hayburn's Case reinforces the idea that judicial power is 'limited.' What does this mean for major policy questions in the 21st century?",
+                options: ["A) Judges should make the laws when Congress is slow to act.", "B) Legislative intent must guide courts rather than judges creating policy themselves.", "C) The President is the only person who can interpret the Constitution.", "D) Judges can only hear cases involving the military or veterans."],
+                correct: "B) Legislative intent must guide courts rather than judges creating policy themselves."
+            },
+            {
+                scenario: "How does the ruling in Hayburn's Case (1792) protect the Separation of Powers?",
+                options: ["A) It prevents the Executive from acting as a 'superior court' over federal judges.", "B) It allows the President to fire judges who disagree with his policy goals.", "C) It gives Congress the power to ignore Supreme Court rulings on statutes.", "D) It combines the Judicial and Executive branches for better efficiency."],
+                correct: "A) It prevents the Executive from acting as a 'superior court' over federal judges."
+            },
+            {
+                scenario: "What would be the constitutional result if the Judiciary was turned into an 'administrative body' as feared in 1792?",
+                options: ["A) Judicial independence would be compromised by executive oversight.", "B) Congress would lose the power to tax the public.", "C) The President would be required to serve as a judge in federal court.", "D) The Bill of Rights would be automatically repealed."],
+                correct: "A) Judicial independence would be compromised by executive oversight."
+            },
+            {
+                scenario: "Congress passes a law to regulate space travel. Which clause allows them to pass 'implementing' laws for powers not specifically listed in 1787?",
+                options: ["A) The Vesting Clause.", "B) The Necessary and Proper Clause.", "C) The Take Care Clause.", "D) The Supremacy Clause."],
+                correct: "B) The Necessary and Proper Clause."
+            },
+            {
+                scenario: "What is the 'check' needed when Congress uses its authority to delegate power to administrative agencies?",
+                options: ["A) Courts must check that Congress actually intended to give that specific power.", "B) The President must personally approve every agency staff member hired.", "C) The agency must be completely shut down every four years.", "D) Congress must use a 'Legislative Veto' to maintain control."],
+                correct: "A) Courts must check that Congress actually intended to give that specific power."
+            },
+            {
+                scenario: "Does the Necessary and Proper Clause give Congress unlimited power to create and empower agencies?",
+                options: ["A) Yes, as long as the law is deemed 'Proper' by the agency.", "B) No, it must support and implement powers specifically listed in Article I.", "C) Only if the Supreme Court gives written permission before the law is passed.", "D) Only during times of active military conflict."],
+                correct: "B) No, it must support and implement powers specifically listed in Article I."
+            },
+            {
+                scenario: "Why is Clause 18 often called the 'Elastic Clause' in the context of federal agencies?",
+                options: ["A) It allows the Constitution to 'stretch' to cover modern issues like workplace safety.", "B) It allows the President to 'snap' the law back when he disagrees with Congress.", "C) It requires all federal laws to be printed on durable, flexible paper.", "D) It gives the Supreme Court power to change the actual words of the Constitution."],
+                correct: "A) It allows the Constitution to 'stretch' to cover modern issues like workplace safety."
+            },
+            {
+                scenario: "How does Clause 18 relate to the 'Intelligible Principle' test used by the Courts?",
+                options: ["A) It requires the President to be 'Intelligible' when addressing the public.", "B) It provides the legal basis for Congress to delegate while providing guidance.", "C) It prevents Congress from ever communicating with an agency.", "D) It requires all agencies to be located within the District of Columbia."],
+                correct: "B) It provides the legal basis for Congress to delegate while providing guidance."
+            },
+            {
+                scenario: "A new law tries to lower the salary of federal judges who rule against the Executive branch. Why does Article III, Section 1 forbid this?",
+                options: ["A) Judges are entitled to automatic yearly bonuses.", "B) It protects judicial independence by ensuring compensation cannot be diminished.", "C) Only the President has the power to set the salaries of federal judges.", "D) The 27th Amendment forbids changes to judicial pay."],
+                correct: "B) It protects judicial independence by ensuring compensation cannot be diminished."
+            },
+            {
+                scenario: "What does 'Life Tenure' (holding office during good behavior) allow judges to do when reviewing agency regulations?",
+                options: ["A) Make new laws without having to worry about what Congress thinks.", "B) Interpret laws independently without fear of political retaliation.", "C) Stay in office even if they stop performing their judicial duties.", "D) Run for the office of President while remaining a sitting judge."],
+                correct: "B) Interpret laws independently without fear of political retaliation."
+            },
+            {
+                scenario: "According to the establishing language of Article III, what is the core limit on federal judges regarding policy decisions?",
+                options: ["A) Judges are supposed to interpret laws, not create policy themselves.", "B) Judges must make policy whenever the President is out of the country.", "C) Judges only handle policy related to the military and national defense.", "D) There is no limit; judges possess absolute 'Judicial Power' over all policy."],
+                correct: "A) Judges are supposed to interpret laws, not create policy themselves."
+            },
+            {
+                scenario: "Which branch has the constitutional power to establish 'inferior courts' under Article III, Section 1?",
+                options: ["A) The Supreme Court.", "B) The Executive Branch.", "C) The Legislative Branch (Congress).", "D) The individual State governments."],
+                correct: "C) The Legislative Branch (Congress)."
+            },
+            {
+                scenario: "How does 'Life Tenure' for judges help maintain the overall Separation of Powers?",
+                options: ["A) It makes the Judicial branch the most powerful part of the government.", "B) It ensures judges are not 'employees' of the President or Congress.", "C) It allows judges to serve in Congress and the Courts at the same time.", "D) It prevents the President from ever being sued in a court of law."],
+                correct: "B) It ensures judges are not 'employees' of the President or Congress."
+            },
+            {
+                scenario: "Federalist 51 argues that 'Ambition must be made to counteract ambition.' How does this apply to an agency overreaching its power?",
+                options: ["A) The President should fire every employee within that agency immediately.", "B) The other branches must use their own powers to check and balance the agency.", "C) Ambition is inherently bad and should be removed from all government officials.", "D) Only a direct vote by the people can check an administrative agency."],
+                correct: "B) The other branches must use their own powers to check and balance the agency."
+            },
+            {
+                scenario: "Why did the authors of the Federalist Papers believe a system of checks and balances was necessary?",
+                options: ["A) Because they believed government officials were naturally perfect.", "B) Because people (including officials) are not perfect and cannot be trusted with unlimited power.", "C) To make sure the federal government moves as slowly as possible.", "D) To ensure the President possesses all the authority in the nation."],
+                correct: "B) Because people (including officials) are not perfect and cannot be trusted with unlimited power."
+            },
+            {
+                scenario: "How does the logic of Federalist 51 keep major policy decisions within the Legislative branch?",
+                options: ["A) By forcing federal judges to write all the laws for the country.", "B) By ensuring branches check each other to prevent one group from overstepping.", "C) By giving the President the power to dissolve Congress at any time.", "D) By requiring all laws to be approved by the Supreme Court before passage."],
+                correct: "B) By ensuring branches check each other to prevent one group from overstepping."
+            },
+            {
+                scenario: "Federalist 51 states 'If men were angels, no government would be necessary.' What does this imply about administrative agencies?",
+                options: ["A) Agency employees are experts and therefore do not need oversight.", "B) Because they are humans with ambition, they must be constrained by the Constitution.", "C) Agencies should only hire people who have been vetted as 'angels.'", "D) Government oversight is unnecessary in a modern, technical society."],
+                correct: "B) Because they are humans with ambition, they must be constrained by the Constitution."
+            },
+            {
+                scenario: "What is the primary result of 'dividing authority' among three branches, as described in the Federalist Papers?",
+                options: ["A) Administrative efficiency is maximized for the public.", "B) No one branch can gain total control, thereby preventing tyranny.", "C) The government becomes too weak to perform its basic functions.", "D) The individual States lose all of their constitutional power."],
+                correct: "B) No one branch can gain total control, thereby preventing tyranny."
+            },
+            {
+                scenario: "Which branch does Madison describe as the 'impetuous vortex' in Federalist 48, tending to absorb powers if not checked?",
+                options: ["A) The Executive branch.", "B) The Judicial branch.", "C) The Legislative branch.", "D) The Administrative agencies."],
+                correct: "C) The Legislative branch."
+            },
+            {
+                scenario: "According to Federalist 48, why is a 'parchment barrier' (written rules alone) insufficient to stop power grabbing?",
+                options: ["A) People cannot read the Constitution.", "B) Power is encroaching and requires active checks, not just written words.", "C) The President can rewrite the parchment at any time.", "D) The Supreme Court has the only copy of the document."],
+                correct: "B) Power is encroaching and requires active checks, not just written words."
+            },
+            {
+                scenario: "If a court finds that the Legislature has overreached into the Executive's territory, which argument supports striking down that action?",
+                options: ["A) The Legislature is the only branch that should have power.", "B) Each branch must have a constitutional 'defense' to maintain balance.", "C) The President should have the power to dissolve the Legislature.", "D) The Judicial branch is the actual 'vortex' of the government."],
+                correct: "B) Each branch must have a constitutional 'defense' to maintain balance."
+            },
+            {
+                scenario: "How does Federalist 48 justify the Court's role in interpreting 'Legislative Intent'?",
+                options: ["A) It ensures the Legislature remains the most powerful branch.", "B) It maintains separation of powers by preventing one branch from absorbing the duties of another.", "C) It allows judges to create new laws when they disagree with the President.", "D) It forces the Executive to follow the Judicial branch's orders."],
+                correct: "B) It maintains separation of powers by preventing one branch from absorbing the duties of another."
+            },
+            {
+                scenario: "In modern agencies, why is the warning in Federalist 48 about the 'impetuous vortex' still relevant?",
+                options: ["A) Agencies are part of the Legislative branch.", "B) It warns that the branch with the most power must be kept within its boundaries.", "C) It suggests that the President should have all lawmaking power.", "D) It argues the Constitution should be replaced by agency rules."],
+                correct: "B) It warns that the branch with the most power must be kept within its boundaries."
+            },
+            {
+                scenario: "In the 2025 FCC case, the Court emphasized that agencies cannot exercise 'highly consequential power' without what?",
+                options: ["A) A majority vote from the public.", "B) Clear statutory authorization from Congress.", "C) Permission from the Secretary of State.", "D) A 9 0 ruling from the Supreme Court."],
+                correct: "B) Clear statutory authorization from Congress."
+            },
+            {
+                scenario: "If an agency attempts to regulate a major new industry without a specific law, which 2025 precedent would be used to challenge them?",
+                options: ["A) Marbury v. Madison.", "B) FCC v. Consumers' Research.", "C) The Dodd Frank Act.", "D) Federalist No. 10."],
+                correct: "B) FCC v. Consumers' Research."
+            },
+            {
+                scenario: "The Court in FCC v. Consumers' Research (2025) focused on 'Legislative Intent.' Why is this crucial for major policy shifts?",
+                options: ["A) It ensures only elected lawmakers make the biggest decisions.", "B) It allows agencies to ignore the President.", "C) It gives the Supreme Court the power to fund the government.", "D) It requires all laws to be written by agency heads."],
+                correct: "A) It ensures only elected lawmakers make the biggest decisions."
+            },
+            {
+                scenario: "What does the term 'highly consequential power' refer to in the 2025 FCC ruling?",
+                options: ["A) Minor administrative changes.", "B) Rules with vast economic or political significance.", "C) The power to hire and fire agency staff.", "D) The power to sign international treaties."],
+                correct: "B) Rules with vast economic or political significance."
+            },
+            {
+                scenario: "How does the FCC v. Consumers' Research (2025) decision strengthen the Separation of Powers?",
+                options: ["A) It gives the Executive branch more lawmaking authority.", "B) It prevents agencies from acting as 'mini legislatures' without a clear mandate.", "C) It allows Congress to fire the President.", "D) It removes the Judicial branch's power to review rules."],
+                correct: "B) It prevents agencies from acting as 'mini legislatures' without a clear mandate."
+            },
+            {
+                scenario: "Under the FTC Act, for what specific reasons can a President remove a Commissioner?",
+                options: ["A) Any reason the President chooses.", "B) Inefficiency, neglect of duty, or malfeasance in office.", "C) If the Commissioner belongs to the opposite political party.", "D) Only if the Supreme Court approves the removal."],
+                correct: "B) Inefficiency, neglect of duty, or malfeasance in office."
+            },
+            {
+                scenario: "The 2025 removal case regarding an independent agency relied on which 1935 precedent?",
+                options: ["A) Myers v. United States.", "B) Humphrey's Executor v. United States.", "C) Marbury v. Madison.", "D) Plessy v. Ferguson."],
+                correct: "B) Humphrey's Executor v. United States."
+            },
+            {
+                scenario: "In a 2025 removal case, a court ordered the reinstatement of a fired Commissioner. What principle does this enforce?",
+                options: ["A) The Unitary Executive theory.", "B) That Congress can protect certain agency members from political firing.", "C) That the President is the only person who can interpret the law.", "D) That independent agencies should be abolished."],
+                correct: "B) That Congress can protect certain agency members from political firing."
+            },
+            {
+                scenario: "Why does protecting an independent Commissioner from 'at will' removal help keep policy decisions with Congress?",
+                options: ["A) It ensures the agency follows the President's personal agenda.", "B) It allows the agency to carry out the law without fear of political retaliation.", "C) It gives the Commissioner the power to veto laws.", "D) It makes the agency part of the Judicial branch."],
+                correct: "B) It allows the agency to carry out the law without fear of political retaliation."
+            },
+            {
+                scenario: "What was the result of the 2 1 D.C. Circuit decision in 2025 regarding agency removal?",
+                options: ["A) It declared the FTC Act unconstitutional.", "B) It upheld the protection of independent agency members from being fired without cause.", "C) It gave the President the power to fire all agency heads.", "D) It ruled that Commissioners can only be fired by Congress."],
+                correct: "B) It upheld the protection of independent agency members from being fired without cause."
+            },
+            {
+                scenario: "The Dodd Frank Act created the CFPB. Which constitutional concern arises when Congress delegates broad power to a new agency?",
+                options: ["A) Whether the agency is spending too much money.", "B) Whether the agency is staying within the legislative intent provided by Congress.", "C) Whether the President likes the agency head.", "D) Whether the agency is located in the right city."],
+                correct: "B) Whether the agency is staying within the legislative intent provided by Congress."
             }
-        };
+        ],
+        "Q2": [
+            {
+                scenario: "An environmental agency tries to regulate a new type of gas not mentioned in the original Clean Air Act. Based on the 2014 Utility Air ruling, what must the court look for?",
+                options: ["A) If the President likes the new regulation.", "B) Whether Congress clearly authorized the agency to regulate that specific area.", "C) If the agency has enough scientists to manage the project.", "D) Whether the Supreme Court thinks the gas is dangerous."],
+                correct: "B) Whether Congress clearly authorized the agency to regulate that specific area."
+            },
+            {
+                scenario: "The 2014 Utility Air case established that agencies cannot discover new, broad powers in old laws. This reinforces which principle?",
+                options: ["A) Executive Supremacy.", "B) Legislative Intent.", "C) Judicial Activism.", "D) Total Agency Autonomy."],
+                correct: "B) Legislative Intent."
+            },
+            {
+                scenario: "If an agencys new rule would cause a massive shift in the national economy, why does the 2014 EPA precedent require the Court to step in?",
+                options: ["A) To make sure the agency stays within the boundaries set by elected lawmakers.", "B) To help the agency gain more funding from Congress.", "C) To ensure the President can bypass the Senate.", "D) To allow the Judicial branch to write the new environmental laws."],
+                correct: "A) To make sure the agency stays within the boundaries set by elected lawmakers."
+            },
+            {
+                scenario: "Utility Air Regulatory Group v. EPA (2014) is often cited to prove that which branch holds the ultimate power over major policy decisions?",
+                options: ["A) The Executive branch.", "B) The Legislative branch.", "C) The Administrative branch.", "D) The State governments."],
+                correct: "B) The Legislative branch."
+            },
+            {
+                scenario: "Under the Utility Air (2014) standard, if a statute is ambiguous, can an agency claim transformative new power over the economy?",
+                options: ["A) Yes, because agencies are experts.", "B) No, the Court expects Congress to speak clearly if it wishes to assign such power.", "C) Only if the President signs an Executive Order confirming it.", "D) Yes, but only during an election year."],
+                correct: "B) No, the Court expects Congress to speak clearly if it wishes to assign such power."
+            },
+            {
+                scenario: "In 2000, the Supreme Court ruled the FDA could not regulate tobacco because Congress had historically protected tobacco in other laws. This is an example of checking:",
+                options: ["A) The Presidents budget.", "B) Agency overreach beyond congressional intent.", "C) The Supreme Courts own jurisdiction.", "D) State level healthcare mandates."],
+                correct: "B) Agency overreach beyond congressional intent."
+            },
+            {
+                scenario: "If an agency tries to regulate a product that Congress has purposely left unregulated for decades, which case provides the best precedent to stop them?",
+                options: ["A) Marbury v. Madison.", "B) FDA v. Brown and Williamson.", "C) Plessy v. Ferguson.", "D) Roe v. Wade."],
+                correct: "B) FDA v. Brown and Williamson."
+            },
+            {
+                scenario: "Why did the Court in the 2000 FDA case look at past laws passed by Congress to decide if the agency had power today?",
+                options: ["A) To see if the agency was being efficient.", "B) To determine the overall Legislative Intent regarding the agencys jurisdiction.", "C) To see if the judges could rewrite the laws themselves.", "D) To calculate how much tax revenue was being lost."],
+                correct: "B) To determine the overall Legislative Intent regarding the agencys jurisdiction."
+            },
+            {
+                scenario: "The ruling in Brown and Williamson (2000) suggests that even if a product is harmful, an agency cannot regulate it unless:",
+                options: ["A) The public votes for it.", "B) Congress has delegated that specific authority to the agency.", "C) The President declares a state of emergency.", "D) The Supreme Court agrees that the product is bad."],
+                correct: "B) Congress has delegated that specific authority to the agency."
+            },
+            {
+                scenario: "How does FDA v. Brown and Williamson support the Separation of Powers?",
+                options: ["A) It allows agencies to make laws when Congress is too busy.", "B) It prevents unelected bureaucrats from making major policy shifts without a clear law.", "C) It gives the President the power to override the FDA.", "D) It forces the Supreme Court to approve all new drugs."],
+                correct: "B) It prevents unelected bureaucrats from making major policy shifts without a clear law."
+            },
+            {
+                scenario: "Madison writes in Federalist 51 that Each department should have a will of its own. How does this apply to a judge reviewing an agency rule?",
+                options: ["A) The judge should do whatever the President wants.", "B) The judge must use the law to check if the Executive is encroaching on Legislative power.", "C) The judge should let the agency do whatever it wants to avoid conflict.", "D) The judge should ask the Legislature to vote on every single court case."],
+                correct: "B) The judge must use the law to check if the Executive is encroaching on Legislative power."
+            },
+            {
+                scenario: "According to Federalist 51, why shouldnt unelected judges make sweeping policy decisions?",
+                options: ["A) Because judges dont have enough education.", "B) To ensure that policy remains with the politically accountable branch (Congress).", "C) Because the Constitution says judges only handle criminal trials.", "D) Because the President is the only person who should make policy."],
+                correct: "B) To ensure that policy remains with the politically accountable branch (Congress)."
+            },
+            {
+                scenario: "Federalist 51 focuses on Checks and Balances. What is the Check when an agency ignores a laws original meaning?",
+                options: ["A) The President can fire the agency staff.", "B) The Judicial branch can strike down the rule for violating legislative intent.", "C) The agency can change the Constitution.", "D) The states can ignore the federal government entirely."],
+                correct: "B) The Judicial branch can strike down the rule for violating legislative intent."
+            },
+            {
+                scenario: "Madison argues that ambition must be made to counteract ambition. In Q2, this means the Courts ambition to protect the law stops what?",
+                options: ["A) The Legislative branch from passing any laws.", "B) The Executive branch from absorbing lawmaking powers.", "C) The public from voting in elections.", "D) The military from taking over the government."],
+                correct: "B) The Executive branch from absorbing lawmaking powers."
+            },
+            {
+                scenario: "Why is the concept of Constitutional Defense in Federalist 51 vital for the Major Questions Doctrine?",
+                options: ["A) It gives the President a defense in court.", "B) It justifies the Courts role in keeping each branch within its proper silo or territory.", "C) It allows the military to defend the Capitol.", "D) It requires the Supreme Court to defend all agency decisions."],
+                correct: "B) It justifies the Courts role in keeping each branch within its proper silo or territory."
+            },
+            {
+                scenario: "Which branch is generally considered to have the most Institutional Competence for making broad social and economic policy choices?",
+                options: ["A) The Judicial branch.", "B) The Executive branch agencies.", "C) The Legislative branch (Congress).", "D) The individual states."],
+                correct: "C) The Legislative branch (Congress)."
+            },
+            {
+                scenario: "Why do courts often defer to Legislative Intent rather than making their own policy rules?",
+                options: ["A) Because judges are less educated than lawmakers.", "B) Because Congress is designed to debate and represent the will of the people on major issues.", "C) Because the Supreme Court is forbidden from reading the news.", "D) Because the President told the judges to stay out of it."],
+                correct: "B) Because Congress is designed to debate and represent the will of the people on major issues."
+            },
+            {
+                scenario: "If a policy decision involves complex trade offs between different groups of citizens, why is Congress more competent to handle it than an agency?",
+                options: ["A) Agencies are too small to handle big problems.", "B) Congress is politically accountable to the voters for those trade offs.", "C) Agencies are forbidden by Article III from speaking to the public.", "D) Only Congress has access to a budget."],
+                correct: "B) Congress is politically accountable to the voters for those trade offs."
+            },
+            {
+                scenario: "Institutional Competence suggests that while agencies have technical expertise, they lack what?",
+                options: ["A) Scientific equipment.", "B) Political legitimacy to make major value judgments for the nation.", "C) The power to hire lawyers.", "D) Offices in Washington D.C."],
+                correct: "B) Political legitimacy to make major value judgments for the nation."
+            },
+            {
+                scenario: "How does a Court use Institutional Competence to decide a case involving a major agency rule?",
+                options: ["A) By checking if the rule was written in clear language.", "B) By determining if the decision is so big that it should have been made by the accountable Legislature.", "C) By allowing the agency to take over the role of Congress.", "D) By letting the President decide which branch is more competent."],
+                correct: "B) By determining if the decision is so big that it should have been made by the accountable Legislature."
+            },
+            {
+                scenario: "The Nondelegation Doctrine is based on the idea that Article I, Section 1 gives All legislative powers to whom?",
+                options: ["A) The President.", "B) The Supreme Court.", "C) Congress.", "D) The People directly."],
+                correct: "C) Congress."
+            },
+            {
+                scenario: "According to the Nondelegation Doctrine, why cant Congress give away its lawmaking power to an agency without clear guidance?",
+                options: ["A) It would make the government too expensive.", "B) It would allow unelected officials to create laws without public accountability.", "C) It would violate the 2nd Amendment.", "D) Agencies are too busy to handle lawmaking."],
+                correct: "B) It would allow unelected officials to create laws without public accountability."
+            },
+            {
+                scenario: "When a Court strikes down an agency rule for being too broad, which doctrine are they most likely using to say Congress didnt give you this power?",
+                options: ["A) The Supremacy Clause.", "B) The Nondelegation Doctrine.", "C) The Necessary and Proper Clause.", "D) The Commerce Clause."],
+                correct: "B) The Nondelegation Doctrine."
+            },
+            {
+                scenario: "The goal of the Nondelegation Doctrine is to ensure that which branch remains responsible for the biggest laws in the land?",
+                options: ["A) The Judicial branch.", "B) The Legislative branch.", "C) The Executive branch.", "D) The local governments."],
+                correct: "B) The Legislative branch."
+            },
+            {
+                scenario: "In modern law, the Nondelegation Doctrine is often enforced through the Major Questions Doctrine. This means the Court looks for:",
+                options: ["A) A specific, clear statement from Congress authorizing the power.", "B) A signature from the Chief Justice.", "C) A majority vote in a national Gallup poll.", "D) The agencys internal memo about its own power."],
+                correct: "A) A specific, clear statement from Congress authorizing the power."
+            },
+            {
+                scenario: "The Supreme Court upheld the Flexible Tariff Act because Congress provided an Intelligible Principle. What does that mean?",
+                options: ["A) The law was written in very fancy language.", "B) Congress gave the President a clear map or guidelines on how to use the power.", "C) The President was allowed to do whatever he wanted with tariffs.", "D) The law was translated into every language."],
+                correct: "B) Congress gave the President a clear map or guidelines on how to use the power."
+            },
+            {
+                scenario: "The J.W. Hampton case (1928) proved that Congress can delegate power, but only if they:",
+                options: ["A) Get permission from the Supreme Court first.", "B) Provide specific standards and limits for the agency to follow.", "C) Give the power to the military instead of an agency.", "D) Allow the President to change the law every week."],
+                correct: "B) Provide specific standards and limits for the agency to follow."
+            },
+            {
+                scenario: "If a law says The President can set any tax he wants, why would the Intelligible Principle test strike it down?",
+                options: ["A) It is too helpful for the economy.", "B) It lacks any specific guidelines or limits from Congress.", "C) The President isnt good at math.", "D) Only the Supreme Court can set taxes."],
+                correct: "B) It lacks any specific guidelines or limits from Congress."
+            },
+            {
+                scenario: "How does the Intelligible Principle test protect Legislative Intent?",
+                options: ["A) It allows agencies to ignore what Congress said.", "B) It ensures that the agency is just carrying out the will of Congress, not making its own new policy.", "C) It gives the President the power to fire Congress.", "D) It requires all laws to be written by the Supreme Court."],
+                correct: "B) It ensures that the agency is just carrying out the will of Congress, not making its own new policy."
+            },
+            {
+                scenario: "Hampton v. United States (1928) showed that as long as Congress provides a rule of action, the delegation is:",
+                options: ["A) Unconstitutional.", "B) Constitutional.", "C) Subject to a presidential veto.", "D) Only valid in times of war."],
+                correct: "B) Constitutional."
+            },
+            {
+                scenario: "In the 1994 MCI case, the agency tried to modify a law so much that it completely changed it. Why did the Court strike this down?",
+                options: ["A) The change was too expensive for the government.", "B) Modify means small changes, not fundamentally rewriting the laws intent.", "C) The agency didnt have enough staff to enforce it.", "D) Only the President can modify a law."],
+                correct: "B) Modify means small changes, not fundamentally rewriting the laws intent."
+            },
+            {
+                scenario: "If an agency uses a small word in a statute to give itself massive new authority, which 1994 case prevents this expansion by dictionary?",
+                options: ["A) Brown v. Board.", "B) MCI v. AT&T.", "C) United States v. Lopez.", "D) Federalist 10."],
+                correct: "B) MCI v. AT&T."
+            },
+            {
+                scenario: "MCI v. AT&T (1994) reinforces that agencies are creatures of statute. This means:",
+                options: ["A) They can do whatever they want.", "B) They only have the powers that Congress specifically wrote into law.", "C) They are created by the Supreme Court.", "D) They are part of the Judicial branch."],
+                correct: "B) They only have the powers that Congress specifically wrote into law."
+            },
+            {
+                scenario: "How did the 1994 MCI ruling protect the power of the Legislative branch?",
+                options: ["A) It gave Congress more money.", "B) It prevented an agency from using its own rules to effectively repeal parts of a law passed by Congress.", "C) It allowed Congress to fire agency heads.", "D) It required all agency rules to be signed by the Speaker of the House."],
+                correct: "B) It prevented an agency from using its own rules to effectively repeal parts of a law passed by Congress."
+            },
+            {
+                scenario: "If an agency claims that technological changes allow it to ignore the specific wording of a law, the Court uses MCI v. AT&T to say:",
+                options: ["A) Tech changes are more important than the law.", "B) Only Congress can rewrite the law to keep up with technology.", "C) The agency is now the new Legislature.", "D) The Supreme Court will write the tech rules instead."],
+                correct: "B) Only Congress can rewrite the law to keep up with technology."
+            },
+            {
+                scenario: "In the 2022 COVID 19 vaccine mandate case, the Court ruled that OSHA overstepped because:",
+                options: ["A) Vaccines dont work.", "B) A vaccine mandate is a major question that Congress had not clearly authorized.", "C) The President was not allowed to speak about vaccines.", "D) OSHA is an unconstitutional agency."],
+                correct: "B) A vaccine mandate is a major question that Congress had not clearly authorized."
+            },
+            {
+                scenario: "The NFIB v. OSHA ruling emphasizes that when an agency takes sweeping action affecting millions, it needs:",
+                options: ["A) A signature from the Governor.", "B) A clear statement from Congress in the law.", "C) A majority vote in the Supreme Court.", "D) A national state of emergency declaration."],
+                correct: "B) A clear statement from Congress in the law."
+            },
+            {
+                scenario: "If an agency tries to use a general workplace safety law to regulate a public health issue, which 2022 case blocks them?",
+                options: ["A) NFIB v. OSHA.", "B) Marbury v. Madison.", "C) Roe v. Wade.", "D) United States v. Nixon."],
+                correct: "A) NFIB v. OSHA."
+            },
+            {
+                scenario: "The 2022 OSHA ruling was a win for which constitutional principle?",
+                options: ["A) Executive Power.", "B) Separation of Powers.", "C) Federalism.", "D) Judicial Review of state laws."],
+                correct: "B) Separation of Powers."
+            },
+            {
+                scenario: "What does NFIB v. OSHA (2022) tell us about Major Policy decisions during a crisis?",
+                options: ["A) Agencies can do anything they want during a crisis.", "B) Even in a crisis, major policy decisions must be based on clear authority from Congress.", "C) The Supreme Court becomes the Commander in Chief during a crisis.", "D) Congress is suspended during national emergencies."],
+                correct: "B) Even in a crisis, major policy decisions must be based on clear authority from Congress."
+            },
+            {
+                scenario: "When the CDC tried to stop evictions across the country in 2021, the Supreme Court ruled they lacked authority because:",
+                options: ["A) Housing is not part of the economy.", "B) Congress had not clearly authorized the CDC to manage national housing policy.", "C) The CDC is not a real federal agency.", "D) Evictions are required by the Constitution."],
+                correct: "B) Congress had not clearly authorized the CDC to manage national housing policy."
+            },
+            {
+                scenario: "The Alabama Association of Realtors case (2021) reinforces that Major Questions require:",
+                options: ["A) Extensive scientific research.", "B) Clear and specific congressional authorization.", "C) A treaty with the United Nations.", "D) Approval from the Department of Justice."],
+                correct: "B) Clear and specific congressional authorization."
+            },
+            {
+                scenario: "How does the 2021 HHS ruling protect the role of the Legislature?",
+                options: ["A) It prevents an agency from using a tiny law about sanitation to control the entire housing market.", "B) It allows Congress to stop paying the CDC.", "C) It gives Congress the power to evict people itself.", "D) It requires the CDC to get a vote from Congress every day."],
+                correct: "A) It prevents an agency from using a tiny law about sanitation to control the entire housing market."
+            },
+            {
+                scenario: "If an agencys rule involves vast economic and political significance, which 2021 case says the Court must be skeptical?",
+                options: ["A) Alabama Association of Realtors v. HHS.", "B) Citizens United v. FEC.", "C) Plessy v. Ferguson.", "D) Federalist No. 78."],
+                correct: "A) Alabama Association of Realtors v. HHS."
+            },
+            {
+                scenario: "The CDCs eviction moratorium was struck down because the Court found the agency was making policy that belonged to:",
+                options: ["A) The Military.", "B) Elected lawmakers in Congress.", "C) The individual people in their own homes.", "D) The Supreme Court."],
+                correct: "B) Elected lawmakers in Congress."
+            },
+            {
+                scenario: "The Take Care Clause says the President shall take care that the laws be faithfully executed. This means the President:",
+                options: ["A) Can change the laws whenever he wants.", "B) Must follow the laws as Congress wrote them.", "C) Can ignore laws he thinks are unconstitutional.", "D) Is the person who writes the laws."],
+                correct: "B) Must follow the laws as Congress wrote them."
+            },
+            {
+                scenario: "If a President orders an agency to do something that violates a statute passed by Congress, which clause is he violating?",
+                options: ["A) The Commerce Clause.", "B) The Take Care Clause.", "C) The Supremacy Clause.", "D) The Vesting Clause."],
+                correct: "B) The Take Care Clause."
+            },
+            {
+                scenario: "How does Article II, Section 3 support Legislative Intent?",
+                options: ["A) It requires the Executive branch to carry out the Intent of the lawmakers who wrote the law.", "B) It gives the President the power to veto legislative intent.", "C) It says the Presidents intent is more important than Congress.", "D) It forbids Congress from writing laws."],
+                correct: "A) It requires the Executive branch to carry out the Intent of the lawmakers who wrote the law."
+            },
+            {
+                scenario: "The Take Care Clause serves as a limit on the Executive. What happens if the President executes a law that doesnt exist?",
+                options: ["A) He is doing his job correctly.", "B) He is violating the Separation of Powers and the Take Care Clause.", "C) He is automatically impeached.", "D) The Supreme Court must write a new law for him."],
+                correct: "B) He is violating the Separation of Powers and the Take Care Clause."
+            },
+            {
+                scenario: "When a Court reviews an agency rule, it checks the Take Care Clause to ensure the agency is:",
+                options: ["A) Being fast and efficient.", "B) Faithfully following the statute provided by the Legislature.", "C) Spending as much money as possible.", "D) Hiring enough people."],
+                correct: "B) Faithfully following the statute provided by the Legislature."
+            },
+            {
+                scenario: "During the COVID 19 pandemic, many agencies issued emergency rules. What was the primary constitutional concern?",
+                options: ["A) Whether the rules were effective at stopping the virus.", "B) Whether agencies were using the crisis to exceed the power Congress gave them.", "C) Whether the agencies were located in the right city.", "D) Whether the rules were written in the right font."],
+                correct: "B) Whether agencies were using the crisis to exceed the power Congress gave them."
+            },
+            {
+                scenario: "Does a National Emergency give federal agencies the power to ignore the original intent of a law?",
+                options: ["A) Yes, because safety is more important than the law.", "B) No, the Constitution and legislative boundaries still apply during emergencies.", "C) Only if the President says so in a televised speech.", "D) Only if the Supreme Court is on vacation."],
+                correct: "B) No, the Constitution and legislative boundaries still apply during emergencies."
+            },
+            {
+                scenario: "How did the 2021 2022 Court cases regarding pandemic rules change the Major Questions Doctrine?",
+                options: ["A) They made it harder for agencies to take broad action without clear laws from Congress.", "B) They gave agencies unlimited power during health crises.", "C) They removed the Supreme Courts power to review emergency rules.", "D) They forced Congress to stop making laws during pandemics."],
+                correct: "A) They made it harder for agencies to take broad action without clear laws from Congress."
+            },
+            {
+                scenario: "When an agency issues an emergency rule, the Court checks Legislative Intent to ensure:",
+                options: ["A) The agency is following the Presidents political party goals.", "B) The agency is still acting within the specific scope authorized by the lawmakers.", "C) The agency is spending its budget correctly.", "D) The public is not angry about the rule."],
+                correct: "B) The agency is still acting within the specific scope authorized by the lawmakers."
+            },
+            {
+                scenario: "The Pandemic Emergency Rulemaking era proved that which branch must ultimately decide how much power to give during a crisis?",
+                options: ["A) The Executive branch.", "B) The Legislative branch.", "C) The Judicial branch.", "D) The Administrative branch."],
+                correct: "B) The Legislative branch."
+            }
+        ],
+        "Q3": [
+            {
+                scenario: "A defendant is held in jail for six months before their trial starts. Under the 5th Amendment Due Process Clause, what is the primary requirement for this detention?",
+                options: ["A) The detention must be punitive to teach the defendant a lesson.", "B) The detention must be non punitive and related to a legitimate goal like public safety.", "C) The President must personally sign the detention order.", "D) The defendant must be forced to plead guilty to leave."],
+                correct: "B) The detention must be non punitive and related to a legitimate goal like public safety."
+            },
+            {
+                scenario: "The Due Process Clause is rooted in the 1215 Magna Carta concept of the law of the land. What does this mean for a person facing pretrial detention?",
+                options: ["A) The government can take their property without a hearing.", "B) The government must provide notice and a fair hearing before restricting liberty.", "C) Only the King can decide who stays in jail.", "D) Laws from 1215 are more important than the Bill of Rights."],
+                correct: "B) The government must provide notice and a fair hearing before restricting liberty."
+            },
+            {
+                scenario: "If a court holds a defendant without a hearing simply because they are accused of a crime, which constitutional principle is being violated?",
+                options: ["A) The 2nd Amendment.", "B) Fundamental fairness and established legal procedures under Due Process.", "C) The Commander in Chief power.", "D) The Elastic Clause."],
+                correct: "B) Fundamental fairness and established legal procedures under Due Process."
+            },
+            {
+                scenario: "In the context of pretrial rights, what does the 5th Amendment require regarding the presumption of innocence?",
+                options: ["A) It requires defendants to prove they are innocent before getting bail.", "B) It ensures that individuals are not punished through detention before a conviction.", "C) It allows the government to ignore evidence if the crime is serious.", "D) It only applies to people who can afford a lawyer."],
+                correct: "B) It ensures that individuals are not punished through detention before a conviction."
+            },
+            {
+                scenario: "A judge justifies a liberty restriction by saying it prevents flight or danger to the community. This logic is a requirement of which clause?",
+                options: ["A) The Take Care Clause.", "B) The Due Process Clause.", "C) The Necessary and Proper Clause.", "D) The Appointments Clause."],
+                correct: "B) The Due Process Clause."
+            },
+            {
+                scenario: "The Bail Reform Act of 1984 introduced a major change to federal law. What was the primary shift in focus?",
+                options: ["A) It made bail completely free for everyone.", "B) It allowed judges to consider community safety as a reason for preventive detention.", "C) It required all defendants to wear electronic monitors.", "D) It removed the power of judges to set bail."],
+                correct: "B) It allowed judges to consider community safety as a reason for preventive detention."
+            },
+            {
+                scenario: "Under the 1984 Act, a defendant can be detained without bail if they are considered dangerous, regardless of what?",
+                options: ["A) Their age.", "B) Their ability to pay a specific amount of money.", "C) The evidence against them.", "D) The opinion of the President."],
+                correct: "B) Their ability to pay a specific amount of money."
+            },
+            {
+                scenario: "Which types of crimes are specifically mentioned in the 1984 Bail Reform Act as grounds for seeking preventive detention?",
+                options: ["A) Petty theft and traffic violations.", "B) Specific felonies, violent crimes, or drug offenses.", "C) Any crime committed on a weekend.", "D) Only crimes involving international treaties."],
+                correct: "B) Specific felonies, violent crimes, or drug offenses."
+            },
+            {
+                scenario: "Prior to 1984, the primary goal of bail was to ensure the defendant appeared in court. What did the 1984 Act add to that goal?",
+                options: ["A) The goal of rehabilitating the defendant before trial.", "B) The goal of protecting the safety of the community.", "C) The goal of increasing government revenue through fines.", "D) The goal of speeding up the trial process by three months."],
+                correct: "B) The goal of protecting the safety of the community."
+            },
+            {
+                scenario: "If a judge detains a person because no conditions of release can ensure the safety of others, which law are they applying?",
+                options: ["A) The Judiciary Act of 1789.", "B) The Bail Reform Act of 1984.", "C) The Civil Rights Act of 1964.", "D) The Patriot Act."],
+                correct: "B) The Bail Reform Act of 1984."
+            },
+            {
+                scenario: "A state passes a law that requires all defendants to be jailed for 30 days regardless of the crime. Which principle says the government must use the narrowest possible means?",
+                options: ["A) The Unitary Executive theory.", "B) The Least Restrictive Means principle.", "C) The Broad Construction doctrine.", "D) The Absolute Immunity principle."],
+                correct: "B) The Least Restrictive Means principle."
+            },
+            {
+                scenario: "If a court can achieve the goal of public safety by using an ankle monitor instead of a jail cell, what does the least restrictive means principle require?",
+                options: ["A) The court must still use the jail cell to be safe.", "B) The court should use the ankle monitor to protect the defendants liberty.", "C) The court should let the defendant go with no supervision at all.", "D) The court should ask the public to vote on the decision."],
+                correct: "B) The court should use the ankle monitor to protect the defendants liberty."
+            },
+            {
+                scenario: "The least restrictive means approach is most often applied when a government action infringes upon what?",
+                options: ["A) A minor local ordinance.", "B) A constitutionally protected right.", "C) A non binding resolution.", "D) An internal agency memo."],
+                correct: "B) A constitutionally protected right."
+            },
+            {
+                scenario: "In pretrial detention hearings, why is the least restrictive means principle a philosophical defense for the accused?",
+                options: ["A) It argues that the government should never have a police force.", "B) It argues that liberty is the norm and detention is the carefully limited exception.", "C) It suggests that all laws are unconstitutional.", "D) It requires the judge to be a philosopher."],
+                correct: "B) It argues that liberty is the norm and detention is the carefully limited exception."
+            },
+            {
+                scenario: "When a judge reviews bail conditions, using the least restrictive means ensures that the conditions are what?",
+                options: ["A) As expensive as possible.", "B) Closely tailored to the specific risks posed by the defendant.", "C) Applied exactly the same to every single person.", "D) Hidden from the public record."],
+                correct: "B) Closely tailored to the specific risks posed by the defendant."
+            },
+            {
+                scenario: "In Federalist 78, Alexander Hamilton describes the Judiciary as the least dangerous branch because it lacks which two things?",
+                options: ["A) Intelligence and wisdom.", "B) Force and will.", "C) Money and lawyers.", "D) Judges and courthouses."],
+                correct: "B) Force and will."
+            },
+            {
+                scenario: "How does Federalist 78 justify the power of judicial review in the context of detention laws?",
+                options: ["A) Judges should make laws that the President likes.", "B) Judges must protect the Constitution against legislative overreach.", "C) Judges should follow whatever Congress says even if it violates rights.", "D) The Judiciary should have the power to command the military."],
+                correct: "B) Judges must protect the Constitution against legislative overreach."
+            },
+            {
+                scenario: "Hamilton argues for lifetime tenure for federal judges. According to Federalist 78, how does this help a defendant in a bail hearing?",
+                options: ["A) It makes the judge more likely to follow the latest political trends.", "B) It allows the judge to exercise independent judgment without fear of political retaliation.", "C) It ensures the judge is always older than the defendant.", "D) It prevents the judge from ever leaving their office."],
+                correct: "B) It allows the judge to exercise independent judgment without fear of political retaliation."
+            },
+            {
+                scenario: "Federalist 78 says the Judiciary exercises judgment rather than will. How does this apply to the Bail Reform Act?",
+                options: ["A) Judges must use their personal will to decide who is dangerous.", "B) Judges must use their judgment to ensure the Act is applied within constitutional limits.", "C) Judges should ignore the Act and do what the President says.", "D) Judges have no role in bail decisions."],
+                correct: "B) Judges must use their judgment to ensure the Act is applied within constitutional limits."
+            },
+            {
+                scenario: "Which concept from Federalist 78 empowers a judge to strike down a pretrial detention statute that violates the Bill of Rights?",
+                options: ["A) The Commander in Chief power.", "B) Judicial Review.", "C) The Power of the Purse.", "D) Executive Privilege."],
+                correct: "B) Judicial Review."
+            },
+            {
+                scenario: "In Hamdi v. Rumsfeld (2004), the government argued it had plenary power to detain an American citizen because of what?",
+                options: ["A) The citizen was a foreign spy.", "B) It was wartime and the citizen was labeled an enemy combatant.", "C) The citizen had no passport.", "D) The citizen refused to pay taxes."],
+                correct: "B) It was wartime and the citizen was labeled an enemy combatant."
+            },
+            {
+                scenario: "What did the Supreme Court rule in the Hamdi case regarding the rights of American citizens detained by the military?",
+                options: ["A) They have no rights during a war.", "B) They must be given a meaningful opportunity to contest their detention before a neutral decision maker.", "C) They must be immediately released without any questions.", "D) Only the President can decide their fate."],
+                correct: "B) They must be given a meaningful opportunity to contest their detention before a neutral decision maker."
+            },
+            {
+                scenario: "Hamdi v. Rumsfeld (2004) prevents the government from doing what to its own citizens?",
+                options: ["A) Taxing them during wartime.", "B) Detaining them indefinitely without due process.", "C) Allowing them to join the military.", "D) Giving them access to a lawyer."],
+                correct: "B) Detaining them indefinitely without due process."
+            },
+            {
+                scenario: "The Hamdi ruling proves that even during a national security crisis, which branch does not have absolute authority?",
+                options: ["A) The Judicial branch.", "B) The Executive branch.", "C) The Legislative branch.", "D) The State governments."],
+                correct: "B) The Executive branch."
+            },
+            {
+                scenario: "A neutral decision maker in the Hamdi context is usually which type of official?",
+                options: ["A) A military general.", "B) A federal judge.", "C) A member of the Presidents cabinet.", "D) A local police chief."],
+                correct: "B) A federal judge."
+            },
+            {
+                scenario: "In Zadvydas v. Davis (2001), why was the defendant being held indefinitely by the government?",
+                options: ["A) He was a dangerous spy.", "B) He was a stateless person and no country would accept him for deportation.", "C) He was waiting for a jury trial.", "D) He refused to testify against his friends."],
+                correct: "B) He was a stateless person and no country would accept him for deportation."
+            },
+            {
+                scenario: "The Court in Zadvydas (2001) used the constitutional doubt doctrine. What was the result for administrative detention?",
+                options: ["A) It can last for the rest of a persons life.", "B) It generally has a six month presumptive limit if removal is not foreseeable.", "C) It is always illegal from day one.", "D) It can only be used for citizens, not non citizens."],
+                correct: "B) It generally has a six month presumptive limit if removal is not foreseeable."
+            },
+            {
+                scenario: "According to the Zadvydas ruling, administrative detention becomes unconstitutional if it effectively becomes what?",
+                options: ["A) A short vacation.", "B) Life imprisonment without a trial.", "C) A tax on the individual.", "D) A community service requirement."],
+                correct: "B) Life imprisonment without a trial."
+            },
+            {
+                scenario: "What must the government prove to keep someone in detention longer than six months under the Zadvydas standard?",
+                options: ["A) That the person is very annoying.", "B) That removal is reasonably foreseeable in the near future.", "C) That the person has a lot of money.", "D) That the President wants them to stay."],
+                correct: "B) That removal is reasonably foreseeable in the near future."
+            },
+            {
+                scenario: "Zadvydas v. Davis (2001) limits the power of which agency to hold people forever?",
+                options: ["A) The FBI.", "B) The INS or immigration authorities.", "C) The Department of Education.", "D) The Supreme Court."],
+                correct: "B) The INS or immigration authorities."
+            },
+            {
+                scenario: "In October 2025, a Chicago judge barred federal agents from making arrests at courthouses. What was the primary goal of this order?",
+                options: ["A) To help criminals escape the city.", "B) To ensure defendants can attend pretrial hearings without being diverted into immigration detention.", "C) To stop the federal government from collecting taxes.", "D) To close down the courthouses for renovation."],
+                correct: "B) To ensure defendants can attend pretrial hearings without being diverted into immigration detention."
+            },
+            {
+                scenario: "The 2025 Chicago court order upholds a common law privilege. What is that privilege called?",
+                options: ["A) Privilege from paying bail.", "B) Privilege from arrest for those performing judicial duties.", "C) Privilege to ignore the judge.", "D) Privilege to carry a weapon in court."],
+                correct: "B) Privilege from arrest for those performing judicial duties."
+            },
+            {
+                scenario: "How does preventing ICE from stalking courthouses protect the integrity of the judicial system?",
+                options: ["A) It makes the courthouses more crowded.", "B) It ensures that people are not afraid to show up for their day in court.", "C) It gives the judge the power to hire their own police force.", "D) It prevents the President from visiting Chicago."],
+                correct: "B) It ensures that people are not afraid to show up for their day in court."
+            },
+            {
+                scenario: "A warrantless civil arrest at a courthouse is an example of what type of detention?",
+                options: ["A) Primary detention for a new crime.", "B) Secondary detention that interferes with an ongoing case.", "C) Legal detention approved by Congress.", "D) Military detention on foreign soil."],
+                correct: "B) Secondary detention that interferes with an ongoing case."
+            },
+            {
+                scenario: "The 2025 Cook County order reinforces the idea that the Judicial branch has the power to control what?",
+                options: ["A) The entire city of Chicago.", "B) The physical environment and procedures of its own courthouses.", "C) The federal budget.", "D) The actions of the military in foreign wars."],
+                correct: "B) The physical environment and procedures of its own courthouses."
+            },
+            {
+                scenario: "Boumediene v. Bush (2008) is considered the gold standard for detention rights. What did it grant to detainees at Guantanamo Bay?",
+                options: ["A) The right to a free phone call.", "B) The right to challenge their detention via a writ of habeas corpus.", "C) The right to be immediately released to the United States.", "D) The right to choose their own jail cell."],
+                correct: "B) The right to challenge their detention via a writ of habeas corpus."
+            },
+            {
+                scenario: "In the 2008 Boumediene case, the Court ruled that which clause applies to territory under U.S. control even if it is not a state?",
+                options: ["A) The Commerce Clause.", "B) The Suspension Clause.", "C) The Appointments Clause.", "D) The 18th Amendment."],
+                correct: "B) The Suspension Clause."
+            },
+            {
+                scenario: "The Boumediene ruling ensures that even enemy combatants have the opportunity to contest the legal basis of their detention before whom?",
+                options: ["A) Their own military commanders.", "B) A neutral judge.", "C) The Secretary of Defense.", "D) A committee of Congress."],
+                correct: "B) A neutral judge."
+            },
+            {
+                scenario: "The government argued in 2008 that non citizens on foreign soil had no rights to U.S. courts. How did the Supreme Court respond?",
+                options: ["A) They agreed and dismissed the case.", "B) They ruled that constitutional protections follow the reach of U.S. authority and control.", "C) They said only citizens have the right to habeas corpus.", "D) They told the President to close the prison immediately."],
+                correct: "B) They ruled that constitutional protections follow the reach of U.S. authority and control."
+            },
+            {
+                scenario: "What is the primary function of a writ of habeas corpus as highlighted in Boumediene?",
+                options: ["A) To prove the defendant is guilty.", "B) To require the government to justify why it is holding someone in custody.", "C) To allow a defendant to sue for money.", "D) To give the President power to move a prisoner."],
+                correct: "B) To require the government to justify why it is holding someone in custody."
+            },
+            {
+                scenario: "New Hampshire implemented a real time electronic notification system in 2026. What does this system track?",
+                options: ["A) The social media posts of all citizens.", "B) The bail status and conditions of released individuals.", "C) The political party of the judges.", "D) The amount of money in the state treasury."],
+                correct: "B) The bail status and conditions of released individuals."
+            },
+            {
+                scenario: "In the 2026 context, how does the New Hampshire system serve as a middle ground between release and detention?",
+                options: ["A) It lets everyone out of jail with no rules.", "B) It allows low risk individuals to stay free under digital supervision while alerting police to violations.", "C) It requires everyone to pay ten thousand dollars to stay out of jail.", "D) It replaces all judges with computers."],
+                correct: "B) It allows low risk individuals to stay free under digital supervision while alerting police to violations."
+            },
+            {
+                scenario: "Why would a state implement a digital tracking system after rolling back no cash bail reforms?",
+                options: ["A) To save money on paper and pens.", "B) To provide a way to justify release for some while ensuring public safety through instant alerts.", "C) To track the location of the Governor.", "D) To make the trial process take longer."],
+                correct: "B) To provide a way to justify release for some while ensuring public safety through instant alerts."
+            },
+            {
+                scenario: "The New Hampshire system is an example of using technology to enforce what?",
+                options: ["A) New tax laws.", "B) Pretrial release conditions set by a judge.", "C) Military discipline.", "D) Voting requirements."],
+                correct: "B) Pretrial release conditions set by a judge."
+            },
+            {
+                scenario: "If an individual on bail violates a condition, the 2026 notification system allows the state to more effectively justify what?",
+                options: ["A) A full pardon for the defendant.", "B) Preventive detention for the high risk individual.", "C) A pay raise for the police.", "D) Closing the case permanently."],
+                correct: "B) Preventive detention for the high risk individual."
+            },
+            {
+                scenario: "A 2025 proposal aims to change Federal Rule of Evidence 609. What would this change require regarding prior convictions?",
+                options: ["A) All prior convictions must be told to the jury immediately.", "B) The probative value must substantially outweigh the prejudicial effect before use.", "C) Prior convictions can never be mentioned in court.", "D) Only the President can decide which convictions are used."],
+                correct: "B) The probative value must substantially outweigh the prejudicial effect before use."
+            },
+            {
+                scenario: "How does a trial rule about evidence impact a pretrial bail hearing?",
+                options: ["A) It has no impact at all.", "B) It gives the defense leverage to argue the case is weaker if the government cannot smear the defendant.", "C) It makes the bail hearing last for three weeks.", "D) It requires the judge to be a witness in the trial."],
+                correct: "B) It gives the defense leverage to argue the case is weaker if the government cannot smear the defendant."
+            },
+            {
+                scenario: "What is the danger of using a defendants past conviction at a trial or bail hearing?",
+                options: ["A) It might make the defendant look too good.", "B) It might unfairly prejudice the judge or jury against the defendant regardless of the current facts.", "C) It might cause the courthouse to run out of records.", "D) It might force the prosecutor to resign."],
+                correct: "B) It might unfairly prejudice the judge or jury against the defendant regardless of the current facts."
+            },
+            {
+                scenario: "The strength of the case is a key factor in detaining someone pretrial. If the Evidence Rules Committee proposal (2025) makes a case harder to prove, what happens to the defense?",
+                options: ["A) They lose all their power.", "B) They have more leverage to argue for release because the prosecution claims are harder to support.", "C) They are required to plead guilty.", "D) They must pay double for bail."],
+                correct: "B) They have more leverage to argue for release because the prosecution claims are harder to support."
+            },
+            {
+                scenario: "Why is the term probative value important in the 2025 evidence proposal?",
+                options: ["A) It refers to how much the trial costs.", "B) It refers to how useful the evidence is at proving a specific fact in the case.", "C) It refers to the defendants bank account balance.", "D) It refers to the judges salary."],
+                correct: "B) It refers to how useful the evidence is at proving a specific fact in the case."
+            },
+            {
+                scenario: "In Kingsley v. Hendrikson (2015), the Court set a standard for using force against pretrial detainees. What is that standard?",
+                options: ["A) The force must be intentionally cruel.", "B) The force must be objectively unreasonable.", "C) Any force is allowed as long as the detainee is in jail.", "D) No force is ever allowed for any reason."],
+                correct: "B) The force must be objectively unreasonable."
+            },
+            {
+                scenario: "According to the Kingsley (2015) ruling, does a pretrial detainee need to prove the officer intended to hurt them?",
+                options: ["A) Yes, intent is the only thing that matters.", "B) No, they only need to show the force used was objectively unreasonable.", "C) Only if the detainee is a citizen.", "D) Only if the incident happened in a federal prison."],
+                correct: "B) No, they only need to show the force used was objectively unreasonable."
+            },
+            {
+                scenario: "Why are pretrial detainees protected from unreasonable force under the Due Process Clause?",
+                options: ["A) Because they are paying customers of the jail.", "B) Because they have not been convicted of a crime and are presumed innocent.", "C) Because the 8th Amendment only applies to children.", "D) Because the President issued an Executive Order about it."],
+                correct: "B) Because they have not been convicted of a crime and are presumed innocent."
+            },
+            {
+                scenario: "What does objectively unreasonable mean in the context of Kingsley v. Hendrikson?",
+                options: ["A) Whatever the officer says is reasonable.", "B) Whether a reasonable officer on the scene would have used that much force given the facts.", "C) Whether the detainee thinks the force was fair.", "D) Whether the public voted for the officer."],
+                correct: "B) Whether a reasonable officer on the scene would have used that much force given the facts."
+            },
+            {
+                scenario: "The Kingsley (2015) case reinforces that pretrial detention cannot be used as a form of what?",
+                options: ["A) Education.", "B) Punishment.", "C) Safe housing.", "D) Employment."],
+                correct: "B) Punishment."
+            },
+            {
+                scenario: "If a jail officer uses force against a pretrial detainee to punish them for being annoying, which case is being violated?",
+                options: ["A) Marbury v. Madison.", "B) Kingsley v. Hendrikson.", "C) Plessy v. Ferguson.", "D) McCulloch v. Maryland."],
+                correct: "B) Kingsley v. Hendrikson."
+            },
+            {
+                scenario: "Pretrial detention is limited to cases reasonably related to a legitimate goal. Which of these is a legitimate goal?",
+                options: ["A) Increasing the jail population.", "B) Preventing flight or danger to the community.", "C) Making sure the defendant loses their job.", "D) Helping the prosecutor win the case faster."],
+                correct: "B) Preventing flight or danger to the community."
+            },
+            {
+                scenario: "The 5th Amendment mandates that the federal government provide fundamental fairness. In a bail hearing, this includes the right to:",
+                options: ["A) Choose your own judge.", "B) A prompt and impartial hearing to justify liberty restrictions.", "C) Leave the country immediately.", "D) Access to a personal phone in jail."],
+                correct: "B) A prompt and impartial hearing to justify liberty restrictions."
+            },
+            {
+                scenario: "Which 2004 case ruled that even during wartime, an American citizen cannot be held indefinitely without a trial?",
+                options: ["A) Hamdi v. Rumsfeld.", "B) United States v. Nixon.", "C) Korematsu v. United States.", "D) Citizens United v. FEC."],
+                correct: "A) Hamdi v. Rumsfeld."
+            },
+            {
+                scenario: "The Suspension Clause mentioned in the Guantanamo cases refers to the governments power to suspend what?",
+                options: ["A) The collection of taxes.", "B) The writ of habeas corpus.", "C) The right to vote.", "D) The entire Constitution."],
+                correct: "B) The writ of habeas corpus."
+            }
+        ]
+    },
+    "Sarah": {
+        "Q1": [
+            {
+                scenario: "In Federalist 70, Alexander Hamilton argues that energy in the executive is a leading character in the definition of good government. What does he mean by energy?",
+                options: ["A) The President should be young and athletic.", "B) The executive must have decisiveness, activity, secrecy, and dispatch.", "C) The President should have the power to light up the Capitol building.", "D) The executive branch should have thousands of employees."],
+                correct: "B) The executive must have decisiveness, activity, secrecy, and dispatch."
+            },
+            {
+                scenario: "Why did the authors of Federalist 70 oppose a plural executive or a group of presidents?",
+                options: ["A) It would cost too much money to pay multiple salaries.", "B) It would create confusion and diffuse responsibility, making accountability impossible.", "C) A group of people would be too strong for the Judicial branch to check.", "D) The Constitution only allows people from one state to lead at a time."],
+                correct: "B) It would create confusion and diffuse responsibility, making accountability impossible."
+            },
+            {
+                scenario: "According to the evidence on Federalist 70, how does a single president protect liberty better than a council?",
+                options: ["A) A single leader can be more easily watched and held accountable by the people.", "B) A single leader has the power to ignore the Bill of Rights.", "C) Councils are always corrupt according to the Magna Carta.", "D) One person is less likely to start a war than a group."],
+                correct: "A) A single leader can be more easily watched and held accountable by the people."
+            },
+            {
+                scenario: "If a national crisis requires a very fast decision, which concept from Federalist 70 justifies having one President instead of a committee?",
+                options: ["A) Judicial Review.", "B) Executive Dispatch and Decisiveness.", "C) The Power of the Purse.", "D) Legislative Oversight."],
+                correct: "B) Executive Dispatch and Decisiveness."
+            },
+            {
+                scenario: "Hamilton argued that a single executive would be strong enough to do what regarding the other branches?",
+                options: ["A) Abolish them during a time of war.", "B) Check the other branches to maintain the balance of power.", "C) Appoint the members of the House of Representatives.", "D) Write the budget without any help from Congress."],
+                correct: "B) Check the other branches to maintain the balance of power."
+            },
+            {
+                scenario: "The Clean Air Act gives the EPA the authority to set national standards for air quality. This is an example of which constitutional process?",
+                options: ["A) The Supreme Court making a new law.", "B) Congress delegating technical authority to an executive agency.", "C) The President bypassing Congress with an Executive Order.", "D) The States taking over federal responsibilities."],
+                correct: "B) Congress delegating technical authority to an executive agency."
+            },
+            {
+                scenario: "Under the Clean Air Act, the EPA regulates hazardous emissions from power plants. Why does Congress give this specific task to an agency?",
+                options: ["A) Congress is not allowed to write laws about the environment.", "B) Agencies have the specialized expertise to handle complex scientific standards.", "C) The President owns all the power plants in the country.", "D) To prevent the Judicial branch from seeing the rules."],
+                correct: "B) Agencies have the specialized expertise to handle complex scientific standards."
+            },
+            {
+                scenario: "How does the Clean Air Act relate to the overall power of the Executive branch?",
+                options: ["A) It limits the President to only one term in office.", "B) It significantly expands executive authority by allowing an agency to write specific rules with the force of law.", "C) It gives the President the power to fire members of Congress.", "D) It removes all environmental power from the federal government."],
+                correct: "B) It significantly expands executive authority by allowing an agency to write specific rules with the force of law."
+            },
+            {
+                scenario: "If the EPA issues a rule about urban smog that was never mentioned in the original Clean Air Act, what must the Court check?",
+                options: ["A) If the rule is popular on social media.", "B) If the agency stayed within the authority granted by Congress in the statute.", "C) If the President personally wrote the smog rule.", "D) If the EPA has enough money to pay for the rule."],
+                correct: "B) If the agency stayed within the authority granted by Congress in the statute."
+            },
+            {
+                scenario: "The Clean Air Act targets issues like acid rain and ozone depletion. Who is responsible for enforcing these rules daily?",
+                options: ["A) The Supreme Court.", "B) Executive branch agencies like the EPA.", "C) The House of Representatives.", "D) The local city councils."],
+                correct: "B) Executive branch agencies like the EPA."
+            },
+            {
+                scenario: "The Affordable Care Act was designed to expand access to health insurance. Which branch of government passed this law?",
+                options: ["A) The Executive branch.", "B) The Legislative branch.", "C) The Judicial branch.", "D) The Administrative branch."],
+                correct: "B) The Legislative branch."
+            },
+            {
+                scenario: "When a law like the Affordable Care Act is very broad, how does it affect the power of executive agencies?",
+                options: ["A) It makes the agencies smaller and less powerful.", "B) It gives agencies the power to fill in the details and create specific regulations.", "C) It prevents agencies from speaking to the public.", "D) It requires the Supreme Court to write the health insurance plans."],
+                correct: "B) It gives agencies the power to fill in the details and create specific regulations."
+            },
+            {
+                scenario: "The Affordable Care Act is often used to show how which branch handles major social policy?",
+                options: ["A) The Judicial branch via court rulings.", "B) The Legislative branch via federal statutes.", "C) The Military via executive commands.", "D) The States via individual treaties."],
+                correct: "B) The Legislative branch via federal statutes."
+            },
+            {
+                scenario: "Critics of broad laws argue that they give too much discretion to which group?",
+                options: ["A) To the voters.", "B) To unelected bureaucrats in executive agencies.", "C) To the Chief Justice of the Supreme Court.", "D) To the King of England."],
+                correct: "B) To unelected bureaucrats in executive agencies."
+            },
+            {
+                scenario: "If the government uses the Affordable Care Act to protect consumers from high costs, it is an example of the executive branch doing what?",
+                options: ["A) Making a new law from scratch.", "B) Executing the policy goals set by Congress in the law.", "C) Overriding a Supreme Court decision.", "D) Ignoring the Constitution."],
+                correct: "B) Executing the policy goals set by Congress in the law."
+            },
+            {
+                scenario: "In Marbury v. Madison, Chief Justice John Marshall established which major principle?",
+                options: ["A) Executive Privilege.", "B) Judicial Review.", "C) The Right to Counsel.", "D) Federalism."],
+                correct: "B) Judicial Review."
+            },
+            {
+                scenario: "The evidence notes that the Judicial branch is shielded from political pressure. Why is this important?",
+                options: ["A) It allows judges to win elections more easily.", "B) It ensures judges can rule on the constitutionality of laws without fearing the other branches.", "C) It prevents judges from ever talking to the President.", "D) It gives judges the power to set the national tax rate."],
+                correct: "B) It ensures judges can rule on the constitutionality of laws without fearing the other branches."
+            },
+            {
+                scenario: "What was the specific result for the law in question during Marbury v. Madison?",
+                options: ["A) The law was upheld because Congress is always right.", "B) The law was declared unconstitutional because it violated the boundaries of the Court.", "C) The law was sent to the President for a second signature.", "D) The law was deleted by the Secretary of State."],
+                correct: "B) The law was declared unconstitutional because it violated the boundaries of the Court."
+            },
+            {
+                scenario: "Marbury v. Madison affirms the Court's power to do what to an act of Congress?",
+                options: ["A) Rewrite the law to make it better.", "B) Declare the act unconstitutional and void.", "C) Force the President to sign the act.", "D) Increase the funding for the act."],
+                correct: "B) Declare the act unconstitutional and void."
+            },
+            {
+                scenario: "If the Legislative and Executive branches agree on a law that violates the Constitution, which branch has the final word according to Marbury?",
+                options: ["A) The Executive branch.", "B) The Judicial branch.", "C) The Legislative branch.", "D) The State governments."],
+                correct: "B) The Judicial branch."
+            },
+            {
+                scenario: "The National Emergencies Act of 1976 was passed to do what to presidential power?",
+                options: ["A) Give the President unlimited authority forever.", "B) Formalize the process and add congressional oversight to limit unchecked power.", "C) Remove the President's role as Commander in Chief.", "D) Allow the President to stay in office for a third term."],
+                correct: "B) Formalize the process and add congressional oversight to limit unchecked power."
+            },
+            {
+                scenario: "Under the 1976 Act, what must a President do to use emergency powers?",
+                options: ["A) Ask for permission from the Supreme Court in secret.", "B) Formally declare the emergency and specify which powers are being invoked.", "C) Wait for a 100 percent vote in the House of Representatives.", "D) Resign from office temporarily."],
+                correct: "B) Formally declare the emergency and specify which powers are being invoked."
+            },
+            {
+                scenario: "How can Congress terminate a national emergency declared by the President under this Act?",
+                options: ["A) By asking the President nicely to stop.", "B) Through a joint resolution, though it may require overriding a veto.", "C) By firing the President immediately.", "D) By closing the Capitol building."],
+                correct: "B) Through a joint resolution, though it may require overriding a veto."
+            },
+            {
+                scenario: "The National Emergencies Act enabled presidents to do what regarding routine governance?",
+                options: ["A) Stop all government work indefinitely.", "B) Use significant authority not explicitly detailed in the Constitution for daily tasks.", "C) Give all their power to the Judicial branch.", "D) Abolish the Electoral College."],
+                correct: "B) Use significant authority not explicitly detailed in the Constitution for daily tasks."
+            },
+            {
+                scenario: "The requirement for a President to report to Congress during an emergency is an example of what?",
+                options: ["A) Judicial Overreach.", "B) Legislative Oversight and Checks and Balances.", "C) Executive Supremacy.", "D) Direct Democracy."],
+                correct: "B) Legislative Oversight and Checks and Balances."
+            },
+            {
+                scenario: "In Federalist 63, James Madison defends the Senate as a vital force. Why did he want the Senate to have longer terms and a smaller size?",
+                options: ["A) To make sure the Senate was more powerful than the President.", "B) To provide stability and check the fleeting passions of the public.", "C) To save money on election costs.", "D) To allow Senators to live in Washington D.C. permanently."],
+                correct: "B) To provide stability and check the fleeting passions of the public."
+            },
+            {
+                scenario: "Madison refers to the Senate as a 'necessary fence.' What is it fencing or protecting against?",
+                options: ["A) The Military taking over the government.", "B) The volatile and short-term actions of the House of Representatives.", "C) Foreign kings trying to enter the country.", "D) The Supreme Court making too many rulings."],
+                correct: "B) The volatile and short-term actions of the House of Representatives."
+            },
+            {
+                scenario: "How does Federalist 63 relate to foreign policy?",
+                options: ["A) It says the President should handle all foreign policy alone.", "B) It argues the Senate provides a consistent national character for long-term governance.", "C) It suggests that only the House should meet with foreign leaders.", "D) It forbids the U.S. from talking to other countries."],
+                correct: "B) It argues the Senate provides a consistent national character for long-term governance."
+            },
+            {
+                scenario: "According to Federalist 63, the Senate remains accountable to the people over time while still being what?",
+                options: ["A) A group of kings.", "B) Insulated from direct popular whims in the short term.", "C) Completely hidden from the public eye.", "D) Appointed by the Supreme Court."],
+                correct: "B) Insulated from direct popular whims in the short term."
+            },
+            {
+                scenario: "The structural framework described in Federalist 63 ensures that which branch has a slow and reasoned internal check?",
+                options: ["A) The Executive branch.", "B) The Legislative branch.", "C) The Judicial branch.", "D) The Administrative branch."],
+                correct: "B) The Legislative branch."
+            },
+            {
+                scenario: "In J.W. Hampton Jr. and Co. v. United States (1928), the Court created which famous test for delegating power?",
+                options: ["A) The Lemon Test.", "B) The Intelligible Principle Test.", "C) The Rational Basis Test.", "D) The Strict Scrutiny Test."],
+                correct: "B) The Intelligible Principle Test."
+            },
+            {
+                scenario: "Why did the Court rule that Congress could delegate the power to set tariff rates to the President in 1928?",
+                options: ["A) Because the President is an expert on taxes.", "B) Because Congress provided clear guidelines or standards for the President to follow.", "C) Because the Constitution says the President is in charge of all money.", "D) Because Congress was too busy to meet that year."],
+                correct: "B) Because Congress provided clear guidelines or standards for the President to follow."
+            },
+            {
+                scenario: "The J.W. Hampton case is foundational for the modern administrative state. What does this mean for agencies?",
+                options: ["A) Agencies are unconstitutional.", "B) Congress can set broad policies and let agencies handle the specific details.", "C) Agencies can make any law they want without Congress.", "D) Agencies must be led by members of the Supreme Court."],
+                correct: "B) Congress can set broad policies and let agencies handle the specific details."
+            },
+            {
+                scenario: "The J.W. Hampton case shows how branches shift their responsibilities. This is an example of:",
+                options: ["A) Separation of Powers.", "B) Delegation of Authority.", "C) Judicial Activism.", "D) Federalism."],
+                correct: "B) Delegation of Authority."
+            },
+            {
+                scenario: "Under the Intelligible Principle test, a delegation is constitutional if Congress provides what?",
+                options: ["A) A large budget.", "B) A clear standard or rule to guide the executive discretion.", "C) A personal letter of permission.", "D) A 100 percent majority vote."],
+                correct: "B) A clear standard or rule to guide the executive discretion."
+            },
+            {
+                scenario: "In West Virginia v. EPA, the Court introduced the major questions doctrine. What does this doctrine require?",
+                options: ["A) Agencies must answer questions from the public every day.", "B) For issues of vast economic significance, Congress must provide clear authorization.", "C) The President must ask the Supreme Court before making any decisions.", "D) Only the House of Representatives can talk to the EPA."],
+                correct: "B) For issues of vast economic significance, Congress must provide clear authorization."
+            },
+            {
+                scenario: "How does West Virginia v. EPA limit agency power?",
+                options: ["A) It shuts down the EPA permanently.", "B) It prevents agencies from using broad, general laws to make huge policy shifts.", "C) It gives the states the power to fire EPA workers.", "D) It requires all EPA rules to be written in Latin."],
+                correct: "B) It prevents agencies from using broad, general laws to make huge policy shifts."
+            },
+            {
+                scenario: "The major questions doctrine ensures there is no confusion about what?",
+                options: ["A) Who the President is.", "B) Whether Congress actually intended for an agency to have a specific, massive power.", "C) How much money is in the federal budget.", "D) Where the Supreme Court is located."],
+                correct: "B) Whether Congress actually intended for an agency to have a specific, massive power."
+            },
+            {
+                scenario: "The West Virginia v. EPA ruling focused on an agency's attempt to regulate which industry?",
+                options: ["A) The movie industry.", "B) The power plant and energy industry.", "C) The toy industry.", "D) The space travel industry."],
+                correct: "B) The power plant and energy industry."
+            },
+            {
+                scenario: "Does the major questions doctrine overturn the broader nondelegation precedent?",
+                options: ["A) Yes, it makes all delegation illegal.", "B) No, it just limits agency power in specific, high-stakes cases.", "C) Only if the President agrees with the ruling.", "D) It only applies to the Judicial branch."],
+                correct: "B) No, it just limits agency power in specific, high-stakes cases."
+            },
+            {
+                scenario: "Section 232 of the 1962 Trade Expansion Act allows the President to impose tariffs if which condition is met?",
+                options: ["A) The President wants more money for the budget.", "B) Imports of a product are found to threaten U.S. national security.", "C) The public votes for higher taxes on cars.", "D) A foreign leader insults the President."],
+                correct: "B) Imports of a product are found to threaten U.S. national security."
+            },
+            {
+                scenario: "Why would Congress give the President the power to set tariffs under the 1962 Act?",
+                options: ["A) Because the Constitution says only the President can handle trade.", "B) To allow the President to move quickly on issues of national security and economic stability.", "C) To ensure the Supreme Court has nothing to do.", "D) Because Congress wanted to stop making laws."],
+                correct: "B) To allow the President to move quickly on issues of national security and economic stability."
+            },
+            {
+                scenario: "If tariffs are high, Congress can blame the President. This is an example of what?",
+                options: ["A) Checks and Balances.", "B) Using delegation to avoid political accountability.", "C) Judicial Review.", "D) The Take Care Clause."],
+                correct: "B) Using delegation to avoid political accountability."
+            },
+            {
+                scenario: "The 1962 Act was recently used to place tariffs on which two major goods?",
+                options: ["A) Toys and clothing.", "B) Steel and aluminum.", "C) Fruits and vegetables.", "D) Books and movies."],
+                correct: "B) Steel and aluminum."
+            },
+            {
+                scenario: "Who must find that an import threatens national security before the President acts under Section 232?",
+                options: ["A) The Secretary of State.", "B) The Commerce Secretary.", "C) The Chief Justice.", "D) The Speaker of the House."],
+                correct: "B) The Commerce Secretary."
+            },
+            {
+                scenario: "Article II of the U.S. Constitution establishes which branch of government?",
+                options: ["A) The Legislative branch.", "B) The Executive branch.", "C) The Judicial branch.", "D) The Administrative branch."],
+                correct: "B) The Executive branch."
+            },
+            {
+                scenario: "Which of these is a power specifically listed for the President in Article II?",
+                options: ["A) The power to declare war.", "B) The power to serve as Commander in Chief of the military.", "C) The power to write the federal budget alone.", "D) The power to remove Supreme Court justices."],
+                correct: "B) The power to serve as Commander in Chief of the military."
+            },
+            {
+                scenario: "According to Article II, how does the President come into power?",
+                options: ["A) A direct popular vote of all citizens.", "B) Through the Electoral College process.", "C) Appointment by the Senate.", "D) Winning a debate in the Supreme Court."],
+                correct: "B) Through the Electoral College process."
+            },
+            {
+                scenario: "If a President exercises a power not listed in Article II, where did that power likely come from?",
+                options: ["A) It was stolen from the people.", "B) It was delegated or given to them by another branch, like Congress.", "C) The President made it up and it is illegal.", "D) It came from an international treaty."],
+                correct: "B) It was delegated or given to them by another branch, like Congress."
+            },
+            {
+                scenario: "What are the basic qualifications to be President under Article II?",
+                options: ["A) 25 years old and a resident for 7 years.", "B) 35 years old and a natural born citizen.", "C) Any age as long as you are a citizen.", "D) You must have served in the Senate first."],
+                correct: "B) 35 years old and a natural born citizen."
+            }
+        ],
+        "Q2": [
+            {
+                scenario: "When Congress faces a total shutdown and cannot agree on how to spend money, which term describes this political dysfunction?",
+                options: ["A) Executive Order.", "B) Gridlock.", "C) Judicial Review.", "D) Federalism."],
+                correct: "B) Gridlock."
+            },
+            {
+                scenario: "How does political gridlock specifically hinder the ability of the Legislative branch to function?",
+                options: ["A) It allows them to pass laws faster.", "B) It prevents them from agreeing on spending and completing tasks.", "C) It gives the Supreme Court the power to fire Congress.", "D) It forces the President to work for free."],
+                correct: "B) It prevents them from agreeing on spending and completing tasks."
+            },
+            {
+                scenario: "In the context of the Clean Air Act, the Court ruled that agencies cannot use vague language to claim transformative power. This justified which doctrine?",
+                options: ["A) The Elephant Doctrine.", "B) The Major Questions Doctrine.", "C) The Commerce Clause.", "D) The Right to Counsel."],
+                correct: "B) The Major Questions Doctrine."
+            },
+            {
+                scenario: "If an agency tries to use a minor section of the Clean Air Act to take over a massive part of the economy, what is the legal concern?",
+                options: ["A) The agency is being too efficient.", "B) The agency is claiming regulatory power without clear authorization from Congress.", "C) The agency is spending too much money on office supplies.", "D) The agency is violating a treaty with another country."],
+                correct: "B) The agency is claiming regulatory power without clear authorization from Congress."
+            },
+            {
+                scenario: "During the 1981 government shutdown, federal employees were furloughed due to a dispute over what?",
+                options: ["A) The location of the capital.", "B) Domestic spending cuts versus higher defense funding.", "C) The size of the Supreme Court.", "D) The date of the next election."],
+                correct: "B) Domestic spending cuts versus higher defense funding."
+            },
+            {
+                scenario: "The 1981 and 1986 shutdowns are examples of what happening between the President and Congress?",
+                options: ["A) Total cooperation.", "B) Funding gaps and budget disputes.", "C) A joint agreement to abolish taxes.", "D) The creation of a new branch of government."],
+                correct: "B) Funding gaps and budget disputes."
+            },
+            {
+                scenario: "A 1986 shutdown impacted families needing welfare funding. This shows that budget disputes between branches have what kind of impact?",
+                options: ["A) No impact at all.", "B) Real world consequences for citizens relying on federal services.", "C) Impacts only on the Judicial branch.", "D) Impacts only on foreign governments."],
+                correct: "B) Real world consequences for citizens relying on federal services."
+            },
+            {
+                scenario: "The Biden administration has faced court reviews regarding greenhouse gas emissions. What is the central question in these reviews?",
+                options: ["A) Whether the rules are popular.", "B) Whether Congress clearly authorized the agency to make such major policy actions.", "C) Whether the President can fire the judges.", "D) Whether the EPA has enough scientists."],
+                correct: "B) Whether Congress clearly authorized the agency to make such major policy actions."
+            },
+            {
+                scenario: "Courts may review sweeping emissions rules to ensure that agencies are not acting without what?",
+                options: ["A) A press release.", "B) Explicit legislative backing from Congress.", "C) A vote from the Supreme Court.", "D) Permission from the military."],
+                correct: "B) Explicit legislative backing from Congress."
+            },
+            {
+                scenario: "Justice Antonin Scalia famously stated that Congress does not hide elephants in mouse holes. What does the elephant represent?",
+                options: ["A) A small minor rule.", "B) A huge transformative power or major policy change.", "C) A literal animal in the zoo.", "D) The Republican party."],
+                correct: "B) A huge transformative power or major policy change."
+            },
+            {
+                scenario: "What did Scalia mean by a mouse hole in the context of agency power?",
+                options: ["A) A very large building.", "B) Vague or minor language in a law.", "C) A hole in the wall of Congress.", "D) A secret tunnel for the President."],
+                correct: "B) Vague or minor language in a law."
+            },
+            {
+                scenario: "The phrase regarding elephants and mouse holes helps the court enforce what?",
+                options: ["A) Executive Intent.", "B) Legislative Intent and the limits of agency authority.", "C) Judicial Will.", "D) State Sovereignty."],
+                correct: "B) Legislative Intent and the limits of agency authority."
+            },
+            {
+                scenario: "Under the Public Health Service Act, agencies like the HHS get emergency powers. How do courts check these powers?",
+                options: ["A) By asking the public to vote on the rule.", "B) By reviewing whether the specific action matches what Congress intended.", "C) By giving the agency even more money.", "D) By allowing the President to ignore the law."],
+                correct: "B) By reviewing whether the specific action matches what Congress intended."
+            },
+            {
+                scenario: "Article 1 Section 8 of the Constitution lists the enumerated powers of Congress. Why are these important for agencies?",
+                options: ["A) They allow agencies to do anything they want.", "B) They provide the legal foundation for the authority that Congress delegates to agencies.", "C) They give the President the power to tax people directly.", "D) They list the names of every person in the government."],
+                correct: "B) They provide the legal foundation for the authority that Congress delegates to agencies."
+            },
+            {
+                scenario: "When a court checks if an agency action stays within the powers listed in Article 1 Section 8, what are they trying to limit?",
+                options: ["A) Agency efficiency.", "B) Agency overreach.", "C) Congressional voting.", "D) Presidential speeches."],
+                correct: "B) Agency overreach."
+            },
+            {
+                scenario: "The principle of Separation of Powers divides government responsibilities to prevent what?",
+                options: ["A) The public from voting.", "B) The concentration of power in a single branch.", "C) The government from spending money.", "D) The military from leaving the country."],
+                correct: "B) The concentration of power in a single branch."
+            },
+            {
+                scenario: "Which branch is responsible for making the laws according to the principle of Separation of Powers?",
+                options: ["A) The Executive branch.", "B) The Legislative branch.", "C) The Judicial branch.", "D) The Administrative branch."],
+                correct: "B) The Legislative branch."
+            },
+            {
+                scenario: "Avoiding agency overreach is a process that keeps bureaucratic actions within the bounds of what?",
+                options: ["A) Political polls.", "B) Enabling statutes or the laws passed by Congress.", "C) Executive Orders.", "D) Judicial wishes."],
+                correct: "B) Enabling statutes or the laws passed by Congress."
+            },
+            {
+                scenario: "The Major Questions Doctrine acts as a check to prevent agencies from doing what with vague language?",
+                options: ["A) Deleting it.", "B) Stretching it to expand their own power.", "C) Ignoring it.", "D) Correcting the grammar."],
+                correct: "B) Stretching it to expand their own power."
+            },
+            {
+                scenario: "If an agency creates a brand new law rather than just implementing an old one, what have they done?",
+                options: ["A) They have followed the Constitution.", "B) They have committed agency overreach.", "C) They have helped the Judicial branch.", "D) They have been promoted."],
+                correct: "B) They have committed agency overreach."
+            },
+            {
+                scenario: "In a system of checks and balances, the Courts interpret the laws. This means they decide:",
+                options: ["A) How much the President should be paid.", "B) If an agency is following the intent of the Legislative branch.", "C) When the next election should happen.", "D) Which laws Congress is allowed to talk about."],
+                correct: "B) If an agency is following the intent of the Legislative branch."
+            },
+            {
+                scenario: "The 1981 shutdown affected all agency workers except for which branch?",
+                options: ["A) The Executive branch.", "B) The Legislative branch.", "C) The Administrative branch.", "D) The Military branch."],
+                correct: "B) The Legislative branch."
+            },
+            {
+                scenario: "Why must major policy decisions require clear legislative backing before an agency acts?",
+                options: ["A) To make sure the rules are easy to read.", "B) To ensure the decision is made by the branch most accountable to the people.", "C) To give the President more time to rest.", "D) To prevent the Supreme Court from working too hard."],
+                correct: "B) To ensure the decision is made by the branch most accountable to the people."
+            },
+            {
+                scenario: "Which constitutional article defines what Congress is allowed to delegate to agencies?",
+                options: ["A) Article 1.", "B) Article 2.", "C) Article 3.", "D) Article 4."],
+                correct: "A) Article 1."
+            },
+            {
+                scenario: "In the context of regulatory expansion, the major questions doctrine serves as a:",
+                options: ["A) Funding source.", "B) Check and balance on power.", "C) Way to increase taxes.", "D) Tool for the President to make laws."],
+                correct: "B) Check and balance on power."
+            }
+        ],
+        "Q3": [
+            {
+                scenario: "The 2026 case Liam Conejo v. ICE involves mandatory detention. Which amendment's Due Process Clause is typically used to challenge such federal detentions?",
+                options: ["A) 2nd Amendment", "B) 5th Amendment", "C) 10th Amendment", "D) 19th Amendment"],
+                correct: "B) 5th Amendment"
+            },
+            {
+                scenario: "In Kansas v. Hendricks, the Court ruled that civil commitment is constitutional if the person has a mental abnormality that makes them a danger. Is this considered a criminal punishment?",
+                options: ["A) Yes, it is a life sentence", "B) No, it is a non punitive civil procedure meant for public safety", "C) Only if a jury is present", "D) Yes, but only for non citizens"],
+                correct: "B) No, it is a non punitive civil procedure meant for public safety"
+            },
+            {
+                scenario: "Under the standard in Bell v. Wolfish, what must the government prove to justify the conditions of pretrial detention?",
+                options: ["A) That the person is definitely guilty", "B) That the conditions are related to a legitimate government goal and not just punishment", "C) That the person has no family in the country", "D) That the detention will last less than one week"],
+                correct: "B) That the conditions are related to a legitimate government goal and not just punishment"
+            }
+        ]
+    },
+    "Evan": {
+        "Q1": [],
+        "Q2": [],
+        "Q3": [
+            {
+                scenario: "In Demore v. Kim, the Court upheld the no bail detention of certain lawful permanent residents. What was the government's primary justification?",
+                options: ["A) To save money on court costs", "B) To ensure that deportable non citizens appear for their removal proceedings", "C) To punish them for entering the country", "D) Because they are not protected by the Constitution"],
+                correct: "B) To ensure that deportable non citizens appear for their removal proceedings"
+            },
+            {
+                scenario: "The ruling in SEC v. Jarkesy (2024) is a major win for which right in the context of agency actions?",
+                options: ["A) Freedom of the Press", "B) The 7th Amendment right to a jury trial for civil fraud penalties", "C) The right to bear arms", "D) The right to a free public education"],
+                correct: "B) The 7th Amendment right to a jury trial for civil fraud penalties"
+            },
+            {
+                scenario: "When applying Stack v. Boyle, a judge finds that a $1,000,000 bail for a minor shoplifting charge is Excessive. Which amendment is being protected?",
+                options: ["A) 4th Amendment", "B) 8th Amendment", "C) 14th Amendment", "D) 1st Amendment"],
+                correct: "B) 8th Amendment"
+            }
+        ]
+    },
+    "Bekim": {
+        "Q1": [],
+        "Q2": [],
+        "Q3": [
+            {
+                scenario: "Section 412 of the U.S. Patriot Act allows for certified detentions. How long can a non citizen be held before the government must start removal or criminal proceedings?",
+                options: ["A) Indefinitely with no check", "B) 7 days", "C) 1 year", "D) 24 hours"],
+                correct: "B) 7 days"
+            },
+            {
+                scenario: "In Carlson v. Landon, the Court allowed the denial of bail for non citizens based on their membership in the Communist Party. This was largely due to concerns over what?",
+                options: ["A) Tax evasion", "B) National security and the threat of subversion", "C) Overcrowded prisons", "D) The price of international travel"],
+                correct: "B) National security and the threat of subversion"
+            },
+            {
+                scenario: "If a non citizen is arrested without a warrant in a 2025 enforcement action, which amendment provides the Reasonable Search and Seizure protection?",
+                options: ["A) 1st Amendment", "B) 4th Amendment", "C) 9th Amendment", "D) 12th Amendment"],
+                correct: "B) 4th Amendment"
+            }
+        ]
+    }
+};
 
         let currentQuestions = [];
         let streak = 0;
